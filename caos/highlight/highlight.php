@@ -3,8 +3,10 @@
 include("caos/highlight/commands.php");
 include("caos/highlight/variables.php");
 include("caos/highlight/command_variables.php"); //could be a command, could be a variable, could be superman
-function IndentCode($times) {
-    if($times>0) {
+function IndentCode($times) 
+    {
+    if($times>0)
+    {
        $indentation = '<span style="margin-left:'.$times.'em">';
     }
     return $indentation;
@@ -33,9 +35,12 @@ function HighlightCaos($caos)
         $line = trim($line);
         $words = explode(" ",$line);
         $firstword = $words[0];
-        if($firstword == 'scrp' || $firstword=='endm' || $firstword == 'rscr') {
+        if($firstword == 'scrp' || $firstword=='endm' || $firstword == 'rscr')
+        {
             $indent = 0;
-        } else if($firstword == 'elif' || $firstword == 'else' || $firstword == 'endi') {
+        }
+        else if($firstword == 'elif' || $firstword == 'else' || $firstword == 'endi')
+        {
             $indent--;
         }
         
@@ -120,18 +125,24 @@ function HighlightCaos($caos)
                     $word .= '</span>'; //end the string
                     $inString=false;
                 }
-            } else if($inByteString) {
+            }
+            else if($inByteString)
+            {
                 if($word{strlen($word)-1} == ']')
                 {
                     $word .= '</span>'; //end the string
                     $inByteString=false;
                 }
             }
+            
             if($currentWord == sizeof($words)-1)
             {
-                if($indent > 0) {
+                if($indent > 0)
+                {
                     $newLine .= $word."</span><br />\n";
-                } else {
+                }
+                else
+                {
                     $newLine .= $word."<br />\n";
                 }
             }
@@ -149,11 +160,6 @@ function HighlightCaos($caos)
         {
             $indent++;
         }
-        
-        
-        
-        
-        
         
         
         $returned .= $newLine; 
