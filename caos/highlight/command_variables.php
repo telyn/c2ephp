@@ -2,14 +2,14 @@
 $caosCommandVariables = array
 (
 //agents
-"pfft",
-"erk",
+"accg",
 "attr",
 "base",
 "bhvr",
 "gall",
 "hand",
 "mira",
+"perm",
 "plne",
 "pose",
 "puhl", //returns value and accepts arguments!

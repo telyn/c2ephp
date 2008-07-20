@@ -2,7 +2,6 @@
 $caosVariables = array
 (
 //agents
-"hah",
 "abba",
 "carr",
 "fmly",

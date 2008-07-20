@@ -3,7 +3,6 @@
 $caosCommands = array
 (
 //agents
-"lol",
 "ark!",
 "alph",
 "anim",
