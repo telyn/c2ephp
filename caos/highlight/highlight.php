@@ -1,5 +1,5 @@
 <?
-//doif elif else endi scrp endm inst? slow?
+
 include("caos/highlight/commands.php");
 include("caos/highlight/variables.php");
 include("caos/highlight/command_variables.php"); //could be a command, could be a variable, could be superman
@@ -7,6 +7,7 @@ function IndentCode($times)
     {
     if($times>0)
     {
+       $times *= 2; // to make the indent bigger. Ought to be personalisable.
        $indentation = '<span style="margin-left:'.$times.'em">';
     }
     return $indentation;
@@ -16,7 +17,6 @@ function HighlightCaos($caos)
     global $caosCommands;
     global $caosVariables;
     global $caosCommandVariables;
-    $caos = strtolower($caos);
     $caos = str_replace("\r","\n",$caos); //get rid of DUMB MAC&WINDOWS NEWLINES HURR
     while(strpos($caos,"\n\n") !== false)
     {
@@ -39,7 +39,11 @@ function HighlightCaos($caos)
         {
             $indent = 0;
         }
-        else if($firstword == 'elif' || $firstword == 'else' || $firstword == 'endi')
+        else if($firstword == 'retn' || $firstword == 'subr')
+        {
+            $indent = 1;
+        }
+        else if($firstword == 'elif' || $firstword == 'else' || $firstword == 'endi' || $firstword == 'retn' || $firstword == 'untl' || $firstword == 'next' || $firstword == 'ever' || $firstword == 'repe')
         {
             $indent--;
         }
@@ -47,20 +51,26 @@ function HighlightCaos($caos)
         $inString = false;
         $inByteString = false; //byte strings are [] and mostly used with anim
         $currentWord = 0;
+        $lastWord = "";
         $newLine = IndentCode($indent).'';
         foreach($words as $word)
         {
             if($inString == false && $inByteString == false)
-            { 
-                if(in_array($word,$caosCommands))
+            {
+                $lcword = strtolower($word);
+                
+                if($lastWord == "gsub" || $lastWord == "subr") {
+                    $word = '<span class="label">'.$word.'</span>';
+                } else
+                if(in_array($lcword,$caosCommands))
                 {
                     $word = '<span class="command">'.$word.'</span>';
                 }
-                else if(in_array($word,$caosVariables) or ereg("(va|ov|mv)[0-9][0-9]", $word))
+                else if(in_array($lcword,$caosVariables) or ereg("(va|ov|mv)[0-9][0-9]", $lcword))
                 {
                     $word = '<span class="variable">'.$word.'</span>';
                 }
-                else if(in_array($word,$caosCommandVariables))
+                else if(in_array($lcword,$caosCommandVariables))
                 {
                     if($currentWord == 0)
                     {
@@ -117,6 +127,7 @@ function HighlightCaos($caos)
                 {
                     $word = '<span class="error">'.$word.'</span>';
                 }
+                
             } 
             else if($inString)
             {
@@ -150,18 +161,24 @@ function HighlightCaos($caos)
             {
                 $newLine .= $word.' ';
             }
+            $lastWord = $lcword;
             $currentWord++;
         } //end foreach words
         
         if($firstword == 'scrp' || $firstword=='rscr') 
         {
+            $newLine = "<br />\n".$newLine;
             $indent = 1;
-        } else if($firstword=='doif' || $firstword == 'elif' || $firstword == 'else') 
+        }
+        else if($firstword == 'iscr') 
+        {
+            $indent = 1;
+        }
+        else if($firstword=='doif' || $firstword == 'elif' || $firstword == 'else' || $firstword == 'inst' || $firstword == 'subr' || $firstword == 'loop' || $firstword == 'reps' || $firstword == 'etch' || $firstword == 'enum' || $firstword == 'esee' || $firstword == 'epas' || $firstword == 'econ') 
         {
             $indent++;
         }
-        
-        
+                
         $returned .= $newLine; 
     }
     return $returned;
