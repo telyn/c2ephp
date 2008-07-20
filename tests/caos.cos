@@ -1,0 +1,663 @@
+ant.cos, from Creatures 3:
+
+
+iscr
+inst
+new: simp 2 17 6 "ant" 9 68 50
+perm 99
+attr 192
+setv ov02 0
+setv ov61 15
+setv ov00 0
+setv ov01 2000
+setv ov72 200
+setv ov73 150
+setv ov74 800
+mvto 570 470
+new: simp 2 17 6 "ant" 9 68 50
+perm 99
+attr 192
+setv ov02 0
+setv ov61 15
+setv ov00 0
+setv ov01 2000
+setv ov72 200
+setv ov73 150
+setv ov74 800
+mvto 4850 1940
+new: simp 2 17 6 "ant" 9 68 50
+perm 99
+attr 192
+setv ov02 0
+setv ov61 15
+setv ov00 0
+setv ov01 2000
+setv ov72 200
+setv ov73 150
+setv ov74 800
+mvto 5000 440
+new: simp 2 17 6 "ant" 9 68 50
+perm 99
+attr 192
+setv ov02 0
+setv ov61 15
+setv ov00 0
+setv ov01 2000
+setv ov72 200
+setv ov73 150
+setv ov74 800
+mvto 2050 2030
+new: simp 2 17 6 "ant" 9 68 50
+perm 99
+attr 192
+setv ov02 0
+setv ov61 15
+setv ov00 0
+setv ov01 2000
+setv ov72 200
+setv ov73 150
+setv ov74 800
+mvto 2700 3420
+enum 2 17 6
+aero 0
+accg 1
+elas 10
+fric 80
+clac 0
+anim [0]
+setv ov00 0
+setv ov01 2000
+setv ov72 200
+setv ov73 150
+setv ov74 800
+setv vely 0
+next
+new: simp 2 17 6 "ant" 9 68 50
+perm 99
+tick 30
+attr 192
+aero 0
+accg 1
+elas 10
+fric 80
+clac 0
+anim [1]
+setv ov00 0
+setv ov01 2000
+setv ov02 420
+setv ov61 15
+setv ov72 200
+setv ov73 150
+setv ov74 800
+mvto 2240 770
+setv vely 0
+endm
+scrp 2 14 2 1
+stim writ from 88 1
+endm
+scrp 2 14 2 9
+tick rand 5 12
+addv ov01 1
+subv ov02 1
+doif carr = null
+doif rtyp room ownr = 8 or rtyp room ownr = 9
+subv ov02 100
+endi
+endi
+doif ov02 <= 0
+setv ov00 99
+endi
+doif ov07 = 1
+gsub quen
+endi
+doif ov01 gt 2010
+setv va66 ov01
+modv va66 10
+doif va66 eq 0
+addv ov20 1
+endi
+endi
+doif ov02 < ov72 and ov00 <> 2
+setv ov00 1
+endi
+doif ov02 <= 0
+setv ov00 99
+endi
+doif obst 0 lt 30
+setv ov10 1
+setv ov11 -1
+endi
+doif obst 1 lt 30
+setv ov10 -1
+setv ov11 -1
+endi
+doif obst 2 lt 30
+setv ov11 1
+endi
+doif obst 3 lt 30
+setv ov11 -1
+endi
+doif ov00 eq 99
+gsub die_
+endi
+doif ov00 = 1
+gsub gfod
+endi
+doif ov00 = 2
+gsub home
+endi
+doif ov00 eq 0
+gsub roam
+endi
+subr die_
+setv va50 posl
+setv va51 post
+setv va52 ov10
+doif ov07 = 0
+new: simp 2 10 24 "ant" 12 18 2000
+else
+new: simp 2 10 24 "ant" 12 56 2000
+endi
+accg 2
+tick 4
+elas 0
+fric 60
+attr 195
+aero 0
+setv ov10 va52
+setv ov01 0
+setv ov61 10
+doif tmvt va50 va51 <> 1
+kill targ
+else
+mvto va50 va51
+setv vely 0
+endi
+kill ownr
+retn
+subr gfod
+setv va47 2
+setv va48 10
+setv va49 0
+inst
+doif ov16 = null
+gsub find
+endi
+targ ov16
+doif targ <> null
+targ ownr
+gsub hunt
+doif touc ov16 ownr <> 0
+setv ov00 2
+mesg writ ov16 4
+seta ov18 ov16
+endi
+else
+targ ownr
+setv ov00 0
+seta ov16 null
+endi
+targ ownr
+gsub vect
+gsub anim
+gsub move
+stop
+retn
+subr home
+seta ov16 ov19
+targ ov16
+doif targ <> null
+targ ownr
+gsub hunt
+doif touc ownr ov16 = 1
+targ ownr
+inst
+doif ov18 <> null
+mesg writ ov18 12
+seta ov18 null
+endi
+mesg writ ov16 500
+setv ov00 0
+addv ov02 ov73
+endi
+else
+targ ownr
+setv ov00 0
+seta ov16 null
+endi
+targ ownr
+gsub vect
+gsub anim
+gsub move
+stop
+retn
+subr roam
+setv va66 rand 0 10
+setv ov75 1
+doif va66 lt 5
+negv ov10
+endi
+doif va66 gt 5
+setv ov11 rand -1 1
+setv ov11 -1
+endi
+gsub vect
+gsub anim
+gsub move
+stop
+retn
+subr vect
+setv va10 rand 2 6
+setv va11 rand 1 3
+retn
+subr anim
+doif ov10 eq 0
+loop
+setv ov10 rand -1 1
+untl ov10 ne 0
+endi
+doif ov10 <= 0
+anim []
+base ov30
+anim [0 1 2 3 4 5 6 7 255]
+endi
+doif ov10 > 0
+anim []
+base ov31
+anim [0 1 2 3 4 5 6 7 255]
+endi
+retn
+subr move
+doif obst down < 5
+fric 0
+velo 0 0
+mulv va10 ov10
+mulv va11 ov11
+absv va11
+velo va10 va11
+wait 10
+fric 100
+anim []
+endi
+retn
+subr find
+setv va99 99999999
+seta va58 null
+inst
+esee va47 va48 va49
+doif targ <> null
+setv va88 0
+setv va50 relx ownr targ
+setv va51 rely ownr targ
+doif va50 lt 0
+negv va50
+endi
+doif va51 lt 0
+negv va51
+endi
+setv va52 va50
+mulv va52 va52
+setv va53 va51
+mulv va53 va53
+setv va54 va52
+addv va54 va53
+doif va54 lt va99
+seta va58 targ
+setv va99 va54
+endi
+endi
+next
+targ va58
+doif targ <> null
+targ ownr
+seta ov16 va58
+else
+targ ownr
+seta ov16 null
+endi
+targ ownr
+slow
+retn
+subr hunt
+inst
+targ ov16
+doif targ <> null
+setv va50 posx
+setv va51 posy
+targ ownr
+doif posx lt va50
+setv ov10 1
+endi
+doif posx gt va50
+setv ov10 -1
+endi
+doif posy lt va51
+setv ov11 1
+endi
+doif posy gt va51
+setv ov11 -1
+endi
+else
+targ ownr
+setv ov00 0
+stop
+endi
+retn
+subr quen
+setv va47 2
+setv va48 17
+setv va49 6
+gsub fnd2
+doif ov16 <> null
+targ ownr
+gsub hunt
+doif touc ownr ov16 <> 0
+gsub bnst
+endi
+else
+targ ownr
+setv ov00 0
+gsub rom2
+endi
+targ ownr
+gsub obst
+gsub vec2
+gsub ani2
+gsub mov2
+stop
+retn
+subr bnst
+seta va16 ov16
+enum 2 17 6
+doif targ = va16
+tick 30
+doif pose = 0
+addv ov02 450
+anim [1]
+endi
+endi
+next
+targ ownr
+kill targ
+retn
+subr obst
+doif obst 0 lt 120
+setv ov10 1
+endi
+doif obst 1 lt 120
+setv ov10 -1
+endi
+doif obst 2 lt 60
+setv ov11 1
+endi
+doif obst 3 lt 100
+setv ov11 -1
+endi
+retn
+subr fnd2
+setv va99 99999999
+seta va58 null
+seta va19 ov19
+esee va47 va48 va49
+doif targ <> va19
+inst
+setv va88 0
+setv va50 relx ownr targ
+setv va51 rely ownr targ
+doif va50 lt 0
+negv va50
+endi
+doif va51 lt 0
+negv va51
+endi
+setv va52 va50
+mulv va52 va52
+setv va53 va51
+mulv va53 va53
+setv va54 va52
+addv va54 va53
+doif va54 lt va99
+seta va58 targ
+setv va99 va54
+endi
+slow
+endi
+next
+doif va58 <> null
+targ ownr
+seta ov16 va58
+else
+targ ownr
+seta ov16 null
+endi
+targ ownr
+slow
+retn
+subr vec2
+setv va10 rand 4 8
+setv va11 rand 2 8
+mulv va10 ov10
+mulv va11 ov11
+doif ov12 < va10
+addv ov12 rand 3 6
+elif ov12 > va10
+subv ov12 rand 3 6
+endi
+doif ov13 < va11
+addv ov13 rand 3 6
+elif ov13 > va11
+subv ov13 rand 3 6
+endi
+setv va10 ov12
+setv va11 ov13
+retn
+subr ani2
+doif ov12 eq 0
+loop
+setv ov12 rand -1 1
+untl ov12 ne 0
+endi
+doif ov12 <= 0
+anim []
+base ov32
+anim [0 2 255]
+endi
+doif ov12 > 0
+anim []
+base ov33
+anim [0 2 255]
+endi
+retn
+subr mov2
+velo va10 va11
+retn
+subr rom2
+setv va66 rand 0 12
+doif va66 lt 5
+doif va66 = 1
+setv ov10 1
+elif va66 = 2
+setv ov10 -1
+elif va66 = 3
+setv ov11 1
+elif va66 = 4
+setv ov11 -1
+endi
+endi
+gsub obst
+gsub vec2
+gsub ani2
+gsub mov2
+stop
+retn
+endm
+scrp 2 17 6 9
+subv ov02 1
+doif ov02 > 0 and ov02 <= 420
+anim [1]
+elif ov02 > 420 and ov02 <= 600
+anim [2]
+elif ov02 > 600 and ov02 <= 800
+anim [3]
+elif ov02 > 1000 and ov02 <= 1500
+anim [4]
+elif ov02 > 1500 and ov02 <= 2000
+anim [5]
+elif ov02 > 2000
+anim [6]
+endi
+setv va50 posx
+setv va51 posy
+subv va51 0
+setv va88 0
+inst
+enum 2 14 2
+doif ov19 = ownr
+addv va88 1
+endi
+next
+slow
+doif ov02 > ov72 and ov02 < 2000 and va88 < 10
+inst
+new: simp 2 14 2 "ant" 51 0 2500
+perm 99
+tick 8
+attr 195
+aero 0
+accg 1
+elas 1
+fric 0
+clac 0
+bhvr 17
+puhl -1 10 12
+setv ov30 0
+setv ov31 8
+setv ov32 16
+setv ov33 18
+setv ov34 24
+setv ov36 34
+setv ov37 38
+setv ov00 0
+setv ov01 2000
+setv ov02 405
+setv ov05 2
+setv ov06 rand 0 1
+setv ov07 0
+setv ov10 1
+setv ov11 -1
+seta ov16 null
+seta ov19 ownr
+setv ov20 0
+setv ov61 40
+setv ov72 400
+setv ov73 40
+setv ov74 800
+setv ov75 1
+doif tmvt va50 va51 <> 1
+kill targ
+else
+mvto va50 va51
+setv vely 0
+targ ownr
+subv ov02 ov73
+endi
+targ ownr
+slow
+elif ov02 >= 2000 and va88 < 10
+inst
+new: simp 2 14 2 "ant" 51 30 2500
+perm 50
+tick 8
+attr 195
+aero 0
+accg 0
+elas 1
+fric 0
+clac 0
+bhvr 17
+puhl -1 10 12
+setv ov30 0
+setv ov31 8
+setv ov32 18
+setv ov33 22
+setv ov34 24
+setv ov36 34
+setv ov37 38
+setv ov00 0
+setv ov01 2000
+setv ov02 405
+setv ov05 2
+setv ov06 rand 0 1
+setv ov07 1
+setv ov10 1
+setv ov11 -1
+seta ov16 null
+seta ov19 ownr
+setv ov20 0
+setv ov61 41
+setv ov72 400
+setv ov73 400
+setv ov74 800
+setv ov75 1
+doif tmvt va50 va51 <> 1
+kill targ
+else
+mvto va50 va51
+setv vely 0
+targ ownr
+subv ov02 1800
+endi
+targ ownr
+slow
+endi
+doif ov02 < 0
+doif totl 2 14 2 = 0
+addv ov02 200
+endi
+endi
+endm
+scrp 2 14 2 12
+stim writ from 80 1
+kill ownr
+endm
+scrp 2 10 24 9
+addv ov01 1
+doif ov01 > 50
+doif ov10 <= 0 and carr = null
+anim []
+base 0
+anim [0 1 2 3 4 5]
+doif room targ <> -1 and carr = null
+altr room targ 3 0.1
+altr room targ 4 0.1
+endi
+over
+kill targ
+elif ov10 > 0 and carr = null
+anim []
+base 6
+anim [0 1 2 3 4 5]
+doif room targ <> -1 and carr = null
+altr room targ 3 0.1
+altr room targ 4 0.1
+endi
+over
+kill targ
+endi
+endi
+endm
+scrp 2 17 6 500
+addv ov02 ov72
+endm
+rscr
+enum 2 14 2
+kill targ
+next
+scrx 2 14 2 9
+scrx 2 14 2 6
+enum 2 17 6
+kill targ
+next
+scrx 2 17 6 9
+scrx 2 17 6 6
+endm
