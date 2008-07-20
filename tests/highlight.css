@@ -1,0 +1,25 @@
+.command
+{
+	color:rgb(40,0,200);
+}
+.variable
+{
+	color:rgb(170,10,145);
+}
+.string
+{
+	color:rgb(195,25,25);
+}
+.number
+{
+	color:rgb(90,20,10);
+}
+.comment
+{
+	color:rgb(0,150,0);
+}
+.error
+{
+	color:rgb(255,0,0);
+	font-weight:bold;
+}
