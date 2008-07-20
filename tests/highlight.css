@@ -17,9 +17,13 @@
 .comment
 {
 	color:rgb(0,150,0);
+	font-style: italic;
 }
 .error
 {
 	color:rgb(255,0,0);
 	font-weight:bold;
+}
+.bytestring {
+	color:rgb(200,20,100);
 }

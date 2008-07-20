@@ -40,11 +40,12 @@ function HighlightCaos($caos)
         }
         
         $inString = false;
+        $inByteString = false; //byte strings are [] and mostly used with anim
         $currentWord = 0;
         $newLine = IndentCode($indent).'';
         foreach($words as $word)
         {
-            if(!$inString)
+            if($inString == false && $inByteString == false)
             { 
                 if(in_array($word,$caosCommands))
                 {
@@ -59,7 +60,8 @@ function HighlightCaos($caos)
                     if($currentWord == 0)
                     {
                         $word = '<span class="command">'.$word.'</span>';
-                    } else
+                    }
+                    else
                     {
                         $word = '<span class="variable">'.$word.'</span>';
                     }
@@ -70,12 +72,22 @@ function HighlightCaos($caos)
                     if($word{strlen($word)-1} == '"')
                     {
                     	$word .= '</span>'; //end the string
-						$inString=false;
+						$inString = false;
 					}
 					else
 					{
-						$inString=true;
+						$inString = true;
 					}
+                }
+                else if($word{0} == '[')
+                {
+                    $word = '<span class="bytestring">'.$word;
+                    if($word{strlen($word)-1} == ']') {
+                        $word .= '</span>';
+                        $inByteString = false;
+                    } else {
+                        $inByteString = true;
+                    }
                 }
                 else if(is_numeric($word))
                 {
@@ -100,12 +112,19 @@ function HighlightCaos($caos)
                 {
                     $word = '<span class="error">'.$word.'</span>';
                 }
-            } else
+            } 
+            else if($inString)
             {
                 if($word{strlen($word)-1} == '"')
                 {
                     $word .= '</span>'; //end the string
                     $inString=false;
+                }
+            } else if($inByteString) {
+                if($word{strlen($word)-1} == ']')
+                {
+                    $word .= '</span>'; //end the string
+                    $inByteString=false;
                 }
             }
             if($currentWord == sizeof($words)-1)
