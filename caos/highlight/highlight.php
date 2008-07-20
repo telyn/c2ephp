@@ -37,7 +37,8 @@ function HighlightCaos($caos)
                 {
                     $word = '<span class="command">'.$word.'</span>';
                 }
-                else if(in_array($word,$caosVariables)) {
+                else if(in_array($word,$caosVariables) or ereg("(va|ov|mv)[0-9][0-9]", $word))
+                {
                     $word = '<span class="variable">'.$word.'</span>';
                 }
                 else if(in_array($word,$caosCommandVariables))
