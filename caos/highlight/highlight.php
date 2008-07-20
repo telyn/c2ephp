@@ -1,5 +1,6 @@
 <?
-
+include("caos/highlight/operators.php");
+include("caos/highlight/flowcontrols.php");
 include("caos/highlight/commands.php");
 include("caos/highlight/variables.php");
 include("caos/highlight/command_variables.php"); //could be a command, could be a variable, could be superman
@@ -17,6 +18,8 @@ function HighlightCaos($caos)
     global $caosCommands;
     global $caosVariables;
     global $caosCommandVariables;
+    global $caosOperators;
+    global $caosFlowControls;
     $caos = str_replace("\r","\n",$caos); //get rid of DUMB MAC&WINDOWS NEWLINES HURR
     while(strpos($caos,"\n\n") !== false)
     {
@@ -66,9 +69,17 @@ function HighlightCaos($caos)
                 {
                     $word = '<span class="command">'.$word.'</span>';
                 }
-                else if(in_array($lcword,$caosVariables) or ereg("(va|ov|mv)[0-9][0-9]", $lcword))
+                else if(in_array($lcword,$caosVariables) || ereg("(va|ov|mv)[0-9][0-9]", $lcword))
                 {
                     $word = '<span class="variable">'.$word.'</span>';
+                }
+                else if(in_array($lcword,$caosOperators))
+                {
+                    $word = '<span class="operator">'.$word.'</span>';
+                }
+                else if(in_array($lcword,$caosFlowControls))
+                {
+                    $word = '<span class="flowcontrol">'.$word.'</span>';
                 }
                 else if(in_array($lcword,$caosCommandVariables))
                 {

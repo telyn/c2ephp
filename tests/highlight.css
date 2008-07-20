@@ -30,3 +30,10 @@
 .label {
     color: orange;
 }
+.flowcontrol {
+    color: purple;
+}
+.operator {
+    color: purple;
+    font-weight: bold;
+}
