@@ -4,8 +4,8 @@
         <link rel="stylesheet" type="text/css" href="highlight.css" />
     </head>
     <body><span class="comment">*ant.cos, from Creatures 3:</span><br />
-<span class="error">iscr</span><br />
-<span style="margin-left:2em"><span class="error">inst</span></span><br />
+<span class="flowcontrol">iscr</span><br />
+<span style="margin-left:2em"><span class="flowcontrol">inst</span></span><br />
 <span style="margin-left:4em"><span class="command">new:</span> <span class="command">simp</span> <span class="number">2</span> <span class="number">17</span> <span class="number">6</span> <span class="string">"ant"</span> <span class="number">9</span> <span class="number">68</span> <span class="number">50</span></span><br />
 <span style="margin-left:4em"><span class="command">perm</span> <span class="number">99</span></span><br />
 <span style="margin-left:4em"><span class="command">attr</span> <span class="number">192</span></span><br />
@@ -61,7 +61,7 @@
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">ov73</span> <span class="number">150</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">ov74</span> <span class="number">800</span></span><br />
 <span style="margin-left:4em"><span class="error">mvto</span> <span class="number">2700</span> <span class="number">3420</span></span><br />
-<span style="margin-left:4em"><span class="error">enum</span> <span class="number">2</span> <span class="number">17</span> <span class="number">6</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">enum</span> <span class="number">2</span> <span class="number">17</span> <span class="number">6</span></span><br />
 <span style="margin-left:6em"><span class="error">aero</span> <span class="number">0</span></span><br />
 <span style="margin-left:6em"><span class="command">accg</span> <span class="number">1</span></span><br />
 <span style="margin-left:6em"><span class="error">elas</span> <span class="number">10</span></span><br />
@@ -74,7 +74,7 @@
 <span style="margin-left:6em"><span class="command">setv</span> <span class="variable">ov73</span> <span class="number">150</span></span><br />
 <span style="margin-left:6em"><span class="command">setv</span> <span class="variable">ov74</span> <span class="number">800</span></span><br />
 <span style="margin-left:6em"><span class="command">setv</span> <span class="error">vely</span> <span class="number">0</span></span><br />
-<span style="margin-left:4em"><span class="error">next</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">next</span></span><br />
 <span style="margin-left:4em"><span class="command">new:</span> <span class="command">simp</span> <span class="number">2</span> <span class="number">17</span> <span class="number">6</span> <span class="string">"ant"</span> <span class="number">9</span> <span class="number">68</span> <span class="number">50</span></span><br />
 <span style="margin-left:4em"><span class="command">perm</span> <span class="number">99</span></span><br />
 <span style="margin-left:4em"><span class="command">tick</span> <span class="number">30</span></span><br />
@@ -94,75 +94,75 @@
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">ov74</span> <span class="number">800</span></span><br />
 <span style="margin-left:4em"><span class="error">mvto</span> <span class="number">2240</span> <span class="number">770</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="error">vely</span> <span class="number">0</span></span><br />
-<span class="error">endm</span><br />
+<span class="flowcontrol">endm</span><br />
 <br />
-<span class="error">scrp</span> <span class="number">2</span> <span class="number">14</span> <span class="number">2</span> <span class="number">1</span><br />
+<span class="flowcontrol">scrp</span> <span class="number">2</span> <span class="number">14</span> <span class="number">2</span> <span class="number">1</span><br />
 <span style="margin-left:2em"><span class="error">stim</span> <span class="command">writ</span> <span class="variable">from</span> <span class="number">88</span> <span class="number">1</span></span><br />
-<span class="error">endm</span><br />
+<span class="flowcontrol">endm</span><br />
 <br />
-<span class="error">scrp</span> <span class="number">2</span> <span class="number">14</span> <span class="number">2</span> <span class="number">9</span><br />
+<span class="flowcontrol">scrp</span> <span class="number">2</span> <span class="number">14</span> <span class="number">2</span> <span class="number">9</span><br />
 <span style="margin-left:2em"><span class="command">tick</span> <span class="command">rand</span> <span class="number">5</span> <span class="number">12</span></span><br />
 <span style="margin-left:2em"><span class="command">addv</span> <span class="variable">ov01</span> <span class="number">1</span></span><br />
 <span style="margin-left:2em"><span class="command">subv</span> <span class="variable">ov02</span> <span class="number">1</span></span><br />
-<span style="margin-left:2em"><span class="error">doif</span> <span class="variable">carr</span> <span class="error">=</span> <span class="variable">null</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="error">rtyp</span> <span class="error">room</span> <span class="variable">ownr</span> <span class="error">=</span> <span class="number">8</span> <span class="error">or</span> <span class="error">rtyp</span> <span class="error">room</span> <span class="variable">ownr</span> <span class="error">=</span> <span class="number">9</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">doif</span> <span class="variable">carr</span> <span class="operator">=</span> <span class="variable">null</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="error">rtyp</span> <span class="error">room</span> <span class="variable">ownr</span> <span class="operator">=</span> <span class="number">8</span> <span class="error">or</span> <span class="error">rtyp</span> <span class="error">room</span> <span class="variable">ownr</span> <span class="operator">=</span> <span class="number">9</span></span><br />
 <span style="margin-left:6em"><span class="command">subv</span> <span class="variable">ov02</span> <span class="number">100</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">doif</span> <span class="variable">ov02</span> <span class="error"><=</span> <span class="number">0</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">doif</span> <span class="variable">ov02</span> <span class="operator"><=</span> <span class="number">0</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">ov00</span> <span class="number">99</span></span><br />
-<span style="margin-left:2em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">doif</span> <span class="variable">ov07</span> <span class="error">=</span> <span class="number">1</span></span><br />
-<span style="margin-left:4em"><span class="error">gsub</span> <span class="label">quen</span></span><br />
-<span style="margin-left:2em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">doif</span> <span class="variable">ov01</span> <span class="error">gt</span> <span class="number">2010</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">doif</span> <span class="variable">ov07</span> <span class="operator">=</span> <span class="number">1</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">gsub</span> <span class="label">quen</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">doif</span> <span class="variable">ov01</span> <span class="operator">gt</span> <span class="number">2010</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va66</span> <span class="variable">ov01</span></span><br />
 <span style="margin-left:4em"><span class="command">modv</span> <span class="variable">va66</span> <span class="number">10</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="variable">va66</span> <span class="error">eq</span> <span class="number">0</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="variable">va66</span> <span class="operator">eq</span> <span class="number">0</span></span><br />
 <span style="margin-left:6em"><span class="command">addv</span> <span class="variable">ov20</span> <span class="number">1</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">doif</span> <span class="variable">ov02</span> <span class="error"><</span> <span class="variable">ov72</span> <span class="error">and</span> <span class="variable">ov00</span> <span class="error"><></span> <span class="number">2</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">doif</span> <span class="variable">ov02</span> <span class="operator"><</span> <span class="variable">ov72</span> <span class="error">and</span> <span class="variable">ov00</span> <span class="operator"><></span> <span class="number">2</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">ov00</span> <span class="number">1</span></span><br />
-<span style="margin-left:2em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">doif</span> <span class="variable">ov02</span> <span class="error"><=</span> <span class="number">0</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">doif</span> <span class="variable">ov02</span> <span class="operator"><=</span> <span class="number">0</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">ov00</span> <span class="number">99</span></span><br />
-<span style="margin-left:2em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">doif</span> <span class="error">obst</span> <span class="number">0</span> <span class="error">lt</span> <span class="number">30</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">doif</span> <span class="error">obst</span> <span class="number">0</span> <span class="operator">lt</span> <span class="number">30</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">ov10</span> <span class="number">1</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">ov11</span> <span class="number">-1</span></span><br />
-<span style="margin-left:2em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">doif</span> <span class="error">obst</span> <span class="number">1</span> <span class="error">lt</span> <span class="number">30</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">doif</span> <span class="error">obst</span> <span class="number">1</span> <span class="operator">lt</span> <span class="number">30</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">ov10</span> <span class="number">-1</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">ov11</span> <span class="number">-1</span></span><br />
-<span style="margin-left:2em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">doif</span> <span class="error">obst</span> <span class="number">2</span> <span class="error">lt</span> <span class="number">30</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">doif</span> <span class="error">obst</span> <span class="number">2</span> <span class="operator">lt</span> <span class="number">30</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">ov11</span> <span class="number">1</span></span><br />
-<span style="margin-left:2em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">doif</span> <span class="error">obst</span> <span class="number">3</span> <span class="error">lt</span> <span class="number">30</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">doif</span> <span class="error">obst</span> <span class="number">3</span> <span class="operator">lt</span> <span class="number">30</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">ov11</span> <span class="number">-1</span></span><br />
-<span style="margin-left:2em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">doif</span> <span class="variable">ov00</span> <span class="error">eq</span> <span class="number">99</span></span><br />
-<span style="margin-left:4em"><span class="error">gsub</span> <span class="label">die_</span></span><br />
-<span style="margin-left:2em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">doif</span> <span class="variable">ov00</span> <span class="error">=</span> <span class="number">1</span></span><br />
-<span style="margin-left:4em"><span class="error">gsub</span> <span class="label">gfod</span></span><br />
-<span style="margin-left:2em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">doif</span> <span class="variable">ov00</span> <span class="error">=</span> <span class="number">2</span></span><br />
-<span style="margin-left:4em"><span class="error">gsub</span> <span class="label">home</span></span><br />
-<span style="margin-left:2em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">doif</span> <span class="variable">ov00</span> <span class="error">eq</span> <span class="number">0</span></span><br />
-<span style="margin-left:4em"><span class="error">gsub</span> <span class="label">roam</span></span><br />
-<span style="margin-left:2em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">subr</span> <span class="label">die_</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">doif</span> <span class="variable">ov00</span> <span class="operator">eq</span> <span class="number">99</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">gsub</span> <span class="label">die_</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">doif</span> <span class="variable">ov00</span> <span class="operator">=</span> <span class="number">1</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">gsub</span> <span class="label">gfod</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">doif</span> <span class="variable">ov00</span> <span class="operator">=</span> <span class="number">2</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">gsub</span> <span class="label">home</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">doif</span> <span class="variable">ov00</span> <span class="operator">eq</span> <span class="number">0</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">gsub</span> <span class="label">roam</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">subr</span> <span class="label">die_</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va50</span> <span class="variable">posl</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va51</span> <span class="variable">post</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va52</span> <span class="variable">ov10</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="variable">ov07</span> <span class="error">=</span> <span class="number">0</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="variable">ov07</span> <span class="operator">=</span> <span class="number">0</span></span><br />
 <span style="margin-left:6em"><span class="command">new:</span> <span class="command">simp</span> <span class="number">2</span> <span class="number">10</span> <span class="number">24</span> <span class="string">"ant"</span> <span class="number">12</span> <span class="number">18</span> <span class="number">2000</span></span><br />
-<span style="margin-left:4em"><span class="error">else</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">else</span></span><br />
 <span style="margin-left:6em"><span class="command">new:</span> <span class="command">simp</span> <span class="number">2</span> <span class="number">10</span> <span class="number">24</span> <span class="string">"ant"</span> <span class="number">12</span> <span class="number">56</span> <span class="number">2000</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
 <span style="margin-left:4em"><span class="command">accg</span> <span class="number">2</span></span><br />
 <span style="margin-left:4em"><span class="command">tick</span> <span class="number">4</span></span><br />
 <span style="margin-left:4em"><span class="error">elas</span> <span class="number">0</span></span><br />
@@ -172,108 +172,108 @@
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">ov10</span> <span class="variable">va52</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">ov01</span> <span class="number">0</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">ov61</span> <span class="number">10</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="error">tmvt</span> <span class="variable">va50</span> <span class="variable">va51</span> <span class="error"><></span> <span class="number">1</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="error">tmvt</span> <span class="variable">va50</span> <span class="variable">va51</span> <span class="operator"><></span> <span class="number">1</span></span><br />
 <span style="margin-left:6em"><span class="command">kill</span> <span class="variable">targ</span></span><br />
-<span style="margin-left:4em"><span class="error">else</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">else</span></span><br />
 <span style="margin-left:6em"><span class="error">mvto</span> <span class="variable">va50</span> <span class="variable">va51</span></span><br />
 <span style="margin-left:6em"><span class="command">setv</span> <span class="error">vely</span> <span class="number">0</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
 <span style="margin-left:4em"><span class="command">kill</span> <span class="variable">ownr</span></span><br />
-<span style="margin-left:2em"><span class="error">retn</span></span><br />
-<span style="margin-left:2em"><span class="error">subr</span> <span class="label">gfod</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">retn</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">subr</span> <span class="label">gfod</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va47</span> <span class="number">2</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va48</span> <span class="number">10</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va49</span> <span class="number">0</span></span><br />
-<span style="margin-left:4em"><span class="error">inst</span></span><br />
-<span style="margin-left:6em"><span class="error">doif</span> <span class="variable">ov16</span> <span class="error">=</span> <span class="variable">null</span></span><br />
-<span style="margin-left:8em"><span class="error">gsub</span> <span class="label">find</span></span><br />
-<span style="margin-left:6em"><span class="error">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">inst</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">doif</span> <span class="variable">ov16</span> <span class="operator">=</span> <span class="variable">null</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">gsub</span> <span class="label">find</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">endi</span></span><br />
 <span style="margin-left:6em"><span class="command">targ</span> <span class="variable">ov16</span></span><br />
-<span style="margin-left:6em"><span class="error">doif</span> <span class="variable">targ</span> <span class="error"><></span> <span class="variable">null</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">doif</span> <span class="variable">targ</span> <span class="operator"><></span> <span class="variable">null</span></span><br />
 <span style="margin-left:8em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
-<span style="margin-left:8em"><span class="error">gsub</span> <span class="label">hunt</span></span><br />
-<span style="margin-left:8em"><span class="error">doif</span> <span class="command">touc</span> <span class="variable">ov16</span> <span class="variable">ownr</span> <span class="error"><></span> <span class="number">0</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">gsub</span> <span class="label">hunt</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">doif</span> <span class="command">touc</span> <span class="variable">ov16</span> <span class="variable">ownr</span> <span class="operator"><></span> <span class="number">0</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">ov00</span> <span class="number">2</span></span><br />
 <span style="margin-left:10em"><span class="command">mesg</span> <span class="command">writ</span> <span class="variable">ov16</span> <span class="number">4</span></span><br />
 <span style="margin-left:10em"><span class="command">seta</span> <span class="variable">ov18</span> <span class="variable">ov16</span></span><br />
-<span style="margin-left:8em"><span class="error">endi</span></span><br />
-<span style="margin-left:6em"><span class="error">else</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">else</span></span><br />
 <span style="margin-left:8em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
 <span style="margin-left:8em"><span class="command">setv</span> <span class="variable">ov00</span> <span class="number">0</span></span><br />
 <span style="margin-left:8em"><span class="command">seta</span> <span class="variable">ov16</span> <span class="variable">null</span></span><br />
-<span style="margin-left:6em"><span class="error">endi</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">endi</span></span><br />
 <span style="margin-left:6em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
-<span style="margin-left:6em"><span class="error">gsub</span> <span class="label">vect</span></span><br />
-<span style="margin-left:6em"><span class="error">gsub</span> <span class="label">anim</span></span><br />
-<span style="margin-left:6em"><span class="error">gsub</span> <span class="label">move</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">gsub</span> <span class="label">vect</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">gsub</span> <span class="label">anim</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">gsub</span> <span class="label">move</span></span><br />
 <span style="margin-left:6em"><span class="error">stop</span></span><br />
-<span style="margin-left:2em"><span class="error">retn</span></span><br />
-<span style="margin-left:2em"><span class="error">subr</span> <span class="label">home</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">retn</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">subr</span> <span class="label">home</span></span><br />
 <span style="margin-left:4em"><span class="command">seta</span> <span class="variable">ov16</span> <span class="variable">ov19</span></span><br />
 <span style="margin-left:4em"><span class="command">targ</span> <span class="variable">ov16</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="variable">targ</span> <span class="error"><></span> <span class="variable">null</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="variable">targ</span> <span class="operator"><></span> <span class="variable">null</span></span><br />
 <span style="margin-left:6em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
-<span style="margin-left:6em"><span class="error">gsub</span> <span class="label">hunt</span></span><br />
-<span style="margin-left:6em"><span class="error">doif</span> <span class="command">touc</span> <span class="variable">ownr</span> <span class="variable">ov16</span> <span class="error">=</span> <span class="number">1</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">gsub</span> <span class="label">hunt</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">doif</span> <span class="command">touc</span> <span class="variable">ownr</span> <span class="variable">ov16</span> <span class="operator">=</span> <span class="number">1</span></span><br />
 <span style="margin-left:8em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
-<span style="margin-left:8em"><span class="error">inst</span></span><br />
-<span style="margin-left:10em"><span class="error">doif</span> <span class="variable">ov18</span> <span class="error"><></span> <span class="variable">null</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">inst</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">doif</span> <span class="variable">ov18</span> <span class="operator"><></span> <span class="variable">null</span></span><br />
 <span style="margin-left:12em"><span class="command">mesg</span> <span class="command">writ</span> <span class="variable">ov18</span> <span class="number">12</span></span><br />
 <span style="margin-left:12em"><span class="command">seta</span> <span class="variable">ov18</span> <span class="variable">null</span></span><br />
-<span style="margin-left:10em"><span class="error">endi</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">endi</span></span><br />
 <span style="margin-left:10em"><span class="command">mesg</span> <span class="command">writ</span> <span class="variable">ov16</span> <span class="number">500</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">ov00</span> <span class="number">0</span></span><br />
 <span style="margin-left:10em"><span class="command">addv</span> <span class="variable">ov02</span> <span class="variable">ov73</span></span><br />
-<span style="margin-left:8em"><span class="error">endi</span></span><br />
-<span style="margin-left:6em"><span class="error">else</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">else</span></span><br />
 <span style="margin-left:8em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
 <span style="margin-left:8em"><span class="command">setv</span> <span class="variable">ov00</span> <span class="number">0</span></span><br />
 <span style="margin-left:8em"><span class="command">seta</span> <span class="variable">ov16</span> <span class="variable">null</span></span><br />
-<span style="margin-left:6em"><span class="error">endi</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">endi</span></span><br />
 <span style="margin-left:6em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
-<span style="margin-left:6em"><span class="error">gsub</span> <span class="label">vect</span></span><br />
-<span style="margin-left:6em"><span class="error">gsub</span> <span class="label">anim</span></span><br />
-<span style="margin-left:6em"><span class="error">gsub</span> <span class="label">move</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">gsub</span> <span class="label">vect</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">gsub</span> <span class="label">anim</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">gsub</span> <span class="label">move</span></span><br />
 <span style="margin-left:6em"><span class="error">stop</span></span><br />
-<span style="margin-left:2em"><span class="error">retn</span></span><br />
-<span style="margin-left:2em"><span class="error">subr</span> <span class="label">roam</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">retn</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">subr</span> <span class="label">roam</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va66</span> <span class="command">rand</span> <span class="number">0</span> <span class="number">10</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">ov75</span> <span class="number">1</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="variable">va66</span> <span class="error">lt</span> <span class="number">5</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="variable">va66</span> <span class="operator">lt</span> <span class="number">5</span></span><br />
 <span style="margin-left:6em"><span class="command">negv</span> <span class="variable">ov10</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="variable">va66</span> <span class="error">gt</span> <span class="number">5</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="variable">va66</span> <span class="operator">gt</span> <span class="number">5</span></span><br />
 <span style="margin-left:6em"><span class="command">setv</span> <span class="variable">ov11</span> <span class="command">rand</span> <span class="number">-1</span> <span class="number">1</span></span><br />
 <span style="margin-left:6em"><span class="command">setv</span> <span class="variable">ov11</span> <span class="number">-1</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:4em"><span class="error">gsub</span> <span class="label">vect</span></span><br />
-<span style="margin-left:4em"><span class="error">gsub</span> <span class="label">anim</span></span><br />
-<span style="margin-left:4em"><span class="error">gsub</span> <span class="label">move</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">gsub</span> <span class="label">vect</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">gsub</span> <span class="label">anim</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">gsub</span> <span class="label">move</span></span><br />
 <span style="margin-left:4em"><span class="error">stop</span></span><br />
-<span style="margin-left:2em"><span class="error">retn</span></span><br />
-<span style="margin-left:2em"><span class="error">subr</span> <span class="label">vect</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">retn</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">subr</span> <span class="label">vect</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va10</span> <span class="command">rand</span> <span class="number">2</span> <span class="number">6</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va11</span> <span class="command">rand</span> <span class="number">1</span> <span class="number">3</span></span><br />
-<span style="margin-left:2em"><span class="error">retn</span></span><br />
-<span style="margin-left:2em"><span class="error">subr</span> <span class="label">anim</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="variable">ov10</span> <span class="error">eq</span> <span class="number">0</span></span><br />
-<span style="margin-left:6em"><span class="error">loop</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">retn</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">subr</span> <span class="label">anim</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="variable">ov10</span> <span class="operator">eq</span> <span class="number">0</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">loop</span></span><br />
 <span style="margin-left:8em"><span class="command">setv</span> <span class="variable">ov10</span> <span class="command">rand</span> <span class="number">-1</span> <span class="number">1</span></span><br />
-<span style="margin-left:6em"><span class="error">untl</span> <span class="variable">ov10</span> <span class="error">ne</span> <span class="number">0</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="variable">ov10</span> <span class="error"><=</span> <span class="number">0</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">untl</span> <span class="variable">ov10</span> <span class="error">ne</span> <span class="number">0</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="variable">ov10</span> <span class="operator"><=</span> <span class="number">0</span></span><br />
 <span style="margin-left:6em"><span class="command">anim</span> <span class="bytestring">[]</span></span><br />
 <span style="margin-left:6em"><span class="command">base</span> <span class="variable">ov30</span></span><br />
 <span style="margin-left:6em"><span class="command">anim</span> <span class="bytestring">[0 1 2 3 4 5 6 7 255]</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="variable">ov10</span> <span class="error">></span> <span class="number">0</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="variable">ov10</span> <span class="operator">></span> <span class="number">0</span></span><br />
 <span style="margin-left:6em"><span class="command">anim</span> <span class="bytestring">[]</span></span><br />
 <span style="margin-left:6em"><span class="command">base</span> <span class="variable">ov31</span></span><br />
 <span style="margin-left:6em"><span class="command">anim</span> <span class="bytestring">[0 1 2 3 4 5 6 7 255]</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">retn</span></span><br />
-<span style="margin-left:2em"><span class="error">subr</span> <span class="label">move</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="error">obst</span> <span class="error">down</span> <span class="error"><</span> <span class="number">5</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">retn</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">subr</span> <span class="label">move</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="error">obst</span> <span class="error">down</span> <span class="operator"><</span> <span class="number">5</span></span><br />
 <span style="margin-left:6em"><span class="error">fric</span> <span class="number">0</span></span><br />
 <span style="margin-left:6em"><span class="error">velo</span> <span class="number">0</span> <span class="number">0</span></span><br />
 <span style="margin-left:6em"><span class="command">mulv</span> <span class="variable">va10</span> <span class="variable">ov10</span></span><br />
@@ -283,248 +283,248 @@
 <span style="margin-left:6em"><span class="error">wait</span> <span class="number">10</span></span><br />
 <span style="margin-left:6em"><span class="error">fric</span> <span class="number">100</span></span><br />
 <span style="margin-left:6em"><span class="command">anim</span> <span class="bytestring">[]</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">retn</span></span><br />
-<span style="margin-left:2em"><span class="error">subr</span> <span class="label">find</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">retn</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">subr</span> <span class="label">find</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va99</span> <span class="number">99999999</span></span><br />
 <span style="margin-left:4em"><span class="command">seta</span> <span class="variable">va58</span> <span class="variable">null</span></span><br />
-<span style="margin-left:4em"><span class="error">inst</span></span><br />
-<span style="margin-left:6em"><span class="error">esee</span> <span class="variable">va47</span> <span class="variable">va48</span> <span class="variable">va49</span></span><br />
-<span style="margin-left:8em"><span class="error">doif</span> <span class="variable">targ</span> <span class="error"><></span> <span class="variable">null</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">inst</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">esee</span> <span class="variable">va47</span> <span class="variable">va48</span> <span class="variable">va49</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">doif</span> <span class="variable">targ</span> <span class="operator"><></span> <span class="variable">null</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">va88</span> <span class="number">0</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">va50</span> <span class="error">relx</span> <span class="variable">ownr</span> <span class="variable">targ</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">va51</span> <span class="error">rely</span> <span class="variable">ownr</span> <span class="variable">targ</span></span><br />
-<span style="margin-left:10em"><span class="error">doif</span> <span class="variable">va50</span> <span class="error">lt</span> <span class="number">0</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">doif</span> <span class="variable">va50</span> <span class="operator">lt</span> <span class="number">0</span></span><br />
 <span style="margin-left:12em"><span class="command">negv</span> <span class="variable">va50</span></span><br />
-<span style="margin-left:10em"><span class="error">endi</span></span><br />
-<span style="margin-left:10em"><span class="error">doif</span> <span class="variable">va51</span> <span class="error">lt</span> <span class="number">0</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">doif</span> <span class="variable">va51</span> <span class="operator">lt</span> <span class="number">0</span></span><br />
 <span style="margin-left:12em"><span class="command">negv</span> <span class="variable">va51</span></span><br />
-<span style="margin-left:10em"><span class="error">endi</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">endi</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">va52</span> <span class="variable">va50</span></span><br />
 <span style="margin-left:10em"><span class="command">mulv</span> <span class="variable">va52</span> <span class="variable">va52</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">va53</span> <span class="variable">va51</span></span><br />
 <span style="margin-left:10em"><span class="command">mulv</span> <span class="variable">va53</span> <span class="variable">va53</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">va54</span> <span class="variable">va52</span></span><br />
 <span style="margin-left:10em"><span class="command">addv</span> <span class="variable">va54</span> <span class="variable">va53</span></span><br />
-<span style="margin-left:10em"><span class="error">doif</span> <span class="variable">va54</span> <span class="error">lt</span> <span class="variable">va99</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">doif</span> <span class="variable">va54</span> <span class="operator">lt</span> <span class="variable">va99</span></span><br />
 <span style="margin-left:12em"><span class="command">seta</span> <span class="variable">va58</span> <span class="variable">targ</span></span><br />
 <span style="margin-left:12em"><span class="command">setv</span> <span class="variable">va99</span> <span class="variable">va54</span></span><br />
-<span style="margin-left:10em"><span class="error">endi</span></span><br />
-<span style="margin-left:8em"><span class="error">endi</span></span><br />
-<span style="margin-left:6em"><span class="error">next</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">next</span></span><br />
 <span style="margin-left:6em"><span class="command">targ</span> <span class="variable">va58</span></span><br />
-<span style="margin-left:6em"><span class="error">doif</span> <span class="variable">targ</span> <span class="error"><></span> <span class="variable">null</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">doif</span> <span class="variable">targ</span> <span class="operator"><></span> <span class="variable">null</span></span><br />
 <span style="margin-left:8em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
 <span style="margin-left:8em"><span class="command">seta</span> <span class="variable">ov16</span> <span class="variable">va58</span></span><br />
-<span style="margin-left:6em"><span class="error">else</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">else</span></span><br />
 <span style="margin-left:8em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
 <span style="margin-left:8em"><span class="command">seta</span> <span class="variable">ov16</span> <span class="variable">null</span></span><br />
-<span style="margin-left:6em"><span class="error">endi</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">endi</span></span><br />
 <span style="margin-left:6em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
-<span style="margin-left:6em"><span class="error">slow</span></span><br />
-<span style="margin-left:2em"><span class="error">retn</span></span><br />
-<span style="margin-left:2em"><span class="error">subr</span> <span class="label">hunt</span></span><br />
-<span style="margin-left:4em"><span class="error">inst</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">slow</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">retn</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">subr</span> <span class="label">hunt</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">inst</span></span><br />
 <span style="margin-left:6em"><span class="command">targ</span> <span class="variable">ov16</span></span><br />
-<span style="margin-left:6em"><span class="error">doif</span> <span class="variable">targ</span> <span class="error"><></span> <span class="variable">null</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">doif</span> <span class="variable">targ</span> <span class="operator"><></span> <span class="variable">null</span></span><br />
 <span style="margin-left:8em"><span class="command">setv</span> <span class="variable">va50</span> <span class="variable">posx</span></span><br />
 <span style="margin-left:8em"><span class="command">setv</span> <span class="variable">va51</span> <span class="variable">posy</span></span><br />
 <span style="margin-left:8em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
-<span style="margin-left:8em"><span class="error">doif</span> <span class="variable">posx</span> <span class="error">lt</span> <span class="variable">va50</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">doif</span> <span class="variable">posx</span> <span class="operator">lt</span> <span class="variable">va50</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">ov10</span> <span class="number">1</span></span><br />
-<span style="margin-left:8em"><span class="error">endi</span></span><br />
-<span style="margin-left:8em"><span class="error">doif</span> <span class="variable">posx</span> <span class="error">gt</span> <span class="variable">va50</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">doif</span> <span class="variable">posx</span> <span class="operator">gt</span> <span class="variable">va50</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">ov10</span> <span class="number">-1</span></span><br />
-<span style="margin-left:8em"><span class="error">endi</span></span><br />
-<span style="margin-left:8em"><span class="error">doif</span> <span class="variable">posy</span> <span class="error">lt</span> <span class="variable">va51</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">doif</span> <span class="variable">posy</span> <span class="operator">lt</span> <span class="variable">va51</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">ov11</span> <span class="number">1</span></span><br />
-<span style="margin-left:8em"><span class="error">endi</span></span><br />
-<span style="margin-left:8em"><span class="error">doif</span> <span class="variable">posy</span> <span class="error">gt</span> <span class="variable">va51</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">doif</span> <span class="variable">posy</span> <span class="operator">gt</span> <span class="variable">va51</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">ov11</span> <span class="number">-1</span></span><br />
-<span style="margin-left:8em"><span class="error">endi</span></span><br />
-<span style="margin-left:6em"><span class="error">else</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">else</span></span><br />
 <span style="margin-left:8em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
 <span style="margin-left:8em"><span class="command">setv</span> <span class="variable">ov00</span> <span class="number">0</span></span><br />
 <span style="margin-left:8em"><span class="error">stop</span></span><br />
-<span style="margin-left:6em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">retn</span></span><br />
-<span style="margin-left:2em"><span class="error">subr</span> <span class="label">quen</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">retn</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">subr</span> <span class="label">quen</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va47</span> <span class="number">2</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va48</span> <span class="number">17</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va49</span> <span class="number">6</span></span><br />
-<span style="margin-left:4em"><span class="error">gsub</span> <span class="label">fnd2</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="variable">ov16</span> <span class="error"><></span> <span class="variable">null</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">gsub</span> <span class="label">fnd2</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="variable">ov16</span> <span class="operator"><></span> <span class="variable">null</span></span><br />
 <span style="margin-left:6em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
-<span style="margin-left:6em"><span class="error">gsub</span> <span class="label">hunt</span></span><br />
-<span style="margin-left:6em"><span class="error">doif</span> <span class="command">touc</span> <span class="variable">ownr</span> <span class="variable">ov16</span> <span class="error"><></span> <span class="number">0</span></span><br />
-<span style="margin-left:8em"><span class="error">gsub</span> <span class="label">bnst</span></span><br />
-<span style="margin-left:6em"><span class="error">endi</span></span><br />
-<span style="margin-left:4em"><span class="error">else</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">gsub</span> <span class="label">hunt</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">doif</span> <span class="command">touc</span> <span class="variable">ownr</span> <span class="variable">ov16</span> <span class="operator"><></span> <span class="number">0</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">gsub</span> <span class="label">bnst</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">else</span></span><br />
 <span style="margin-left:6em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
 <span style="margin-left:6em"><span class="command">setv</span> <span class="variable">ov00</span> <span class="number">0</span></span><br />
-<span style="margin-left:6em"><span class="error">gsub</span> <span class="label">rom2</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">gsub</span> <span class="label">rom2</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
 <span style="margin-left:4em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
-<span style="margin-left:4em"><span class="error">gsub</span> <span class="label">obst</span></span><br />
-<span style="margin-left:4em"><span class="error">gsub</span> <span class="label">vec2</span></span><br />
-<span style="margin-left:4em"><span class="error">gsub</span> <span class="label">ani2</span></span><br />
-<span style="margin-left:4em"><span class="error">gsub</span> <span class="label">mov2</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">gsub</span> <span class="label">obst</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">gsub</span> <span class="label">vec2</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">gsub</span> <span class="label">ani2</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">gsub</span> <span class="label">mov2</span></span><br />
 <span style="margin-left:4em"><span class="error">stop</span></span><br />
-<span style="margin-left:2em"><span class="error">retn</span></span><br />
-<span style="margin-left:2em"><span class="error">subr</span> <span class="label">bnst</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">retn</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">subr</span> <span class="label">bnst</span></span><br />
 <span style="margin-left:4em"><span class="command">seta</span> <span class="variable">va16</span> <span class="variable">ov16</span></span><br />
-<span style="margin-left:4em"><span class="error">enum</span> <span class="number">2</span> <span class="number">17</span> <span class="number">6</span></span><br />
-<span style="margin-left:6em"><span class="error">doif</span> <span class="variable">targ</span> <span class="error">=</span> <span class="variable">va16</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">enum</span> <span class="number">2</span> <span class="number">17</span> <span class="number">6</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">doif</span> <span class="variable">targ</span> <span class="operator">=</span> <span class="variable">va16</span></span><br />
 <span style="margin-left:8em"><span class="command">tick</span> <span class="number">30</span></span><br />
-<span style="margin-left:8em"><span class="error">doif</span> <span class="variable">pose</span> <span class="error">=</span> <span class="number">0</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">doif</span> <span class="variable">pose</span> <span class="operator">=</span> <span class="number">0</span></span><br />
 <span style="margin-left:10em"><span class="command">addv</span> <span class="variable">ov02</span> <span class="number">450</span></span><br />
 <span style="margin-left:10em"><span class="command">anim</span> <span class="bytestring">[1]</span></span><br />
-<span style="margin-left:8em"><span class="error">endi</span></span><br />
-<span style="margin-left:6em"><span class="error">endi</span></span><br />
-<span style="margin-left:4em"><span class="error">next</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">next</span></span><br />
 <span style="margin-left:4em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
 <span style="margin-left:4em"><span class="command">kill</span> <span class="variable">targ</span></span><br />
-<span style="margin-left:2em"><span class="error">retn</span></span><br />
-<span style="margin-left:2em"><span class="error">subr</span> <span class="label">obst</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="error">obst</span> <span class="number">0</span> <span class="error">lt</span> <span class="number">120</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">retn</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">subr</span> <span class="label">obst</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="error">obst</span> <span class="number">0</span> <span class="operator">lt</span> <span class="number">120</span></span><br />
 <span style="margin-left:6em"><span class="command">setv</span> <span class="variable">ov10</span> <span class="number">1</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="error">obst</span> <span class="number">1</span> <span class="error">lt</span> <span class="number">120</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="error">obst</span> <span class="number">1</span> <span class="operator">lt</span> <span class="number">120</span></span><br />
 <span style="margin-left:6em"><span class="command">setv</span> <span class="variable">ov10</span> <span class="number">-1</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="error">obst</span> <span class="number">2</span> <span class="error">lt</span> <span class="number">60</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="error">obst</span> <span class="number">2</span> <span class="operator">lt</span> <span class="number">60</span></span><br />
 <span style="margin-left:6em"><span class="command">setv</span> <span class="variable">ov11</span> <span class="number">1</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="error">obst</span> <span class="number">3</span> <span class="error">lt</span> <span class="number">100</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="error">obst</span> <span class="number">3</span> <span class="operator">lt</span> <span class="number">100</span></span><br />
 <span style="margin-left:6em"><span class="command">setv</span> <span class="variable">ov11</span> <span class="number">-1</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">retn</span></span><br />
-<span style="margin-left:2em"><span class="error">subr</span> <span class="label">fnd2</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">retn</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">subr</span> <span class="label">fnd2</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va99</span> <span class="number">99999999</span></span><br />
 <span style="margin-left:4em"><span class="command">seta</span> <span class="variable">va58</span> <span class="variable">null</span></span><br />
 <span style="margin-left:4em"><span class="command">seta</span> <span class="variable">va19</span> <span class="variable">ov19</span></span><br />
-<span style="margin-left:4em"><span class="error">esee</span> <span class="variable">va47</span> <span class="variable">va48</span> <span class="variable">va49</span></span><br />
-<span style="margin-left:6em"><span class="error">doif</span> <span class="variable">targ</span> <span class="error"><></span> <span class="variable">va19</span></span><br />
-<span style="margin-left:8em"><span class="error">inst</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">esee</span> <span class="variable">va47</span> <span class="variable">va48</span> <span class="variable">va49</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">doif</span> <span class="variable">targ</span> <span class="operator"><></span> <span class="variable">va19</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">inst</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">va88</span> <span class="number">0</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">va50</span> <span class="error">relx</span> <span class="variable">ownr</span> <span class="variable">targ</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">va51</span> <span class="error">rely</span> <span class="variable">ownr</span> <span class="variable">targ</span></span><br />
-<span style="margin-left:10em"><span class="error">doif</span> <span class="variable">va50</span> <span class="error">lt</span> <span class="number">0</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">doif</span> <span class="variable">va50</span> <span class="operator">lt</span> <span class="number">0</span></span><br />
 <span style="margin-left:12em"><span class="command">negv</span> <span class="variable">va50</span></span><br />
-<span style="margin-left:10em"><span class="error">endi</span></span><br />
-<span style="margin-left:10em"><span class="error">doif</span> <span class="variable">va51</span> <span class="error">lt</span> <span class="number">0</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">doif</span> <span class="variable">va51</span> <span class="operator">lt</span> <span class="number">0</span></span><br />
 <span style="margin-left:12em"><span class="command">negv</span> <span class="variable">va51</span></span><br />
-<span style="margin-left:10em"><span class="error">endi</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">endi</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">va52</span> <span class="variable">va50</span></span><br />
 <span style="margin-left:10em"><span class="command">mulv</span> <span class="variable">va52</span> <span class="variable">va52</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">va53</span> <span class="variable">va51</span></span><br />
 <span style="margin-left:10em"><span class="command">mulv</span> <span class="variable">va53</span> <span class="variable">va53</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">va54</span> <span class="variable">va52</span></span><br />
 <span style="margin-left:10em"><span class="command">addv</span> <span class="variable">va54</span> <span class="variable">va53</span></span><br />
-<span style="margin-left:10em"><span class="error">doif</span> <span class="variable">va54</span> <span class="error">lt</span> <span class="variable">va99</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">doif</span> <span class="variable">va54</span> <span class="operator">lt</span> <span class="variable">va99</span></span><br />
 <span style="margin-left:12em"><span class="command">seta</span> <span class="variable">va58</span> <span class="variable">targ</span></span><br />
 <span style="margin-left:12em"><span class="command">setv</span> <span class="variable">va99</span> <span class="variable">va54</span></span><br />
-<span style="margin-left:10em"><span class="error">endi</span></span><br />
-<span style="margin-left:10em"><span class="error">slow</span></span><br />
-<span style="margin-left:8em"><span class="error">endi</span></span><br />
-<span style="margin-left:6em"><span class="error">next</span></span><br />
-<span style="margin-left:6em"><span class="error">doif</span> <span class="variable">va58</span> <span class="error"><></span> <span class="variable">null</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">slow</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">next</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">doif</span> <span class="variable">va58</span> <span class="operator"><></span> <span class="variable">null</span></span><br />
 <span style="margin-left:8em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
 <span style="margin-left:8em"><span class="command">seta</span> <span class="variable">ov16</span> <span class="variable">va58</span></span><br />
-<span style="margin-left:6em"><span class="error">else</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">else</span></span><br />
 <span style="margin-left:8em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
 <span style="margin-left:8em"><span class="command">seta</span> <span class="variable">ov16</span> <span class="variable">null</span></span><br />
-<span style="margin-left:6em"><span class="error">endi</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">endi</span></span><br />
 <span style="margin-left:6em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
-<span style="margin-left:6em"><span class="error">slow</span></span><br />
-<span style="margin-left:2em"><span class="error">retn</span></span><br />
-<span style="margin-left:2em"><span class="error">subr</span> <span class="label">vec2</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">slow</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">retn</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">subr</span> <span class="label">vec2</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va10</span> <span class="command">rand</span> <span class="number">4</span> <span class="number">8</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va11</span> <span class="command">rand</span> <span class="number">2</span> <span class="number">8</span></span><br />
 <span style="margin-left:4em"><span class="command">mulv</span> <span class="variable">va10</span> <span class="variable">ov10</span></span><br />
 <span style="margin-left:4em"><span class="command">mulv</span> <span class="variable">va11</span> <span class="variable">ov11</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="variable">ov12</span> <span class="error"><</span> <span class="variable">va10</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="variable">ov12</span> <span class="operator"><</span> <span class="variable">va10</span></span><br />
 <span style="margin-left:6em"><span class="command">addv</span> <span class="variable">ov12</span> <span class="command">rand</span> <span class="number">3</span> <span class="number">6</span></span><br />
-<span style="margin-left:4em"><span class="error">elif</span> <span class="variable">ov12</span> <span class="error">></span> <span class="variable">va10</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">elif</span> <span class="variable">ov12</span> <span class="operator">></span> <span class="variable">va10</span></span><br />
 <span style="margin-left:6em"><span class="command">subv</span> <span class="variable">ov12</span> <span class="command">rand</span> <span class="number">3</span> <span class="number">6</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="variable">ov13</span> <span class="error"><</span> <span class="variable">va11</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="variable">ov13</span> <span class="operator"><</span> <span class="variable">va11</span></span><br />
 <span style="margin-left:6em"><span class="command">addv</span> <span class="variable">ov13</span> <span class="command">rand</span> <span class="number">3</span> <span class="number">6</span></span><br />
-<span style="margin-left:4em"><span class="error">elif</span> <span class="variable">ov13</span> <span class="error">></span> <span class="variable">va11</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">elif</span> <span class="variable">ov13</span> <span class="operator">></span> <span class="variable">va11</span></span><br />
 <span style="margin-left:6em"><span class="command">subv</span> <span class="variable">ov13</span> <span class="command">rand</span> <span class="number">3</span> <span class="number">6</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va10</span> <span class="variable">ov12</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va11</span> <span class="variable">ov13</span></span><br />
-<span style="margin-left:2em"><span class="error">retn</span></span><br />
-<span style="margin-left:2em"><span class="error">subr</span> <span class="label">ani2</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="variable">ov12</span> <span class="error">eq</span> <span class="number">0</span></span><br />
-<span style="margin-left:6em"><span class="error">loop</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">retn</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">subr</span> <span class="label">ani2</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="variable">ov12</span> <span class="operator">eq</span> <span class="number">0</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">loop</span></span><br />
 <span style="margin-left:8em"><span class="command">setv</span> <span class="variable">ov12</span> <span class="command">rand</span> <span class="number">-1</span> <span class="number">1</span></span><br />
-<span style="margin-left:6em"><span class="error">untl</span> <span class="variable">ov12</span> <span class="error">ne</span> <span class="number">0</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="variable">ov12</span> <span class="error"><=</span> <span class="number">0</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">untl</span> <span class="variable">ov12</span> <span class="error">ne</span> <span class="number">0</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="variable">ov12</span> <span class="operator"><=</span> <span class="number">0</span></span><br />
 <span style="margin-left:6em"><span class="command">anim</span> <span class="bytestring">[]</span></span><br />
 <span style="margin-left:6em"><span class="command">base</span> <span class="variable">ov32</span></span><br />
 <span style="margin-left:6em"><span class="command">anim</span> <span class="bytestring">[0 2 255]</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="variable">ov12</span> <span class="error">></span> <span class="number">0</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="variable">ov12</span> <span class="operator">></span> <span class="number">0</span></span><br />
 <span style="margin-left:6em"><span class="command">anim</span> <span class="bytestring">[]</span></span><br />
 <span style="margin-left:6em"><span class="command">base</span> <span class="variable">ov33</span></span><br />
 <span style="margin-left:6em"><span class="command">anim</span> <span class="bytestring">[0 2 255]</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">retn</span></span><br />
-<span style="margin-left:2em"><span class="error">subr</span> <span class="label">mov2</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">retn</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">subr</span> <span class="label">mov2</span></span><br />
 <span style="margin-left:4em"><span class="error">velo</span> <span class="variable">va10</span> <span class="variable">va11</span></span><br />
-<span style="margin-left:2em"><span class="error">retn</span></span><br />
-<span style="margin-left:2em"><span class="error">subr</span> <span class="label">rom2</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">retn</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">subr</span> <span class="label">rom2</span></span><br />
 <span style="margin-left:4em"><span class="command">setv</span> <span class="variable">va66</span> <span class="command">rand</span> <span class="number">0</span> <span class="number">12</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="variable">va66</span> <span class="error">lt</span> <span class="number">5</span></span><br />
-<span style="margin-left:6em"><span class="error">doif</span> <span class="variable">va66</span> <span class="error">=</span> <span class="number">1</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="variable">va66</span> <span class="operator">lt</span> <span class="number">5</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">doif</span> <span class="variable">va66</span> <span class="operator">=</span> <span class="number">1</span></span><br />
 <span style="margin-left:8em"><span class="command">setv</span> <span class="variable">ov10</span> <span class="number">1</span></span><br />
-<span style="margin-left:6em"><span class="error">elif</span> <span class="variable">va66</span> <span class="error">=</span> <span class="number">2</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">elif</span> <span class="variable">va66</span> <span class="operator">=</span> <span class="number">2</span></span><br />
 <span style="margin-left:8em"><span class="command">setv</span> <span class="variable">ov10</span> <span class="number">-1</span></span><br />
-<span style="margin-left:6em"><span class="error">elif</span> <span class="variable">va66</span> <span class="error">=</span> <span class="number">3</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">elif</span> <span class="variable">va66</span> <span class="operator">=</span> <span class="number">3</span></span><br />
 <span style="margin-left:8em"><span class="command">setv</span> <span class="variable">ov11</span> <span class="number">1</span></span><br />
-<span style="margin-left:6em"><span class="error">elif</span> <span class="variable">va66</span> <span class="error">=</span> <span class="number">4</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">elif</span> <span class="variable">va66</span> <span class="operator">=</span> <span class="number">4</span></span><br />
 <span style="margin-left:8em"><span class="command">setv</span> <span class="variable">ov11</span> <span class="number">-1</span></span><br />
-<span style="margin-left:6em"><span class="error">endi</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:4em"><span class="error">gsub</span> <span class="label">obst</span></span><br />
-<span style="margin-left:4em"><span class="error">gsub</span> <span class="label">vec2</span></span><br />
-<span style="margin-left:4em"><span class="error">gsub</span> <span class="label">ani2</span></span><br />
-<span style="margin-left:4em"><span class="error">gsub</span> <span class="label">mov2</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">gsub</span> <span class="label">obst</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">gsub</span> <span class="label">vec2</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">gsub</span> <span class="label">ani2</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">gsub</span> <span class="label">mov2</span></span><br />
 <span style="margin-left:4em"><span class="error">stop</span></span><br />
-<span style="margin-left:2em"><span class="error">retn</span></span><br />
-<span class="error">endm</span><br />
+<span style="margin-left:2em"><span class="flowcontrol">retn</span></span><br />
+<span class="flowcontrol">endm</span><br />
 <br />
-<span class="error">scrp</span> <span class="number">2</span> <span class="number">17</span> <span class="number">6</span> <span class="number">9</span><br />
+<span class="flowcontrol">scrp</span> <span class="number">2</span> <span class="number">17</span> <span class="number">6</span> <span class="number">9</span><br />
 <span style="margin-left:2em"><span class="command">subv</span> <span class="variable">ov02</span> <span class="number">1</span></span><br />
-<span style="margin-left:2em"><span class="error">doif</span> <span class="variable">ov02</span> <span class="error">></span> <span class="number">0</span> <span class="error">and</span> <span class="variable">ov02</span> <span class="error"><=</span> <span class="number">420</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">doif</span> <span class="variable">ov02</span> <span class="operator">></span> <span class="number">0</span> <span class="error">and</span> <span class="variable">ov02</span> <span class="operator"><=</span> <span class="number">420</span></span><br />
 <span style="margin-left:4em"><span class="command">anim</span> <span class="bytestring">[1]</span></span><br />
-<span style="margin-left:2em"><span class="error">elif</span> <span class="variable">ov02</span> <span class="error">></span> <span class="number">420</span> <span class="error">and</span> <span class="variable">ov02</span> <span class="error"><=</span> <span class="number">600</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">elif</span> <span class="variable">ov02</span> <span class="operator">></span> <span class="number">420</span> <span class="error">and</span> <span class="variable">ov02</span> <span class="operator"><=</span> <span class="number">600</span></span><br />
 <span style="margin-left:4em"><span class="command">anim</span> <span class="bytestring">[2]</span></span><br />
-<span style="margin-left:2em"><span class="error">elif</span> <span class="variable">ov02</span> <span class="error">></span> <span class="number">600</span> <span class="error">and</span> <span class="variable">ov02</span> <span class="error"><=</span> <span class="number">800</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">elif</span> <span class="variable">ov02</span> <span class="operator">></span> <span class="number">600</span> <span class="error">and</span> <span class="variable">ov02</span> <span class="operator"><=</span> <span class="number">800</span></span><br />
 <span style="margin-left:4em"><span class="command">anim</span> <span class="bytestring">[3]</span></span><br />
-<span style="margin-left:2em"><span class="error">elif</span> <span class="variable">ov02</span> <span class="error">></span> <span class="number">1000</span> <span class="error">and</span> <span class="variable">ov02</span> <span class="error"><=</span> <span class="number">1500</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">elif</span> <span class="variable">ov02</span> <span class="operator">></span> <span class="number">1000</span> <span class="error">and</span> <span class="variable">ov02</span> <span class="operator"><=</span> <span class="number">1500</span></span><br />
 <span style="margin-left:4em"><span class="command">anim</span> <span class="bytestring">[4]</span></span><br />
-<span style="margin-left:2em"><span class="error">elif</span> <span class="variable">ov02</span> <span class="error">></span> <span class="number">1500</span> <span class="error">and</span> <span class="variable">ov02</span> <span class="error"><=</span> <span class="number">2000</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">elif</span> <span class="variable">ov02</span> <span class="operator">></span> <span class="number">1500</span> <span class="error">and</span> <span class="variable">ov02</span> <span class="operator"><=</span> <span class="number">2000</span></span><br />
 <span style="margin-left:4em"><span class="command">anim</span> <span class="bytestring">[5]</span></span><br />
-<span style="margin-left:2em"><span class="error">elif</span> <span class="variable">ov02</span> <span class="error">></span> <span class="number">2000</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">elif</span> <span class="variable">ov02</span> <span class="operator">></span> <span class="number">2000</span></span><br />
 <span style="margin-left:4em"><span class="command">anim</span> <span class="bytestring">[6]</span></span><br />
-<span style="margin-left:2em"><span class="error">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">endi</span></span><br />
 <span style="margin-left:2em"><span class="command">setv</span> <span class="variable">va50</span> <span class="variable">posx</span></span><br />
 <span style="margin-left:2em"><span class="command">setv</span> <span class="variable">va51</span> <span class="variable">posy</span></span><br />
 <span style="margin-left:2em"><span class="command">subv</span> <span class="variable">va51</span> <span class="number">0</span></span><br />
 <span style="margin-left:2em"><span class="command">setv</span> <span class="variable">va88</span> <span class="number">0</span></span><br />
-<span style="margin-left:2em"><span class="error">inst</span></span><br />
-<span style="margin-left:4em"><span class="error">enum</span> <span class="number">2</span> <span class="number">14</span> <span class="number">2</span></span><br />
-<span style="margin-left:6em"><span class="error">doif</span> <span class="variable">ov19</span> <span class="error">=</span> <span class="variable">ownr</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">inst</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">enum</span> <span class="number">2</span> <span class="number">14</span> <span class="number">2</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">doif</span> <span class="variable">ov19</span> <span class="operator">=</span> <span class="variable">ownr</span></span><br />
 <span style="margin-left:8em"><span class="command">addv</span> <span class="variable">va88</span> <span class="number">1</span></span><br />
-<span style="margin-left:6em"><span class="error">endi</span></span><br />
-<span style="margin-left:4em"><span class="error">next</span></span><br />
-<span style="margin-left:4em"><span class="error">slow</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="variable">ov02</span> <span class="error">></span> <span class="variable">ov72</span> <span class="error">and</span> <span class="variable">ov02</span> <span class="error"><</span> <span class="number">2000</span> <span class="error">and</span> <span class="variable">va88</span> <span class="error"><</span> <span class="number">10</span></span><br />
-<span style="margin-left:6em"><span class="error">inst</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">next</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">slow</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="variable">ov02</span> <span class="operator">></span> <span class="variable">ov72</span> <span class="error">and</span> <span class="variable">ov02</span> <span class="operator"><</span> <span class="number">2000</span> <span class="error">and</span> <span class="variable">va88</span> <span class="operator"><</span> <span class="number">10</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">inst</span></span><br />
 <span style="margin-left:8em"><span class="command">new:</span> <span class="command">simp</span> <span class="number">2</span> <span class="number">14</span> <span class="number">2</span> <span class="string">"ant"</span> <span class="number">51</span> <span class="number">0</span> <span class="number">2500</span></span><br />
 <span style="margin-left:8em"><span class="command">perm</span> <span class="number">99</span></span><br />
 <span style="margin-left:8em"><span class="command">tick</span> <span class="number">8</span></span><br />
@@ -559,18 +559,18 @@
 <span style="margin-left:8em"><span class="command">setv</span> <span class="variable">ov73</span> <span class="number">40</span></span><br />
 <span style="margin-left:8em"><span class="command">setv</span> <span class="variable">ov74</span> <span class="number">800</span></span><br />
 <span style="margin-left:8em"><span class="command">setv</span> <span class="variable">ov75</span> <span class="number">1</span></span><br />
-<span style="margin-left:8em"><span class="error">doif</span> <span class="error">tmvt</span> <span class="variable">va50</span> <span class="variable">va51</span> <span class="error"><></span> <span class="number">1</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">doif</span> <span class="error">tmvt</span> <span class="variable">va50</span> <span class="variable">va51</span> <span class="operator"><></span> <span class="number">1</span></span><br />
 <span style="margin-left:10em"><span class="command">kill</span> <span class="variable">targ</span></span><br />
-<span style="margin-left:8em"><span class="error">else</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">else</span></span><br />
 <span style="margin-left:10em"><span class="error">mvto</span> <span class="variable">va50</span> <span class="variable">va51</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="error">vely</span> <span class="number">0</span></span><br />
 <span style="margin-left:10em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
 <span style="margin-left:10em"><span class="command">subv</span> <span class="variable">ov02</span> <span class="variable">ov73</span></span><br />
-<span style="margin-left:8em"><span class="error">endi</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">endi</span></span><br />
 <span style="margin-left:8em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
-<span style="margin-left:8em"><span class="error">slow</span></span><br />
-<span style="margin-left:6em"><span class="error">elif</span> <span class="variable">ov02</span> <span class="error">>=</span> <span class="number">2000</span> <span class="error">and</span> <span class="variable">va88</span> <span class="error"><</span> <span class="number">10</span></span><br />
-<span style="margin-left:8em"><span class="error">inst</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">slow</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">elif</span> <span class="variable">ov02</span> <span class="operator">>=</span> <span class="number">2000</span> <span class="error">and</span> <span class="variable">va88</span> <span class="operator"><</span> <span class="number">10</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">inst</span></span><br />
 <span style="margin-left:10em"><span class="command">new:</span> <span class="command">simp</span> <span class="number">2</span> <span class="number">14</span> <span class="number">2</span> <span class="string">"ant"</span> <span class="number">51</span> <span class="number">30</span> <span class="number">2500</span></span><br />
 <span style="margin-left:10em"><span class="command">perm</span> <span class="number">50</span></span><br />
 <span style="margin-left:10em"><span class="command">tick</span> <span class="number">8</span></span><br />
@@ -605,72 +605,72 @@
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">ov73</span> <span class="number">400</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">ov74</span> <span class="number">800</span></span><br />
 <span style="margin-left:10em"><span class="command">setv</span> <span class="variable">ov75</span> <span class="number">1</span></span><br />
-<span style="margin-left:10em"><span class="error">doif</span> <span class="error">tmvt</span> <span class="variable">va50</span> <span class="variable">va51</span> <span class="error"><></span> <span class="number">1</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">doif</span> <span class="error">tmvt</span> <span class="variable">va50</span> <span class="variable">va51</span> <span class="operator"><></span> <span class="number">1</span></span><br />
 <span style="margin-left:12em"><span class="command">kill</span> <span class="variable">targ</span></span><br />
-<span style="margin-left:10em"><span class="error">else</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">else</span></span><br />
 <span style="margin-left:12em"><span class="error">mvto</span> <span class="variable">va50</span> <span class="variable">va51</span></span><br />
 <span style="margin-left:12em"><span class="command">setv</span> <span class="error">vely</span> <span class="number">0</span></span><br />
 <span style="margin-left:12em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
 <span style="margin-left:12em"><span class="command">subv</span> <span class="variable">ov02</span> <span class="number">1800</span></span><br />
-<span style="margin-left:10em"><span class="error">endi</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">endi</span></span><br />
 <span style="margin-left:10em"><span class="command">targ</span> <span class="variable">ownr</span></span><br />
-<span style="margin-left:10em"><span class="error">slow</span></span><br />
-<span style="margin-left:8em"><span class="error">endi</span></span><br />
-<span style="margin-left:8em"><span class="error">doif</span> <span class="variable">ov02</span> <span class="error"><</span> <span class="number">0</span></span><br />
-<span style="margin-left:10em"><span class="error">doif</span> <span class="command">totl</span> <span class="number">2</span> <span class="number">14</span> <span class="number">2</span> <span class="error">=</span> <span class="number">0</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">slow</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">doif</span> <span class="variable">ov02</span> <span class="operator"><</span> <span class="number">0</span></span><br />
+<span style="margin-left:10em"><span class="flowcontrol">doif</span> <span class="command">totl</span> <span class="number">2</span> <span class="number">14</span> <span class="number">2</span> <span class="operator">=</span> <span class="number">0</span></span><br />
 <span style="margin-left:12em"><span class="command">addv</span> <span class="variable">ov02</span> <span class="number">200</span></span><br />
-<span style="margin-left:10em"><span class="error">endi</span></span><br />
-<span style="margin-left:8em"><span class="error">endi</span></span><br />
-<span class="error">endm</span><br />
+<span style="margin-left:10em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:8em"><span class="flowcontrol">endi</span></span><br />
+<span class="flowcontrol">endm</span><br />
 <br />
-<span class="error">scrp</span> <span class="number">2</span> <span class="number">14</span> <span class="number">2</span> <span class="number">12</span><br />
+<span class="flowcontrol">scrp</span> <span class="number">2</span> <span class="number">14</span> <span class="number">2</span> <span class="number">12</span><br />
 <span style="margin-left:2em"><span class="error">stim</span> <span class="command">writ</span> <span class="variable">from</span> <span class="number">80</span> <span class="number">1</span></span><br />
 <span style="margin-left:2em"><span class="command">kill</span> <span class="variable">ownr</span></span><br />
-<span class="error">endm</span><br />
+<span class="flowcontrol">endm</span><br />
 <br />
-<span class="error">scrp</span> <span class="number">2</span> <span class="number">10</span> <span class="number">24</span> <span class="number">9</span><br />
+<span class="flowcontrol">scrp</span> <span class="number">2</span> <span class="number">10</span> <span class="number">24</span> <span class="number">9</span><br />
 <span style="margin-left:2em"><span class="command">addv</span> <span class="variable">ov01</span> <span class="number">1</span></span><br />
-<span style="margin-left:2em"><span class="error">doif</span> <span class="variable">ov01</span> <span class="error">></span> <span class="number">50</span></span><br />
-<span style="margin-left:4em"><span class="error">doif</span> <span class="variable">ov10</span> <span class="error"><=</span> <span class="number">0</span> <span class="error">and</span> <span class="variable">carr</span> <span class="error">=</span> <span class="variable">null</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">doif</span> <span class="variable">ov01</span> <span class="operator">></span> <span class="number">50</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">doif</span> <span class="variable">ov10</span> <span class="operator"><=</span> <span class="number">0</span> <span class="error">and</span> <span class="variable">carr</span> <span class="operator">=</span> <span class="variable">null</span></span><br />
 <span style="margin-left:6em"><span class="command">anim</span> <span class="bytestring">[]</span></span><br />
 <span style="margin-left:6em"><span class="command">base</span> <span class="number">0</span></span><br />
 <span style="margin-left:6em"><span class="command">anim</span> <span class="bytestring">[0 1 2 3 4 5]</span></span><br />
-<span style="margin-left:6em"><span class="error">doif</span> <span class="error">room</span> <span class="variable">targ</span> <span class="error"><></span> <span class="number">-1</span> <span class="error">and</span> <span class="variable">carr</span> <span class="error">=</span> <span class="variable">null</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">doif</span> <span class="error">room</span> <span class="variable">targ</span> <span class="operator"><></span> <span class="number">-1</span> <span class="error">and</span> <span class="variable">carr</span> <span class="operator">=</span> <span class="variable">null</span></span><br />
 <span style="margin-left:8em"><span class="error">altr</span> <span class="error">room</span> <span class="variable">targ</span> <span class="number">3</span> <span class="number">0.1</span></span><br />
 <span style="margin-left:8em"><span class="error">altr</span> <span class="error">room</span> <span class="variable">targ</span> <span class="number">4</span> <span class="number">0.1</span></span><br />
-<span style="margin-left:6em"><span class="error">endi</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">endi</span></span><br />
 <span style="margin-left:6em"><span class="variable">over</span></span><br />
 <span style="margin-left:6em"><span class="command">kill</span> <span class="variable">targ</span></span><br />
-<span style="margin-left:4em"><span class="error">elif</span> <span class="variable">ov10</span> <span class="error">></span> <span class="number">0</span> <span class="error">and</span> <span class="variable">carr</span> <span class="error">=</span> <span class="variable">null</span></span><br />
+<span style="margin-left:4em"><span class="flowcontrol">elif</span> <span class="variable">ov10</span> <span class="operator">></span> <span class="number">0</span> <span class="error">and</span> <span class="variable">carr</span> <span class="operator">=</span> <span class="variable">null</span></span><br />
 <span style="margin-left:6em"><span class="command">anim</span> <span class="bytestring">[]</span></span><br />
 <span style="margin-left:6em"><span class="command">base</span> <span class="number">6</span></span><br />
 <span style="margin-left:6em"><span class="command">anim</span> <span class="bytestring">[0 1 2 3 4 5]</span></span><br />
-<span style="margin-left:6em"><span class="error">doif</span> <span class="error">room</span> <span class="variable">targ</span> <span class="error"><></span> <span class="number">-1</span> <span class="error">and</span> <span class="variable">carr</span> <span class="error">=</span> <span class="variable">null</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">doif</span> <span class="error">room</span> <span class="variable">targ</span> <span class="operator"><></span> <span class="number">-1</span> <span class="error">and</span> <span class="variable">carr</span> <span class="operator">=</span> <span class="variable">null</span></span><br />
 <span style="margin-left:8em"><span class="error">altr</span> <span class="error">room</span> <span class="variable">targ</span> <span class="number">3</span> <span class="number">0.1</span></span><br />
 <span style="margin-left:8em"><span class="error">altr</span> <span class="error">room</span> <span class="variable">targ</span> <span class="number">4</span> <span class="number">0.1</span></span><br />
-<span style="margin-left:6em"><span class="error">endi</span></span><br />
+<span style="margin-left:6em"><span class="flowcontrol">endi</span></span><br />
 <span style="margin-left:6em"><span class="variable">over</span></span><br />
 <span style="margin-left:6em"><span class="command">kill</span> <span class="variable">targ</span></span><br />
-<span style="margin-left:4em"><span class="error">endi</span></span><br />
-<span style="margin-left:2em"><span class="error">endi</span></span><br />
-<span class="error">endm</span><br />
+<span style="margin-left:4em"><span class="flowcontrol">endi</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">endi</span></span><br />
+<span class="flowcontrol">endm</span><br />
 <br />
-<span class="error">scrp</span> <span class="number">2</span> <span class="number">17</span> <span class="number">6</span> <span class="number">500</span><br />
+<span class="flowcontrol">scrp</span> <span class="number">2</span> <span class="number">17</span> <span class="number">6</span> <span class="number">500</span><br />
 <span style="margin-left:2em"><span class="command">addv</span> <span class="variable">ov02</span> <span class="variable">ov72</span></span><br />
-<span class="error">endm</span><br />
+<span class="flowcontrol">endm</span><br />
 <br />
-<span class="error">rscr</span><br />
-<span style="margin-left:2em"><span class="error">enum</span> <span class="number">2</span> <span class="number">14</span> <span class="number">2</span></span><br />
+<span class="flowcontrol">rscr</span><br />
+<span style="margin-left:2em"><span class="flowcontrol">enum</span> <span class="number">2</span> <span class="number">14</span> <span class="number">2</span></span><br />
 <span style="margin-left:4em"><span class="command">kill</span> <span class="variable">targ</span></span><br />
-<span style="margin-left:2em"><span class="error">next</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">next</span></span><br />
 <span style="margin-left:2em"><span class="error">scrx</span> <span class="number">2</span> <span class="number">14</span> <span class="number">2</span> <span class="number">9</span></span><br />
 <span style="margin-left:2em"><span class="error">scrx</span> <span class="number">2</span> <span class="number">14</span> <span class="number">2</span> <span class="number">6</span></span><br />
-<span style="margin-left:2em"><span class="error">enum</span> <span class="number">2</span> <span class="number">17</span> <span class="number">6</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">enum</span> <span class="number">2</span> <span class="number">17</span> <span class="number">6</span></span><br />
 <span style="margin-left:4em"><span class="command">kill</span> <span class="variable">targ</span></span><br />
-<span style="margin-left:2em"><span class="error">next</span></span><br />
+<span style="margin-left:2em"><span class="flowcontrol">next</span></span><br />
 <span style="margin-left:2em"><span class="error">scrx</span> <span class="number">2</span> <span class="number">17</span> <span class="number">6</span> <span class="number">9</span></span><br />
 <span style="margin-left:2em"><span class="error">scrx</span> <span class="number">2</span> <span class="number">17</span> <span class="number">6</span> <span class="number">6</span></span><br />
-<span class="error">endm</span><br />
+<span class="flowcontrol">endm</span><br />
 <span class="error"></span><br />
     </body>
 </html>
