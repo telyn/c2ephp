@@ -18,7 +18,7 @@ class StringReader {
         return "";
     }
     public function ReadInt($characters) {
-        return BytesToInt($this->Read($characters));
+        return BytesToIntLilEnd($this->Read($characters));
     }
     public function GetPosition() {
         return $this->position;
@@ -31,16 +31,16 @@ class StringReader {
     }
 }
 
-function BytesToInt($string) {
-        if($string == "") {
-            return false;
-        }
-        $bytes = str_split($string);
-        $length = strlen($string);
-        $int = 0;
-        for($i=0;$i<$length;$i++) {
-            $int += ord($bytes[$i])<<($i*8);
-        }
-        return $int;
+function BytesToIntLilEnd($string) { //little endian
+    if($string == "") {
+        return false;
     }
+    $bytes = str_split($string);
+    $length = strlen($string);
+    $int = 0;
+    for($i=0;$i<$length;$i++) {
+        $int += ord($bytes[$i])<<($i*8);
+    }
+    return $int;
+}
 ?>
