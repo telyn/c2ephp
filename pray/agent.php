@@ -74,6 +74,8 @@ class AgentFile {
                 case 'EGG':
                     $this->ParseTagBlock($blockid);
                     break;
+                default:
+                    $this->blocks[$blockid]['Content'] = $this->reader->GetSubString($this->blocks[$blockid]['Start'],$this->blocks[$blockid]['Length']);
             }
         }
         return true;
@@ -107,7 +109,6 @@ class AgentFile {
         }       
         $this->blocks[$blockid] = $block;
     }
-    
 }
 
 ?>
