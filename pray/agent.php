@@ -16,10 +16,15 @@ class AgentFile {
         if($this->ParseHeader()) {
             while($this->ParseBlockHeader()) {
             }
-            print_r($this->blocks);
+            return TRUE;
         } else {
             echo "Failed at block header: NOT A PRAY FILE";
+            return FALSE;
         }
+    }
+    
+    function GetBlocks() {
+        return $this->blocks;
     }
     
     function ParseHeader() {
@@ -77,7 +82,7 @@ class AgentFile {
     function ParseTagBlock($blockid) {
         $block = $this->blocks[$blockid];
         $blockbinary = $this->reader->GetSubString($block['Start'],$block['Length']);
-        if($block['Compression'])) {
+        if($block['Compression']) {
             $blockbinary = gzuncompress($blockbinary);
         }
         $blockreader = new StringReader($blockbinary);
@@ -104,7 +109,5 @@ class AgentFile {
     }
     
 }
-$ball = new AgentFile(file_get_contents('rubber_ball.agents'));
-$ball->Parse();
 
 ?>
