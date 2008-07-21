@@ -1,6 +1,5 @@
 <?php
-chdir('..');
-include('caos/highlight/highlight.php');
+include(dirname(__FILE__).'../caos/highlight/highlight.php');
 $cos = file_get_contents('tests/ant.cos');
 echo <<<HTML
 <html>

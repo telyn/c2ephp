@@ -1,9 +1,9 @@
 <?
-include($_SERVER['DOCUMENT_ROOT'].'/operators.php');
-include($_SERVER['DOCUMENT_ROOT'].'/flowcontrols.php');
-include($_SERVER['DOCUMENT_ROOT'].'/commands.php');
-include($_SERVER['DOCUMENT_ROOT'].'/variables.php');
-include($_SERVER['DOCUMENT_ROOT'].'/command_variables.php'); //could be a command, could be a variable, could be superman
+include(dirname(__FILE__).'/operators.php');
+include(dirname(__FILE__).'/flowcontrols.php');
+include(dirname(__FILE__).'/commands.php');
+include(dirname(__FILE__).'/variables.php');
+include(dirname(__FILE__).'/command_variables.php'); //could be a command, could be a variable, could be superman
 function IndentCode($times) 
     {
     if($times>0)
