@@ -2,16 +2,20 @@
 class StringReader {
     private $position;
     private $string;
-    
-    public function StringReader($string) {
+    public function StringReader($string) { // string can be a file pointer resource or a string.
         $this->string = $string;
     }
     public function Read($characters) {
         if($characters > 0) {
-            if($this->position+$characters > strlen($this->string)) {
-                return "";
+            if(is_resource($this->string)) {
+                fseek($this->string,$this->position);
+                $str = fgets($this->string,$characters+1);
+            } else {
+                if($this->position+$characters > strlen($this->string)) {
+                    return "";
+                }
+                $str = substr($this->string,$this->position,$characters);
             }
-            $str = substr($this->string,$this->position,$characters);
             $this->position += $characters;
             return $str;
         }
@@ -24,10 +28,16 @@ class StringReader {
         return $this->position;
     }
     public function GetSubString($start=0,$length = FALSE) {
-        if($length == FALSE) {
-            $length = strlen($this->string)-$start;
+        if(is_string($this->string)) {
+            if($length == FALSE) {
+                $length = strlen($this->string)-$start;
+            }
+            $str = substr($this->string,$start,$length);         
+        } else {
+            fseek($this->string,$start);
+            $str = fgets($this->string,$length);
         }
-        return substr($this->string,$start,$length);
+        return $str;
     }
 }
 
