@@ -2,9 +2,10 @@
 include(dirname(__FILE__).'/agent.php');
 
 function ExtractCompleteAgent($agent) {
-    $agent = new AgentFile(file_get_contents($agent));
+    $agent = new Agent(file_get_contents($agent));
     $agent->Parse();
     $blocks = $agent->GetBlocks();
+    $fileBlocks = $agent->GetBlocks('FILE');
     foreach($blocks as $block) {
         switch($block['Type']) {
             case 'FILE':
@@ -15,18 +16,19 @@ function ExtractCompleteAgent($agent) {
                 
             case 'AGNT':
             case 'DSAG':
+            case 'EGG': //after looking I don't think it needs any special treatment
                 $handle = fopen($block['Name'].'.'.$block['Type'].'.pray.txt','w');
                 fwrite($handle,'"en-GB"'."\r\n\r\n".'group '.$block['Type'].' "'.$block['Name']."\"\r\n");
                 foreach($block['Tags'] as $name=>$value) {
                     
-                    if($name == "Script 1") {
+                    if($name == "Script 1") { //since apparently there should only be one script ever (according to CDN)
                         
-                        $cosfile = $block['Name'].'.'.$block['Type'].'.cos';
-                        $coshandle = fopen('./'.$cosfile,'w');
-                        fwrite($coshandle,$value);
-                        fclose($coshandle);
+                        $cosFile = $block['Name'].'.'.$block['Type'].'.cos';
+                        $cosHandle = fopen('./'.$cosFile,'w');
+                        fwrite($cosHandle,$value);
+                        fclose($cosHandle);
                         
-                        fwrite($handle,'"Script 1" @ "'.$cosfile."\"\r\n");
+                        fwrite($handle,'"Script 1" @ "'.$cosFile."\"\r\n"); //special handling because the script directive is DUMB
                     } else {
                         if(is_int($value)) {
                             fwrite($handle,'"'.$name.'" '.$value."\r\n");
@@ -36,6 +38,9 @@ function ExtractCompleteAgent($agent) {
                             fwrite($handle,'"'.$name.'" "'.$value."\"\r\n");
                         }
                     }
+                }
+                foreach($fileBlocks as $fileBlock) {
+                    fwrite($handle,'inline FILE "'.$fileBlock['Name'].'" "'.$fileBlock['Name']."\"\r\n");
                 }
                 fclose($handle);
                 break;
