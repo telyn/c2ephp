@@ -1,12 +1,12 @@
 <?php
 include(dirname(__FILE__).'/../support/StringReader.php');
 
-class AgentFile {
+class Agent {
     private $reader;
     private $blocks=array();
     
     
-    function AgentFile($str) {
+    function Agent($str) {
         $this->reader = new StringReader($str);
         $this->blocks = array();
     }
@@ -23,8 +23,18 @@ class AgentFile {
         }
     }
     
-    function GetBlocks() {
-        return $this->blocks;
+    function GetBlocks($type=FALSE) { //gets all blocks or one type of block
+        if(!$type) {
+            return $this->blocks;
+        } else {
+            $retblocks = array();
+            foreach($this->blocks as $block) {
+                if($block['Type'] == $type) {
+                    $retblocks[] = $block;
+                }
+            }
+            return $retblocks;
+        }
     }
     
     function ParseHeader() {
@@ -62,20 +72,25 @@ class AgentFile {
         }
         $this->blocks[] = array('Type'=>$blockid,'Name'=>$name,'Length'=>$length,'FullLength'=>$fulllength,'Compression'=>(int)$compression,'Start'=>$this->reader->GetPosition());
         $this->reader->Read($length);
-        /*switch($blockid) {
-            case 'FILE':
-            break;
-                       
-        }*/
-        foreach($this->blocks as $blockid=>$blockarr) {
-            switch($blockarr['Type']) {
+        
+        foreach($this->blocks as $blockid=>$blockArray) {
+            switch($blockArray['Type']) {
                 case 'AGNT':
                 case 'DSAG':
+                case 'LIVE':
                 case 'EGG':
+                case 'DFAM':
+                case 'SFAM':
+                case 'EXPC':
+                case 'DSEX':
                     $this->ParseTagBlock($blockid);
                     break;
                 default:
-                    $this->blocks[$blockid]['Content'] = $this->reader->GetSubString($this->blocks[$blockid]['Start'],$this->blocks[$blockid]['Length']);
+                    $content = $this->reader->GetSubString($this->blocks[$blockid]['Start'],$this->blocks[$blockid]['Length']);
+                    if($this->blocks[$blockid]['Compression']) {
+                        $content = gzuncompress($content);
+                    }
+                    $this->blocks[$blockid]['Content'] = $content;
             }
         }
         return true;
@@ -83,28 +98,28 @@ class AgentFile {
     
     function ParseTagBlock($blockid) {
         $block = $this->blocks[$blockid];
-        $blockbinary = $this->reader->GetSubString($block['Start'],$block['Length']);
+        $blockBinary = $this->reader->GetSubString($block['Start'],$block['Length']);
         if($block['Compression']) {
-            $blockbinary = gzuncompress($blockbinary);
+            $blockBinary = gzuncompress($blockBinary);
         }
-        $blockreader = new StringReader($blockbinary);
+        $blockReader = new StringReader($blockBinary);
         
         
-        $numints = $blockreader->ReadInt(4);
-        for($i=0;$i<$numints;$i++) {
-            $namelen = $blockreader->ReadInt(4);
-            $name = $blockreader->Read($namelen);
-            $int = $blockreader->ReadInt(4);
+        $numInts = $blockReader->ReadInt(4);
+        for($i=0;$i<$numInts;$i++) {
+            $nameLength = $blockReader->ReadInt(4);
+            $name = $blockReader->Read($nameLength);
+            $int = $blockReader->ReadInt(4);
             $block['Tags'][$name] = $int;
         }
         
         
-        $numstrings = $blockreader->ReadInt(4);
-        for($i=0;$i<$numstrings;$i++) {
-            $namelen = $blockreader->ReadInt(4);
-            $name = $blockreader->Read($namelen);
-            $strlen = $blockreader->ReadInt(4);
-            $string = $blockreader->Read($strlen);
+        $numStrings = $blockReader->ReadInt(4);
+        for($i=0;$i<$numStrings;$i++) {
+            $nameLength = $blockReader->ReadInt(4);
+            $name = $blockReader->Read($nameLength);
+            $stringLength = $blockReader->ReadInt(4);
+            $string = $blockReader->Read($stringLength);
             $block['Tags'][$name] = $string;
         }       
         $this->blocks[$blockid] = $block;
