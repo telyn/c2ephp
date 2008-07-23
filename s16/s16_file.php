@@ -1,4 +1,5 @@
 <?php
+require_once(dirname(__FILE__)."/../support/FileReader.php");
 require_once(dirname(__FILE__)."/s16_file_header.php");
 class s16_file
 {
@@ -6,7 +7,7 @@ class s16_file
 	var $file;
 	function s16_file($s16file)
 	{
-		if(!file_exists($s16file))
+		/*if(!file_exists($s16file))
 			throw new Exception("File does no exist: ".$s16file);
 		if(!is_file($s16file))
 			throw new Exception("Target is not a file.");
@@ -17,6 +18,10 @@ class s16_file
 		
 		if(!$this->file)
 			throw new Exception("File failed to open.");
+		
+		$this->header = new s16_file_header($this->file);*/
+		
+		$this->file = $s16file;
 		
 		$this->header = new s16_file_header($this->file);
 	}
