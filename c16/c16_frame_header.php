@@ -49,7 +49,6 @@ class c16_frame_header
 					$z = $x + $run_length;
 					for(;$x < $z; $x++)
 					{
-						$pixel = 0;
 						$pixel = $fp->ReadInt(2);
 						if($encoding == "565")
 						{
@@ -73,18 +72,5 @@ class c16_frame_header
 		}
 		imagepng($image);
 	 }
-}
-
-function ReadLittle($fp, $count)
-{
-	$int = 0;
-	for($x = 0; $x < $count; $x++)
-	{
-		$buffer = (ord(fgetc($fp)) << ($x * 8));
-		if($buffer === false)
-			throw new Exception("Read failure");
-		$int += $buffer;
-	}
-	return $int; 
 }
 ?>

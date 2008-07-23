@@ -1,4 +1,5 @@
 <?php
+require_once(dirname(__FILE__)."/../support/FileReader.php");
 class s16_frame_header
 {
 	 var $offset;
@@ -6,12 +7,10 @@ class s16_frame_header
 	 var $height;
 	 function s16_frame_header($fp)
 	 {
-	 	$this->offset = ReadLittle($fp, 4);
-	 	$buffer = ReadLittle($fp, 2);
-	 	//if($buffer&4)
-	 	//	throw new Exception("Invalid frame width; must be divisible by 4 - ".$buffer.".");
+	 	$this->offset = $fp->ReadInt(4);
+	 	$buffer = $fp->ReadInt(2);
 	 	$this->width = $buffer;
-	 	$this->height = ReadLittle($fp, 2);
+	 	$this->height = $fp->ReadInt(2);
 	 }
 	 
 	 function OutputPNG($fp, $encoding)
@@ -19,14 +18,12 @@ class s16_frame_header
 	 	header("Content-type: image/png");
 		$image = imagecreatetruecolor($this->width,
 									  $this->height);
-		fseek($fp, $this->offset);
+		$fp->Seek($this->offset);
 		for($y = 0; $y < $this->height; $y++)
 		{
 			for($x = 0; $x < $this->width; $x++)
 			{
-				$pixel = 0;
-				$pixel += ord(fgetc($fp));
-				$pixel += ord(fgetc($fp)) << 8;
+				$pixel = $fp->ReadInt(2);
 				if($encoding == "565")
 				{
 					$red   = ($pixel & 0xF800) >> 8;
@@ -45,19 +42,5 @@ class s16_frame_header
 		}
 		imagepng($image);
 	 }
-}
-
-function ReadLittle($fp, $count)
-{
-	$int = 0;
-	for($x = 0; $x < $count; $x++)
-	{
-		$buffer = (ord(fgetc($fp)) << ($x * 8));
-		if($buffer === false)
-			throw new Exception("Read failure");
-		//printf("(%d)", $buffer);
-		$int += $buffer;
-	}
-	return $int; 
 }
 ?>
