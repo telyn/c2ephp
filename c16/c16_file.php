@@ -4,7 +4,7 @@ class c16_file
 {
 	var $header;
 	var $file;
-	function c16_file($c16file)
+	function c16_file(IReader $c16file)
 	{
 		$this->file = $c16file;
 		

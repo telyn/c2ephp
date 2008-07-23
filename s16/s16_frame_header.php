@@ -5,7 +5,7 @@ class s16_frame_header
 	 var $offset;
 	 var $width;
 	 var $height;
-	 function s16_frame_header($fp)
+	 function s16_frame_header(IReader $fp)
 	 {
 	 	$this->offset = $fp->ReadInt(4);
 	 	$buffer = $fp->ReadInt(2);
@@ -13,7 +13,7 @@ class s16_frame_header
 	 	$this->height = $fp->ReadInt(2);
 	 }
 	 
-	 function OutputPNG($fp, $encoding)
+	 function OutputPNG(IReader $fp, $encoding)
 	 {
 	 	header("Content-type: image/png");
 		$image = imagecreatetruecolor($this->width,
