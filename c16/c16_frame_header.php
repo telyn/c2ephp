@@ -1,4 +1,5 @@
 <?php
+require_once(dirname(__FILE__)."/../support/FileReader.php");
 class c16_frame_header
 {
 	 var $offset;
@@ -7,15 +8,15 @@ class c16_frame_header
 	 var $line_offset;
 	 function c16_frame_header($fp)
 	 {
-	 	$this->offset = ReadLittle($fp, 4);
-	 	$buffer = ReadLittle($fp, 2);
+	 	$this->offset = $fp->ReadInt(4);
+	 	$buffer = $fp->ReadInt(2);
 	 	if($buffer < 1)
 	 		throw new Exception("Frame claims zero width.");
 	 	$this->width = $buffer;
-	 	$this->height = ReadLittle($fp, 2);
+	 	$this->height = $fp->ReadInt(2);
 	 	for($x = 0; $x < ($this->height - 1); $x++)
 	 	{
-	 		$this->line_offset[$x] = ReadLittle($fp, 4);
+	 		$this->line_offset[$x] = $fp->ReadInt(4);
 	 	}
 	 }
 	 
@@ -24,12 +25,12 @@ class c16_frame_header
 	 	header("Content-type: image/png");
 		$image = imagecreatetruecolor($this->width,
 									  $this->height);
-		fseek($fp, $this->offset);
+		$fp->Seek($this->offset);
 		for($y = 0; $y < $this->height; $y++)
 		{
 			for($x = 0; $x < $this->width;)
 			{
-				$run = ReadLittle($fp, 2);
+				$run = $fp->ReadInt(2);
 				if(($run & 0x0001) > 0)
 					$run_type = "colour";
 				else
@@ -49,8 +50,7 @@ class c16_frame_header
 					for(;$x < $z; $x++)
 					{
 						$pixel = 0;
-						$pixel += ord(fgetc($fp));
-						$pixel += ord(fgetc($fp)) << 8;
+						$pixel = $fp->ReadInt(2);
 						if($encoding == "565")
 						{
 							$red   = ($pixel & 0xF800) >> 8;
@@ -68,7 +68,7 @@ class c16_frame_header
 					}
 				}
 			if($x == $this->width)
-				fseek($fp, 2, SEEK_CUR);
+				$fp->Skip(2);
 			}
 		}
 		imagepng($image);
