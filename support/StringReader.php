@@ -18,6 +18,12 @@ class StringReader implements IReader {
         }
         return "";
     }
+    public function Seek($position) {
+        $this->position = $position;
+    }
+    public function Skip($count) {
+        $this->position += $characters;
+    }
     public function ReadInt($characters) {
         return BytesToIntLilEnd($this->Read($characters));
     }
