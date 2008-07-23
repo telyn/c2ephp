@@ -5,7 +5,7 @@ class s16_file
 {
 	var $header;
 	var $file;
-	function s16_file($s16file)
+	function s16_file(IReader $s16file)
 	{
 		/*if(!file_exists($s16file))
 			throw new Exception("File does no exist: ".$s16file);

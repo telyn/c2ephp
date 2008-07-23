@@ -6,7 +6,7 @@ class s16_file_header
 	var $encoding;
 	var $frame_count;
 	var $frame_header;
-	function s16_file_header($fp)
+	function s16_file_header(IReader $fp)
 	{
 		$buffer = $fp->ReadInt(4);
 		if($buffer == 1)
