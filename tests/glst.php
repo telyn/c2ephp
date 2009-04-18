@@ -13,11 +13,12 @@ $blocks = $agent->GetBlocks('GLST');
 
 $glst = $blocks[0]['Content'];
 $glst = substr($glst,strpos($glst,chr(0x1A).chr(0x04))+2);
+
+
+$data = gzuncompress($glst);
 $h = fopen($argv[1].'.glst','wb');
 fwrite($h,$data);
 fclose($h);
-
-$data = gzuncompress($glst);
 $reader = new StringReader($data);
 $history = new CreatureHistory($reader);
 print_r($history->Decode());
