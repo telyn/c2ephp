@@ -1,6 +1,8 @@
 <?php
-include(dirname(__FILE__).'/agent.php');
-
+require_once(dirname(__FILE__).'/agent.php');
+ 
+//this function is pretty dirty, all things considered.
+ 
 function ExtractCompleteAgent($agent) {
     $agent = new Agent(file_get_contents($agent));
     $agent->Parse();

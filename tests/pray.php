@@ -1,11 +1,12 @@
 <?php
 include(dirname(__FILE__).'/../pray/agent.php');
+include(dirname(__FILE__).'/../support/FileReader.php');
 if($argv[1] != "") {
     $file = $argv[1];
 } else {
     $file = 'rubber_ball.agents';
 }
-$agent = new Agent(file_get_contents($file));
+$agent = new Agent(new FileReader($file));
 if(!$agent->Parse()) {
     echo "Error!\n";
 } else {

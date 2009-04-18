@@ -30,7 +30,7 @@ class StringReader implements IReader {
     public function GetPosition() {
         return $this->position;
     }
-    public function GetSubString($start=0,$length = FALSE) {
+    public function GetSubString($start,$length = FALSE) {
         if($length == FALSE) {
             $length = strlen($this->string)-$start;
         }
