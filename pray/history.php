@@ -22,10 +22,14 @@ class CreatureHistory {
 		} else if($firstchar == chr(0x27)) {
 			//Good. Let's begin.
 			$this->reader->Read(3);
-			while($this->DecodeEvent()) {
-				$i++;
+			while($this->DecodeEvent());
+			//check for creature age on last
+			$length = sizeof($this->history);
+			$lastitem = $this->history[$length-1];
+			$onebeforelast = $this->history[$length-2];
+			if($lastitem['creatureage'] < $onebeforelast['creatureage'] || $lastitem['lifestage'] < $onebeforelast['lifestage']){
+				unset($this->history[$length-1]);
 			}
-			echo $i;
 			return $this->history;
 		} else {
 			die(' D:');
