@@ -9,7 +9,11 @@ function ExtractCompleteAgent($agent) {
     foreach($blocks as $block) {
         switch($block['Type']) {
             case 'FILE':
-                $handle = fopen('./'.$block['Name'],'w');
+			case 'PHOT':
+			case 'GENE':
+			case 'GLST':
+			case 'CREA':
+                $handle = fopen('./'.$block['Name'],'wb');
                 fwrite($handle,$block['Content']);
                 fclose($handle);
                 break;
