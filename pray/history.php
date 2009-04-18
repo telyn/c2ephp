@@ -22,31 +22,30 @@ class CreatureHistory {
 		} else if($firstchar == chr(0x27)) {
 			//Good. Let's begin.
 			$this->reader->Read(3);
-			while($this->DecodeEvent());
-			//check for creature age on last
-			$length = sizeof($this->history);
-			$lastitem = $this->history[$length-1];
-			$onebeforelast = $this->history[$length-2];
-			if($lastitem['creatureage'] < $onebeforelast['creatureage'] || $lastitem['lifestage'] < $onebeforelast['lifestage']){
-				unset($this->history[$length-1]);
+			if($this->reader->ReadInt(4)!=1) {
+				return false;
+			}
+			$this->DecodeSplicedEvent();
+			if(!isset($this->history[0]['eventslength'])) {
+				return false;
+			}
+			echo $this->history[0]['eventslength'];
+			for($i=1;$i<$this->history[0]['eventslength'];$i++) {
+				$this->DecodeEvent();
 			}
 			return $this->history;
 		} else {
-			die(' D:');
 			return false;
 		}
 	}
 	private function DecodeEvent() {
 		$eventNumber = $this->reader->ReadInt(4);
 		//echo 'Event '.$eventNumber."\n";
-		if($eventNumber == 0) {
+		if($eventNumber == 0 || $eventNumber == 1) {
 			//file has probably ended.
 			//echo 'Ended?';
 			return false;
-		} else if($eventNumber == 1) {
-			$this->DecodeSplicedEvent();
-			return true;
-		} else if($eventNumber < 18) {
+		} if($eventNumber < 18) {
 			$this->DecodeRegularEvent($eventNumber);
 			return true;
 		}
@@ -77,7 +76,7 @@ class CreatureHistory {
 		'gender'			=> $this->reader->ReadInt(4),
 		'unknown1'			=> $this->reader->ReadInt(4),
 		'species'			=> $this->reader->ReadInt(4),
-		'unknown2'			=> $this->reader->ReadInt(4),
+		'eventslength'		=> $this->reader->ReadInt(4),
 		'unknown3'			=> $this->reader->ReadInt(4),
 		'worldtime'			=> $this->reader->ReadInt(4),
 		'creatureage'		=> $this->reader->ReadInt(4),
