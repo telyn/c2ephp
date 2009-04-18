@@ -1,13 +1,15 @@
 <?php
-include(dirname(__FILE__).'/../support/StringReader.php');
+
+require_once(dirname(__FILE__).'/../support/IReader.php');
+require_once(dirname(__FILE__).'/../support/StringReader.php');
 
 class Agent {
     private $reader;
     private $blocks=array();
     
     
-    function Agent($str) {
-        $this->reader = new StringReader($str);
+    function Agent(IReader $reader) {
+        $this->reader = $reader;
         $this->blocks = array();
     }
     
@@ -16,7 +18,7 @@ class Agent {
         if($this->ParseHeader()) {
             while($this->ParseBlockHeader()) {
             }
-            return TRUE;
+            return $this->blocks;
         } else {
             echo "Failed at block header: NOT A PRAY FILE";
             return FALSE;
@@ -46,9 +48,9 @@ class Agent {
     }
 
     function ParseBlockHeader() {
-        $blockid = $this->reader->Read(4);
-        if($blockid=="") {
-            return false;
+		$blocktype = $this->reader->Read(4);
+        if($blocktype=="") {
+			return false;
         }
         $name = trim($this->reader->Read(128));
         if($name=="") {
@@ -68,30 +70,28 @@ class Agent {
         }
         $compression = false;
         if($flags & 1 == 1) {
-            $compression=true;
+		    $compression=true;
         }
-        $this->blocks[] = array('Type'=>$blockid,'Name'=>$name,'Length'=>$length,'FullLength'=>$fulllength,'Compression'=>(int)$compression,'Start'=>$this->reader->GetPosition());
-        $this->reader->Read($length);
-        
-        foreach($this->blocks as $blockid=>$blockArray) {
-            switch($blockArray['Type']) {
-                case 'AGNT':
-                case 'DSAG':
-                case 'LIVE':
-                case 'EGG':
-                case 'DFAM':
-                case 'SFAM':
-                case 'EXPC':
-                case 'DSEX':
-                    $this->ParseTagBlock($blockid);
-                    break;
-                default:
-                    $content = $this->reader->GetSubString($this->blocks[$blockid]['Start'],$this->blocks[$blockid]['Length']);
-                    if($this->blocks[$blockid]['Compression']) {
-                        $content = gzuncompress($content);
-                    }
-                    $this->blocks[$blockid]['Content'] = $content;
-            }
+        $this->blocks[] = array('Type'=>$blocktype,'Name'=>$name,'Length'=>$length,'FullLength'=>$fulllength,'Compression'=>(int)$compression,'Start'=>$this->reader->GetPosition());
+        $blockid = sizeof($this->blocks)-1;
+		
+        switch($blocktype) {
+			case 'AGNT':
+			case 'DSAG':
+			case 'LIVE':
+			case 'EGG':
+			case 'DFAM':
+			case 'SFAM':
+			case 'EXPC':
+			case 'DSEX':
+				$this->ParseTagBlock($blockid);
+				break;
+			default:
+				$content = $this->reader->Read($length);
+				if($compression) {
+					$content = gzuncompress($content);
+				}
+				$this->blocks[$blockid]['Content'] = $content;
         }
         return true;
     }

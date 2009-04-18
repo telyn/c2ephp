@@ -17,7 +17,10 @@ class FileReader implements IReader
 	
     public function Read($count)
     {
-		return fgets($this->fp, $count);
+		if($count > 0) {
+			return fread($this->fp, $count);
+		}
+		return '';
 	}
 	
 	public function ReadInt($count)
@@ -38,9 +41,15 @@ class FileReader implements IReader
 		return ftell($this->fp);
 	}
 	
-	public function GetSubString($start=0,$length = FALSE)
+	public function GetSubString($start,$length = FALSE)
 	{
-		//currently badly un-implemented!
+		fseek($this->fp,$start);
+		if($length === false) {
+			$data = '';
+			while($data.=fread($this->fp,4096));
+			return $data;
+		}
+		return fread($this->fp,$length);
 	}
 	
 	public function Seek($position)
