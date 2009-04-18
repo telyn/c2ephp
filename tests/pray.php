@@ -5,11 +5,13 @@ if($argv[1] != "") {
 } else {
     $file = 'rubber_ball.agents';
 }
-$ball = new Agent(file_get_contents($file));
-if(!$ball->Parse()) {
+$agent = new Agent(file_get_contents($file));
+if(!$agent->Parse()) {
     echo "Error!\n";
 } else {
-    print_r($ball->GetBlocks());
+	$testhandle = fopen('test.txt','wb');
+	fwrite($testhandle,print_r($agent->GetBlocks(),true));
+	fclose($testhandle);
 }
 
 ?>
