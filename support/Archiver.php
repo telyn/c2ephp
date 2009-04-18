@@ -1,11 +1,12 @@
 <?php
 function DeArchive($data) {
 	if(is_string($data)) {
-		if(substr($glst,0,55) == "Creatures Evolution Engine - Archived information file. zLib 1.13 compressed.") {
-			$data = substr($glst,strpos($glst,chr(0x1A).chr(0x04))+2);
-			$data = gzuncompress($glst);
+		if(substr($data,0,55) == "Creatures Evolution Engine - Archived information file.") {
+			$data = substr($data,strpos($data,chr(0x1A).chr(0x04))+2);
+			$data = gzuncompress($data);
 			return $data;
 		}
+		die(':(');
 		return false;
 	} else if(is_resource($data)) {
 		return false; //coming soon
