@@ -1,10 +1,10 @@
 <?php
-require_once(dirname(__FILE__).'/agent.php');
+require_once(dirname(__FILE__).'/prayfile.php');
  
 //this function is pretty dirty, all things considered.
  
 function ExtractCompleteAgent($agent) {
-    $agent = new Agent(file_get_contents($agent));
+    $agent = new PRAYFile(file_get_contents($agent));
     $agent->Parse();
     $blocks = $agent->GetBlocks();
     $fileBlocks = $agent->GetBlocks('FILE');
