@@ -74,9 +74,11 @@ class CreatureHistory {
 			'eventspecific'		=> array($this->reader->Read($this->reader->ReadInt(4)),$this->reader->Read($this->reader->ReadInt(4)),$this->reader->Read($this->reader->ReadInt(4)),$this->reader->Read($this->reader->ReadInt(4))),
 			'worldname'			=> $this->reader->Read($this->reader->ReadInt(4)),
 			'worldUID'			=> $this->reader->Read($this->reader->ReadInt(4)),
-			'DSUser'			=> $this->reader->Read($this->reader->ReadInt(4))
+			'DSUser'			=> $this->reader->Read($this->reader->ReadInt(4)),
+			'unknown1'			=> $this->reader->ReadInt(4),
+			'unknown2'			=> $this->reader->ReadInt(4)
 			);
-			$this->reader->Read(8);
+			
 			$this->history['events'][] = $eventInfo;
 			return true;
 		}
