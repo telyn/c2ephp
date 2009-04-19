@@ -40,18 +40,18 @@ class CreatureHistory {
 				return false;
 			}
 			
-			for($i=1;$i<$this->history['information']['eventslength'];$i++) {
+			for($i=0;$i<$this->history['information']['eventslength'];$i++) {
 				$this->DecodeEvent();
 			}
 			
 			//reading the footer
 			for($i=0;$i<4;$i++) {
-				$this->history['information'] = array(
+				$this->history['information'] += array(
 					'unknown1' => $this->reader->ReadInt(4),
 					'unknown2' => $this->reader->ReadInt(4),
 					'unknown3' => $this->reader->ReadInt(4),
-					'warpveteran' => ($this->reader->ReadInt(4)==1)?true:false,
-					'unknown3' => $this->reader->Read($this->reader->ReadInt(4))
+					'warpveteran' => (($this->reader->ReadInt(4)==1)?1:0),
+					'unknown4' => $this->reader->Read($this->reader->ReadInt(4))
 				);
 			}
 			
