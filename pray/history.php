@@ -34,7 +34,7 @@ class CreatureHistory {
 			'unknown1'			=> $this->reader->ReadInt(4),
 			'species'			=> $this->reader->ReadInt(4),
 			'eventslength'		=> $this->reader->ReadInt(4)
-			)
+			);
 			
 			if(!isset($this->history['information']['eventslength'])) {
 				return false;
