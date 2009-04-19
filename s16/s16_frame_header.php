@@ -5,7 +5,7 @@ class s16_frame_header
 	 var $offset;
 	 var $width;
 	 var $height;
-	 function s16_frame_header(IReader $fp)
+	 function s16_frame_header(IReader &$fp)
 	 {
 	 	$this->offset = $fp->ReadInt(4);
 	 	$buffer = $fp->ReadInt(2);
