@@ -26,12 +26,21 @@ class CreatureHistory {
 			if($this->reader->ReadInt(4)!=1) {
 				return false;
 			}
-			$this->DecodeSplicedEvent();
-			if(!isset($this->history[0]['eventslength'])) {
+			$this->history['information'] = array(
+			'moniker'			=> $this->reader->Read($this->reader->ReadInt(4)),
+			'moniker2'			=> $this->reader->Read($this->reader->ReadInt(4)),
+			'name'				=> $this->reader->Read($this->reader->ReadInt(4)),
+			'gender'			=> $this->reader->ReadInt(4),
+			'unknown1'			=> $this->reader->ReadInt(4),
+			'species'			=> $this->reader->ReadInt(4),
+			'eventslength'		=> $this->reader->ReadInt(4)
+			)
+			
+			if(!isset($this->history['information']['eventslength'])) {
 				return false;
 			}
 			
-			for($i=1;$i<$this->history[0]['eventslength'];$i++) {
+			for($i=1;$i<$this->history['information']['eventslength'];$i++) {
 				$this->DecodeEvent();
 			}
 			return $this->history;
@@ -42,57 +51,32 @@ class CreatureHistory {
 	private function DecodeEvent() {
 		$eventNumber = $this->reader->ReadInt(4);
 		//echo 'Event '.$eventNumber."\n";
-		if($eventNumber == 0 || $eventNumber == 1) {
-			//file has probably ended.
-			//echo 'Ended?';
-			return false;
-		} if($eventNumber < 18) {
-			$this->DecodeRegularEvent($eventNumber);
+		if($eventNumber < 18) {
+				$eventInfo = array(
+			'eventnumber'		=> $eventNumber,
+			'eventname'			=> $this->GetEventNameByNumber($eventNumber),
+			'worldtime'			=> $this->reader->ReadInt(4),
+			'creatureage'		=> $this->reader->ReadInt(4),
+			'timestamp'			=> $this->reader->ReadInt(4),
+			'lifestage'			=> $this->reader->ReadInt(4),
+			'eventspecific'		=> array($this->reader->Read($this->reader->ReadInt(4)),$this->reader->Read($this->reader->ReadInt(4)),$this->reader->Read($this->reader->ReadInt(4)),$this->reader->Read($this->reader->ReadInt(4))),
+			'worldname'			=> $this->reader->Read($this->reader->ReadInt(4)),
+			'worldUID'			=> $this->reader->Read($this->reader->ReadInt(4)),
+			'DSUser'			=> $this->reader->Read($this->reader->ReadInt(4))
+			);
+			$this->reader->Read(8);
+			$this->history['events'][] = $eventInfo;
 			return true;
 		}
+		return false;
 	}
 	private function DecodeRegularEvent($eventNumber) {
-		$eventInfo = array(
-		'eventnumber'		=> $eventNumber,
-		'eventname'			=> $this->GetEventNameByNumber($eventNumber),
-		'worldtime'			=> $this->reader->ReadInt(4),
-		'creatureage'		=> $this->reader->ReadInt(4),
-		'timestamp'			=> $this->reader->ReadInt(4),
-		'lifestage'			=> $this->reader->ReadInt(4),
-		'eventspecific'		=> array($this->reader->Read($this->reader->ReadInt(4)),$this->reader->Read($this->reader->ReadInt(4)),$this->reader->Read($this->reader->ReadInt(4)),$this->reader->Read($this->reader->ReadInt(4))),
-		'worldname'			=> $this->reader->Read($this->reader->ReadInt(4)),
-		'worldUID'			=> $this->reader->Read($this->reader->ReadInt(4)),
-		'DSUser'			=> $this->reader->Read($this->reader->ReadInt(4))
-		);
-		$this->reader->Read(8);
-		$this->history[] = $eventInfo;
-	}
-	private function DecodeSplicedEvent() {
-		$eventInfo = array(
-		'eventnumber'		=> 1,
-		'eventname'			=> $this->GetEventNameByNumber(1),
-		'moniker'			=> $this->reader->Read($this->reader->ReadInt(4)),
-		'moniker2'			=> $this->reader->Read($this->reader->ReadInt(4)),
-		'name'				=> $this->reader->Read($this->reader->ReadInt(4)),
-		'gender'			=> $this->reader->ReadInt(4),
-		'unknown1'			=> $this->reader->ReadInt(4),
-		'species'			=> $this->reader->ReadInt(4),
-		'eventslength'		=> $this->reader->ReadInt(4),
-		'unknown3'			=> $this->reader->ReadInt(4),
-		'worldtime'			=> $this->reader->ReadInt(4),
-		'creatureage'		=> $this->reader->ReadInt(4),
-		'timestamp'			=> $this->reader->ReadInt(4),
-		'lifestage'			=> $this->reader->ReadInt(4),
-		'eventspecific'		=> array($this->reader->Read($this->reader->ReadInt(4)),$this->reader->Read($this->reader->ReadInt(4)),$this->reader->Read($this->reader->ReadInt(4)),$this->reader->Read($this->reader->ReadInt(4))),
-		'worldname'			=> $this->reader->Read($this->reader->ReadInt(4)),
-		'worldUID'			=> $this->reader->Read($this->reader->ReadInt(4)),
-		'DSUser'			=> $this->reader->Read($this->reader->ReadInt(4))
-		);
-		$this->reader->Read(8);
-		$this->history[] = $eventInfo;
+		
 	}
 	public function GetEventNameByNumber($eventnumber) {
 		switch($eventnumber) {
+			case 0:
+				return 'conceived';
 			case 1:
 				return 'spliced';
 			case 2:
