@@ -6,7 +6,7 @@ require_once(dirname(__FILE__).'/../support/StringReader.php');
 require_once(dirname(__FILE__).'/../support/FileReader.php');
 require_once(dirname(__FILE__).'/../support/Archiver.php');
 
-$agent = new Agent(new FileReader($argv[1]));
+$agent = new PRAYFile(new FileReader($argv[1]));
 $agent->Parse();
 
 $blocks = $agent->GetBlocks('GLST');

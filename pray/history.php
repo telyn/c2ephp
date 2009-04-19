@@ -2,13 +2,20 @@
 require_once(dirname(__FILE__).'/../support/Archiver.php');
 require_once(dirname(__FILE__).'/../support/IReader.php');
 require_once(dirname(__FILE__).'/../support/StringReader.php');
+require_once(dirname(__FILE__).'/prayfile.php');
 
 class CreatureHistory {
 	private $reader;
 	private $history;
-	
-	public function CreatureHistory(IReader $reader) {
-		$this->reader = $reader;
+	private $prayFile;
+	public function CreatureHistory(PRAYFile $prayFile) {
+		$prayFile->Parse();
+		$history = $prayFile->GetBlocks('GLST');
+		if(sizeof($history) == 0) {
+			throw new Exception('This pray file contains no GLST blocks');
+		}
+		$this->prayFile = $prayFile;
+		$this->reader = new StringReader($history[0]['Content']);
 	}
 	public function Decode() {
 		$firstchar = $this->reader->Read(1);
@@ -71,14 +78,23 @@ class CreatureHistory {
 			'creatureage'		=> $this->reader->ReadInt(4),
 			'timestamp'			=> $this->reader->ReadInt(4),
 			'lifestage'			=> $this->reader->ReadInt(4),
-			'eventspecific'		=> array($this->reader->Read($this->reader->ReadInt(4)),$this->reader->Read($this->reader->ReadInt(4)),$this->reader->Read($this->reader->ReadInt(4)),$this->reader->Read($this->reader->ReadInt(4))),
+			'monikers'			=> array($this->reader->Read($this->reader->ReadInt(4)),$this->reader->Read($this->reader->ReadInt(4))),
+			'usertext'			=> $this->reader->Read($this->reader->ReadInt(4)),
+			'photograph'		=> array('name' => $this->reader->Read($this->reader->ReadInt(4))),
 			'worldname'			=> $this->reader->Read($this->reader->ReadInt(4)),
 			'worldUID'			=> $this->reader->Read($this->reader->ReadInt(4)),
 			'DSUser'			=> $this->reader->Read($this->reader->ReadInt(4)),
 			'unknown1'			=> $this->reader->ReadInt(4),
 			'unknown2'			=> $this->reader->ReadInt(4)
 			);
-			
+			if($this->prayFile != null && $eventInfo['photograph']['name'] != '') {
+				$eventInfo['photograph']['data'] = $this->prayFile->GetBlockByName($eventInfo['photograph']['name'].'.DSEX.photo');
+				if($eventInfo['photograph']['data'] == '') {
+					$eventInfo['photograph']['data'] = $this->prayFile->GetBlockByName($eventInfo['photograph']['name'].'.EXPC.photo');
+				}
+				$eventInfo['photograph']['data'] = $eventInfo['photograph']['data']['Content'];
+				
+			}
 			$this->history['events'][] = $eventInfo;
 			return true;
 		}
