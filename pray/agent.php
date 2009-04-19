@@ -29,9 +29,12 @@ class Agent {
         if(!$type) {
             return $this->blocks;
         } else {
+			if(is_string($type)) {
+				$type = array($type);
+			}
             $retblocks = array();
             foreach($this->blocks as $block) {
-                if($block['Type'] == $type) {
+                if(in_array($block['Type'],$type)) {
                     $retblocks[] = $block;
                 }
             }

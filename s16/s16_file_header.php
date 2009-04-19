@@ -23,7 +23,7 @@ class s16_file_header
 		}
 	}
 	
-	function OutputPNG($frame, $fp)
+	function OutputPNG($frame, IReader $fp)
 	{
 		if($this->frame_count < ($frame+1))
 			throw new Exception("OutputPNG - Frame out of bounds - ".$frame);
