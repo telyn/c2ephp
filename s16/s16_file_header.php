@@ -6,7 +6,7 @@ class s16_file_header
 	var $encoding;
 	var $frame_count;
 	var $frame_header;
-	function s16_file_header(IReader $fp)
+	function s16_file_header(IReader &$fp)
 	{
 		$buffer = $fp->ReadInt(4);
 		if($buffer == 1)
@@ -14,7 +14,7 @@ class s16_file_header
 		else if($buffer == 0)
 			$this->encoding = "555";
 		else
-			throw new Exception("File encoding not recognised. (".$buffer.")");
+			throw new Exception("File encoding not recognised. (".$buffer.'|'.$fp->Position().')');
 		$buffer = $fp->ReadInt(2);
 		$this->frame_count = $buffer;
 		for($x=0; $x < $this->frame_count; $x++)
