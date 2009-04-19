@@ -19,8 +19,7 @@ $data = gzuncompress($glst);
 $h = fopen($argv[1].'.glst','wb');
 fwrite($h,$data);
 fclose($h);
-$reader = new StringReader($data);
-$history = new CreatureHistory($reader);
+$history = new CreatureHistory($agent);
 print_r($history->Decode());
 
 
