@@ -15,7 +15,7 @@ class s16_frame_header
 	 
 	 function OutputPNG(IReader $fp, $encoding)
 	 {
-	 	header("Content-type: image/png");
+	 	ob_start();
 		$image = imagecreatetruecolor($this->width,
 									  $this->height);
 		$fp->Seek($this->offset);
@@ -41,6 +41,9 @@ class s16_frame_header
 			}
 		}
 		imagepng($image);
+		$contents = ob_get_contents();
+		ob_end_clean();
+		return $contents;
 	 }
 }
 ?>
