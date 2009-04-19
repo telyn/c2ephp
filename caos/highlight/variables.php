@@ -1,31 +1,65 @@
 <?php
 $caosVariables = array
 (
-//agents
-"abba",
-"carr",
-"fmly",
-"from",
-"gnus",
-"held",
-"hght",
-"null",
-"over",
-"ownr",
-"pntr",
-"posb",
-"posl",
-"posr",
-"post",
-"posx",
-"posy",
-"spcs",
-"wdth",
-//cameras
-
-//variables
-"cata",
-"gnam",
-"modu"
+	//agents
+	'abba',
+	'carr',
+	'fmly',
+	'from',
+	'gnus',
+	'held',
+	'hght',
+	'null',
+	'over',
+	'ownr',
+	'pntr',
+	'posb',
+	'posl',
+	'posr',
+	'post',
+	'posx',
+	'posy',
+	'spcs',
+	'wdth',
+	//cameras
+	'cmrx',
+	'cmry',
+	'wdow',
+	'wndb',
+	'wndh',
+	'wndl',
+	'wndr',
+	'wndt',
+	//CD Player
+	'frqh',
+	'frql',
+	'frqn',
+	//compounds
+	'npgs',
+	'attn',
+	'bvar',
+	'byit',
+	'cage',
+	'crea',
+	'decn',
+	'dftx',
+	'dfty',
+	'drv!',
+	'expr',
+	'hhld',
+	'ins#',
+	'limb',
+	'orgf',
+	'orgi',
+	'orgn',
+	'seen',
+	'tage',
+	'uftx',
+	'ufty',
+	
+	//variables
+	'cata',
+	'gnam',
+	'modu'
 );
 ?>
