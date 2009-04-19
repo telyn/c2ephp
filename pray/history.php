@@ -17,8 +17,9 @@ class CreatureHistory {
 			$data = DeArchive($data);
 			if($data !== false) {
 				$this->reader = new StringReader($data);
-				$this->Decode();
+				return $this->Decode();
 			}
+			return false;
 		} else if($firstchar == chr(0x27)) {
 			//Good. Let's begin.
 			$this->reader->Read(3);
@@ -29,7 +30,7 @@ class CreatureHistory {
 			if(!isset($this->history[0]['eventslength'])) {
 				return false;
 			}
-			echo $this->history[0]['eventslength'];
+			
 			for($i=1;$i<$this->history[0]['eventslength'];$i++) {
 				$this->DecodeEvent();
 			}
