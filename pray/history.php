@@ -31,7 +31,7 @@ class CreatureHistory {
 			'moniker2'			=> $this->reader->Read($this->reader->ReadInt(4)),
 			'name'				=> $this->reader->Read($this->reader->ReadInt(4)),
 			'gender'			=> $this->reader->ReadInt(4),
-			'unknown1'			=> $this->reader->ReadInt(4),
+			'genus'				=> $this->reader->ReadInt(4), //0 for norn, 1 for grendel, 2 for ettin
 			'species'			=> $this->reader->ReadInt(4),
 			'eventslength'		=> $this->reader->ReadInt(4)
 			);
