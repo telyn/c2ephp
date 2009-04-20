@@ -13,7 +13,7 @@ class c16_file
 	
 	function OutputPNG($frame)
 	{
-		$this->header->OutputPNG($frame, $this->file);
+		return $this->header->OutputPNG($frame, $this->file);
 	}
 }
 ?>

@@ -28,7 +28,7 @@ class c16_file_header
 	{
 		if($this->frame_count < ($frame+1))
 			throw new Exception("OutputPNG - Frame out of bounds - ".$frame);
-		$this->frame_header[$frame]->OutputPNG($fp, $this->encoding);
+		return $this->frame_header[$frame]->OutputPNG($fp, $this->encoding);
 	}
 }
 ?>

@@ -22,7 +22,7 @@ class c16_frame_header
 	 
 	 function OutputPNG($fp, $encoding)
 	 {
-	 	header("Content-type: image/png");
+	 	ob_start();
 		$image = imagecreatetruecolor($this->width,
 									  $this->height);
 		$fp->Seek($this->offset);
@@ -71,6 +71,9 @@ class c16_frame_header
 			}
 		}
 		imagepng($image);
+		$data = ob_get_contents();
+		ob_end_clean();
+		return $data;
 	 }
 }
 ?>
