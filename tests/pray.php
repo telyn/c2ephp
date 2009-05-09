@@ -1,5 +1,5 @@
 <?php
-include(dirname(__FILE__).'/../pray/prayfile.php');
+include(dirname(__FILE__).'/../pray/PRAYFile.php');
 include(dirname(__FILE__).'/../support/FileReader.php');
 if($argv[1] != "") {
     $file = $argv[1];

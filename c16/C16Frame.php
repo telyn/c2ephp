@@ -1,12 +1,12 @@
 <?php
 require_once(dirname(__FILE__)."/../support/FileReader.php");
-class c16_frame_header
+class C16Frame
 {
 	 var $offset;
 	 var $width;
 	 var $height;
 	 var $line_offset;
-	 function c16_frame_header(IReader $fp)
+	 function C16Frame(IReader $fp)
 	 {
 	 	$this->offset = $fp->ReadInt(4);
 	 	$buffer = $fp->ReadInt(2);

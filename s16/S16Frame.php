@@ -1,6 +1,6 @@
 <?php
 require_once(dirname(__FILE__)."/../support/FileReader.php");
-class s16_frame_header
+class S16Frame
 {
 	 var $offset;
 	 var $width;
