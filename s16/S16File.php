@@ -3,31 +3,33 @@ require_once(dirname(__FILE__)."/../support/FileReader.php");
 require_once(dirname(__FILE__)."/S16Frame.php");
 class S16File
 {
-	var $encoding;
-	var $frame_count;
-	var $frame_header;
-	function s16_file_header(IReader &$fp)
+	private $encoding;
+	private $frame_count;
+	private $frame_header;
+	private $fp;
+	function S16File(IReader $fp)
 	{
-		$buffer = $fp->ReadInt(4);
+		$this->fp = $fp;
+		$buffer = $this->fp->ReadInt(4);
 		if($buffer == 1)
 			$this->encoding = "565";
 		else if($buffer == 0)
 			$this->encoding = "555";
 		else
-			throw new Exception("File encoding not recognised. (".$buffer.'|'.$fp->Position().')');
-		$buffer = $fp->ReadInt(2);
+			throw new Exception("File encoding not recognised. (".$buffer.'|'.$this->fp->GetPosition().')');
+		$buffer = $this->fp->ReadInt(2);
 		$this->frame_count = $buffer;
 		for($x=0; $x < $this->frame_count; $x++)
 		{
-			$this->frame_header[$x] = new S16Frame($fp);
+			$this->frame_header[$x] = new S16Frame($this->fp);
 		}
 	}
 	
-	function OutputPNG($frame, IReader $fp)
+	function OutputPNG($frame)
 	{
 		if($this->frame_count < ($frame+1))
 			throw new Exception("OutputPNG - Frame out of bounds - ".$frame);
-		return $this->frame_header[$frame]->OutputPNG($fp, $this->encoding);
+		return $this->frame_header[$frame]->OutputPNG($this->fp, $this->encoding);
 	}
 }
 ?>
