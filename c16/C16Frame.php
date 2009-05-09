@@ -2,11 +2,11 @@
 require_once(dirname(__FILE__)."/../support/FileReader.php");
 class C16Frame
 {
-	 var $offset;
-	 var $width;
-	 var $height;
-	 var $line_offset;
-	 function C16Frame(IReader $fp)
+	 private $offset;
+	 private $width;
+	 private $height;
+	 private $line_offset;
+	 public function C16Frame(IReader $fp)
 	 {
 	 	$this->offset = $fp->ReadInt(4);
 	 	$buffer = $fp->ReadInt(2);
@@ -20,7 +20,7 @@ class C16Frame
 	 	}
 	 }
 	 
-	 function OutputPNG($fp, $encoding)
+	 public function OutputPNG($fp, $encoding)
 	 {
 	 	ob_start();
 		$image = imagecreatetruecolor($this->width,
