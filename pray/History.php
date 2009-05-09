@@ -2,7 +2,7 @@
 require_once(dirname(__FILE__).'/../support/Archiver.php');
 require_once(dirname(__FILE__).'/../support/IReader.php');
 require_once(dirname(__FILE__).'/../support/StringReader.php');
-require_once(dirname(__FILE__).'/prayfile.php');
+require_once(dirname(__FILE__).'/PRAYFile.php');
 
 class CreatureHistory {
 	private $reader;
