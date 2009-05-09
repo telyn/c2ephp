@@ -1,6 +1,6 @@
 <?php
 require_once(dirname(__FILE__)."/../support/FileReader.php");
-require_once(dirname(__FILE__)."/s16_frame_header.php");
+require_once(dirname(__FILE__)."/S16Frame.php");
 class S16File
 {
 	var $encoding;
