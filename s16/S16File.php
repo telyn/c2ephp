@@ -1,30 +1,29 @@
 <?php
-require_once(dirname(__FILE__)."/c16_frame_header.php");
-class c16_file_header
+require_once(dirname(__FILE__)."/../support/FileReader.php");
+require_once(dirname(__FILE__)."/s16_frame_header.php");
+class S16File
 {
 	var $encoding;
 	var $frame_count;
 	var $frame_header;
-	function c16_file_header(IReader $fp)
+	function s16_file_header(IReader &$fp)
 	{
 		$buffer = $fp->ReadInt(4);
-		if($buffer == 3)
+		if($buffer == 1)
 			$this->encoding = "565";
-		else if($buffer == 2)
+		else if($buffer == 0)
 			$this->encoding = "555";
 		else
-			throw new Exception("File encoding not recognised. (".$buffer.")");
+			throw new Exception("File encoding not recognised. (".$buffer.'|'.$fp->Position().')');
 		$buffer = $fp->ReadInt(2);
-		if($buffer < 1)
-			throw new Exception("Sprite file appears to contain less than 1 frame.");
 		$this->frame_count = $buffer;
 		for($x=0; $x < $this->frame_count; $x++)
 		{
-			$this->frame_header[$x] = new c16_frame_header($fp);
-		} 
+			$this->frame_header[$x] = new S16Frame($fp);
+		}
 	}
 	
-	function OutputPNG($frame, $fp)
+	function OutputPNG($frame, IReader $fp)
 	{
 		if($this->frame_count < ($frame+1))
 			throw new Exception("OutputPNG - Frame out of bounds - ".$frame);

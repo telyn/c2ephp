@@ -1,5 +1,5 @@
 <?php
-include(dirname(__FILE__).'/../pray/extract.php');
+include(dirname(__FILE__).'/extract.php');
 $agent = new PRAYFile(file_get_contents('testcreature.creature'));
 $agent->Parse();
  

@@ -1,6 +1,6 @@
 <?php
 require_once('../support/IReader.php');
-require_once('../spr/sprframe.php');
+require_once('../spr/SPRFrame.php');
 
 interface ICOB {
 	public function LoadCOB(IReader $reader);

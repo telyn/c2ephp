@@ -1,7 +1,7 @@
 <?php
 //take off the two unprintable characters after Creatures Evolution Engine - Archived information file. zLib 1.13 compressed.
-require_once(dirname(__FILE__).'/../pray/extract.php');
-require_once(dirname(__FILE__).'/../pray/history.php');
+require_once(dirname(__FILE__).'/../pray/History.php');
+require_once(dirname(__FILE__).'/../pray/PRAYFile.php');
 require_once(dirname(__FILE__).'/../support/StringReader.php');
 require_once(dirname(__FILE__).'/../support/FileReader.php');
 require_once(dirname(__FILE__).'/../support/Archiver.php');
