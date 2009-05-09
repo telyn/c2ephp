@@ -6,7 +6,7 @@ class FileReader implements IReader
     public function FileReader($file)
     {
     	if(!file_exists($file))
-			throw new Exception("File does no exist: ".$file);
+			throw new Exception("File does not exist: ".$file);
 		if(!is_file($file))
 			throw new Exception("Target is not a file.");
 		if(!is_readable($file))
