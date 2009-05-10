@@ -7,7 +7,7 @@ require_once(dirname(__FILE__).'/support/Archiver.php');
 
 //PRAY
 require_once(dirname(__FILE__).'/pray/PRAYFile.php');
-require_once(dirname(__FILE__).'/pray/History.php');
+require_once(dirname(__FILE__).'/pray/CreatureHistory.php');
 
 //images
 require_once(dirname(__FILE__).'/c16/C16File.php');
