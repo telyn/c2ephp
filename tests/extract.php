@@ -61,8 +61,6 @@ function ExtractCompleteAgent($agent) {
     }
     
 }
-function ExtractFileFromAgent($agent,$file) { //$file is a filename or a block id.
-    if(is_int($file)) {
-    }
-}
+
+ExtractCompleteAgent($argv[1]);
 ?>
