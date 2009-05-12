@@ -31,7 +31,7 @@ class C16File
 	{
 		if($this->frameCount < ($frame+1))
 			throw new Exception('OutputPNG - Frame out of bounds - '.$frame);
-		return $this->frames[$frame]->OutputPNG($this->reader, $this->encoding);
+		return $this->frames[$frame]->OutputPNG($this->encoding);
 	}
 }
 ?>
