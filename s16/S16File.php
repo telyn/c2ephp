@@ -29,7 +29,7 @@ class S16File
 	{
 		if($this->frame_count < ($frame+1))
 			throw new Exception("OutputPNG - Frame out of bounds - ".$frame);
-		return $this->frame_header[$frame]->OutputPNG($this->fp, $this->encoding);
+		return $this->frame_header[$frame]->OutputPNG($this->encoding);
 	}
 }
 ?>
