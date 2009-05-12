@@ -1,36 +1,38 @@
 <?php
-require_once(dirname(__FILE__)."/../support/FileReader.php");
+require_once(dirname(__FILE__)."/../support/IReader.php");
 class C16Frame
 {
 	 private $offset;
 	 private $width;
 	 private $height;
-	 private $line_offset;
-	 public function C16Frame(IReader $fp)
+	 private $this->reader;
+	 private $lineOffset;
+	 public function C16Frame(IReader &$reader)
 	 {
-	 	$this->offset = $fp->ReadInt(4);
-	 	$buffer = $fp->ReadInt(2);
+ 	 	$this->reader = $reader;
+	 	$this->offset = $this->reader->ReadInt(4);
+	 	$buffer = $this->reader->ReadInt(2);
 	 	if($buffer < 1)
-	 		throw new Exception("Frame claims zero width.");
+	 		throw new Exception('Frame claims zero width.');
 	 	$this->width = $buffer;
-	 	$this->height = $fp->ReadInt(2);
+	 	$this->height = $this->reader->ReadInt(2);
 	 	for($x = 0; $x < ($this->height - 1); $x++)
 	 	{
-	 		$this->line_offset[$x] = $fp->ReadInt(4);
+	 		$this->lineOffset[$x] = $this->reader->ReadInt(4);
 	 	}
 	 }
 	 
-	 public function OutputPNG($fp, $encoding)
+	 public function OutputPNG($encoding)
 	 {
 	 	ob_start();
 		$image = imagecreatetruecolor($this->width,
 									  $this->height);
-		$fp->Seek($this->offset);
+		$this->reader->Seek($this->offset);
 		for($y = 0; $y < $this->height; $y++)
 		{
 			for($x = 0; $x < $this->width;)
 			{
-				$run = $fp->ReadInt(2);
+				$run = $this->reader->ReadInt(2);
 				if(($run & 0x0001) > 0)
 					$run_type = "colour";
 				else
@@ -49,7 +51,7 @@ class C16Frame
 					$z = $x + $run_length;
 					for(;$x < $z; $x++)
 					{
-						$pixel = $fp->ReadInt(2);
+						$pixel = $this->reader->ReadInt(2);
 						if($encoding == "565")
 						{
 							$red   = ($pixel & 0xF800) >> 8;
@@ -67,7 +69,7 @@ class C16Frame
 					}
 				}
 			if($x == $this->width)
-				$fp->Skip(2);
+				$this->reader->Skip(2);
 			}
 		}
 		imagepng($image);
