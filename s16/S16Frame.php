@@ -4,26 +4,34 @@ class S16Frame
 {
 	 private $offset;
 	 private $width;
+	 private $reader;
 	 private $height;
-	 public function S16Frame(IReader &$fp)
+	 public function S16Frame(IReader &$reader,$width=false,$height=false,$offset=false)
 	 {
-	 	$this->offset = $fp->ReadInt(4);
-	 	$buffer = $fp->ReadInt(2);
-	 	$this->width = $buffer;
-	 	$this->height = $fp->ReadInt(2);
+	 	$this->reader = $reader;
+	 	if($width === false || $height === false || $offset === false) {
+		 	$this->offset = $this->reader->ReadInt(4);
+		 	$buffer = $this->reader->ReadInt(2);
+		 	$this->width = $buffer;
+	 		$this->height = $this->reader->ReadInt(2);
+	 	} else {
+	 		$this->width = $width;
+	 		$this->height = $width;
+	 		$this->offset = $offset;
+	 	}
 	 }
 	 
-	 public function OutputPNG(IReader $fp, $encoding)
+	 public function OutputPNG($encoding)
 	 {
 	 	ob_start();
 		$image = imagecreatetruecolor($this->width,
 									  $this->height);
-		$fp->Seek($this->offset);
+		$this->reader->Seek($this->offset);
 		for($y = 0; $y < $this->height; $y++)
 		{
 			for($x = 0; $x < $this->width; $x++)
 			{
-				$pixel = $fp->ReadInt(2);
+				$pixel = $this->reader->ReadInt(2);
 				if($encoding == "565")
 				{
 					$red   = ($pixel & 0xF800) >> 8;

@@ -4,21 +4,14 @@ require_once(dirname(__FILE__).'/../support/IReader.php');
 require_once(dirname(__FILE__).'/../support/FileReader.php');
 require_once(dirname(__FILE__).'/../support/StringReader.php');
 
-if(!isset($sprToRGB)) {
-$paletteReader = new FileReader(dirname(__FILE__).'/palette.dta');
-	for($i = 0;$i<256;$i++) {
-		$sprToRGB[$i] = array('b'=>$paletteReader->ReadInt(1)*4,'g'=>$paletteReader->ReadInt(1)*4,'r'=>$paletteReader->ReadInt(1)*4);
-	}
-	unset($paletteReader);
-}
 
-
-class SPRFrame /*implements ISpriteFrame*/ {
+class SPRFrame {
 	private $width;
 	private $height;
 	private $offset;
 	private $data;
-	public function SPRFrame(IReader $reader,$width,$height) {
+	public static $sprToRGB;
+	public function SPRFrame(IReader $reader,$width,$height,$offset=0) {
 		$this->reader = $reader;
 		$this->width = $width;
 		$this->height = $height;
@@ -53,10 +46,16 @@ class SPRFrame /*implements ISpriteFrame*/ {
 		return $data;
 	}
 	private function NextToRGB() {
-		global $sprToRGB;
 		$colour = $this->data->ReadInt(1);
-		return $sprToRGB[$colour];
+		return self::$sprToRGB[$colour];
 	}
 	
+}
+if(empty(SPRFrame::$sprToRGB)) {
+	$paletteReader = new FileReader(dirname(__FILE__).'/palette.dta');
+	for($i = 0;$i<256;$i++) {
+		SPRFrame::$sprToRGB[$i] = array('b'=>$paletteReader->ReadInt(1)*4,'g'=>$paletteReader->ReadInt(1)*4,'r'=>$paletteReader->ReadInt(1)*4);
+	}
+	unset($paletteReader);
 }
 ?>

@@ -9,7 +9,7 @@ class StringReader implements IReader {
     public function Read($characters) {
         if($characters > 0) {
             if($this->position+$characters > strlen($this->string)) {
-                return "";
+                return false;
             }
             $str = substr($this->string,$this->position,$characters);
             
