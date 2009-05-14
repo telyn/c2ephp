@@ -1,5 +1,5 @@
 <?php
-include('../cob/cob.php');
+include('../agents/cob.php');
 require_once('../support/FileReader.php');
 
 $cob = new C1COB(new FileReader('carrotbeatle.cob'));
