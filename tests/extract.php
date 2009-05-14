@@ -1,7 +1,7 @@
 <?php
 include('../support/FileReader.php');
-require_once('../pray/PRAYFile.php');
-require_once('../s16/S16File.php');
+require_once('../agents/PRAYFile.php');
+require_once('../sprites/S16File.php');
  
 //this function is pretty dirty, all things considered.
  
