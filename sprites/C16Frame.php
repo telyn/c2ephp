@@ -5,7 +5,7 @@ class C16Frame
 	 private $offset;
 	 private $width;
 	 private $height;
-	 private $this->reader;
+	 private $reader;
 	 private $lineOffset;
 	 public function C16Frame(IReader &$reader)
 	 {
