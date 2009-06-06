@@ -126,7 +126,7 @@ class C2COB implements ICOB {
 				break;
 			}			
 		}
-		return $string;
+		return substr($string,0,-1);
 	}
 	public function GetData($type=false) {
 		if(!$type) {
