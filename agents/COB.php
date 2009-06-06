@@ -10,14 +10,12 @@ require_once(dirname(__FILE__).'/C2COB.php');
 class COB implements ICOB {
 	public $cob;
 	public function COB(IReader $reader) {
-		echo "New cob\n";
 		$this->LoadCOB($reader);
 	}
 	public function LoadCOB(IReader $reader) {
 		if($reader->Read(4) == 'cob2') {
 			$reader->Seek(0);
 			$this->cob = new C2COB($reader);
-			echo "COB2!\n";
 		} else {
 			echo "Compressed or COB1\n";
 			$uncompressed = @gzuncompress($reader->GetSubString(0));
