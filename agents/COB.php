@@ -3,9 +3,9 @@ require_once(dirname(__FILE__).'/../support/IReader.php');
 require_once(dirname(__FILE__).'/../support/StringReader.php');
 require_once(dirname(__FILE__).'/../sprites/SPRFrame.php');
 require_once(dirname(__FILE__).'/../sprites/S16Frame.php');
-require_once(dirname(__FILE__).'/../support/ICOB.php');
-require_once(dirname(__FILE__).'/../support/C1COB.php');
-require_once(dirname(__FILE__).'/../support/C2COB.php');
+require_once(dirname(__FILE__).'/ICOB.php');
+require_once(dirname(__FILE__).'/C1COB.php');
+require_once(dirname(__FILE__).'/C2COB.php');
 
 class COB implements ICOB {
 	public $cob;
