@@ -74,7 +74,6 @@ class C2COB implements ICOB {
 		$blockData['removeScript'] = $this->ReadString($block);
 		$blockData['eventScripts'] = array();
 		$eventScripts = $block->ReadInt(2);
-		echo $eventScripts;
 		for($i=0;$i<$eventScripts;$i++) {
 			$blockData['eventScripts'][] = $this->ReadString($block);
 		}
