@@ -27,7 +27,7 @@ class COB implements ICOB {
 		}
 	}
 	public function GetData() {
-		$this->cob->GetData();
+		return $this->cob->GetData();
 	}
 }
 
