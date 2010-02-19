@@ -1,6 +1,9 @@
 <?php
 
+require_once(dirname(__FILE__).'/../../support/StringReader.php');
+require_once(dirname(__FILE__).'/../../support/Archiver.php');
 require_once(dirname(__FILE__).'/PrayBlock.php');
+
 define('GLST_FORMAT_UNKNOWN',0);
 define('GLST_FORMAT_C3',1);
 define('GLST_FORMAT_DS',2);
@@ -10,7 +13,7 @@ class GLSTBlock extends PrayBlock {
 	public function GLSTBlock(&$prayfile,$name,$content,$flags) {
 		parent::PrayBlock($prayfile,$name,$content,$flags);
 		$this->Decode();
-		print_r($this->history);
+//		print_r($this->history);
 	}
 	private function Decompress() {
 			$content = $this->GetData();
