@@ -2,6 +2,7 @@
 
 require_once(dirname(__FILE__).'/../support/IReader.php');
 require_once(dirname(__FILE__).'/../support/StringReader.php');
+require_once(dirname(__FILE__).'/PRAY/PrayBlock.php');
 
 class PRAYFile {
     private $reader;
@@ -16,16 +17,18 @@ class PRAYFile {
     
     public function Parse() {
 		if(!$this->parsed) {
-			$this->parsed = true;
 			if($this->ParseHeader()) {
 				while($this->ParseBlockHeader()) {
 				}
+				$this->parsed = true;
+				//print_r($this->blocks);
 				return $this->blocks;
 			} else {
 				echo "Failed at block header: NOT A PRAY FILE";
 				return FALSE;
 			}
 		}
+		
 		return $this->blocks;
     }
     
@@ -41,7 +44,7 @@ class PRAYFile {
 			}
             $retblocks = array();
             foreach($this->blocks as $block) {
-                if(in_array($block['Type'],$type)) {
+                if(is_subclass_of($block,$type)) {
                     $retblocks[] = $block;
                 }
             }
@@ -51,7 +54,7 @@ class PRAYFile {
     public function GetBlockByName($name) {
 		foreach($this->blocks as $blockid => $block) {
 			
-			if($block['Name'] == $name) {
+			if($block->name == $name) {
 				return $block;
 			}
 		}
@@ -89,57 +92,17 @@ class PRAYFile {
         if($flags & 1 == 1) {
 		    $compression=true;
         }
-        $this->blocks[] = array('Type'=>$blocktype,'Name'=>$name,'Length'=>$length,'FullLength'=>$fulllength,'Compression'=>(int)$compression,'Start'=>$this->reader->GetPosition());
+		//if we make the content here, we don't have to write the same line or two ten or more times :)
+		$content = $this->reader->Read($length);
+		if($compression) {
+			$content = gzuncompress($content);
+		}
+		
+		$this->blocks[] = MakePrayBlock($blocktype,$this,$name,$content,$flags);
+        //$this->blocks[] = array('Type'=>$blocktype,'Name'=>$name,'Length'=>$length,'FullLength'=>$fulllength,'Compression'=>(int)$compression,'Start'=>$this->reader->GetPosition());
         $blockid = sizeof($this->blocks)-1;
 		
-        switch($blocktype) {
-			case 'AGNT':
-			case 'DSAG':
-			case 'LIVE':
-			case 'EGG':
-			case 'DFAM':
-			case 'SFAM':
-			case 'EXPC':
-			case 'DSEX':
-				$this->ParseTagBlock($blockid);
-				break;
-			default:
-				$content = $this->reader->Read($length);
-				if($compression) {
-					$content = gzuncompress($content);
-				}
-				$this->blocks[$blockid]['Content'] = $content;
-        }
         return true;
-    }
-    
-    private function ParseTagBlock($blockid) {
-        $block = $this->blocks[$blockid];
-        $blockBinary = $this->reader->GetSubString($block['Start'],$block['Length']);
-        if($block['Compression']) {
-            $blockBinary = gzuncompress($blockBinary);
-        }
-        $blockReader = new StringReader($blockBinary);
-        
-        
-        $numInts = $blockReader->ReadInt(4);
-        for($i=0;$i<$numInts;$i++) {
-            $nameLength = $blockReader->ReadInt(4);
-            $name = $blockReader->Read($nameLength);
-            $int = $blockReader->ReadInt(4);
-            $block['Tags'][$name] = $int;
-        }
-        
-        
-        $numStrings = $blockReader->ReadInt(4);
-        for($i=0;$i<$numStrings;$i++) {
-            $nameLength = $blockReader->ReadInt(4);
-            $name = $blockReader->Read($nameLength);
-            $stringLength = $blockReader->ReadInt(4);
-            $string = $blockReader->Read($stringLength);
-            $block['Tags'][$name] = $string;
-        }       
-        $this->blocks[$blockid] = $block;
     }
 }
 

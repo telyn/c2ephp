@@ -10,7 +10,7 @@ class CreatureHistory {
 	private $prayFile;
 	public function CreatureHistory(PRAYFile $prayFile) {
 		$prayFile->Parse();
-		$history = $prayFile->GetBlocks('GLST');
+		$history = $prayFile->GetBlocks('GLSTBlock');
 		if(sizeof($history) == 0) {
 			throw new Exception('This pray file contains no GLST blocks');
 		}
