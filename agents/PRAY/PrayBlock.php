@@ -1,4 +1,7 @@
 <?php
+/** \file
+*	Defines the PrayBlock abstract superclass, as well as the MakePrayBlock PrayBlock factory.
+*/
 require_once(dirname(__FILE__).'/AGNTBlock.php');
 require_once(dirname(__FILE__).'/CREABlock.php');
 require_once(dirname(__FILE__).'/DFAMBlock.php');
@@ -14,7 +17,10 @@ require_once(dirname(__FILE__).'/PHOTBlock.php');
 require_once(dirname(__FILE__).'/SFAMBlock.php');
 
 define('PRAY_FLAG_ZLIB_COMPRESSED',1);
-
+/** \name Block Types
+* Constants for the various PRAY block types
+*/
+//@{
 define('PRAY_BLOCK_AGNT','AGNT');
 define('PRAY_BLOCK_CREA','CREA');
 define('PRAY_BLOCK_DFAM','DFAM');
@@ -28,7 +34,15 @@ define('PRAY_BLOCK_GLST','GLST');
 define('PRAY_BLOCK_LIVE','LIVE');
 define('PRAY_BLOCK_PHOT','PHOT');
 define('PRAY_BLOCK_SFAM','SFAM');
-
+//}@
+/** Creates PrayBlock objects of the correct type.
+*	\return An object that is an instance of a subclass of PrayBlock.
+* 	\param $blocktype	The type of PRAYBlock, as one of the Block Types defines.
+*	\param $prayfile	The PRAYFile object that the PRAYBlock is a child of. This is used to allow blocks to access to each other.
+*	\param $name		The name of the PRAYBlock
+*	\param $content		The binary content of the PRAYBlock, uncompressed if necessary.
+*	\param $flags		The flags given to this PRAYBlock as an integer.
+*/
 function MakePrayBlock($blocktype,PRAYFile $prayfile,$name,$content,$flags) {
 	switch($blocktype) {
 		//agents
@@ -91,13 +105,14 @@ abstract class PrayBlock {
 		$this->flags = $flags;
 		$this->type = $type;
 	}
-	private function EncodeBlockHeader() {
+	private function EncodeBlockHeader($specificlength) {
 		$compiled = $this->GetType();
 		$compiled .= substr($this->GetName(),0,128);
 		$len = 128 - strlen($this->GetName());
 		for($i=0;$i<$len;$i++) {
 			$compiled .= "\0";
 		}
+		$compiled .= pack('VVV',$specificlength,$specificlength,0);
 	}
 	public function GetName() {
 		return $this->name;
@@ -124,7 +139,7 @@ abstract class PrayBlock {
 		$this->content = $content;
 	}
 	public function Compile() {
-		$compiled  = $this->EncodeBlockHeader();
+		$compiled  = $this->EncodeBlockHeader(strlen($this->GetData));
 		$compiled .= $this->GetData();
 	}
 }

@@ -9,8 +9,9 @@ abstract class CreaturesArchiveBlock extends PrayBlock {
 	}
 
 	public function Compile() {
-		$compiled  = $this->EncodeBlockHeader();
-		$compiled .= Archive($this->GetData());
+		$archiveddata = Archive($this->GetData());
+		$compiled  = $this->EncodeBlockHeader(strlen($archiveddata));
+		$compiled .= $archiveddata;
 	}
 
 	private function Decompress() {
