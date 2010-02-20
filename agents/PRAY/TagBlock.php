@@ -38,7 +38,7 @@ abstract class TagBlock extends PrayBlock {
 			$compiled .= $value;
 		}
 	}
-	public function TagBlock(&$prayfile,$name,$content,$flags,$type) {
+	public function TagBlock($prayfile,$name,$content,$flags,$type) {
 		parent::PrayBlock($prayfile,$name,$content,$flags,$type);
 
         $blockReader = new StringReader($content);

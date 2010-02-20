@@ -65,6 +65,7 @@ class PRAYFile {
 		}
 		return null;
 	}
+
     private function ParseHeader() {
         if($this->reader->Read(4) == "PRAY") {
             return true;
