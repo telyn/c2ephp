@@ -17,6 +17,13 @@ class GLSTBlock extends CreaturesArchiveBlock {
 	public function GetHistory() {
 		return $this->history;
 	}
+	public function GetPHOTBlockName($event) {
+		if(GLST_FORMAT_DS) {
+			return $event['photograph'].'.DSEX.photo';
+		} else {
+			return $event['photograph'].'.photo';
+		}
+	}
 	private function Decode() {
 		$reader = new StringReader($this->GetData());
 		$firstchar = $reader->Read(1);
