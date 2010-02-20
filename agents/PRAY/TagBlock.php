@@ -14,7 +14,7 @@ abstract class TagBlock extends PrayBlock {
 		return $this->tags;
 	}
 	public function Compile() {
-		$compiled = $this->EncodeBlockHeader();
+		$compiled = '';
 		$ints = array();
 		$strings = array();
 		foreach($this->tags as $key=>$value) {
@@ -37,6 +37,7 @@ abstract class TagBlock extends PrayBlock {
 			$compiled .= pack('V',strlen($value));
 			$compiled .= $value;
 		}
+		$compiled = $this->EncodeBlockHeader(strlen($compiled)) . $compiled;
 	}
 	public function TagBlock($prayfile,$name,$content,$flags,$type) {
 		parent::PrayBlock($prayfile,$name,$content,$flags,$type);
