@@ -13,6 +13,7 @@ require_once(dirname(__FILE__).'/LIVEBlock.php');
 require_once(dirname(__FILE__).'/PHOTBlock.php');
 require_once(dirname(__FILE__).'/SFAMBlock.php');
 
+define('PRAY_FLAG_ZLIB_COMPRESSED',1);
 
 define('PRAY_BLOCK_AGNT','AGNT');
 define('PRAY_BLOCK_CREA','CREA');
@@ -28,54 +29,54 @@ define('PRAY_BLOCK_LIVE','LIVE');
 define('PRAY_BLOCK_PHOT','PHOT');
 define('PRAY_BLOCK_SFAM','SFAM');
 
-function MakePrayBlock($blocktype,PRAYFile &$prayfile,$name,$content,$flags) {
+function MakePrayBlock($blocktype,PRAYFile $prayfile,$name,$content,$flags) {
 	switch($blocktype) {
 		//agents
-		case 'AGNT':
+		case PRAY_BLOCK_AGNT:
 			return new AGNTBlock($prayfile,$name,$content,$flags);
-		case 'DSAG':
+		case PRAY_BLOCK_DSAG:
 			return new DSAGBlock($prayfile,$name,$content,$flags);
-		case 'LIVE':
+		case PRAY_BLOCK_LIVE:
 			return new LIVEBlock($prayfile,$name,$content,$flags); //sea monkeys agent files.
 
 		//egg
-		case 'EGG':
+		case PRAY_BLOCK_EGG:
 			return new EGGBlock($prayfile,$name,$content,$flags);
 
 		//starter families
-		case 'DFAM':
+		case PRAY_BLOCK_DFAM:
 			return new DFAMBlock($prayfile,$name,$content,$flags);
-		case 'SFAM':
+		case PRAY_BLOCK_SFAM:
 			return new SFAMBlock($prayfile,$name,$content,$flags);
 		
 		//exported creatures
-		case 'EXPC':
+		case PRAY_BLOCK_EXPC:
 			return new EXPCBlock($prayfile,$name,$content,$flags);
-		case 'DSEX':
+		case PRAY_BLOCK_DSEX:
 			return new DSEXBlock($prayfile,$name,$content,$flags);
 
-		case 'CREA':
+		case PRAY_BLOCK_CREA:
 			return new CREABlock($prayfile,$name,$content,$flags);
 
 		//creature photos
-		case 'PHOT':
+		case PRAY_BLOCK_PHOT:
 			return new PHOTBlock($prayfile,$name,$content,$flags);
 
 		//creature history
-		case 'GLST':
+		case PRAY_BLOCK_GLST:
 			return new GLSTBlock($prayfile,$name,$content,$flags);
 
 		//creature genetics
-		case 'GENE':
+		case PRAY_BLOCK_GENE:
 			return new GENEBlock($prayfile,$name,$content,$flags);
 	
 		//files
-		case 'FILE':
+		case PRAY_BLOCK_FILE:
 			return new FILEBlock($prayfile,$name,$content,$flags);
 
 	}
 }
-define('PRAY_FLAG_ZLIB_COMPRESSED',1);
+
 
 abstract class PrayBlock {
 	private $prayfile;
@@ -83,7 +84,7 @@ abstract class PrayBlock {
 	private $name;
 	private $type;	
 
-	public function PrayBlock(&$prayfile,$name,$content,$flags,$type) {
+	public function PrayBlock($prayfile,$name,$content,$flags,$type) {
 		$this->prayfile = $prayfile;
 		$this->name = $name;
 		$this->content = $content;

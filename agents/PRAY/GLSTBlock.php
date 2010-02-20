@@ -77,7 +77,7 @@ class GLSTBlock extends CreaturesArchiveBlock {
 			'lifestage'			=> $reader->ReadInt(4),
 			'monikers'			=> array($reader->Read($reader->ReadInt(4)),$reader->Read($reader->ReadInt(4))),
 			'usertext'			=> $reader->Read($reader->ReadInt(4)),
-			'photograph'		=> array('name' => $reader->Read($reader->ReadInt(4))),
+			'photograph'		=> $reader->Read($reader->ReadInt(4)),
 			'worldname'			=> $reader->Read($reader->ReadInt(4)),
 			'worldUID'			=> $reader->Read($reader->ReadInt(4)),
 			);
@@ -87,17 +87,6 @@ class GLSTBlock extends CreaturesArchiveBlock {
 						'unknown1'			=> $reader->ReadInt(4),
 						'unknown2'			=> $reader->ReadInt(4)
 					);
-			}
-			$prayfile = $this->GetPrayFile();
-			if($prayfile != null && $eventInfo['photograph']['name'] != '') {
-				$eventInfo['photograph']['data'] = $prayfile->GetBlockByName($eventInfo['photograph']['name'].'.DSEX.photo');
-				if($eventInfo['photograph']['data'] == null) {
-					$eventInfo['photograph']['data'] = $prayfile->GetBlockByName($eventInfo['photograph']['name'].'.photo');
-				}
-				if($eventInfo['photograph']['data'] != null) {
-					$eventInfo['photograph']['data'] = $eventInfo['photograph']['data']->GetData();
-				}
-				
 			}
 			$this->history['events'][] = $eventInfo;
 			return true;

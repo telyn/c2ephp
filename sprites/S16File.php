@@ -6,26 +6,28 @@ class S16File
 	private $encoding;
 	private $frame_count;
 	private $frame_header;
-	private $fp;
-	function S16File(IReader $fp)
+	private $reader;
+	public function S16File(IReader $reader)
 	{
-		$this->fp = $fp;
-		$buffer = $this->fp->ReadInt(4);
-		if($buffer == 1)
+		$this->reader = $reader;
+		$buffer = $this->reader->ReadInt(4);
+		if($buffer == 1) {
 			$this->encoding = "565";
-		else if($buffer == 0)
+		} else if($buffer == 0) {
 			$this->encoding = "555";
-		else
-			throw new Exception("File encoding not recognised. (".$buffer.'|'.$this->fp->GetPosition().')');
-		$buffer = $this->fp->ReadInt(2);
-		$this->frame_count = $buffer;
-		for($x=0; $x < $this->frame_count; $x++)
+		} else {
+			throw new Exception("File encoding not recognised. (".$buffer.'|'.$this->reader->GetPosition().')');
+		}
+		$this->frame_count = $this->reader->ReadInt(2);
+		for($i=0; $i < $this->frame_count; $i++)
 		{
-			$this->frame_header[$x] = new S16Frame($this->fp);
+			$this->frame_header[$i] = new S16Frame($this->reader);
 		}
 	}
-	
-	function OutputPNG($frame)
+	public function GetFrame($frame) {
+		return $this->frame_header[$frame];
+	}
+	public function OutputPNG($frame)
 	{
 		if($this->frame_count < ($frame+1))
 			throw new Exception("OutputPNG - Frame out of bounds - ".$frame);
