@@ -7,7 +7,6 @@ require_once(dirname(__FILE__).'/support/Archiver.php');
 
 //PRAY
 require_once(dirname(__FILE__).'/agents/PRAYFile.php');
-require_once(dirname(__FILE__).'/agents/CreatureHistory.php');
 require_once(dirname(__FILE__).'/agents/COB.php');
 
 //images
