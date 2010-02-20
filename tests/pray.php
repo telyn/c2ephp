@@ -7,12 +7,6 @@ if($argv[1] != "") {
     $file = 'rubber_ball.agents';
 }
 $agent = new PRAYFile(new FileReader($file));
-if(!$agent->Parse()) {
-    echo "Error!\n";
-} else {
-	$testhandle = fopen('test.txt','wb');
-	fwrite($testhandle,print_r($agent->GetBlocks(),true));
-	fclose($testhandle);
-}
+print_r($agent->GetBlocks());
 
 ?>

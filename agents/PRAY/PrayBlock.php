@@ -116,6 +116,9 @@ abstract class PrayBlock {
 	public function GetLength() {
 		return strlen($this->content);
 	}
+	public function GetPrayFile() {
+		return $this->prayfile;
+	}
 	protected function SetData($content) {
 		$this->content = $content;
 	}
