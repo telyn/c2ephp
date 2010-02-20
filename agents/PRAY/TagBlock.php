@@ -13,8 +13,33 @@ abstract class TagBlock extends PrayBlock {
 	public function GetTags() {
 		return $this->tags;
 	}
-	public function TagBlock(&$prayfile,$name,$content,$flags) {
-		parent::PrayBlock($prayfile,$name,$content,$flags);
+	public function Compile() {
+		$compiled = $this->EncodeBlockHeader();
+		$ints = array();
+		$strings = array();
+		foreach($this->tags as $key=>$value) {
+			if(is_int($value)) {
+				$ints[$key] = $value;
+			} else {
+				$strings[$key] = $value;
+			}
+		}
+		$compiled .= pack('V',sizeof($ints));
+		foreach($ints as $key=>$value) {
+			$compiled .= pack('V',strlen($key));
+			$compiled .= $key;
+			$compiled .= pack('V',$value);
+		}
+		$compiled .= pack('V',sizeof($strings));
+		foreach($strings as $key=>$value) {
+			$compiled .= pack('V',strlen($key));
+			$compiled .= $key;
+			$compiled .= pack('V',strlen($value));
+			$compiled .= $value;
+		}
+	}
+	public function TagBlock(&$prayfile,$name,$content,$flags,$type) {
+		parent::PrayBlock($prayfile,$name,$content,$flags,$type);
 
         $blockReader = new StringReader($content);
         

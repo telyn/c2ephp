@@ -12,6 +12,7 @@ class PRAYFile {
     function PRAYFile(IReader $reader) {
         $this->reader = $reader;
         $this->blocks = array();
+		$this->Parse();
     }
     
     
@@ -33,6 +34,10 @@ class PRAYFile {
     }
     
 	public function Compile() {
+		$compiled = 'PRAY';
+		foreach($blocks as $block) {
+			$compiled .= $block->Compile();
+		}
 	}
 	
     public function GetBlocks($type=FALSE) { //gets all blocks or one type of block
@@ -44,7 +49,7 @@ class PRAYFile {
 			}
             $retblocks = array();
             foreach($this->blocks as $block) {
-                if(is_subclass_of($block,$type)) {
+                if(in_array($block->GetType(),$type)) {
                     $retblocks[] = $block;
                 }
             }
@@ -54,7 +59,7 @@ class PRAYFile {
     public function GetBlockByName($name) {
 		foreach($this->blocks as $blockid => $block) {
 			
-			if($block->name == $name) {
+			if($block->GetName() == $name) {
 				return $block;
 			}
 		}

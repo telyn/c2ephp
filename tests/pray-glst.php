@@ -7,12 +7,10 @@ require_once(dirname(__FILE__).'/../support/FileReader.php');
 require_once(dirname(__FILE__).'/../support/Archiver.php');
 
 $agent = new PRAYFile(new FileReader($argv[1]));
-$agent->Parse();
+$blocks = $agent->GetBlocks(PRAY_BLOCK_GLST);
+$history = $blocks[0]->GetHistory();
 
-/*$blocks = $agent->GetBlocks('GLSTBlock');
-$glst = $blocks[0]->GetData();
-$glst = substr($glst,strpos($glst,chr(0x1A).chr(0x04))+2);
-*/
+print_r($history);
 
 
 ?>
