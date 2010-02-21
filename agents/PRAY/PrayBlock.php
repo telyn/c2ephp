@@ -16,26 +16,47 @@ require_once(dirname(__FILE__).'/LIVEBlock.php');
 require_once(dirname(__FILE__).'/PHOTBlock.php');
 require_once(dirname(__FILE__).'/SFAMBlock.php');
 
-define('PRAY_FLAG_ZLIB_COMPRESSED',1);
 /** \name Block Types
 * Constants for the various PRAY block types
 */
 //@{
-define('PRAY_BLOCK_AGNT','AGNT');
+/**\brief Value: 'AGNT' */
+define('PRAY_BLOCK_AGNT','AGNT'); 
+/**\brief Value: 'CREA' */
 define('PRAY_BLOCK_CREA','CREA');
+/**\brief Value: 'DFAM' */
 define('PRAY_BLOCK_DFAM','DFAM');
+/**\brief Value: 'DSAG' */
 define('PRAY_BLOCK_DSAG','DSAG');
+/**\brief Value: 'DSEX' */
 define('PRAY_BLOCK_DSEX','DSEX');
+/**\brief Value: 'EGG' */
 define('PRAY_BLOCK_EGG' ,'EGG' );
+/**\brief Value: 'EXPC' */
 define('PRAY_BLOCK_EXPC','EXPC');
+/**\brief Value: 'FILE' */
 define('PRAY_BLOCK_FILE','FILE');
+/**\brief Value: 'GENE' */
 define('PRAY_BLOCK_GENE','GENE');
+/**\brief Value: 'GLST' */
 define('PRAY_BLOCK_GLST','GLST');
+/**\brief Value: 'LIVE' */
 define('PRAY_BLOCK_LIVE','LIVE');
+/**\brief Value: 'PHOT' */
 define('PRAY_BLOCK_PHOT','PHOT');
+/**\brief Value: 'SFAM' */
 define('PRAY_BLOCK_SFAM','SFAM');
-//}@
-/** Creates PrayBlock objects of the correct type.
+//@}
+/** \name Flags
+* Flags used to specify how the block's data is stored.
+*/
+//@{
+/**\brief Value: 1*/
+///Whether or not the block is zLib compressed.
+define('PRAY_FLAG_ZLIB_COMPRESSED',1);
+//@}
+
+/**\brief Creates PrayBlock objects of the correct type.
 *	\return An object that is an instance of a subclass of PrayBlock.
 * 	\param $blocktype	The type of PRAYBlock, as one of the Block Types defines.
 *	\param $prayfile	The PRAYFile object that the PRAYBlock is a child of. This is used to allow blocks to access to each other.
@@ -91,7 +112,10 @@ function MakePrayBlock($blocktype,PRAYFile $prayfile,$name,$content,$flags) {
 	}
 }
 
-
+/**\brief Abstract class to represent PRAY blocks*/
+/**
+* This class represents a PRAY block
+*/
 abstract class PrayBlock {
 	private $prayfile;
 	private $content;
@@ -99,7 +123,11 @@ abstract class PrayBlock {
 	private $type;	
 
 	public function PrayBlock($prayfile,$name,$content,$flags,$type) {
-		$this->prayfile = $prayfile;
+		if($prayfile instanceof PRAYFile) {
+			$this->prayfile = $prayfile;
+		} else {
+			$prayfile = null;
+		}
 		$this->name = $name;
 		$this->content = $content;
 		$this->flags = $flags;

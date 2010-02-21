@@ -5,13 +5,9 @@ require_once(dirname(__FILE__).'/PrayBlock.php');
 abstract class CreaturesArchiveBlock extends PrayBlock {
 	public function CreaturesArchiveBlock(&$prayfile,$name,$content,$flags,$type) {
 		parent::PrayBlock($prayfile,$name,$content,$flags,$type);
-		$this->Decompress();
-	}
-
-	public function Compile() {
-		$archiveddata = Archive($this->GetData());
-		$compiled  = $this->EncodeBlockHeader(strlen($archiveddata));
-		$compiled .= $archiveddata;
+		if($prayfile instanceof PRAYFile) {
+			$this->Decompress();
+		}
 	}
 
 	private function Decompress() {

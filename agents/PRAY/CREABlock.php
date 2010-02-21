@@ -6,5 +6,8 @@ class CREABlock extends CreaturesArchiveBlock {
 		parent::CreaturesArchiveBlock($prayfile,$name,$content,$flags,PRAY_BLOCK_CREA);
 
 	}
+	public function Compile() {
+		return '';
+	}
 }
 ?>
