@@ -9,10 +9,14 @@ class PRAYFile {
     private $blocks=array();
     private $parsed = false;
     
-    function PRAYFile(IReader $reader) {
-        $this->reader = $reader;
-        $this->blocks = array();
-		$this->Parse();
+    function PRAYFile($reader) {
+		$this->blocks = array();
+		if($reader instanceof IReader) {
+        	$this->reader = $reader;
+			$this->Parse();
+		} else {
+			$this->parsed = true; //make sure no one tries to parse it...
+		}
     }
     
     
@@ -38,6 +42,7 @@ class PRAYFile {
 		foreach($blocks as $block) {
 			$compiled .= $block->Compile();
 		}
+		return $compiled;
 	}
 	
     public function GetBlocks($type=FALSE) { //gets all blocks or one type of block

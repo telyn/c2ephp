@@ -22,7 +22,7 @@ class StringReader implements IReader {
         $this->position = $position;
     }
     public function Skip($count) {
-        $this->position += $characters;
+        $this->position += $count;
     }
     public function ReadInt($characters) {
         return BytesToIntLilEnd($this->Read($characters));
