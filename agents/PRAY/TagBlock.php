@@ -42,7 +42,8 @@ abstract class TagBlock extends PrayBlock {
 	public function TagBlock($prayfile,$name,$content,$flags,$type) {
 		parent::PrayBlock($prayfile,$name,$content,$flags,$type);
 
-        $blockReader = new StringReader($content);
+		//use GetData because it decompresses if necessary.
+        $blockReader = new StringReader($this->GetData());
         
         $numInts = $blockReader->ReadInt(4);
         for($i=0;$i<$numInts;$i++) {

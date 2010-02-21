@@ -11,7 +11,7 @@ abstract class CreaturesArchiveBlock extends PrayBlock {
 	}
 
 	private function Decompress() {
-			$content = $this->GetData();
+			$content = $this->GetData(true);
 			if($content{0} == 'C') {
 				$content = DeArchive($content);
 				if($content !== false) {

@@ -6,5 +6,8 @@ class FILEBlock extends PrayBlock {
 		parent::PrayBlock($prayfile,$name,$content,$flags,PRAY_BLOCK_FILE);
 
 	}
+	public function Compile() {
+		//coming soon.
+	}
 }
 ?>
