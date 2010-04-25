@@ -4,8 +4,7 @@ include(dirname(__FILE__).'/flowcontrols.php');
 include(dirname(__FILE__).'/commands.php');
 include(dirname(__FILE__).'/variables.php');
 include(dirname(__FILE__).'/command_variables.php'); //could be a command, could be a variable, could be superman
-function IndentCode($times) 
-    {
+function IndentCode($times) {
     if($times>0)
     {
        $times *= 2; // to make the indent bigger. Ought to be personalisable.
@@ -13,8 +12,7 @@ function IndentCode($times)
     }
     return $indentation;
 }
-function HighlightCaos($caos)
-{
+function HighlightCaos($caos) {
     global $caosCommands;
     global $caosVariables;
     global $caosCommandVariables;
@@ -63,33 +61,33 @@ function HighlightCaos($caos)
                 $lcword = strtolower($word);
                 
                 if($lastWord == "gsub" || $lastWord == "subr") {
-                    $word = '<span class="label">'.$word.'</span>';
+                    $word = '<span class="label">'.htmlentities($word).'</span>';
                 } else
                 if(in_array($lcword,$caosCommands))
                 {
-                    $word = '<span class="command">'.$word.'</span>';
+                    $word = '<span class="command">'.htmlentities($word).'</span>';
                 }
                 else if(in_array($lcword,$caosVariables) || ereg("(va|ov|mv)[0-9][0-9]", $lcword))
                 {
-                    $word = '<span class="variable">'.$word.'</span>';
+                    $word = '<span class="variable">'.htmlentities($word).'</span>';
                 }
                 else if(in_array($lcword,$caosOperators))
                 {
-                    $word = '<span class="operator">'.$word.'</span>';
+                    $word = '<span class="operator">'.htmlentities($word).'</span>';
                 }
                 else if(in_array($lcword,$caosFlowControls))
                 {
-                    $word = '<span class="flowcontrol">'.$word.'</span>';
+                    $word = '<span class="flowcontrol">'.htmlentities($word).'</span>';
                 }
                 else if(in_array($lcword,$caosCommandVariables))
                 {
                     if($currentWord == 0)
                     {
-                        $word = '<span class="command">'.$word.'</span>';
+                        $word = '<span class="command">'.htmlentities($word).'</span>';
                     }
                     else
                     {
-                        $word = '<span class="variable">'.$word.'</span>';
+                        $word = '<span class="variable">'.htmlentities($word).'</span>';
                     }
                 }
                 else if($word{0} == '"')
@@ -117,7 +115,7 @@ function HighlightCaos($caos)
                 }
                 else if(is_numeric($word))
                 {
-                    $word = '<span class="number">'.$word.'</span>';
+                    $word = '<span class="number">'.htmlentities($word).'</span>';
                 }
                 else if($word{0} == '*')
                 {
@@ -136,7 +134,7 @@ function HighlightCaos($caos)
                 }
                 else
                 {
-                    $word = '<span class="error">'.$word.'</span>';
+                    $word = '<span class="error">'.htmlentities($word).'</span>';
                 }
                 
             } 
