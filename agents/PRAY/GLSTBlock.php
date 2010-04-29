@@ -41,8 +41,10 @@ class GLSTBlock extends CreaturesArchiveBlock {
 			} else {
 				$format = $this->format;
 			}
-			$compiled = $this->history->Compile($format);
-			return $this->EncodeBlockHeader(strlen($compiled)) . $compiled;
+			$compiled = Archive($this->history->Compile($format));
+			$uncompressedlen = strlen($compiled);
+			$compiled = $this->PerformFlagOperations($compiled);
+			return $this->EncodeBlockHeader(strlen($compiled),$uncompressedlen).$compiled;
 		}
 	}
 	public function GetHistory() {
@@ -69,7 +71,7 @@ class GLSTBlock extends CreaturesArchiveBlock {
 			return false;
 		}
 		//Good. Let's begin.
-		//bunch of bytes I don't get. (always seemed to be null, I think)
+		//bunch of bytes I don't get. (always seem to be null)
 		//Actually, the first four bytes including $firstchar are probably one integer used to identify the game used.
 		//seems like the way CL rolls with c2e.
 		$reader->Skip(3); // 3 nulls.

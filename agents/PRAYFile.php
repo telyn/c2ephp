@@ -9,7 +9,7 @@ class PRAYFile {
     private $blocks=array();
     private $parsed = false;
     
-    function PRAYFile($reader) {
+    function PRAYFile($reader=null) {
 		$this->blocks = array();
 		if($reader instanceof IReader) {
         	$this->reader = $reader;
@@ -20,7 +20,7 @@ class PRAYFile {
     }
     
     
-    public function Parse() {
+    private function Parse() {
 		if(!$this->parsed) {
 			if($this->ParseHeader()) {
 				while($this->ParseBlockHeader()) {
@@ -39,12 +39,14 @@ class PRAYFile {
     
 	public function Compile() {
 		$compiled = 'PRAY';
-		foreach($blocks as $block) {
+		foreach($this->blocks as $block) {
 			$compiled .= $block->Compile();
 		}
 		return $compiled;
 	}
-	
+	public function AddBlock(PrayBlock $block) {
+		$this->blocks[] = $block;
+	}
     public function GetBlocks($type=FALSE) { //gets all blocks or one type of block
         if(!$type) {
             return $this->blocks;

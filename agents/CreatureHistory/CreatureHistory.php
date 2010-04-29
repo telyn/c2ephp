@@ -2,13 +2,13 @@
 require_once(dirname(__FILE__).'/CreatureHistoryEvent.php');
 require_once(dirname(__FILE__).'/../PRAY/GLSTBlock.php');
 
-/** \name Block Types
-* Constants for the various PRAY block types
+/** \name Gender
+* CreatureHistory-specific gender constants
 */
 //@{
-/**\brief Value: 0 */
+/**\brief Value: 2 */
 //Girls first! Boys suck :)
-define('CREATUREHISTORY_GENDER_FEMALE',0);
+define('CREATUREHISTORY_GENDER_FEMALE',2);
 /**\brief Value: 1 */
 define('CREATUREHISTORY_GENDER_MALE',1);
 //@}
@@ -55,7 +55,26 @@ class CreatureHistory {
 	 * \param $format GLST_FORMAT_* constant used to state whether the history should be compiled for C3 or DS compatibility.
 	 */
 	public function Compile($format) {
-		
+		$data = '';
+		if($format == GLST_FORMAT_DS) {
+			$data .= chr(0x27).pack('xxx');
+		} else {
+			$data .= chr(0x0C).pack('xxx');
+		}
+		$data .= pack('V',1);
+		$data .= pack('V',32).$this->moniker;
+		$data .= pack('V',32).$this->moniker; //yeah, twice. Dunno why.
+		$data .= pack('V',strlen($this->name)).$this->name;
+		$data .= pack('VVVV',$this-gender,$this->genus,$this->species,count($this->events));
+		foreach($this->events as $event) {
+				$data .= $event->Compile();
+		}
+		$data .= $this->unknown1;
+		$data .= $this->unknown2;
+		if($format == GLST_FORMAT_DS) {
+			$data .= pack('V',$this->unknown3);
+			$data .= pack('V',strlen($this->unknown4)).$this->unknown4;
+		}
 	}
 	/**
 	 * Try to work out which game this CreatureHistory is for (by working out whether any DS-specific variables are set)  
@@ -68,6 +87,7 @@ class CreatureHistory {
 	}
 	/**
 	 * Set variables that are currently unknown and used in C3 and DS.
+	 * These variables COULD be mutations and crossovers during conception, however in a creature that was not conceived, they appear to be strange.
 	 * \param $unknown1 First unknown variable
 	 * \param $unknown2 Second unknown variable
 	 */
