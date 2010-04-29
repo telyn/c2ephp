@@ -6,7 +6,7 @@ function DeArchive($data) {
 			$data = gzuncompress($data);
 			return $data;
 		}
-		die(':(');
+		die('Couldn\'t dearchive -- Probably invalid file');
 		return false;
 	} else if(is_resource($data)) {
 		return false; //coming soon

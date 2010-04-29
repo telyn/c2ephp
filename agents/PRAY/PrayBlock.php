@@ -85,23 +85,34 @@ abstract class PrayBlock {
 		$this->flags = $flags;
 		$this->type = $type;
 	}
-	private function EncodeBlockHeader($specificlength=false) {
+	protected function EncodeBlockHeader($length,$uncompressedlength=false) {
 		$compiled = $this->GetType();
 		$compiled .= substr($this->GetName(),0,128);
 		$len = 128 - strlen($this->GetName());
+		fwrite(STDERR, $len);
 		for($i=0;$i<$len;$i++) {
-			$compiled .= "\0";
+			$compiled .= pack('x');
 		}
-		$length = strlen($this->content);
-		if($specificlength === false) {
-			$specificlength = $length;
+		if($uncompressedlength === false) {
+			$uncompressedlength = $length;
 		}
-		$compiled .= pack('VVV',$length,$specificlength,$this->flags);
+		$compiled .= pack('VVV',$length,$uncompressedlength,$this->flags);
+		return $compiled;
+	}
+	protected function PerformFlagOperations($data) {
+		if($this->IsFlagSet(PRAY_FLAG_ZLIB_COMPRESSED)) {
+			$data = gzcompress($data);
+		}
+		return $data;
 	}
 	public function GetName() {
 		return $this->name;
 	}
 	protected function GetData($decompress=TRUE) {
+		if($this->prayfile == null) {
+			throw new Exception('Can\'t get data on a user-created prayblock');
+			return;
+		}
 		if($decompress && $this->IsFlagSet(PRAY_FLAG_ZLIB_COMPRESSED)) {
 			$this->content = gzuncompress($this->content);
 			$this->SetFlagsOff(PRAY_FLAG_ZLIB_COMPRESSED);

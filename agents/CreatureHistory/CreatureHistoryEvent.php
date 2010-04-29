@@ -41,7 +41,17 @@ class CreatureHistoryEvent {
 		$this->unknown2 = $unknown2;
 	}
 	public function Compile($format) {
-		
+		$data = pack('VVVVV',$this->eventnumber,$this->worldtime,$this->creatureage,$this->timestamp,$this->lifestage);
+		$data .= pack('V',strlen($this->moniker1)).$this->moniker1;
+		$data .= pack('V',strlen($this->moniker2)).$this->moniker2;
+		$data .= pack('V',strlen($this->usertext)).$this->usertext;
+		$data .= pack('V',strlen($this->photograph)).$this->photograph;
+		$data .= pack('V',strlen($this->worldname)).$this->worldname;
+		$data .= pack('V',strlen($this->worldUID)).$this->worldUID;
+		if($format == GLST_FORMAT_DS) {
+			$data .= pack('V',strlen($this->dockingstationuser)).$this->dockingstationuser;
+			$data .= pack('VV',$this->unknown1,$this->unknown2);
+		}
 	}
 	public function GetEventNumber() {
 		return $this->eventnumber;
