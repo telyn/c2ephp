@@ -1,0 +1,34 @@
+<?php
+$caosVariables = array
+(
+	//agents
+	'abba',
+	'carr',
+	'cata',
+	'clac',
+	'fltx',
+	'flty',
+	'fmly',
+	'from',
+	'gnus',
+	'held',
+	'hght',
+	'iitt',
+	'imsk',
+	'mows',
+	'mthx',
+	'mthy',
+	'null',
+	'ownr',
+	'pnts',
+	'posb',
+	'posl',
+	'posr',
+	'post',
+	'posx',
+	'posy',
+	'spcs',
+	'wdth',
+	'_it_'
+);
+?>
