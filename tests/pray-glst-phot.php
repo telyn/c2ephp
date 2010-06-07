@@ -9,8 +9,8 @@ require_once(dirname(__FILE__).'/../support/Archiver.php');
 $agent = new PRAYFile(new FileReader($argv[1]));
 $blocks = $agent->GetBlocks(PRAY_BLOCK_GLST);
 $history = $blocks[0]->GetHistory();
-foreach($history['events'] as $event) {
-	if($event['eventnumber'] == 13) {
+foreach($history->GetEvents() as $event) {
+	if($event->GetEventNumber() == 13) {
 		print $agent->GetBlockByName($event['photograph'].'.photo')->OutputPNG();
 		break;
 	}

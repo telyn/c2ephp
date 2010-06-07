@@ -1,10 +1,72 @@
 <?php
 require_once(dirname(__FILE__).'/../PRAY/GLSTBlock.php');
 
+/** \Brief Creature event numbers
+ * all creatures are either CONCEIVED, SPLICED, ENGINEERED, or IAMCLONED
+ * Then CONCEIVED creatures are MUMLAIDMYEGG
+ * Then they are HATCHED except maybe ENGINEERED creatures.
+ * Then they have a PHOTOTAKEN
+ * Then they make their own way through life.
+ */
+//@{
+/*\brief I was conceived the ol' fashioned way (kisspopping)
+ * Value: 0*/
+define('CREATUREHISTORY_EVENT_CONCEIVED',0);
+/*\brief I was spliced from two other creatures
+ * Value: 1*/
+define('CREATUREHISTORY_EVENT_SPLICED',1);
+/*\brief I was conceived by some geek in their bedroom (genetics kit)
+ * Value: 2*/
+define('CREATUREHISTORY_EVENT_ENGINEERED',2);
+/*\brief I hatched out of my egg and began my journey through life!
+ * Value: 3*/
+define('CREATUREHISTORY_EVENT_HATCHED',3);
+/*\brief I grew up a little! CreatureHistoryEvent::GetLifestage will tell you what lifestage I am now.
+ * Value: 4*/
+define('CREATUREHISTORY_EVENT_AGED',4);
+/*\brief I left this world 
+ * Value: 5*/
+define('CREATUREHISTORY_EVENT_EXPORTED',5);
+/*\brief I joined this world
+ * Value: 6*/
+define('CREATUREHISTORY_EVENT_IMPORTED',6);
+/*\brief My journey through life ended. 
+ * Value: 7*/
+define('CREATUREHISTORY_EVENT_DIED',7);
+/*\brief I became pregnant! (We kisspopped)
+ * Value: 8*/
+define('CREATUREHISTORY_EVENT_BECAMEPREGNANT',8);
+/*\brief I made someone else pregnant! (We kisspopped) 
+ * Value: 9*/
+define('CREATUREHISTORY_EVENT_IMPREGNATED',9);
+/*\brief My child began its journey through life! 
+ * Value: 10*/
+define('CREATUREHISTORY_EVENT_CHILDBORN',10);
+/*\brief My mum laid my egg. Thanks, mum :D 
+ * Value: 11*/
+define('CREATUREHISTORY_EVENT_MUMLAIDMYEGG',11);
+/*\brief I finally got that kid out of my stomach and onto the floor, where it belongs :P 
+ * Value: 12*/
+define('CREATUREHISTORY_EVENT_LAIDEGG',12);
+/*\brief A photo was taken of me. 
+ * Value: 13*/
+define('CREATUREHISTORY_EVENT_PHOTOTAKEN',13);
+/*\brief I was made by cloning another creature. This happens when you export a creature then import it multiple times. 
+ * Value: 14*/
+define('CREATUREHISTORY_EVENT_IAMCLONED',14); 
+/*\brief Another creature was made by cloning me. This happens when you export a creature then import it multiple times. 
+ * Value: 15*/
+define('CREATUREHISTORY_EVENT_CLONEDME',15);
+/*\brief I left this world via the internet :D 
+ * Value: 16*/
+define('CREATUREHISTORY_EVENT_WARPEDOUT',16);
+/*\brief I entered this world via the internet! :D 
+ * Value: 17*/
+define('CREATUREHISTORY_EVENT_WARPEDIN',17);
+//@}
+
 /** \brief Class to represent events in a creature's life*/
-/**
-*
-*/
+
 class CreatureHistoryEvent {
 	private $eventnumber;
 	private $worldtime;
@@ -55,49 +117,6 @@ class CreatureHistoryEvent {
 	}
 	public function GetEventNumber() {
 		return $this->eventnumber;
-	}
-	public function GetEventName() {
-		switch($this->eventnumber) {
-			case 0:
-				return 'conceived';
-			case 1:
-				return 'spliced';
-			case 2:
-				return 'engineered';
-			case 3:
-				return 'hatched';
-			case 4:
-				return 'aged';
-			case 5:
-				return 'exported';
-			case 6:
-				return 'imported';
-			case 7:
-				return 'died';
-			case 8:
-				return 'got pregnant';
-			case 9:
-				return 'made other creature pregnant';
-			case 10:
-				return 'child hatched';
-			case 11:
-				return 'egg laid';
-			case 12:
-				return 'laid egg';
-			case 13:
-				return 'photo taken';
-			case 14:
-				return 'cloned from';
-			case 15:
-				return 'was cloned';
-			case 16:
-				return 'warped out';
-			case 17:
-				return 'warped in';
-			default:
-				return 'unknown';
-				
-		}
 	}
 	public function GetWorldTime() {
 		return $this->worldtime;
