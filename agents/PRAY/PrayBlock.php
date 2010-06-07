@@ -65,7 +65,7 @@ abstract class PrayBlock {
 	private $content;
 	private $name;
 	private $type;
-	private $decoded;
+	private $decompiled;
 
 /**\brief PrayBlock constructor*/
 /**
@@ -78,16 +78,21 @@ abstract class PrayBlock {
 	public function PrayBlock($prayfile,$name,$content,$flags,$type) {
 		if($prayfile instanceof PRAYFile) {
 			$this->prayfile = $prayfile;
-			$this->decoded = false;
+			$this->decompiled = false;
 		} else {
 			$this->prayfile = null;
-			$this->decoded = true;
+			$this->decompiled = true;
 		}
 		$this->name = $name;
 		$this->content = $content;
 		$this->flags = $flags;
 		$this->type = $type;
 	}
+	/** Encodes the block header for attaching to the front of the block binary data.
+	 * 
+	 * \param $length length of the data that will be written to the block
+	 * \param $uncompressedlength length of the data when uncompressed, etc.
+	 */
 	protected function EncodeBlockHeader($length,$uncompressedlength=false) {
 		$compiled = $this->GetType();
 		$compiled .= substr($this->GetName(),0,128);
@@ -102,18 +107,31 @@ abstract class PrayBlock {
 		$compiled .= pack('VVV',$length,$uncompressedlength,$this->flags);
 		return $compiled;
 	}
+	/** Performs flag functions, e.g. compression, just before a compile is done.
+	 * Called automatically.
+	 * \param $data the data to perform the function on
+	 * \return the data, having been transformed.
+	 */
 	protected function PerformFlagOperations($data) {
 		if($this->IsFlagSet(PRAY_FLAG_ZLIB_COMPRESSED)) {
 			$data = gzcompress($data);
 		}
 		return $data;
 	}
+	/** Gets the PRAY block's name
+	 * \return the PRAY block's name
+	 */
 	public function GetName() {
 		return $this->name;
 	}
+	/** Gets the PRAY block's binary data if the PRAYBlock is decompiled.
+	 * If told to decompress, it will set the block's binary data to uncompressed.
+	 * \param $decompress Whether or not to decompress the binary data if necessary.
+	 * \return the PRAY block's binary data.
+	 */
 	public function GetData($decompress=TRUE) {
-		if($this->prayfile == null) {
-			throw new Exception('Can\'t get data on a user-created prayblock');
+		if($this->decompiled) {
+			throw new Exception('Can\'t get data on a decompiled PRAYBlock. It must be compiled first');
 			return;
 		}
 		if($decompress && $this->IsFlagSet(PRAY_FLAG_ZLIB_COMPRESSED)) {
@@ -122,43 +140,88 @@ abstract class PrayBlock {
 		}
 		return $this->content;
 	}
+	/** Gives the type as one of the PRAY_BLOCK_* constants
+	 * \return One of the PRAY_BLOCK_* constants
+	 */
 	public function GetType() {
 		return $this->type;
 	}
+	/** Returns the flag bitfield used to determine flags. Prefer using IsFlagSet
+	 * \return an integer that will either be 0 or 1 with c2e-compatible PRAY blocks.
+	 */
 	public function GetFlags() {
 		return $this->flags;
 	}
+	/** Tells you whether $flag is set on this PRAY block
+	 * \param $flag the bitfield to compare $flags to. As such can be multiple flags OR'd together.
+	 * \return true or false.
+	 */
 	public function IsFlagSet($flag) {
-		return (($this->flags & $flag) == $flag);
+		return (($this->flags & $flag) === $flag);
 	}
-	public function GetLength() {
+	/** Gets the length of this block's content. Only useful on blocks that came from a PRAYFile.
+	 * \returns an integer corresponding to the length of this block's binary data.
+	 */
+	protected function GetLength() {
 		return strlen($this->content);
 	}
-	public function GetPrayFile() {
+	/** Returns the PRAYFile this block belongs to. Only applies to PrayBlocks created with a PRAYFile.
+	 * \returns a PRAYFile object.
+	 */
+	protected function GetPrayFile() {
 		return $this->prayfile;
 	}
-	protected function SetData($content) {
-		$this->content = $content;
-	}
+	/** Sets flags
+	 * \param $flags a bitfield representing the flags to set on.
+	 */
 	protected function SetFlagsOn($flags) {
 		$this->flags = $this->flags | $flags;
 	}
+	/** Unsets flags
+	 * \param $flags a bitfield representing the flags to set off.
+	 */
 	protected function SetFlagsOff($flags) {
 		$this->flags = $this->flags & ~$flags;
 				
 	}
-	public function Compile() {
-		if($this->decoded) { 
-			$data = $this->CompileBlockData();
-			$compile = $this->EncodeBlockHeader(strlen($data));
-			$compiled .= $data; 
+	/** Makes sure that the PrayBlock is decompiled.
+	 * Call this function at the beginning of every function that returns data in superclasses so that data decoding is automatic.
+	 */
+	protected function EnsureDecompiled() {
+		if($this->decompiled) {
+			return;
 		} else {
-			$compiled  = $this->EncodeBlockHeader(strlen($this->content));
-			$compiled .= $this->content;
+			$this->DecompileBlockData();
 		}
 	}
-	//This MUST be overridden! It MUST return JUST the binary data to put into the block.
+	/** Compile this PrayBlock
+	 * Compiles the PrayBlock's data if necessary, then adds the header and returns the binary pray block.
+	 * This function is mainly intended for use by PRAYFiles. 
+	 */
+	public function Compile() {
+		if($this->decompiled) { 
+			$data = $this->CompileBlockData();
+			$uclength = strlen($data);
+			$data = $this->PerformFlagFunctions($data);
+			$compile = $this->EncodeBlockHeader(strlen($data),$uclength);
+			$compiled .= $data;
+			$this->content = $data;
+			$this->decompiled = false;
+			return $compiled; 
+		} else {
+			$data = $this->PerformFlagFunctions($this->content);
+			$compiled  = $this->EncodeBlockHeader(strlen($this->content),strlen($data));
+			$compiled .= $this->content;
+			return $compiled;
+		}
+	}
+	/**\brief Compiles the block data
+	 * \return The compiled block data as a string.
+	 */
 	abstract function CompileBlockData();
+	/**\brief Decompiles the block data
+	 */
+	abstract function DecompileBlockData();
 	/**\brief Creates PrayBlock objects of the correct type.
 	* 	\param $blocktype	The type of PRAYBlock, as one of the Block Types defines.
 	*	\param $prayfile	The PRAYFile object that the PRAYBlock is a child of. This is used to allow blocks to access to each other.

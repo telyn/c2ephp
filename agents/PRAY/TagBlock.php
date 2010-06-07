@@ -3,7 +3,13 @@ require_once(dirname(__FILE__).'/PrayBlock.php');
 require_once(dirname(__FILE__).'/../../support/StringReader.php');
 abstract class TagBlock extends PrayBlock {
 	private $tags;
+	
+	public function TagBlock($prayfile,$name,$content,$flags,$type) {
+		parent::PrayBlock($prayfile,$name,$content,$flags,$type);
+    }
+    
 	public function GetTag($key) {
+		$this->EnsureDecompiled();
 		foreach($this->tags as $tk => $tv) {
 			if($key == $tk) {
 				return $tv;
@@ -11,9 +17,10 @@ abstract class TagBlock extends PrayBlock {
 		}
 	}
 	public function GetTags() {
+		$this->EnsureDecompiled();
 		return $this->tags;
 	}
-	public function CompileBlockData() {
+	protected function CompileBlockData() {
 		$compiled = '';
 		$ints = array();
 		$strings = array();
@@ -39,10 +46,8 @@ abstract class TagBlock extends PrayBlock {
 		}
 		return $compiled;
 	}
-	public function TagBlock($prayfile,$name,$content,$flags,$type) {
-		parent::PrayBlock($prayfile,$name,$content,$flags,$type);
-
-		//use GetData because it decompresses if necessary.
+    protected function DecompileBlockData() {
+    //use GetData because it decompresses if necessary.
         $blockReader = new StringReader($this->GetData());
         
         $numInts = $blockReader->ReadInt(4);

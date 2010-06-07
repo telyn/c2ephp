@@ -14,36 +14,40 @@ class GLSTBlock extends CreaturesArchiveBlock {
 	public function GLSTBlock($object,$name,$content,$flags) {
 		parent::CreaturesArchiveBlock($object,$name,$content,$flags,PRAY_BLOCK_GLST);
 		if($object instanceof PRAYFile) {
-			$this->Decode();
+			//Do nothing! Decoding is automated later now :)
 		} else if($object instanceof CreatureHistory) {
 			$this->history = $object;
 		} else {
 			throw new Exception('Couldn\'t create a GLST block. :(');
 		}
 	}
+	private function GuessFormat() {
+		//if I don't know
+		if($this->format == GLST_FORMAT_UNKNOWN) {
+			//ask $prayfile if it exists. (look for DSEX, otherwise C3)
+			if($this->prayfile != null) {
+				//prayfile should know
+				if(sizeof($this->prayfile->GetBlocks(PRAY_BLOCK_DSEX)) > 0) {
+					$format = GLST_FORMAT_DS;
+				} else {
+					$format = GLST_FORMAT_C3;
+				}
+			} else {
+				//history will know. (Though it could be wrong)
+				$format = $this->history->GuessFormat();
+			}
+			//cache so I don't need to ask again :)
+			$this->format = $format;
+		}
+		return $format;
+	}
 	public function CompileBlockData($format=GLST_FORMAT_UNKNOWN) {
 		//if you don't know
 		if($format == GLST_FORMAT_UNKNOWN) {
-			//and I don't know
-			if($this->format == GLST_FORMAT_UNKNOWN) {
-				//ask $prayfile if it exists. (look for DSEX, otherwise C3)
-				if($this->prayfile != null) {
-					//prayfile should know
-					if(sizeof($this->prayfile->GetBlocks(PRAY_BLOCK_DSEX)) > 0) {
-						$format = GLST_FORMAT_DS;
-					} else {
-						$format = GLST_FORMAT_C3;
-					}
-				} else {
-					//history will know. (Though it could be wrong)
-					$format = $this->history->GuessFormat();
-				}				
-			} else {
-				$format = $this->format;
-			}
-			$compiled = Archive($this->history->Compile($format));
-			return $compiled;
-		}
+			$format = $this->GuessFormat();
+		}			
+		$compiled = Archive($this->history->Compile($format));
+		return $compiled;
 	}
 	public function GetHistory() {
 		return $this->history;
@@ -55,13 +59,13 @@ class GLSTBlock extends CreaturesArchiveBlock {
 			return $event->GetPhotograph().'.photo';
 		}
 	}
-	private function Decode() {	
+	private function DecompileBlockData() {	
 		$reader = new StringReader($this->GetData());
 		$firstchar = $reader->Read(1);
-		if($firstchar == chr(0x27)) {
+		if($firstchar == chr(0x27)) { //apostrophe thing
 			//ds
 			$this->format = GLST_FORMAT_DS;
-		} else if($firstchar == chr(0x0C)) {
+		} else if($firstchar == chr(0x0C)) { //control character
 			//c3
 			$this->format = GLST_FORMAT_C3;
 		} else {
@@ -103,8 +107,6 @@ class GLSTBlock extends CreaturesArchiveBlock {
 		} else {
 			$this->history->SetC3Unknowns($unknown1,$unknown2);
 		}
-
-		return $this->history;
 	}
 	private function DecodeEvent($reader) {
 		$eventNumber = $reader->ReadInt(4);
