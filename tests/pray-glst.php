@@ -8,9 +8,12 @@ require_once(dirname(__FILE__).'/../support/Archiver.php');
 
 $agent = new PRAYFile(new FileReader($argv[1]));
 $blocks = $agent->GetBlocks(PRAY_BLOCK_GLST);
+if(sizeof($blocks) == 0) {
+	print 'No history blocks! Are you sure this is a creature file?'."\n";
+}
 $history = $blocks[0]->GetHistory();
 
-print_r($history);
+var_dump($history);
 
 
 ?>
