@@ -64,7 +64,8 @@ abstract class PrayBlock {
 	private $prayfile;
 	private $content;
 	private $name;
-	private $type;	
+	private $type;
+	private $decoded;
 
 /**\brief PrayBlock constructor*/
 /**
@@ -77,8 +78,10 @@ abstract class PrayBlock {
 	public function PrayBlock($prayfile,$name,$content,$flags,$type) {
 		if($prayfile instanceof PRAYFile) {
 			$this->prayfile = $prayfile;
+			$this->decoded = false;
 		} else {
 			$this->prayfile = null;
+			$this->decoded = true;
 		}
 		$this->name = $name;
 		$this->content = $content;
@@ -108,7 +111,7 @@ abstract class PrayBlock {
 	public function GetName() {
 		return $this->name;
 	}
-	protected function GetData($decompress=TRUE) {
+	public function GetData($decompress=TRUE) {
 		if($this->prayfile == null) {
 			throw new Exception('Can\'t get data on a user-created prayblock');
 			return;
@@ -144,11 +147,18 @@ abstract class PrayBlock {
 		$this->flags = $this->flags & ~$flags;
 				
 	}
-	//Temporary function...shouldn't be called once c2ephp's nearer to completion.
-	abstract function Compile(); /*{
-		$compiled  = $this->EncodeBlockHeader(strlen($this->content));
-		$compiled .= $this->content;
-	}*
+	public function Compile() {
+		if($this->decoded) { 
+			$data = $this->CompileBlockData();
+			$compile = $this->EncodeBlockHeader(strlen($data));
+			$compiled .= $data; 
+		} else {
+			$compiled  = $this->EncodeBlockHeader(strlen($this->content));
+			$compiled .= $this->content;
+		}
+	}
+	//This MUST be overridden! It MUST return JUST the binary data to put into the block.
+	abstract function CompileBlockData();
 	/**\brief Creates PrayBlock objects of the correct type.
 	* 	\param $blocktype	The type of PRAYBlock, as one of the Block Types defines.
 	*	\param $prayfile	The PRAYFile object that the PRAYBlock is a child of. This is used to allow blocks to access to each other.

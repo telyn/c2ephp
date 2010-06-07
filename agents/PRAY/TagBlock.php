@@ -13,7 +13,7 @@ abstract class TagBlock extends PrayBlock {
 	public function GetTags() {
 		return $this->tags;
 	}
-	public function Compile() {
+	public function CompileBlockData() {
 		$compiled = '';
 		$ints = array();
 		$strings = array();
@@ -37,7 +37,7 @@ abstract class TagBlock extends PrayBlock {
 			$compiled .= pack('V',strlen($value));
 			$compiled .= $value;
 		}
-		$compiled = $this->EncodeBlockHeader(strlen($compiled)) . $compiled;
+		return $compiled;
 	}
 	public function TagBlock($prayfile,$name,$content,$flags,$type) {
 		parent::PrayBlock($prayfile,$name,$content,$flags,$type);

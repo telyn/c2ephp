@@ -16,8 +16,8 @@ class PHOTBlock extends PrayBlock {
 	public function PHOTBlock($prayfile,$name,$content,$flags) {
 		parent::PrayBlock($prayfile,$name,$content,$flags,PRAY_BLOCK_PHOT);
 	}
-	public function Compile() {
-		//coming soon...
+	public function CompileBlockData() {
+		return $this->GetData();
 	}
 	/** Returns the photo data as an s16 file.
 	*	\return The photo data as an S16File object.
