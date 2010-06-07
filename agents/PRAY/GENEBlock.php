@@ -9,5 +9,8 @@ class GENEBlock extends PrayBlock {
 	public function CompileBlockData() {
 		return $this->GetData();
 	}
+	protected function DecompileBlockData() {
+		throw new Exception('I don\'t know how to decompile a GENE.');
+	}
 }
 ?>

@@ -19,6 +19,9 @@ class PHOTBlock extends PrayBlock {
 	protected function CompileBlockData() {
 		return $this->GetData();
 	}
+	protected function DecompileBlockData() {
+		throw new Exception('It\'s impossible to decompile a PHOT.');
+	}
 	/** Returns the photo data as an s16 file.
 	*	\return The photo data as an S16File object.
 	*/
