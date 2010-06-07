@@ -18,10 +18,10 @@ class GLSTBlock extends CreaturesArchiveBlock {
 		} else if($object instanceof CreatureHistory) {
 			$this->history = $object;
 		} else {
-			die('Couldn\'t create a GLST block. :(');
+			throw new Exception('Couldn\'t create a GLST block. :(');
 		}
 	}
-	public function Compile($format=GLST_FORMAT_UNKNOWN) {
+	public function CompileBlockData($format=GLST_FORMAT_UNKNOWN) {
 		//if you don't know
 		if($format == GLST_FORMAT_UNKNOWN) {
 			//and I don't know
@@ -42,9 +42,7 @@ class GLSTBlock extends CreaturesArchiveBlock {
 				$format = $this->format;
 			}
 			$compiled = Archive($this->history->Compile($format));
-			$uncompressedlen = strlen($compiled);
-			$compiled = $this->PerformFlagOperations($compiled);
-			return $this->EncodeBlockHeader(strlen($compiled),$uncompressedlen).$compiled;
+			return $compiled;
 		}
 	}
 	public function GetHistory() {
@@ -70,14 +68,11 @@ class GLSTBlock extends CreaturesArchiveBlock {
 			print 'Unknown format!';
 			return false;
 		}
-		//Good. Let's begin.
-		//bunch of bytes I don't get. (always seem to be null)
-		//Actually, the first four bytes including $firstchar are probably one integer used to identify the game used.
-		//seems like the way CL rolls with c2e.
+		//the first four bytes including $firstchar are probably one integer used to identify the game used.
+		//We read the first one above and now we're skipping the next three.
 		$reader->Skip(3); // 3 nulls.
-		print('At '.$reader->GetPosition()."\n");
-		if($reader->ReadInt(4)!=1) { //not :O always 1. Don't know why.
-			print('I guess I was wrong about it always being 1.');
+		if($reader->ReadInt(4)!=1) { //Always 1, don't know why.
+			throw new Exception('I guess I was wrong about it always being 1.');
 			return false;
 		}
 		$moniker		= $reader->Read($reader->ReadInt(4));

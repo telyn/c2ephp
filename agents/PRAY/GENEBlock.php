@@ -6,8 +6,8 @@ class GENEBlock extends PrayBlock {
 		parent::PrayBlock($prayfile,$name,$content,$flags,PRAY_BLOCK_GENE);
 
 	}
-	public function Compile() {
-		//coming later...
+	public function CompileBlockData() {
+		return $this->GetData();
 	}
 }
 ?>

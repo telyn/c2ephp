@@ -102,10 +102,6 @@ class PRAYFile {
         if($flags===false) {
             return false;
         }
-        $compression = false;
-        if($flags & 1 == 1) {
-		    $compression=true;
-        }
 		//if we make the content here, we don't have to write the same line or two ten or more times :)
 		$content = $this->reader->Read($length);
 		$this->blocks[] = PrayBlock::MakePrayBlock($blocktype,$this,$name,$content,$flags);
