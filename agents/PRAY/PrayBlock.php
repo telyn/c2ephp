@@ -129,12 +129,12 @@ abstract class PrayBlock {
 	 * \param $decompress Whether or not to decompress the binary data if necessary.
 	 * \return the PRAY block's binary data.
 	 */
-	public function GetData($decompress=TRUE) {
+	public function GetData() {
 		if($this->decompiled) {
 			throw new Exception('Can\'t get data on a decompiled PRAYBlock. It must be compiled first');
 			return;
 		}
-		if($decompress && $this->IsFlagSet(PRAY_FLAG_ZLIB_COMPRESSED)) {
+		if($this->IsFlagSet(PRAY_FLAG_ZLIB_COMPRESSED)) {
 			$this->content = gzuncompress($this->content);
 			$this->SetFlagsOff(PRAY_FLAG_ZLIB_COMPRESSED);
 		}
@@ -164,6 +164,13 @@ abstract class PrayBlock {
 	 */
 	protected function GetLength() {
 		return strlen($this->content);
+	}
+	/** Sets the data for this object
+	 * Used only by the CreatureHistoryBlock class to archive/de-archive data.
+	 * Should ONLY be used to transform data in a way not specified by flags just before decompiling proper.
+	 */
+	protected function SetData($data) {
+		$this->content = $data;
 	}
 	/** Returns the PRAYFile this block belongs to. Only applies to PrayBlocks created with a PRAYFile.
 	 * \returns a PRAYFile object.
@@ -218,10 +225,10 @@ abstract class PrayBlock {
 	/**\brief Compiles the block data
 	 * \return The compiled block data as a string.
 	 */
-	abstract function CompileBlockData();
+	protected abstract function CompileBlockData();
 	/**\brief Decompiles the block data
 	 */
-	abstract function DecompileBlockData();
+	protected abstract function DecompileBlockData();
 	/**\brief Creates PrayBlock objects of the correct type.
 	* 	\param $blocktype	The type of PRAYBlock, as one of the Block Types defines.
 	*	\param $prayfile	The PRAYFile object that the PRAYBlock is a child of. This is used to allow blocks to access to each other.

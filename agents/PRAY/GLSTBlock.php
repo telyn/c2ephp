@@ -41,7 +41,7 @@ class GLSTBlock extends CreaturesArchiveBlock {
 		}
 		return $format;
 	}
-	public function CompileBlockData($format=GLST_FORMAT_UNKNOWN) {
+	protected function CompileBlockData($format=GLST_FORMAT_UNKNOWN) {
 		//if you don't know
 		if($format == GLST_FORMAT_UNKNOWN) {
 			$format = $this->GuessFormat();
@@ -50,16 +50,21 @@ class GLSTBlock extends CreaturesArchiveBlock {
 		return $compiled;
 	}
 	public function GetHistory() {
+		$this->EnsureDecompiled();
 		return $this->history;
 	}
 	public function GetPHOTBlockName($event) {
+		$photoname = $event->GetPhotoGraph();
+		if(empty($photoname)) {
+			return null;
+		}
 		if($this->format == GLST_FORMAT_DS) {
-			return $event->GetPhotograph().'.DSEX.photo';
+			return $photoname.'.DSEX.photo';
 		} else {
-			return $event->GetPhotograph().'.photo';
+			return $photoname.'.photo';
 		}
 	}
-	private function DecompileBlockData() {	
+	protected function DecompileBlockData() {	
 		$reader = new StringReader($this->GetData());
 		$firstchar = $reader->Read(1);
 		if($firstchar == chr(0x27)) { //apostrophe thing

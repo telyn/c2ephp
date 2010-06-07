@@ -5,8 +5,11 @@ class FILEBlock extends PrayBlock {
 	public function FILEBlock($prayfile,$name,$content,$flags) {
 		parent::PrayBlock($prayfile,$name,$content,$flags,PRAY_BLOCK_FILE);
 	}
-	public function CompileBlockData() {
+	protected function CompileBlockData() {
 		return $this->GetData();
+	}
+	protected function DecompileBlockData() {
+		throw new Exception('It\'s impossible to decode a FILE.');
 	}
 }
 ?>
