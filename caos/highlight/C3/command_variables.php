@@ -19,5 +19,25 @@ $caosCommandVariables = array
 	'meta',
 	'trck',
 	'wdow',
+
+	//compound
+	'page',
+	'ptxt',
+
+	//creatures
+	'aslp',
+	'dead',
+	'dirn',
+	'drea',
+	'face',
+	'ins#',
+	'mind',
+	'motr',
+	'norn',
+	'uncs',
+	'zomb',
+
+	//files
+	
 );
 ?>

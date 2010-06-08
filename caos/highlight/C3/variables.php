@@ -45,5 +45,40 @@ $caosVariables = array
 	'_cd_ frqh',
 	'_cd_ frql',
 	'_cd_ frqm',
+
+	//compound
+	'npgs',
+	
+	//creatures
+	'attn',
+	'bvar',
+	'byit',
+	'cage',
+	'decn',
+	'dftx',
+	'dfty',
+	'drv!',
+	'expr',
+	'hhld',
+	'orgn',
+	'tage',
+	'uftx',
+	'ufty',
+
+	//debug
+	'code',
+	'codf',
+	'codg',
+	'codp',
+	'cods',
+	'paws',
+	'tack',
+	'unid',
+
+	//files
+	'innf',
+	'inni',
+	'innl',
+	'inok'
 );
 ?>
