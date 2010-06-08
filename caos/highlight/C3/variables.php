@@ -29,6 +29,21 @@ $caosVariables = array
 	'posy',
 	'spcs',
 	'wdth',
-	'_it_'
+	'_it_',
+	
+	//camera
+	'cmrx',
+	'cmry',
+	'wndb',
+	'wndh',
+	'wndl',
+	'wndr',
+	'wndt',
+	'wndw',
+
+	//cd player
+	'_cd_ frqh',
+	'_cd_ frql',
+	'_cd_ frqm',
 );
 ?>
