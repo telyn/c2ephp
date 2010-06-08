@@ -16,9 +16,8 @@ $caosCommands = array
 	'frat',
 	'gait',
 	'kill',
-	'mesg',
-	'writ',
-	'wrt+',
+	'mesg writ',
+	'mesg wrt+',
 	'ncls',
 	'nohh',
 	'pcls',
@@ -42,20 +41,41 @@ $caosCommands = array
 
 	//brain
 	'adin',
-	'brn:',
-	'dmpb',
-	'dmpd',
-	'dmpl',
-	'dmpn',
-	'dmpt',
-	'setd',
-	'setl',
-	'setn',
-	'sett',
+	'brn: dmpb',
+	'brn: dmpd',
+	'brn: dmpl',
+	'brn: dmpn',
+	'brn: dmpt',
+	'brn: setd',
+	'brn: setl',
+	'brn: setn',
+	'brn: sett',
 	'doin',
+	
+	//camera
+	'bkgd',
+	'brmi',
+	'cmra',
+	'cmrp',
+	'cmrt',
+	'frsh',
+	'line',
+	'loft',
+	'scam',
+	'snap',
+	'snax',
+	'zoom',
+	
+	//cd player
+	'_cd_ ejct',
+	'_cd_ init',
+	'_cd_ paws',
+	'_cd_ play',
+	'_cd_ shut',
+	'_cd_ stop',
+
 
 	//creation
-	'new:',
-	'simp',
+	'new: simp',
 );
 ?>

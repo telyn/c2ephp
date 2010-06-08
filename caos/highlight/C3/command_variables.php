@@ -14,6 +14,10 @@ $caosCommandVariables = array
 	'rnge',
 	'targ',
 	'tick',
-	''
+
+	//camera
+	'meta',
+	'trck',
+	'wdow',
 );
 ?>
