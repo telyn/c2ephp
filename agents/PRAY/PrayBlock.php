@@ -73,7 +73,8 @@ abstract class PrayBlock {
 *	\param $prayfile	If constructing by reading a PRAY file, is a PRAYFile object. Otherwise is allowed to be anything (it's assumed the subclasses take care of it)
 *	\param $name		The name of the block. Must be unique within the PRAYFile. This will be checked by the PRAYFile.
 *	\param $content		If constructing the PrayBlock by reading a PRAY file, must be a binary string. Otherwise, should be null (but doesn't have to be).
-*	\param $flags		A 1-byte integer
+*	\param $flags		A 1-byte integer containing the flags this PrayBlock has set
+**	\param $type		The type of the PrayBlock as a PRAY_BLOCK_* constant	
 */
 	public function PrayBlock($prayfile,$name,$content,$flags,$type) {
 		if($prayfile instanceof PRAYFile) {
@@ -125,8 +126,7 @@ abstract class PrayBlock {
 		return $this->name;
 	}
 	/** Gets the PRAY block's binary data if the PRAYBlock is decompiled.
-	 * If told to decompress, it will set the block's binary data to uncompressed.
-	 * \param $decompress Whether or not to decompress the binary data if necessary.
+	 * It will decompress automatically if necessary, then unset the compressed flag.
 	 * \return the PRAY block's binary data.
 	 */
 	public function GetData() {

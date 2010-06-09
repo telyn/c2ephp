@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__).'/../PRAY/GLSTBlock.php');
 
-/** \Brief Creature event numbers
+/** \brief Creature event numbers
  * all creatures are either CONCEIVED, SPLICED, ENGINEERED, or IAMCLONED
  * Then CONCEIVED creatures are MUMLAIDMYEGG
  * Then they are HATCHED except maybe ENGINEERED creatures.
