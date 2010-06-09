@@ -100,7 +100,7 @@ class CAOSHighlighter {
 		
 		//if last line is a comment and this line starts with scrp set last line's indent to 0 (remove whitespace at front)
 		if(in_array($words[0],array('scrp','rscr'))) {
-			if(!empty($this->scritLines[$this->currentLine-1])) {
+			if(!empty($this->scriptLines[$this->currentLine-1])) {
 				if($this->scriptLines[$this->currentLine-1]{0} == '*') {
 					$this->highlightedLines[$this->currentLine-1] = ltrim($this->highlightedLines[$this->currentLine-1]);
 				}
