@@ -39,5 +39,46 @@ $caosCommandVariables = array
 
 	//files
 	
+	//input
+	'pure',
+
+	//map
+	'perm',
+	
+	//motion
+	'accg',
+	'admp',
+	'aero',
+	'avel',
+	'elas',
+	'fdmp',
+	'fric',
+	'fvel',
+	'sdmp',
+	'spin',
+	'svel',
+	'varc',
+	
+	//ports
+	
+	//resources
+	
+	//caos
+	
+	//sounds
+	'vois',
+	
+	//time
+	'buzz',
+	'wpau',
+	'targ',
+	
+	//vehicles
+	'cabp',
+	'cabv',
+	
+	//world
+	'delw',
+	'load'
 );
 ?>
