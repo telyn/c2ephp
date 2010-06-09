@@ -79,6 +79,76 @@ $caosVariables = array
 	'innf',
 	'inni',
 	'innl',
-	'inok'
+	'inok',
+	
+	//input
+	'hotp',
+	'hots',
+	'mopx',
+	'mopy',
+	'movx',
+	'movy',
+	'down',
+	'emid',
+	'left',
+	'maph',
+	'mapw',
+	'mloc',
+	'rght',
+	'_up_',
+	
+	//motion
+	'fall',
+	'movs',
+	'velx',
+	'vely',
+	'wall',
+	
+	//ports
+	'prt: itot',
+	'prt: otot',
+	
+	//resources
+	
+	//scripts
+	
+	//time
+	'date',
+	'dayt',
+	'etik',
+	'mont',
+	'msec',
+	'pace',
+	'race',
+	'rtim',
+	'sean',
+	'time',
+	'wtik',
+	'year',
+
+	//variables
+	'gnam',
+	'modu',
+	'eame',
+	'name',
+	'game',
+	'ufos',
+	'vmjr',
+	'vmnr',
+	'_p1_',
+	'_p2_',
+	'null',
+	
+	//vehicles
+	'cabb',
+	'cabl',
+	'cabr',
+	'cabt',
+	
+	//world
+	'nwld',
+	'wnam',
+	'wuid',
+	
 );
 ?>
