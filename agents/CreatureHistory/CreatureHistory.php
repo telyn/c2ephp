@@ -77,17 +77,53 @@ class CreatureHistory {
 		}
 	}
 	/**
-	 * Try to work out which game this CreatureHistory is for (by working out whether any DS-specific variables are set)  
+	 * Try to work out which game this CreatureHistory is for (by working out whether any DS-specific variables are set)
+	 * \return GLST_FORMAT_DS or GLST_FORMAT_C3 as defined in GLSTBlock.php  
 	 */
 	public function GuessFormat() {
 		return (isset($this->unknown3))?GLST_FORMAT_DS:GLST_FORMAT_C3;
 	}
+	/**
+	 * Adds an event to the end of a history.
+	 * \param $event A CreatureHistoryEvent to add to this CreatureHistory object
+	 */
 	public function AddEvent(CreatureHistoryEvent $event) {
 		$this->events[] = $event;
 	}
 	/**
+	 * Gets an event from the history
+	 * Simply gets the nth event that happened in this history
+	 * \param $n the event number to get
+	 * \return the $nth event 
+	 */
+	public function GetEvent($n) {
+		return $this->events[$n];
+	}
+	/**
+	 * Counts the events in the history
+	 * \return How many events there currently are in this history
+	 */
+	public function CountEvents() {
+		return sizeof($this->events);
+	}
+	/**
+	 * Gets all events matching the given event type
+	 * \param $type one of the CREATUREHISTORY_EVENT_* constants, defined in CreatureHistoryEvent.php
+	 * \return an array of CreatureHistoryEvents
+	 */
+	public function GetEventsByType($type) {
+		$matchingEvents = array();
+		foreach($this->events as $event) {
+			if($event->GetEventType() == $type) {
+				$matchingEvents[] = $event;
+			}
+		}
+		return $matchingEvents;
+	}
+	/**
 	 * Set variables that are currently unknown and used in C3 and DS.
 	 * These variables COULD be mutations and crossovers during conception, however in a creature that was not conceived, they appear to be strange.
+	 * Honestly, I don't know yet because I haven't looked into it.
 	 * \param $unknown1 First unknown variable
 	 * \param $unknown2 Second unknown variable
 	 */

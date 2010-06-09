@@ -68,7 +68,7 @@ define('CREATUREHISTORY_EVENT_WARPEDIN',17);
 /** \brief Class to represent events in a creature's life*/
 
 class CreatureHistoryEvent {
-	private $eventnumber;
+	private $eventtype;
 	private $worldtime;
 	private $creatureage;
 	private $timestamp;
@@ -84,8 +84,22 @@ class CreatureHistoryEvent {
 	private $unknown1; ///DS Only
 	private $unknown2; ///DS Only
 
-	public function CreatureHistoryEvent($eventnumber,$worldtime,$creatureage,$timestamp,$lifestage,$moniker1,$moniker2,$usertext,$photograph,$worldname,$worldUID) {
-		$this->eventnumber = $eventnumber;
+	/**
+	 * Instantiates a new CreatureHistoryEvent.
+	 * \param $eventtype The event number as defined by the CREATUREHISTORY_EVENT_* constants.
+	 * \param $worldtime The world's age in ticks at the time of this event.
+	 * \param $creatureage The age of the creature in ticks at the time of this event
+	 * \param $timestamp The time of this event as a unix timestamp. (number of seconds passed since 1st Jan, 1970)
+	 * \param $lifestage The lifestage this creature had achieved at the time of this event.
+	 * \param $moniker1 The first moniker associated with this event. See GetMoniker1
+	 * \param $moniker2 The second moniker associated with this event. See GetMoniker1
+	 * \param $usertext The user text assosciated with this event. See GetUserText
+	 * \param $photograph The photograph associated with this event. See GetPhotograph
+	 * \param $worldname The name of the world the creature was inhabiting at the time of this event 
+	 * \param $worldUID The UID of the world the creature was inhabiting at the the time of this event
+	 */
+	public function CreatureHistoryEvent($eventtype,$worldtime,$creatureage,$timestamp,$lifestage,$moniker1,$moniker2,$usertext,$photograph,$worldname,$worldUID) {
+		$this->eventtype = $eventtype;
 		$this->worldtime = $worldtime;
 		$this->creatureage = $creatureage;
 		$this->timestamp = $timestamp;
@@ -97,13 +111,23 @@ class CreatureHistoryEvent {
 		$this->worldname = $worldname;
 		$this->worldUID = $worldUID;
 	}
+	/**
+	 * Adds DS-specific information to the CreatureHistoryEvent
+	 * \param $DSUserID The UID of the Docking Station user whose world the creature was in at the time of the event
+	 * \param $unknown1 I don't know! But it comes right after the DSUID in the GLST format.
+	 * \param $unknown2 I don't know! But it comes right after unknown1.
+	 */
 	public function AddDSInfo($DSUserID,$unknown1,$unknown2) {
 		$this->dockingstationuser = $DSUserID;
 		$this->unknown1 = $unknown1;
 		$this->unknown2 = $unknown2;
 	}
+	/** Compiles the data into the correct format for the game specified
+	 * \param $format Which game to compile it for (a GLST_FORMAT_* constant)
+	 * \return GLST data ready to be put into a GLST history.
+	 */
 	public function Compile($format) {
-		$data = pack('VVVVV',$this->eventnumber,$this->worldtime,$this->creatureage,$this->timestamp,$this->lifestage);
+		$data = pack('VVVVV',$this->eventtype,$this->worldtime,$this->creatureage,$this->timestamp,$this->lifestage);
 		$data .= pack('V',strlen($this->moniker1)).$this->moniker1;
 		$data .= pack('V',strlen($this->moniker2)).$this->moniker2;
 		$data .= pack('V',strlen($this->usertext)).$this->usertext;
@@ -115,36 +139,84 @@ class CreatureHistoryEvent {
 			$data .= pack('VV',$this->unknown1,$this->unknown2);
 		}
 	}
-	public function GetEventNumber() {
-		return $this->eventnumber;
+	/** Accessor method for event type
+	 * \return The event type as a CREATUREHISTORY_EVENT_* constant.
+	 */
+	public function GetEventType() {
+		return $this->eventtype;
 	}
+	/** Accessor method for world time
+	 * \return The age of the world, in ticks, when this event occurred.
+	 */
 	public function GetWorldTime() {
 		return $this->worldtime;
 	}
+	/** Accessor method for creature age 
+	 * \return The age of the creature, in ticks, when this event happened
+	 */
 	public function GetCreatureAge() {
 		return $this->creatureage;
 	}
+	/** Accessor method for timestamp 
+	 * \return The unix timestamp of the time at which this event occurred
+	 */
 	public function GetTimestamp() {
 		return $this->timestamp;
 	}
+	/** Accessor method for life stage
+	 * \return The creature's life stage (an integer, 0-6 I think. TODO: I'll make it into a constant. 0xFFFFFFFF means unborn.)
+	 */
 	public function GetLifeStage() {
 		return $this->lifestage;
 	}
+	/** Accessor method for moniker 1
+	 * Moniker 1 is the first moniker associated with this event. In conception and splicing, it is one of the conceiving creatures.
+	 * In cloning, it is the cloned creature. (both ways)
+	 * In laying an egg, it is the moniker of the egg laid.
+	 * In becoming pregnant, it's the creature that made this one pregnant
+	 * In making another pregnant, it's the pregnant creature.
+	 * In a child being born, it's the other parent of the child
+	 * \return The first moniker associated with this event 
+	 */
 	public function GetMoniker1() {
 		return $this->moniker1;
 	}
+	/** Accessor method for moniker 2
+	 * Moniker 2 is the second moniker associated with this event. In conception and splicing, it is one of the conceiving creatures.
+	 * In becoming pregnant, it's the child's moniker
+	 * In making another pregnant, it's the child's moniker
+	 * In a child being born, it's the child's moniker
+	 * \return The first moniker associated with this event 
+	 */
 	public function GetMoniker2() {
 		return $this->moniker2;
 	}
+	/** Accessor method for user text
+	 * In theory this can be used on any event without messing it up (and it would be readable via CAOS)
+	 * In practice, this is only used by either the first event or the hatched event (I forget which)
+	 * and is used to mean the text that the user enters to describe this creature in the creature info dialog
+	 * \return The user text associated with this event.
+	 */
 	public function GetUserText() {
 		return $this->usertext;
 	}
+	/** Accessor method for photograph
+	 * In theory this can be used on any event without messing anything up, and would be readable via CAOS.
+	 * In pratice this is only used on photo taken events.
+	 * \return The identifier of the photograph (in the format mymoniker-photonumber)
+	 */
 	public function GetPhotograph() {
 		return $this->photograph;
 	}
+	/** Accessor method for world name
+	 * \return The name of the world this creature was in during this event
+	 */
 	public function GetWorldName() {
 		return $this->worldname;
 	}
+	/** Accessor method for world name
+	 * \return The name of the world this creature was in during this event
+	 */
 	public function GetWorldUID() {
 		return $this->worldUID;
 	}
