@@ -170,7 +170,6 @@ class C2CAOSCommands {
 			'dbug',
 			'dbgv',
 			'dbgm',
-			'scrp',
 			'scrx',
 			'lock',
 			'unlk',
@@ -184,7 +183,8 @@ class C2CAOSCommands {
 			'sys: abrt',
 			'sys: wrld',
 			'sys: conv',
-		);
+			
+			);
 	}
 }
 ?>

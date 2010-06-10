@@ -93,7 +93,8 @@ class C2CAOSVariables {
 			'hour',
 			'mins',
 			'rndr',
-			'lang'
+			'lang',
+			'lng+',
 					
 		);
 	}
