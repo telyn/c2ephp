@@ -1,8 +1,7 @@
 <?php
-class C3CAOSCommands {
+class DSCAOSCommands {
 	public static function GetTokens() {
-		return array
-		(
+		return array(
 			'alph',
 			'anim',
 			'amms',
@@ -213,6 +212,7 @@ class C3CAOSCommands {
 			'hist mon2',
 			'hist mute',
 			'hist name',
+			'hist netu',
 			'hist next',
 			'hist prev',
 			'hist rtim',
@@ -421,6 +421,21 @@ class C3CAOSCommands {
 			'wnti',
 			'wrld',
 			'wtnt',
+		
+			//netbabel
+			'net: expo',
+			'net: from',
+			'net: head',
+			'net: hear',
+			'net: ruso',
+			'net: stat',
+			'net: ulin',
+			'net: unik',
+			'net: whod',
+			'net: whof',
+			'net: whon',
+			'net: whoz',
+			'net: writ',
 		);
 	}
 }
