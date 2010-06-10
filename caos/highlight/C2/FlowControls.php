@@ -24,6 +24,9 @@ class C2CAOSFlowControls {
 			'doif',
 			'else',
 			'endi',
+			'scrp',
+			'iscr',
+			'rscr'
 		);
 	}
 }
