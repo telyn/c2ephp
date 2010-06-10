@@ -120,6 +120,25 @@ class CreatureHistory {
 		}
 		return $matchingEvents;
 	}
+	public function GetCreatureMoniker() {
+		return $this->moniker;
+	}
+	public function GetCreatureName() {
+		return $this->name;
+	}
+	public function GetCreatureGender() {
+		return $this->gender;
+	}
+	public function GetCreatureGenus() {
+		return $this->genus;
+	}
+	public function GetCreatureSpecies() {
+		return $this->species;
+	}
+	public function GetCreatureIsWarpVeteran() {
+		return $this->warpveteran;
+	}
+	
 	/**
 	 * Set variables that are currently unknown and used in C3 and DS.
 	 * These variables COULD be mutations and crossovers during conception, however in a creature that was not conceived, they appear to be strange.
