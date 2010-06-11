@@ -97,6 +97,7 @@ class CAOSHighlighter {
 		$inString = false;
 		$inByteString = false;
 		$highlightedLine = '';
+		$firstToken = '';
 		
 		//if last line is a comment and this line starts with scrp set last line's indent to 0 (remove whitespace at front)
 		if(in_array($words[0],array('scrp','rscr'))) {
@@ -110,7 +111,7 @@ class CAOSHighlighter {
 		for($currentWord=0;$currentWord<sizeof($words);$currentWord++) {
 			
 			$word = $words[$currentWord];
-			$highlightedWord = '';
+			$highlightedWord = $word;
 			if($inString) {
 				if($word{strlen($word)-1} == '"') {
 					$highlightedWord = htmlentities($word).'</span>'; //end the string
@@ -123,15 +124,55 @@ class CAOSHighlighter {
 					$highlightedWord = htmlentities($word).'</span>'; //end the string
 					$inByteString=false;
 				} else {
-					$highlightedWord = $word;
+					$highlightedWord = $word;	
 				}
-			} else {
+			} else if($firstToken != '') {
+				//sort out unquoted strings
+				if($currentWord == 1) {
+					if($this->format == 'C2') {
+						if(in_array(strtolower($firstToken),array('tokn','snde','sndc','sndl','sndq','plbs'))) {
+							if(strlen($word) == 4) {
+								$highlightedWord = '<span class="string">'.$word.'</span>';
+							} else {
+								$highlightedWord = '<span class="error">'.$word.'</span>';
+							}
+						}
+					}
+				} else if($currentWord == 2) {
+					if($this->format == 'C2') {
+						if(preg_match('/^new: (scen|simp|cbtn|comp|vhcl|lift|bkbd|cbub)$/i',$firstToken)) {
+							if(strlen($word) == 4) {
+								$highlightedWord = '<span class="string">'.$word.'</span>';
+							} else {
+								$highlightedWord = '<span class="error">'.$word.'</span>';
+							}
+						}
+					}
+				} else if($currentWord == sizeof($words)-1) {
+					if($this->format == 'C2') {
+						if(strtolower($firstToken) == 'rmsc') {
+							if(strlen($word) == 4) {
+								$highlightedWord = '<span class="string">'.$word.'</span>';
+							} else {
+								$highlightedWord = '<span class="error">'.$word.'</span>';
+							}
+						}
+					}
+				}
+			}
+			if($highlightedWord == $word) {
 				$highlightedWord = $this->TryToHighlightToken($word);
+				if($currentWord == 0) {
+					$firstToken = $word;
+				}
 				//Highlight two-word block.
 				if($highlightedWord == $word && $currentWord < sizeof($words)-1) {
 					$wordPair = $word.' '.$words[$currentWord+1];
 					$highlightedWord = $this->TryToHighlightToken($wordPair);
 					if($highlightedWord != $wordPair) {
+						if($currentWord == 0) {
+							$firstToken = $wordPair;
+						}
 						$currentWord++;
 					} else {
 						$highlightedWord = $word;
@@ -148,6 +189,11 @@ class CAOSHighlighter {
 						}
 					} else if($word{0} == '[') { //begins a bytestring
 						$highlightedWord = '<span class="bytestring">'.htmlentities($word);
+						if($this->format == 'C2') {
+							//c2 bytestrings are part of the original term, on they're own they're wrong!
+							$highlightedWord = '<span class="error">'.htmlentities($word);
+						}
+						
 						if($word{strlen($word)-1} == ']') {
 							$word .= '</span>';
 							$inByteString = false;
@@ -184,10 +230,22 @@ class CAOSHighlighter {
 	
 	private function TryToHighlightToken($word) {
 		$lcword = strtolower($word);
+		$matches; //used for C2 anim command preg_match
 		if(in_array($lcword,$this->caosCommands)) {
 			$word = '<span class="command">'.htmlentities($word).'</span>';
-		} else if(in_array($lcword,$this->caosVariables) || preg_match("/^(va|ov|mv)[0-9]{2}$/", $lcword)) {
+		} else if(in_array($lcword,$this->caosVariables)) {
 			$word = '<span class="variable">'.htmlentities($word).'</span>';
+			//vaXX, ovXX
+		} else if(in_array($this->format,array('C2','C3','DS')) && preg_match("/^(va|ov)[0-9]{2}$/", $lcword)) {
+			$word = '<span class="variable">'.htmlentities($word).'</span>';
+			//mvXX
+		} else if(in_array($this->format,array('C3','DS')) && preg_match('/^(mv)[0-9]{2}$/',$lcword)) {
+			$word = '<span class="variable">'.htmlentities($word).'</span>';
+			//obvX
+		} else if(in_array($this->format,array('C1','C2')) && preg_match('/^(obv)[0-9]$/',$lcword)) {
+			$word = '<span class="variable">'.htmlentities($word).'</span>';
+		} else if($this->format == 'C2' && preg_match('/^([Aa][Nn][Ii][Mm]|[Pp][Rr][Ll][Dd])(\[[0-9]+R?\])$/',$word,$matches)) {
+			$word = '<span class="variable">'.strtolower($matches[1]).'</span><span class="bytestring">'.$matches[2].'</span>';
 		} else if(in_array($lcword,$this->caosOperators)) {
 			$word = '<span class="operator">'.htmlentities($word).'</span>';
 		} else if(in_array($lcword,$this->caosFlowControls)) {
