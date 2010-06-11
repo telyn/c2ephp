@@ -259,7 +259,7 @@ class CAOSHighlighter {
 		}
 		return $word;
 	}
-	
+	//These may well not apply to all versions of CAOS! I haven't thoroughly looked over the docs.
 	private function SetIndentForThisLine($firstword) {
 		switch($firstword) {
 			case 'scrp':
@@ -271,10 +271,10 @@ class CAOSHighlighter {
 			case 'subr':
 				$this->currentIndent = 1;
 				break;
-			case 'elif':
+			case 'elif': //doesn't exist in c2, but we still format it to improve readability.
+						// if someone has used elif in c2 code it will still be tagged as an error :)
 			case 'else':
 			case 'endi':
-			case 'retn':
 			case 'untl':
 			case 'next':
 			case 'ever':
