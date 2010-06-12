@@ -23,7 +23,7 @@ class CAOSHighlighter {
 	private $currentWord;
 
 	public function CAOSHighlighter($format) {
-		$this->format = $format;
+		$this->scriptFormat = $format;
 		//load files...
 		require_once(dirname(__FILE__).'/'.$format.'/CommandVariables.php');
 		require_once(dirname(__FILE__).'/'.$format.'/Commands.php');
@@ -40,11 +40,13 @@ class CAOSHighlighter {
 	}
 	
 	public function HighlightScript($script) {
-		if(strpos("\r",$script) !== false) {
-			$script = str_replace("\r","\n",$script); //get rid of mac and windows newlines.
-			$script = str_replace("\n\n","\n",$script);
+		if(strpos($script,"\r") !== false) {
+			$script = str_replace("\r\n","\n",$script); //get rid of mac and windows newlines.
+			$script = str_replace("\r","\n",$script);
 		}
-		$script = str_replace("\t",' ',$script);
+		//remove tabs and spaces before newlines.
+		$script = str_replace(" \n","\n",$script);
+		$script = str_replace("\t",'',$script);
 		$script = $this->SmartRemoveMultipleSpaces($script);
 		$this->scriptLines = explode("\n",$script);
 		
@@ -58,8 +60,7 @@ class CAOSHighlighter {
 		}
 		return implode($this->highlightedLines);
 	}
-	//TODO: Get rid of double spaces between CAOS commands but not in strings!
-	private function SmartRemoveMultipleSpaces($text) {
+	public function SmartRemoveMultipleSpaces($text) {
 		$newString = array();
 		$inString = false;
 		$inComment = false;
@@ -72,7 +73,6 @@ class CAOSHighlighter {
 			} else if($character == "\n" ) {
 				$inComment = false;
 			} else if(!$inString && !$inComment && $character == ' ') {
-			
 				while($i+2 < strlen($text) && $text{$i+1} == ' ') {
 					$i++;
 				}
@@ -131,14 +131,16 @@ class CAOSHighlighter {
 					$highlightedWord = htmlentities($word).'</span>'; //end the string
 					$inString=false;
 				} else {
-					$highlightedWord = $word;
+					$highlightedLine .= $word;
+					continue;					
 				}
 			} else if($inByteString) {
 				if($word{strlen($word)-1} == ']') {
 					$highlightedWord = htmlentities($word).'</span>'; //end the string
 					$inByteString=false;
 				} else {
-					$highlightedWord = $word;	
+					$highlightedLine .= $word.' ';
+					continue;
 				}
 			} else if($firstToken != '') {
 				//sort out unquoted strings
@@ -161,7 +163,7 @@ class CAOSHighlighter {
 							$highlightedWord = '<span class="error">'.$word.'</span>';
 						}
 					}
-					if($this->format == FORMAT_C2) {
+					if($this->scriptFormat == FORMAT_C2) {
 						if(in_array(strtolower($firstToken),array('tokn','snde','sndc','sndl','sndq','plbs'))) {
 							if(strlen($word) == 4) {
 								$highlightedWord = '<span class="string">'.$word.'</span>';
@@ -171,7 +173,7 @@ class CAOSHighlighter {
 						}
 					}
 				} else if($this->currentWord == 2) {
-					if($this->format == 'C2') {
+					if($this->scriptFormat == 'C2') {
 						if(preg_match('/^new: (scen|simp|cbtn|comp|vhcl|lift|bkbd|cbub)$/i',$firstToken)) {
 							if(strlen($word) == 4) {
 								$highlightedWord = '<span class="string">'.$word.'</span>';
@@ -181,7 +183,7 @@ class CAOSHighlighter {
 						}
 					}
 				} else if($this->currentWord == sizeof($words)-1) {
-					if($this->format == 'C2') {
+					if($this->scriptFormat == 'C2') {
 						if(strtolower($firstToken) == 'rmsc') {
 							if(strlen($word) == 4) {
 								$highlightedWord = '<span class="string">'.$word.'</span>';
@@ -221,7 +223,7 @@ class CAOSHighlighter {
 						}
 					} else if($word{0} == '[') { //begins a bytestring
 						$highlightedWord = '<span class="bytestring">'.htmlentities($word);
-						if($this->format == 'C2') {
+						if($this->scriptFormat == 'C2') {
 							//c2 bytestrings are part of the original term, on they're own they're wrong!
 							$highlightedWord = '<span class="error">'.htmlentities($word);
 						}
@@ -265,21 +267,20 @@ class CAOSHighlighter {
 		
 		//first position commands + flow controls only
 		//2nd position commands + command variables + variables only.
-		
 		if(in_array($lcword,$this->caosCommands)) {
 			$word = '<span class="command">'.htmlentities($word).'</span>';
 		} else if(in_array($lcword,$this->caosVariables)) {
 			$word = '<span class="variable">'.htmlentities($word).'</span>';
 			//vaXX, ovXX
-		} else if(in_array($this->format,array('C2','C3','DS')) && preg_match("/^(va|ov)[0-9]{2}$/", $lcword)) {
+		} else if(in_array($this->scriptFormat,array('C2','C3','DS')) && preg_match("/^(va|ov)[0-9]{2}$/", $lcword)) {
 			$word = '<span class="variable">'.htmlentities($word).'</span>';
 			//mvXX
-		} else if(in_array($this->format,array('C3','DS')) && preg_match('/^(mv)[0-9]{2}$/',$lcword)) {
+		} else if(in_array($this->scriptFormat,array('C3','DS')) && preg_match('/^(mv)[0-9]{2}$/',$lcword)) {
 			$word = '<span class="variable">'.htmlentities($word).'</span>';
 			//obvX
-		} else if(in_array($this->format,array('C1','C2')) && preg_match('/^(obv)[0-9]$/',$lcword)) {
+		} else if(in_array($this->scriptFormat,array('C1','C2')) && preg_match('/^(obv)[0-9]$/',$lcword)) {
 			$word = '<span class="variable">'.htmlentities($word).'</span>';
-		} else if($this->format == 'C2' && preg_match('/^([Aa][Nn][Ii][Mm]|[Pp][Rr][Ll][Dd])(\[[0-9]+R?\])$/',$word,$matches)) {
+		} else if($this->scriptFormat == 'C2' && preg_match('/^([Aa][Nn][Ii][Mm]|[Pp][Rr][Ll][Dd])(\[[0-9]+R?\])$/',$word,$matches)) {
 			$word = '<span class="variable">'.strtolower($matches[1]).'</span><span class="bytestring">'.$matches[2].'</span>';
 		} else if(in_array($lcword,$this->caosOperators)) {
 			$word = '<span class="operator">'.htmlentities($word).'</span>';
@@ -358,5 +359,7 @@ class CAOSHighlighter {
 		return $indent;
 	}
 }
+
+
 
 ?>
