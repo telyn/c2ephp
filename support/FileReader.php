@@ -51,7 +51,16 @@ class FileReader implements IReader
 		}
 		return fread($this->fp,$length);
 	}
-	
+	public function ReadCString() {
+		$string = '';
+		while(($char = $fread($this->fp,1)) !== false) {
+			$string.=$char;
+			if($char == "\0") {
+				break;
+			}			
+		}
+		return substr($string,0,-1);
+	}
 	public function Seek($position)
 	{
 		fseek($this->fp, $position);

@@ -3,8 +3,9 @@ require_once(dirname(__FILE__).'/IReader.php');
 class StringReader implements IReader {
     private $position;
     private $string;
-    public function StringReader($string) { // string can be a file pointer resource or a string.
+    public function StringReader($string) {
         $this->string = $string;
+        $this->position = 0;
     }
     public function Read($characters) {
         if($characters > 0) {
@@ -18,6 +19,16 @@ class StringReader implements IReader {
         }
         return "";
     }
+	public function ReadCString() {
+		$string = '';
+		while(($char = $this->Read(1)) !== false) {
+			$string.=$char;
+			if($char == "\0") {
+				break;
+			}			
+		}
+		return substr($string,0,-1);
+	}
     public function Seek($position) {
         $this->position = $position;
     }
