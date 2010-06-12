@@ -13,8 +13,9 @@ class CAOSHighlighter {
 	private $caosFlowControls = array();
 
 	private $scriptFormat;
-	private $scriptLines;
-	private $highlightedLines;
+	private $scriptLines = array();
+	private $scriptSubroutines = array();
+	private $highlightedLines = array();
 
 	private $previousLineCode;
 	private $currentLine;
@@ -46,9 +47,12 @@ class CAOSHighlighter {
 		$script = str_replace("\t",' ',$script);
 		$script = $this->SmartRemoveMultipleSpaces($script);
 		$this->scriptLines = explode("\n",$script);
+		
+		//now that we have the lines, we can make the list of subroutines.
+		$this->ScanForSubroutines();
 		$this->currentLine = 0;
 		$this->highlightedLines = array();
-		while($line = $this->HighlightNextLine()) {
+		while(($line = $this->HighlightNextLine()) !== false) {
 			
 			$this->highlightedLines[] = $line;
 		}
@@ -77,17 +81,27 @@ class CAOSHighlighter {
 		}
 		return trim(implode('',$newString));
 	}
+	private function ScanForSubroutines() {
+		//expects $scriptLines to be filled out
+		foreach($this->scriptLines as $line) {
+			$words = explode(' ',strtolower($line));
+			if($words[0] == 'subr') {
+				$this->scriptSubroutines[] = $words[1];
+			}
+		}	
+	}
 	private function HighlightNextLine() {
 		if(sizeof($this->scriptLines) <= $this->currentLine) {
 			return false;
 		}
 		$line = $this->scriptLines[$this->currentLine];
-		$line = $this->SmartRemoveMultipleSpaces($line);
+		//$line = $this->SmartRemoveMultipleSpaces($line);
 		if(strlen($line) == 0 && $this->currentIndent > 0) {
 			$highlightedLine = $this->CreateIndentForThisLine('')."\n";
 			$this->currentLine++;
 			return $highlightedLine;
 		} else if(strlen($line) == 0) {
+			$this->currentLine++;
 			return '';
 		}
 		$words = explode(' ',$line);
@@ -108,9 +122,9 @@ class CAOSHighlighter {
 			}
 		} 
 		
-		for($currentWord=0;$currentWord<sizeof($words);$currentWord++) {
+		for($this->currentWord=0;$this->currentWord<sizeof($words);$this->currentWord++) {
 			
-			$word = $words[$currentWord];
+			$word = $words[$this->currentWord];
 			$highlightedWord = $word;
 			if($inString) {
 				if($word{strlen($word)-1} == '"') {
@@ -128,8 +142,26 @@ class CAOSHighlighter {
 				}
 			} else if($firstToken != '') {
 				//sort out unquoted strings
-				if($currentWord == 1) {
-					if($this->format == 'C2') {
+				if($this->currentWord == 1) {
+					if($firstToken == 'subr') {
+						if(strlen($word) == 4 || $this->scriptFormat != FORMAT_C2) {
+							$highlightedWord = '<span class="label">'.$word.'</span>';
+						} else {
+							$highlightedWord = '<span class="error">'.$word.'</span>';
+						}
+					} else if($firstToken == 'gsub') {
+						if(in_array($word,$this->scriptSubroutines)) {
+							//C3/DS allow for any length of subroutine name, C2 and C1 probably only allow 4-character names.
+							if(in_array($this->scriptFormat,array(FORMAT_C3,FORMAT_DS)) || strlen($word) == 4) {
+								$highlightedWord = '<span class="label">'.$word.'</span>';
+							} else {
+								$highlightedWord = '<span class="error">'.$word.'</span>';
+							}
+						} else {
+							$highlightedWord = '<span class="error">'.$word.'</span>';
+						}
+					}
+					if($this->format == FORMAT_C2) {
 						if(in_array(strtolower($firstToken),array('tokn','snde','sndc','sndl','sndq','plbs'))) {
 							if(strlen($word) == 4) {
 								$highlightedWord = '<span class="string">'.$word.'</span>';
@@ -138,7 +170,7 @@ class CAOSHighlighter {
 							}
 						}
 					}
-				} else if($currentWord == 2) {
+				} else if($this->currentWord == 2) {
 					if($this->format == 'C2') {
 						if(preg_match('/^new: (scen|simp|cbtn|comp|vhcl|lift|bkbd|cbub)$/i',$firstToken)) {
 							if(strlen($word) == 4) {
@@ -148,7 +180,7 @@ class CAOSHighlighter {
 							}
 						}
 					}
-				} else if($currentWord == sizeof($words)-1) {
+				} else if($this->currentWord == sizeof($words)-1) {
 					if($this->format == 'C2') {
 						if(strtolower($firstToken) == 'rmsc') {
 							if(strlen($word) == 4) {
@@ -162,24 +194,24 @@ class CAOSHighlighter {
 			}
 			if($highlightedWord == $word) {
 				$highlightedWord = $this->TryToHighlightToken($word);
-				if($currentWord == 0) {
+				if($this->currentWord == 0) {
 					$firstToken = $word;
 				}
 				//Highlight two-word block.
-				if($highlightedWord == $word && $currentWord < sizeof($words)-1) {
-					$wordPair = $word.' '.$words[$currentWord+1];
+				if($highlightedWord == $word && $this->currentWord < sizeof($words)-1) {
+					$wordPair = $word.' '.$words[$this->currentWord+1];
 					$highlightedWord = $this->TryToHighlightToken($wordPair);
 					if($highlightedWord != $wordPair) {
-						if($currentWord == 0) {
+						if($this->currentWord == 0) {
 							$firstToken = $wordPair;
 						}
-						$currentWord++;
+						$this->currentWord++;
 					} else {
 						$highlightedWord = $word;
 					}
 				}
 				if($highlightedWord == $word) { //invalid caos command
-					if($word{0} == '"') { //if it begins a string.
+					if($word{0} == '"' && $this->scriptFormat != FORMAT_C2) { //if it begins a string. (C2 has no strings)
 						$highlightedWord = '<span class="string">'.htmlentities($word);
 						if($word{strlen($word)-1} == '"') {
 							$highlightedWord .= '</span>'; //end the string
@@ -193,9 +225,8 @@ class CAOSHighlighter {
 							//c2 bytestrings are part of the original term, on they're own they're wrong!
 							$highlightedWord = '<span class="error">'.htmlentities($word);
 						}
-						
 						if($word{strlen($word)-1} == ']') {
-							$word .= '</span>';
+							$highlightedWord .= '</span>';
 							$inByteString = false;
 						} else {
 							$inByteString = true;
@@ -204,9 +235,9 @@ class CAOSHighlighter {
 						$highlightedWord = '<span class="number">'.htmlentities($word).'</span>';
 					} else if($word{0} == '*') { // because of SmartRemoveMultipleSpaces, prints exactly as written :)
 						$highlightedWord = '<span class="comment">';
-						for($i=$currentWord;$i<sizeof($words);$i++)
+						for($i=$this->currentWord;$i<sizeof($words);$i++)
 						{
-							if($i!=$currentWord)
+							if($i!=$this->currentWord)
 							{
 								$highlightedWord.=' ';
 							}
@@ -231,6 +262,10 @@ class CAOSHighlighter {
 	private function TryToHighlightToken($word) {
 		$lcword = strtolower($word);
 		$matches; //used for C2 anim command preg_match
+		
+		//first position commands + flow controls only
+		//2nd position commands + command variables + variables only.
+		
 		if(in_array($lcword,$this->caosCommands)) {
 			$word = '<span class="command">'.htmlentities($word).'</span>';
 		} else if(in_array($lcword,$this->caosVariables)) {
