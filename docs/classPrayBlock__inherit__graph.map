@@ -1,0 +1,18 @@
+<map id="G" name="G">
+<area shape="rect" href="$classBinaryBlock.html" title="BinaryBlock" alt="" coords="168,5,259,35"/>
+<area shape="rect" href="$classCreaturesArchiveBlock.html" title="CreaturesArchiveBlock" alt="" coords="136,59,291,88"/>
+<area shape="rect" href="$classFILEBlock.html" title="FILEBlock" alt="" coords="172,112,255,141"/>
+<area shape="rect" href="$classGENEBlock.html" title="GENEBlock" alt="" coords="168,165,259,195"/>
+<area shape="rect" href="$classPHOTBlock.html" title="PHOTBlock" alt="" coords="169,219,257,248"/>
+<area shape="rect" href="$classTagBlock.html" title="TagBlock" alt="" coords="176,272,251,301"/>
+<area shape="rect" href="$classCREABlock.html" title="CREABlock" alt="" coords="339,5,429,35"/>
+<area shape="rect" href="$classGLSTBlock.html" title="GLSTBlock" alt="" coords="341,59,427,88"/>
+<area shape="rect" href="$classAGNTBlock.html" title="AGNTBlock" alt="" coords="340,112,428,141"/>
+<area shape="rect" href="$classDFAMBlock.html" title="DFAMBlock" alt="" coords="339,165,429,195"/>
+<area shape="rect" href="$classDSAGBlock.html" title="DSAGBlock" alt="" coords="339,219,429,248"/>
+<area shape="rect" href="$classDSEXBlock.html" title="DSEXBlock" alt="" coords="339,272,429,301"/>
+<area shape="rect" href="$classEGGBlock.html" title="EGGBlock" alt="" coords="343,325,425,355"/>
+<area shape="rect" href="$classEXPCBlock.html" title="EXPCBlock" alt="" coords="339,379,429,408"/>
+<area shape="rect" href="$classLIVEBlock.html" title="LIVEBlock" alt="" coords="343,432,425,461"/>
+<area shape="rect" href="$classSFAMBlock.html" title="SFAMBlock" alt="" coords="339,485,429,515"/>
+</map>
