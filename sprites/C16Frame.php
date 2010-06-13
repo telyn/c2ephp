@@ -1,15 +1,20 @@
 <?php
-require_once(dirname(__FILE__)."/../support/IReader.php");
-class C16Frame
+require_once(dirname(__FILE__).'/ISpriteFrame.php');
+require_once(dirname(__FILE__).'/../support/IReader.php');
+
+class C16Frame implements ISpriteFrame 
 {
 	 private $offset;
 	 private $width;
 	 private $height;
 	 private $reader;
+	 private $encoding;
 	 private $lineOffset;
-	 public function C16Frame(IReader &$reader)
+	 
+	 public function C16Frame(IReader &$reader,$encoding)
 	 {
  	 	$this->reader = $reader;
+ 	 	$this->encoding = $encoding;
 	 	$this->offset = $this->reader->ReadInt(4);
 	 	$buffer = $this->reader->ReadInt(2);
 	 	if($buffer < 1)
@@ -52,13 +57,13 @@ class C16Frame
 					for(;$x < $z; $x++)
 					{
 						$pixel = $this->reader->ReadInt(2);
-						if($encoding == "565")
+						if($this->encoding == "565")
 						{
 							$red   = ($pixel & 0xF800) >> 8;
 							$green = ($pixel & 0x07E0) >> 3;
 							$blue  = ($pixel & 0x001F) << 3;
 						}
-						else if($encoding == "555")
+						else if($this->encoding == "555")
 						{
 							$red   = ($pixel & 0x7C00) >> 7;
 							$green = ($pixel & 0x03E0) >> 2;

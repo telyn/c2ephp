@@ -23,7 +23,7 @@ class C16File
 		$this->frameCount = $buffer;
 		for($x=0; $x < $this->frameCount; $x++)
 		{
-			$this->frames[$x] = new C16Frame($this->reader);
+			$this->frames[$x] = new C16Frame($this->reader,$this->encoding);
 		} 
 	}
 	

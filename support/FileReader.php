@@ -53,13 +53,13 @@ class FileReader implements IReader
 	}
 	public function ReadCString() {
 		$string = '';
-		while(($char = $fread($this->fp,1)) !== false) {
-			$string.=$char;
-			if($char == "\0") {
+		while(($char = $this->Read(1)) !== false) {
+			if(ord($char) == 0) {
 				break;
-			}			
+			}
+			$string.=$char;
 		}
-		return substr($string,0,-1);
+		return $string;
 	}
 	public function Seek($position)
 	{
