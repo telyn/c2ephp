@@ -1,24 +1,34 @@
 <?php
-//require_once(dirname(__FILE__).'/../support/ISpriteFrame.php');
+require_once(dirname(__FILE__).'/ISpriteFrame.php');
 require_once(dirname(__FILE__).'/../support/IReader.php');
 require_once(dirname(__FILE__).'/../support/FileReader.php');
 require_once(dirname(__FILE__).'/../support/StringReader.php');
 
 
-class SPRFrame {
+class SPRFrame implements ISpriteFrame {
 	private $width;
 	private $height;
 	private $offset;
-	private $data;
+	private $reader;
 	public static $sprToRGB;
+	
 	public function SPRFrame(IReader $reader,$width,$height,$offset=0) {
-		$this->reader = $reader;
 		$this->width = $width;
 		$this->height = $height;
 		$this->offset = $this->reader->GetPosition();
-		$this->data = new StringReader($this->reader->Read($width*$height));
+		$this->reader = $reader;
+		
+		
+		//initialise palette if necessary.
+		if(empty(SPRFrame::$sprToRGB)) {
+			$paletteReader = new FileReader(dirname(__FILE__).'/palette.dta');
+			for($i = 0;$i<256;$i++) {
+				SPRFrame::$sprToRGB[$i] = array('b'=>$paletteReader->ReadInt(1)*4,'g'=>$paletteReader->ReadInt(1)*4,'r'=>$paletteReader->ReadInt(1)*4);
+			}
+			unset($paletteReader);
+		}
 	}
-	public function Flip() {
+	public function Flip() { //
 		$tempData = '';
 		for($i=$this->height-1;$i>-1;$i--) {
 			$tempData .= $this->data->GetSubString($this->width*$i,$this->width);
@@ -50,12 +60,5 @@ class SPRFrame {
 		return self::$sprToRGB[$colour];
 	}
 	
-}
-if(empty(SPRFrame::$sprToRGB)) {
-	$paletteReader = new FileReader(dirname(__FILE__).'/palette.dta');
-	for($i = 0;$i<256;$i++) {
-		SPRFrame::$sprToRGB[$i] = array('b'=>$paletteReader->ReadInt(1)*4,'g'=>$paletteReader->ReadInt(1)*4,'r'=>$paletteReader->ReadInt(1)*4);
-	}
-	unset($paletteReader);
 }
 ?>

@@ -21,7 +21,7 @@ class S16File
 		$this->frame_count = $this->reader->ReadInt(2);
 		for($i=0; $i < $this->frame_count; $i++)
 		{
-			$this->frame_header[$i] = new S16Frame($this->reader);
+			$this->frame_header[$i] = new S16Frame($this->reader,$this->encoding);
 		}
 	}
 	public function GetFrame($frame) {
