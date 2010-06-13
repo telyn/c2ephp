@@ -7,7 +7,7 @@ require_once(dirname(__FILE__).'/CREABlock.php');
 require_once(dirname(__FILE__).'/DFAMBlock.php');
 require_once(dirname(__FILE__).'/DSAGBlock.php');
 require_once(dirname(__FILE__).'/DSEXBlock.php');
-require_once(dirname(__FILE__).'/EGGBlock.php');
+require_once(dirname(__FILE__).'/EGGSBlock.php');
 require_once(dirname(__FILE__).'/EXPCBlock.php');
 require_once(dirname(__FILE__).'/FILEBlock.php');
 require_once(dirname(__FILE__).'/GENEBlock.php');
@@ -31,7 +31,7 @@ require_once(dirname(__FILE__).'/SFAMBlock.php');
 	/**\brief Value: 'DSEX' */
 	define('PRAY_BLOCK_DSEX','DSEX');
 	/**\brief Value: 'EGG' */
-	define('PRAY_BLOCK_EGG' ,'EGG' );
+	define('PRAY_BLOCK_EGGS' ,'EGGS' );
 	/**\brief Value: 'EXPC' */
 	define('PRAY_BLOCK_EXPC','EXPC');
 	/**\brief Value: 'FILE' */
@@ -248,8 +248,8 @@ abstract class PrayBlock {
 				return new LIVEBlock($prayfile,$name,$content,$flags); //sea monkeys agent files.
 
 			//egg
-			case PRAY_BLOCK_EGG:
-				return new EGGBlock($prayfile,$name,$content,$flags);
+			case PRAY_BLOCK_EGGS:
+				return new EGGSBlock($prayfile,$name,$content,$flags);
 
 			//starter families
 			case PRAY_BLOCK_DFAM:
