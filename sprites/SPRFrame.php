@@ -12,11 +12,12 @@ class SPRFrame implements ISpriteFrame {
 	private $reader;
 	public static $sprToRGB;
 	
-	public function SPRFrame(IReader $reader,$width,$height,$offset=0) {
+	public function SPRFrame(IReader $reader,$width,$height) {
+		$this->reader = $reader;
 		$this->width = $width;
 		$this->height = $height;
 		$this->offset = $this->reader->GetPosition();
-		$this->reader = $reader;
+		
 		
 		
 		//initialise palette if necessary.
@@ -28,18 +29,19 @@ class SPRFrame implements ISpriteFrame {
 			unset($paletteReader);
 		}
 	}
-	public function Flip() { //
+	public function Flip() {
 		$tempData = '';
 		for($i=$this->height-1;$i>-1;$i--) {
-			$tempData .= $this->data->GetSubString($this->width*$i,$this->width);
+			$tempData .= $reader->GetSubString($this->offset+$this->width*$i,$this->width);
 		}
-		$this->data = new StringReader($tempData);
+		$this->reader = new StringReader($tempData);
+		$this->offset = 0;
 
 	}
 	public function OutputPNG() {
 		ob_start();
 		$image = imagecreatetruecolor($this->width, $this->height);
-		$this->data->Seek(0);
+		$this->reader->Seek($this->offset);
 		$i=0;
 		for($y = 0; $y < $this->height; $y++)
 		{
@@ -56,7 +58,7 @@ class SPRFrame implements ISpriteFrame {
 		return $data;
 	}
 	private function NextToRGB() {
-		$colour = $this->data->ReadInt(1);
+		$colour = $this->reader->ReadInt(1);
 		return self::$sprToRGB[$colour];
 	}
 	
