@@ -5,6 +5,7 @@ require_once(dirname(__FILE__).'/../support/StringReader.php');
 require_once(dirname(__FILE__).'/COB/AgentBlock.php');
 require_once(dirname(__FILE__).'/COB/FileBlock.php');
 require_once(dirname(__FILE__).'/COB/AuthorBlock.php');
+require_once(dirname(__FILE__).'/COB/UnknownBlock.php');
 
 define('COB_FORMAT_C1','C1');
 define('COB_FORMAT_C2','C2');
