@@ -4,9 +4,20 @@ require_once(dirname(__FILE__).'/../../sprites/ISpriteFrame.php');
 require_once(dirname(__FILE__).'/../../sprites/S16Frame.php');
 require_once(dirname(__FILE__).'/../../sprites/SPRFrame.php');
 
+/** \name Dependency Types
+ * Types of dependencies that apply to COBs.
+ * @{
+ * \brief Sprite Dependency
+**/
 define('DEPENDENCY_SPRITE','sprite');
+/// \brief Sound Dependency
 define('DEPENDENCY_SOUND','sound');
+///@}
 
+/** \brief COB Agent Block for C1 and C2
+ * For Creatures 1, this block contains all the useful data in a typical COB and will be the only block.
+ * For Creatures 2, this block contains the scripts and metadata about the actual object.
+ */
 class COBAgentBlock extends COBBlock {
 	
 	private $agentName;
@@ -30,12 +41,18 @@ class COBAgentBlock extends COBBlock {
 	private $removeScript;
 	private $eventScripts;
 	
+	/** \brief initialise a new COBAgentBlock
+	 * Initialises a new COBAgentBlock with the given name and description. 
+	 * As defaults can be made for everything else these is the only non-optional parts of a COB file in my opinion.
+	 * Even then they could just be '' if you really felt like it. 
+	 * \param $agentName The name of the agent (as displayed in the C2 injector)
+	 * \param $agentDescription The description of the agent (as displayed in the C2 injector)
+	 */
 	public function COBAgentBlock($agentName,$agentDescription) {
 		parent::COBBlock(COB_BLOCK_AGENT);
 		$this->agentName = $agentName;
 		$this->agentDescription = $agentDescription;
 	}
-	
 	public function GetAgentName() {
 		return $this->agentName;
 	}
@@ -57,6 +74,9 @@ class COBAgentBlock extends COBBlock {
 	public function GetThumbnail() {
 		return $this->thumbnail;
 	}
+	/** \brief Gets dependencies of the given type
+	 * \param $type One of the DEPENDENCY_* constants.
+	 */
 	public function GetDependencies($type=null) {
 		$dependenciesToReturn = array();
 		foreach($this->dependencies as $dependency) {
@@ -66,12 +86,24 @@ class COBAgentBlock extends COBBlock {
 		}
 		return $dependenciesToReturn;
 	}
+	/** \Gets the value of reserved1
+	 * Reserved values weren't ever officially used by CL,
+	 * but someone might find them useful for something else.
+	 */
 	public function GetReserved1() {
 		return $this->reserved1;
 	}
+	/** \Gets the value of reserved2
+	 * Reserved values weren't ever officially used by CL,
+	 * but someone might find them useful for something else.
+	 */
 	public function GetReserved2() {
 		return $this->reserved2;
 	}
+	/** \Gets the value of reserved3
+	 * Reserved values weren't ever officially used by CL,
+	 * but someone might find them useful for something else.
+	 */
 	public function GetReserved3() {
 		return $this->reserved3;
 	}
@@ -123,6 +155,11 @@ class COBAgentBlock extends COBBlock {
 		$ablocks = $rcb->GetBlocks(COB_BLOCK_AGENT);
 		$this->removeScript = $ablocks[0]->GetInstallScript();
 	}
+	/** \brief Creates a new COBAgentBlock from an IReader.
+	 * Reads from the current position of the IReader to fill out the data required by
+	 * the COBAgentBlock, then creates one and adds all the fields to it.
+	 * \param $reader The IReader, seeked to the beginning of the contents of the agent block
+	 */
 	public static function CreateFromReaderC2(IReader $reader) {
 		$quantityAvailable = $reader->ReadInt(2);
 		if($quantityAvailable == 0xffff) {
@@ -134,7 +171,6 @@ class COBAgentBlock extends COBBlock {
 		$expiryDay = $reader->ReadInt(1);
 		$expiryMonth = $reader->ReadInt(1);
 		$expiryYear = $reader->ReadInt(2);
-		
 		$expiryDate = mktime(0,0,0,$expiryMonth,$expiryDay,$expiryYear);
 		
 		$reserved = array($reader->ReadInt(4),$reader->ReadInt(4),$reader->ReadInt(4));
