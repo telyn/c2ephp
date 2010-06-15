@@ -1,7 +1,8 @@
 <?php
 require_once(dirname(__FILE__).'/../support/IReader.php');
+require_once(dirname(__FILE__).'/ISpriteFile.php');
 require_once(dirname(__FILE__).'/C16Frame.php');
-class C16File
+class C16File implements ISpriteFile
 {
 	private $encoding;
 	private $frameCount;
@@ -26,7 +27,11 @@ class C16File
 			$this->frames[$x] = new C16Frame($this->reader,$this->encoding);
 		} 
 	}
-	
+	public function GetFrame($frame) {
+		if($this->frameCount < ($frame+1))
+			throw new Exception('OutputPNG - Frame out of bounds - '.$frame);
+		return $this->frames[$frame];
+	}
 	public function OutputPNG($frame)
 	{
 		if($this->frameCount < ($frame+1))

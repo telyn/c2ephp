@@ -1,8 +1,10 @@
 <?php
 require_once(dirname(__FILE__).'/SPRFrame.php');
+require_once(dirname(__FILE__).'/ISpriteFile.php');
 require_once(dirname(__FILE__).'/../support/IReader.php');
 
-class SPRFile {
+//TODO: THIS CLASS WAS IMPLEMENTED REALLY POORLY :(
+class SPRFile implements ISpriteFile {
 	private $reader;
 	private $frameCount;
 	private $frames;
@@ -18,6 +20,11 @@ class SPRFile {
 		for($i=0;$i<$this->frameCount;$i++) {
 			$this->frames[$i] = new SPRFrame($this->reader,$frameData[$i]['width'],$frameData[$i]['height']);
 		}
+	}
+	public function GetFrame($frame) {
+		if($this->frameCount < ($frame+1))
+			throw new Exception('OutputPNG - Frame out of bounds - '.$frame);
+		return $this->frames[$frame];
 	}
 	public function OutputPNG($frame)
 	{
