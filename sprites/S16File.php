@@ -1,7 +1,8 @@
 <?php
 require_once(dirname(__FILE__)."/../support/FileReader.php");
+require_once(dirname(__FILE__).'/ISpriteFile.php');
 require_once(dirname(__FILE__)."/S16Frame.php");
-class S16File
+class S16File implements ISpriteFile
 {
 	private $encoding;
 	private $frame_count;
@@ -25,13 +26,15 @@ class S16File
 		}
 	}
 	public function GetFrame($frame) {
-		return $this->frame_header[$frame];
+		if($this->frameCount < ($frame+1))
+			throw new Exception('OutputPNG - Frame out of bounds - '.$frame);
+		return $this->frames[$frame];
 	}
 	public function OutputPNG($frame)
 	{
 		if($this->frame_count < ($frame+1))
 			throw new Exception("OutputPNG - Frame out of bounds - ".$frame);
-		return $this->frame_header[$frame]->OutputPNG($this->encoding);
+		return $this->frames[$frame]->OutputPNG($this->encoding);
 	}
 }
 ?>
