@@ -109,6 +109,7 @@ class CAOSHighlighter {
 		$this->SetIndentForThisLine($words[0]);
 
 		$inString = false;
+		$whenStringBegan = -1;
 		$inByteString = false;
 		$highlightedLine = '';
 		$firstToken = '';
@@ -127,6 +128,19 @@ class CAOSHighlighter {
 			$word = $words[$this->currentWord];
 			$highlightedWord = $word;
 			if($inString) {
+				if($this->currentWord == sizeof($words)-1) {
+					if($word{strlen($word)-1} != '"') {
+						$highlightedWord = htmlentities($word).'</span>';
+						$highlightedLineBeforeString = substr($highlightedLine,0,$whenStringBegan);
+						$highlightedLineAfterString = substr($highlightedLine,$whenStringBegan);
+						$highlightedLineAfterString .= $highlightedWord;
+						$highlightedLineAfterString = str_replace('<span class="string">','<span class="error">',$highlightedLineAfterString);
+						$highlightedLine = $highlightedLineBeforeString.$highlightedLineAfterString;
+						$inString = false;
+						continue;
+						
+					}
+				}
 				if($word{strlen($word)-1} == '"') {
 					$highlightedWord = htmlentities($word).'</span>'; //end the string
 					$inString=false;
@@ -135,6 +149,17 @@ class CAOSHighlighter {
 					continue;					
 				}
 			} else if($inByteString) {
+				if($this->currentWord == sizeof($words)-1) {
+					if($word{strlen($word)-1} != ']') {
+						$highlightedWord = htmlentities($word).'</span>';
+						$highlightedLineBeforeString = substr($highlightedLine,0,$whenStringBegan);
+						$highlightedLineAfterString = substr($highlightedLine,$whenStringBegan);
+						$highlightedLineAfterString .= $highlightedWord;
+						$highlightedLineAfterString = str_replace('<span class="bytestring">','<span class="error">',$highlightedLineAfterString);
+						$highlightedLine = $highlightedLineBeforeString.$highlightedLineAfterString;
+						continue;
+					}
+				}
 				if($word{strlen($word)-1} == ']') {
 					$highlightedWord = htmlentities($word).'</span>'; //end the string
 					$inByteString=false;
@@ -214,21 +239,29 @@ class CAOSHighlighter {
 				}
 				if($highlightedWord == $word) { //invalid caos command
 					if($word{0} == '"' && $this->scriptFormat != FORMAT_C2) { //if it begins a string. (C2 has no strings)
+						$whenStringBegan = strlen($highlightedLine);
 						$highlightedWord = '<span class="string">'.htmlentities($word);
 						if($word{strlen($word)-1} == '"') {
 							$highlightedWord .= '</span>'; //end the string
+							$inString = false;
+						} else if($this->currentWord == sizeof($words)-1) {
+							$highlightedWord = '<span class="error">'.htmlentities($word).'</span>';
 							$inString = false;
 						} else {
 							$inString = true;
 						}
 					} else if($word{0} == '[') { //begins a bytestring
 						$highlightedWord = '<span class="bytestring">'.htmlentities($word);
+						$whenStringBegan = strlen($highlightedLine);
 						if($this->scriptFormat == 'C2') {
 							//c2 bytestrings are part of the original term, on they're own they're wrong!
 							$highlightedWord = '<span class="error">'.htmlentities($word);
 						}
 						if($word{strlen($word)-1} == ']') {
 							$highlightedWord .= '</span>';
+							$inByteString = false;
+						} else if($this->currentWord == sizeof($words)-1) {
+							$highlightedWord = '<span class="error">'.htmlentities($word).'</span>';
 							$inByteString = false;
 						} else {
 							$inByteString = true;
