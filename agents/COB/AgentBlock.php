@@ -53,24 +53,38 @@ class COBAgentBlock extends COBBlock {
 		$this->agentName = $agentName;
 		$this->agentDescription = $agentDescription;
 	}
+	/// \brief Gets the agent's name
 	public function GetAgentName() {
 		return $this->agentName;
 	}
+	/// \brief Gets the agent's description
 	public function GetAgentDescription() {
 		return $this->agentDescription;
 	}
+	/// \brief Gets the agent's install script
 	public function GetInstallScript() {
 		return $this->installScript;
 	}
+	/// \brief Gets the agent's remove script
 	public function GetRemoveScript() {
 		return $this->removeScript;
 	}
+	/// \brief Gets the number of event scripts
+	public function GetEventScriptCount() {
+		return sizeof($this->eventScripts);
+	}
+	/// \brief Gets the agent's event scripts
 	public function GetEventScripts() {
 		return $this->eventScripts;
 	}
+	/** \brief Gets an event script
+	 * Event scripts are not necessarily in any order.
+	 * \param $whichScript Which script to get.
+	 */
 	public function GetEventScript($whichScript) {
 		return $this->eventScripts[$whichScript];
 	}
+	/// \brief Gets the thumbnail of this agent as an ISpriteFrame
 	public function GetThumbnail() {
 		return $this->thumbnail;
 	}
@@ -107,21 +121,36 @@ class COBAgentBlock extends COBBlock {
 	public function GetReserved3() {
 		return $this->reserved3;
 	}
-	
+	/** \brief Adds a dependency to this agent
+	 * 
+	 * \param COBDependency $dependency The dependency to add.
+	 */
 	public function AddDependency(COBDependency $dependency) {
 		if(!in_array($dependency->GetDependencyName(),$this->dependencies)) {
 			$this->dependencies[] = $dependency;
 		}
 	}
+	/** \brief Adds an install script
+	 * \param $installScript the text of the script to add
+	 */
 	public function AddInstallScript($installScript) {
 		$this->installScript = $installScript;
 	}
+	/** \brief Adds a remover script
+	 * \param $removeScript The text of the script to add
+	 */
 	public function AddRemoveScript($removeScript) {
 		$this->removeScript = $removeScript;
 	}
+	/** \brief Adds an event script
+	 * \param $removeScript The text of the script to add
+	 */
 	public function AddEventScript($eventScript) {
 		$this->eventScripts[] = $eventScript;
 	}
+	/** \brief Adds the date this agent was last injected
+	 * \param $time The date this agent was last injected as a UNIX timestamp
+	 */
 	public function AddLastUsageDate($time) {
 		if($time > time()) {
 			return false;
@@ -129,22 +158,42 @@ class COBAgentBlock extends COBBlock {
 			$this->lastUsageDate = $time;
 		}
 	}
+	/** \brief Adds the date this agent will expire
+	 * \param $time The date this agent will expire as a UNIX timestamp
+	 */
 	public function AddExpiryDate($time) {
 		$this->expiryDate = $time;
 	}
+	/** \brief Adds the quantity of the agent available
+	 * \param $quantity The quantity available
+	 */
 	public function AddQuantityAvailable($quantity) {
 		$this->quantityAvailable = $quantity;
 	}
+	/** \brief Adds the interval required between re-use.
+	 * \param $interval The interval in seconds, between re-use of this agent.
+	 */
 	public function AddReuseInterval($interval) {
 		$this->reuseInterval = $interval;
 	}
+	/** \brief Adds the reserved variables to this agent
+	 * These variables have no meaning to Creatures 2 and don't appear in Creatures 1.
+	 * \param $reserved1 The first reserved variable
+	 * \param $reserved2 The second reserved variable
+	 * \param $reserved3 The third reserved variable
+	 */
 	public function AddReserved($reserved1,$reserved2,$reserved3) {
 		$this->reserved1 = $reserved1;
 		$this->reserved2 = $reserved2;
 		$this->reserved3 = $reserved3;
 	}
-	
+	/** \brief Add the thumbnail to this agent.
+	 * \param ISpriteFrame $frame The thumbnail as an ISpriteFrame 
+	 */
 	public function AddThumbnail(ISpriteFrame $frame) {
+		if($this->thumbnail != null) {
+			throw new Exception('Thumbnail already added');
+		}
 		$this->thumbnail = $frame;
 	}
 	public function AddC1RemoveScriptFromRCB(IReader $reader) {
@@ -221,6 +270,11 @@ class COBAgentBlock extends COBBlock {
 		return $agentBlock;
 		
 	}
+	/** \brief Creates a COBAgentBlock from an IReader
+	 * Reads from the current position of the IReader to fill out the data required by
+	 * the COBAgentBlock, then creates one and adds all the fields to it.
+	 * \param $reader The IReader, seeked to the beginning of the contents of the agent block
+	 */
 	public static function CreateFromReaderC1(IReader $reader) {
 		$quantityAvailable	= $reader->ReadInt(2);
 		$expires_month = $reader->ReadInt(4);
@@ -267,17 +321,24 @@ class COBAgentBlock extends COBBlock {
 	}
 }
 
+/// \brief defines a dependency as used in a COB file
 class COBDependency {
 	private $type;
 	private $name;
 	
+	/** \brief Creates a new COBDependency
+	 * \param $type The type of dependency.
+	 * \param $name The name of the dependency.
+	 */
 	public function COBDependency($type,$name) {
 		$this->type = $type;
 		$this->name = $name;
 	}
+	/// \brief Gets the dependency type
 	public function GetDependencyType() {
 		return $this->type;
 	}
+	/// \brief Gets the name of the dependency
 	public function GetDependencyName() {
 		return $this->name;
 	}
