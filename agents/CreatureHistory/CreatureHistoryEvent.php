@@ -192,7 +192,7 @@ class CreatureHistoryEvent {
 		return $this->moniker2;
 	}
 	/** Accessor method for user text
-	 * In theory this can be used on any event without messing it up (and it would be readable via CAOS)
+	 * In theory user text can be used on any event without messing it up (and it would be readable via CAOS)
 	 * In practice, this is only used by either the first event or the hatched event (I forget which)
 	 * and is used to mean the text that the user enters to describe this creature in the creature info dialog
 	 * \return The user text associated with this event.
