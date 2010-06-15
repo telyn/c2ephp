@@ -19,7 +19,6 @@ define('CREATUREHISTORY_GENDER_MALE',1);
  */
 class CreatureHistory {
 
-	//TODO: Getter functions
 	private $events;
 	private $moniker;
 	private $name;
@@ -63,7 +62,7 @@ class CreatureHistory {
 		}
 		$data .= pack('V',1);
 		$data .= pack('V',32).$this->moniker;
-		$data .= pack('V',32).$this->moniker; //yeah, twice. Dunno why.
+		$data .= pack('V',32).$this->moniker; //yeah, twice. Dunno why, CL are bonkers.
 		$data .= pack('V',strlen($this->name)).$this->name;
 		$data .= pack('VVVV',$this-gender,$this->genus,$this->species,count($this->events));
 		foreach($this->events as $event) {
@@ -120,21 +119,27 @@ class CreatureHistory {
 		}
 		return $matchingEvents;
 	}
+	/// \brief Gets the moniker of the creature this history is attached to.
 	public function GetCreatureMoniker() {
 		return $this->moniker;
 	}
+	/// \brief Gets the name of the creature this history is attached to.
 	public function GetCreatureName() {
 		return $this->name;
 	}
+	/// \brief Gets the gender of the creature this history is attached to.
 	public function GetCreatureGender() {
 		return $this->gender;
 	}
+	/// \brief Gets the genus of the creature this history is attached to.
 	public function GetCreatureGenus() {
 		return $this->genus;
 	}
+	/// \brief Gets the species of the creature this history is attached to.
 	public function GetCreatureSpecies() {
 		return $this->species;
 	}
+	/// \brief Gets whether the creature this history is attached to has been through the warp.
 	public function GetCreatureIsWarpVeteran() {
 		return $this->warpveteran;
 	}
