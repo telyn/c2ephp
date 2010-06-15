@@ -27,7 +27,7 @@ class C16Frame implements ISpriteFrame
 	 	}
 	 }
 	 
-	 public function OutputPNG($encoding)
+	 public function OutputPNG()
 	 {
 	 	ob_start();
 		$image = imagecreatetruecolor($this->width,

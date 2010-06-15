@@ -8,6 +8,6 @@ if($argv[1] != "") {
 }
 $agent = new PRAYFile(new FileReader($file));
 $block = $agent->GetBlocks('AGNT');
-print_r($block[0]);
+print_r($block[0]->GetAgentAnimationAsSpriteFrame());
 
 ?>
