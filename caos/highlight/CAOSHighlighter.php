@@ -129,7 +129,7 @@ class CAOSHighlighter {
 			$highlightedWord = $word;
 			if($inString) {
 				if($this->currentWord == sizeof($words)-1) {
-					if($word{strlen($word)-1} != '"') {
+					if(strpos($word,'"') === false) {
 						$highlightedWord = htmlentities($word).'</span>';
 						$highlightedLineBeforeString = substr($highlightedLine,0,$whenStringBegan);
 						$highlightedLineAfterString = substr($highlightedLine,$whenStringBegan);
@@ -141,16 +141,22 @@ class CAOSHighlighter {
 						
 					}
 				}
-				if($word{strlen($word)-1} == '"') {
-					$highlightedWord = htmlentities($word).'</span>'; //end the string
+				if(($position = strpos($word,'"')) !== false) {
+					$firstHalf = substr($word,0,$position);
+					$secondHalf = substr($word,$position+1);
+					
+					$highlightedWord = htmlentities($firstHalf).'"</span>'; //end the string
+					if($secondHalf != '') {
+						$highlightedWord .= '<span class="error">'.htmlentities($secondHalf).'</span>';
+					}
 					$inString=false;
 				} else {
-					$highlightedLine .= $word;
+					$highlightedLine .= $word.' ';
 					continue;					
 				}
 			} else if($inByteString) {
 				if($this->currentWord == sizeof($words)-1) {
-					if($word{strlen($word)-1} != ']') {
+					if(strpos($word,']') === false) {
 						$highlightedWord = htmlentities($word).'</span>';
 						$highlightedLineBeforeString = substr($highlightedLine,0,$whenStringBegan);
 						$highlightedLineAfterString = substr($highlightedLine,$whenStringBegan);
@@ -160,8 +166,14 @@ class CAOSHighlighter {
 						continue;
 					}
 				}
-				if($word{strlen($word)-1} == ']') {
-					$highlightedWord = htmlentities($word).'</span>'; //end the string
+				if(($position = strpos($word,']')) !== false) {
+					$firstHalf = substr($word,0,$position);
+					$secondHalf = substr($word,$position+1);
+					
+					$highlightedWord = htmlentities($firstHalf).']</span>'; //end the string
+					if($secondHalf != '') {
+						$highlightedWord .= '<span class="error">'.htmlentities($secondHalf).'</span>';
+					}
 					$inByteString=false;
 				} else {
 					$highlightedLine .= $word.' ';
