@@ -127,6 +127,7 @@ abstract class PrayBlock {
 	}
 	/** Gets the PRAY block's binary data if the PRAYBlock is decompiled.
 	 * It will decompress automatically if necessary, then unset the compressed flag.
+	 * TODO: I'm not 100% sure I should keep this public...
 	 * \return the PRAY block's binary data.
 	 */
 	public function GetData() {
