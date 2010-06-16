@@ -74,9 +74,12 @@ abstract class PrayBlock {
 *	\param $name		The name of the block. Must be unique within the PRAYFile. This will be checked by the PRAYFile.
 *	\param $content		If constructing the PrayBlock by reading a PRAY file, must be a binary string. Otherwise, should be null (but doesn't have to be).
 *	\param $flags		A 1-byte integer containing the flags this PrayBlock has set
-**	\param $type		The type of the PrayBlock as a PRAY_BLOCK_* constant	
+**	\param $type		The type of the PrayBlock as a PRAY_BLOCK_* constant. Must be a four-character string.	
 */
 	public function PrayBlock($prayfile,$name,$content,$flags,$type) {
+		if(strlen($type) != 4) {
+			throw new Exception('Invalid PRAY block type: '.$type);
+		}
 		if($prayfile instanceof PRAYFile) {
 			$this->prayfile = $prayfile;
 			$this->decompiled = false;
