@@ -1,5 +1,6 @@
 <?php
 
+require_once(dirname(__FILE__).'/EXPCBlock.php');
 require_once(dirname(__FILE__).'/TagBlock.php');
 
 class DSEXBlock extends EXPCBlock {
