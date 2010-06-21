@@ -83,41 +83,101 @@ window.onload = initDynSections;
     </ul>
   </div>
 <h1>agents/COB.php</h1><a href="COB_8php.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/../support/IReader.php&#39;</span>);
-<a name="l00003"></a>00003 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/../support/StringReader.php&#39;</span>);
-<a name="l00004"></a>00004 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/../sprites/SPRFrame.php&#39;</span>);
-<a name="l00005"></a>00005 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/../sprites/S16Frame.php&#39;</span>);
-<a name="l00006"></a>00006 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/ICOB.php&#39;</span>);
-<a name="l00007"></a>00007 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/C1COB.php&#39;</span>);
-<a name="l00008"></a>00008 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/C2COB.php&#39;</span>);
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/../support/IReader.php&#39;</span>);
+<a name="l00004"></a>00004 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/../support/StringReader.php&#39;</span>);
+<a name="l00005"></a>00005 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/COB/AgentBlock.php&#39;</span>);
+<a name="l00006"></a>00006 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/COB/FileBlock.php&#39;</span>);
+<a name="l00007"></a>00007 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/COB/AuthorBlock.php&#39;</span>);
+<a name="l00008"></a>00008 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/COB/UnknownBlock.php&#39;</span>);
 <a name="l00009"></a>00009 
-<a name="l00010"></a><a class="code" href="classCOB.html">00010</a> <span class="keyword">class </span><a class="code" href="classCOB.html">COB</a> <span class="keyword">implements</span> <a class="code" href="interfaceICOB.html">ICOB</a> {
-<a name="l00011"></a><a class="code" href="classCOB.html#a852a531e9d2d0516ba7367d66aac661d">00011</a>     <span class="keyword">public</span> <a class="code" href="classCOB.html#a852a531e9d2d0516ba7367d66aac661d">$cob</a>;
-<a name="l00012"></a><a class="code" href="classCOB.html#a7b47409f0d1961495a750d841bf7b568">00012</a>     <span class="keyword">public</span> function <a class="code" href="classCOB.html#a7b47409f0d1961495a750d841bf7b568">COB</a>(<a class="code" href="interfaceIReader.html">IReader</a> $reader) {
-<a name="l00013"></a>00013         $this-&gt;<a class="code" href="classCOB.html#a8ae110c7b01c103dedf28398e2631559">LoadCOB</a>($reader);
-<a name="l00014"></a>00014     }
-<a name="l00015"></a><a class="code" href="classCOB.html#a8ae110c7b01c103dedf28398e2631559">00015</a>     <span class="keyword">public</span> function <a class="code" href="classCOB.html#a8ae110c7b01c103dedf28398e2631559">LoadCOB</a>(<a class="code" href="interfaceIReader.html">IReader</a> $reader) {
-<a name="l00016"></a>00016         <span class="keywordflow">if</span>($reader-&gt;<a class="code" href="interfaceIReader.html#a7af19223d4c47acedc5a82b0eace23be">Read</a>(4) == <span class="stringliteral">&#39;cob2&#39;</span>) {
-<a name="l00017"></a>00017             $reader-&gt;<a class="code" href="interfaceIReader.html#ab3e0669bb64e2a55f6824e86facd873f">Seek</a>(0);
-<a name="l00018"></a>00018             $this-&gt;cob = <span class="keyword">new</span> <a class="code" href="classC2COB.html">C2COB</a>($reader);
-<a name="l00019"></a>00019         } <span class="keywordflow">else</span> {
-<a name="l00020"></a>00020             echo <span class="stringliteral">&quot;Compressed or COB1\n&quot;</span>;
-<a name="l00021"></a>00021             $uncompressed = @gzuncompress($reader-&gt;<a class="code" href="interfaceIReader.html#a2ef378fb3813fcc402b94216abb8410e">GetSubString</a>(0));
-<a name="l00022"></a>00022             <span class="keywordflow">if</span>($uncompressed !== <span class="keyword">false</span>) {
-<a name="l00023"></a>00023                 $this-&gt;<a class="code" href="classCOB.html#a8ae110c7b01c103dedf28398e2631559">LoadCOB</a>(<span class="keyword">new</span> <a class="code" href="classStringReader.html">StringReader</a>($uncompressed));
-<a name="l00024"></a>00024             } <span class="keywordflow">else</span> {
-<a name="l00025"></a>00025                 $this-&gt;cob = <span class="keyword">new</span> <a class="code" href="classC1COB.html">C1COB</a>($reader);
-<a name="l00026"></a>00026             }
-<a name="l00027"></a>00027         }
-<a name="l00028"></a>00028     }
-<a name="l00029"></a><a class="code" href="classCOB.html#a45544686298a993878e3f4da05640e3e">00029</a>     <span class="keyword">public</span> function <a class="code" href="classCOB.html#a45544686298a993878e3f4da05640e3e">GetData</a>() {
-<a name="l00030"></a>00030         <span class="keywordflow">return</span> $this-&gt;cob-&gt;GetData();
-<a name="l00031"></a>00031     }
-<a name="l00032"></a>00032 }
-<a name="l00033"></a>00033 
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036 ?&gt;
+<a name="l00010"></a><a class="code" href="COB_8php.html#a6d9996dab6f012667997a95a66b6012f">00010</a> define(<span class="stringliteral">&#39;COB_FORMAT_C1&#39;</span>,<span class="stringliteral">&#39;C1&#39;</span>);
+<a name="l00011"></a><a class="code" href="COB_8php.html#a38c6d036f3cb0c9e03382750541e3b1e">00011</a> define(<span class="stringliteral">&#39;COB_FORMAT_C2&#39;</span>,<span class="stringliteral">&#39;C2&#39;</span>);
+<a name="l00012"></a>00012 
+<a name="l00013"></a><a class="code" href="classCOB.html">00013</a> <span class="keyword">class </span><a class="code" href="classCOB.html">COB</a> {
+<a name="l00014"></a><a class="code" href="classCOB.html#ae3ecf9394037fbd1278e2010729b2541">00014</a>     <span class="keyword">private</span> <a class="code" href="classCOB.html#ae3ecf9394037fbd1278e2010729b2541">$reader</a>;
+<a name="l00015"></a><a class="code" href="classCOB.html#aa713a7606b5ca2fac454ec62bff6784e">00015</a>     <span class="keyword">private</span> <a class="code" href="classCOB.html#aa713a7606b5ca2fac454ec62bff6784e">$format</a>;
+<a name="l00016"></a><a class="code" href="classCOB.html#a3c376687575b9ea1bb20887fc6108511">00016</a>     <span class="keyword">private</span> <a class="code" href="classCOB.html#a3c376687575b9ea1bb20887fc6108511">$blocks</a>;
+<a name="l00017"></a>00017     
+<a name="l00018"></a><a class="code" href="classCOB.html#a973cc5764e796daa83fe6ff27f81fb42">00018</a>     <span class="keyword">public</span> function <a class="code" href="classCOB.html#a973cc5764e796daa83fe6ff27f81fb42">COB</a>(<a class="code" href="interfaceIReader.html">IReader</a> <a class="code" href="classCOB.html#ae3ecf9394037fbd1278e2010729b2541">$reader</a>=null) {
+<a name="l00019"></a>00019         <span class="keywordflow">if</span>(<a class="code" href="classCOB.html#ae3ecf9394037fbd1278e2010729b2541">$reader</a> != null) {
+<a name="l00020"></a>00020             $this-&gt;<a class="code" href="classCOB.html#a8ae110c7b01c103dedf28398e2631559">LoadCOB</a>(<a class="code" href="classCOB.html#ae3ecf9394037fbd1278e2010729b2541">$reader</a>);
+<a name="l00021"></a>00021         }
+<a name="l00022"></a>00022     }
+<a name="l00023"></a><a class="code" href="classCOB.html#a8ae110c7b01c103dedf28398e2631559">00023</a>     <span class="keyword">public</span> function <a class="code" href="classCOB.html#a8ae110c7b01c103dedf28398e2631559">LoadCOB</a>(<a class="code" href="interfaceIReader.html">IReader</a> <a class="code" href="classCOB.html#ae3ecf9394037fbd1278e2010729b2541">$reader</a>) {
+<a name="l00024"></a>00024         <span class="keywordflow">if</span>($reader-&gt;<a class="code" href="interfaceIReader.html#a7af19223d4c47acedc5a82b0eace23be">Read</a>(4) == <span class="stringliteral">&#39;cob2&#39;</span>) {
+<a name="l00025"></a>00025             $reader-&gt;<a class="code" href="interfaceIReader.html#ab3e0669bb64e2a55f6824e86facd873f">Seek</a>(0);
+<a name="l00026"></a>00026             $this-&gt;<a class="code" href="classCOB.html#a6e4f5d6fadcf60d21013806846412f70">LoadC2COB</a>($reader);
+<a name="l00027"></a>00027         } <span class="keywordflow">else</span> {
+<a name="l00028"></a>00028             $string = $reader-&gt;<a class="code" href="interfaceIReader.html#a2ef378fb3813fcc402b94216abb8410e">GetSubString</a>(0);
+<a name="l00029"></a>00029             $data = @gzuncompress($string);
+<a name="l00030"></a>00030             <span class="keywordflow">if</span>($data===<span class="keyword">false</span>) {
+<a name="l00031"></a>00031                 $reader-&gt;<a class="code" href="interfaceIReader.html#ab3e0669bb64e2a55f6824e86facd873f">Seek</a>(0);
+<a name="l00032"></a>00032                 $this-&gt;<a class="code" href="classCOB.html#aa524d975b4fbca6753033999973e4238">LoadC1COB</a>($reader);
+<a name="l00033"></a>00033             } <span class="keywordflow">else</span> {
+<a name="l00034"></a>00034                 $this-&gt;<a class="code" href="classCOB.html#a6e4f5d6fadcf60d21013806846412f70">LoadC2COB</a>(<span class="keyword">new</span> <a class="code" href="classStringReader.html">StringReader</a>($data));
+<a name="l00035"></a>00035             }
+<a name="l00036"></a>00036         }
+<a name="l00037"></a>00037     }
+<a name="l00038"></a><a class="code" href="classCOB.html#a6e4f5d6fadcf60d21013806846412f70">00038</a>     <span class="keyword">public</span> function <a class="code" href="classCOB.html#a6e4f5d6fadcf60d21013806846412f70">LoadC2COB</a>(<a class="code" href="interfaceIReader.html">IReader</a> <a class="code" href="classCOB.html#ae3ecf9394037fbd1278e2010729b2541">$reader</a>) {
+<a name="l00039"></a>00039         $this-&gt;format = <a class="code" href="COB_8php.html#a38c6d036f3cb0c9e03382750541e3b1e">COB_FORMAT_C2</a>;
+<a name="l00040"></a>00040         <span class="keywordflow">if</span>($reader-&gt;<a class="code" href="interfaceIReader.html#a7af19223d4c47acedc5a82b0eace23be">Read</a>(4) == <span class="stringliteral">&#39;cob2&#39;</span>) {
+<a name="l00041"></a>00041             <span class="keywordflow">while</span>(<a class="code" href="pray-agnt-animation_8php.html#a7f8f86b37cd48a37bf0df573d8512d11">$block</a> = $this-&gt;<a class="code" href="classCOB.html#a865dd7da5669ae500742bcfda3a5c74a">ReadBlock</a>($reader)) {
+<a name="l00042"></a>00042                 $this-&gt;blocks[] = <a class="code" href="pray-agnt-animation_8php.html#a7f8f86b37cd48a37bf0df573d8512d11">$block</a>;
+<a name="l00043"></a>00043             }
+<a name="l00044"></a>00044         } <span class="keywordflow">else</span> {
+<a name="l00045"></a>00045             <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Not a valid C2 COB file!&#39;</span>);
+<a name="l00046"></a>00046         }
+<a name="l00047"></a>00047     }
+<a name="l00048"></a>00048     
+<a name="l00049"></a><a class="code" href="classCOB.html#aa524d975b4fbca6753033999973e4238">00049</a>     <span class="keyword">public</span> function <a class="code" href="classCOB.html#aa524d975b4fbca6753033999973e4238">LoadC1COB</a>(<a class="code" href="interfaceIReader.html">IReader</a> <a class="code" href="classCOB.html#ae3ecf9394037fbd1278e2010729b2541">$reader</a>) {
+<a name="l00050"></a>00050         $this-&gt;format = <a class="code" href="COB_8php.html#a6d9996dab6f012667997a95a66b6012f">COB_FORMAT_C1</a>;
+<a name="l00051"></a>00051         $version = $reader-&gt;<a class="code" href="interfaceIReader.html#a61b184ffbf103eb8369e3e2f71d884ea">ReadInt</a>(2);
+<a name="l00052"></a>00052         <span class="keywordflow">if</span>($version &gt; 4) {
+<a name="l00053"></a>00053             <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Invalid cob file.&#39;</span>);
+<a name="l00054"></a>00054         } <span class="keywordflow">else</span> {
+<a name="l00055"></a>00055             $this-&gt;blocks[] = <a class="code" href="classCOBAgentBlock.html#ad6f0ac25d3d9d2061b67f0a04d6e2063" title="Creates a COBAgentBlock from an IReader Reads from the current position of the IReader...">COBAgentBlock::CreateFromReaderC1</a>($reader);
+<a name="l00056"></a>00056         }
+<a name="l00057"></a>00057     }
+<a name="l00058"></a>00058     
+<a name="l00059"></a><a class="code" href="classCOB.html#a5207fc38bf52390c4b36a52e03f5eefa">00059</a>     <span class="keyword">public</span> function <a class="code" href="classCOB.html#a5207fc38bf52390c4b36a52e03f5eefa">AddBlock</a>(<a class="code" href="classCOBBlock.html" title="The base COB block class.">COBBlock</a> <a class="code" href="pray-agnt-animation_8php.html#a7f8f86b37cd48a37bf0df573d8512d11">$block</a>) {
+<a name="l00060"></a>00060         $this-&gt;blocks[] = $block;
+<a name="l00061"></a>00061     }
+<a name="l00062"></a><a class="code" href="classCOB.html#a865dd7da5669ae500742bcfda3a5c74a">00062</a>     <span class="keyword">private</span> function <a class="code" href="classCOB.html#a865dd7da5669ae500742bcfda3a5c74a">ReadBlock</a>(<a class="code" href="classCOB.html#ae3ecf9394037fbd1278e2010729b2541">$reader</a>) {
+<a name="l00063"></a>00063         <span class="keywordflow">if</span>(!($type = <a class="code" href="classCOB.html#ae3ecf9394037fbd1278e2010729b2541">$reader</a>-&gt;Read(4))) {
+<a name="l00064"></a>00064             print($type);
+<a name="l00065"></a>00065             <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00066"></a>00066         }
+<a name="l00067"></a>00067         $size = <a class="code" href="classCOB.html#ae3ecf9394037fbd1278e2010729b2541">$reader</a>-&gt;ReadInt(4);
+<a name="l00068"></a>00068         <span class="keywordflow">switch</span>($type) {
+<a name="l00069"></a>00069             <span class="keywordflow">case</span> <span class="stringliteral">&#39;agnt&#39;</span>:
+<a name="l00070"></a>00070                 <span class="comment">//we read the entire thing so that if there are errors we can still go on with the other blocks.</span>
+<a name="l00071"></a>00071                 <span class="keywordflow">return</span> <a class="code" href="classCOBAgentBlock.html#aea727af0c64c8fbc85906064502ba55a" title="Creates a new COBAgentBlock from an IReader. Reads from the current position of the...">COBAgentBlock::CreateFromReaderC2</a>(<a class="code" href="classCOB.html#ae3ecf9394037fbd1278e2010729b2541">$reader</a>);
+<a name="l00072"></a>00072                 <span class="keywordflow">break</span>;
+<a name="l00073"></a>00073             <span class="keywordflow">case</span> <span class="stringliteral">&#39;auth&#39;</span>:
+<a name="l00074"></a>00074                 <span class="keywordflow">return</span> <a class="code" href="classCOBAuthorBlock.html#abbeb0bb99eb741fb5e6fbdf7c99c2e00">COBAuthorBlock::CreateFromReader</a>(<span class="keyword">new</span> <a class="code" href="classStringReader.html">StringReader</a>(<a class="code" href="classCOB.html#ae3ecf9394037fbd1278e2010729b2541">$reader</a>-&gt;Read($size)));
+<a name="l00075"></a>00075                 <span class="keywordflow">break</span>;
+<a name="l00076"></a>00076             <span class="keywordflow">case</span> <span class="stringliteral">&#39;file&#39;</span>:
+<a name="l00077"></a>00077                 <span class="keywordflow">return</span> <a class="code" href="classCOBFileBlock.html#a980a3b0175c38d0df051b21fac9fc492">COBFileBlock::CreateFromReader</a>(<span class="keyword">new</span> <a class="code" href="classStringReader.html">StringReader</a>(<a class="code" href="classCOB.html#ae3ecf9394037fbd1278e2010729b2541">$reader</a>-&gt;Read($size)));
+<a name="l00078"></a>00078                 <span class="keywordflow">break</span>;
+<a name="l00079"></a>00079             <span class="keywordflow">default</span>:
+<a name="l00080"></a>00080                 <span class="comment">//throw new Exception(&#39;Invalid block type: Probably a bug or an invalid COB file: &#39;.$type);</span>
+<a name="l00081"></a>00081                 <span class="comment">//simply ignore unknown block types, in case people add their own</span>
+<a name="l00082"></a>00082                 <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classCOBUnknownBlock.html" title="Simple class to allow for extra block types.">COBUnknownBlock</a>($type,<a class="code" href="classCOB.html#ae3ecf9394037fbd1278e2010729b2541">$reader</a>-&gt;Read($size));
+<a name="l00083"></a>00083                 <span class="keywordflow">break</span>;
+<a name="l00084"></a>00084         }
+<a name="l00085"></a>00085     }
+<a name="l00086"></a><a class="code" href="classCOB.html#aaa4ac21eacfe2f7b410e5cb481588aa3">00086</a>     <span class="keyword">public</span> function <a class="code" href="classCOB.html#aaa4ac21eacfe2f7b410e5cb481588aa3">GetBlocks</a>($type=<span class="keyword">false</span>) {
+<a name="l00087"></a>00087         <a class="code" href="classCOB.html#a3c376687575b9ea1bb20887fc6108511">$blocks</a> = array();
+<a name="l00088"></a>00088         <span class="keywordflow">foreach</span>($this-&gt;blocks as <a class="code" href="pray-agnt-animation_8php.html#a7f8f86b37cd48a37bf0df573d8512d11">$block</a>) {
+<a name="l00089"></a>00089             <span class="keywordflow">if</span>($type === <span class="keyword">false</span> || $type == $block-&gt;GetType()) {
+<a name="l00090"></a>00090                 <a class="code" href="classCOB.html#a3c376687575b9ea1bb20887fc6108511">$blocks</a>[] = $block;
+<a name="l00091"></a>00091             }
+<a name="l00092"></a>00092         }
+<a name="l00093"></a>00093         <span class="keywordflow">return</span> <a class="code" href="classCOB.html#a3c376687575b9ea1bb20887fc6108511">$blocks</a>;
+<a name="l00094"></a>00094     }
+<a name="l00095"></a>00095 }
+<a name="l00096"></a>00096 ?&gt;
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -133,7 +193,7 @@ window.onload = initDynSections;
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Sat Jun 12 23:32:44 2010 for c2ephp by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jun 21 22:07:24 2010 for c2ephp by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

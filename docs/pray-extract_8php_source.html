@@ -88,14 +88,14 @@ window.onload = initDynSections;
 <a name="l00004"></a>00004 
 <a name="l00005"></a><a class="code" href="pray-extract_8php.html#a0606e5b321c8c85527efdd1c17a9a569">00005</a> <a class="code" href="pray-extract_8php.html#a0606e5b321c8c85527efdd1c17a9a569">$agent</a> = <span class="keyword">new</span> <a class="code" href="classPRAYFile.html">PRAYFile</a>(<span class="keyword">new</span> <a class="code" href="classFileReader.html">FileReader</a>($argv[1]));
 <a name="l00006"></a><a class="code" href="pray-extract_8php.html#affd6fc4c8210d8b9b164c72a0332e732">00006</a> <a class="code" href="pray-extract_8php.html#affd6fc4c8210d8b9b164c72a0332e732">$names</a> = array();
-<a name="l00007"></a>00007 <span class="keywordflow">foreach</span>(<a class="code" href="pray-extract_8php.html#a0606e5b321c8c85527efdd1c17a9a569">$agent</a>-&gt;GetBlocks() as $block) {
-<a name="l00008"></a>00008     $blockname = $block-&gt;GetName().<span class="charliteral">&#39;.&#39;</span>.$block-&gt;GetType();
+<a name="l00007"></a>00007 <span class="keywordflow">foreach</span>(<a class="code" href="pray-extract_8php.html#a0606e5b321c8c85527efdd1c17a9a569">$agent</a>-&gt;GetBlocks() as <a class="code" href="pray-agnt-animation_8php.html#a7f8f86b37cd48a37bf0df573d8512d11">$block</a>) {
+<a name="l00008"></a>00008     $blockname = <a class="code" href="pray-agnt-animation_8php.html#a7f8f86b37cd48a37bf0df573d8512d11">$block</a>-&gt;GetName().<span class="charliteral">&#39;.&#39;</span>.<a class="code" href="pray-agnt-animation_8php.html#a7f8f86b37cd48a37bf0df573d8512d11">$block</a>-&gt;GetType();
 <a name="l00009"></a>00009     <span class="keywordflow">while</span>(in_array($blockname,<a class="code" href="pray-extract_8php.html#affd6fc4c8210d8b9b164c72a0332e732">$names</a>)) {
 <a name="l00010"></a>00010         $blockname .= <span class="charliteral">&#39;-&#39;</span>;
 <a name="l00011"></a>00011     }
 <a name="l00012"></a>00012     echo $blockname.<span class="stringliteral">&quot;\n&quot;</span>;
 <a name="l00013"></a>00013     <a class="code" href="pray-frankenstein_8php.html#a1c5b4a2cf84c26c44e5ae60c87fc4175">$fh</a> = fopen($blockname,<span class="charliteral">&#39;w&#39;</span>);
-<a name="l00014"></a>00014     fwrite(<a class="code" href="pray-frankenstein_8php.html#a1c5b4a2cf84c26c44e5ae60c87fc4175">$fh</a>,$block-&gt;GetData());
+<a name="l00014"></a>00014     fwrite(<a class="code" href="pray-frankenstein_8php.html#a1c5b4a2cf84c26c44e5ae60c87fc4175">$fh</a>,<a class="code" href="pray-agnt-animation_8php.html#a7f8f86b37cd48a37bf0df573d8512d11">$block</a>-&gt;GetData());
 <a name="l00015"></a>00015     fclose(<a class="code" href="pray-frankenstein_8php.html#a1c5b4a2cf84c26c44e5ae60c87fc4175">$fh</a>);
 <a name="l00016"></a>00016 }
 <a name="l00017"></a>00017 
@@ -115,7 +115,7 @@ window.onload = initDynSections;
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Sat Jun 12 23:32:45 2010 for c2ephp by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jun 21 22:07:25 2010 for c2ephp by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

@@ -93,7 +93,7 @@ window.onload = initDynSections;
 <a name="l00009"></a>00009     $name = substr($argv[$i],0,-5);
 <a name="l00010"></a>00010     echo $name.<span class="charliteral">&#39;.&#39;</span>.$type.<span class="stringliteral">&quot;\n&quot;</span>;
 <a name="l00011"></a>00011     $content = file_get_contents($argv[$i]);
-<a name="l00012"></a>00012     <a class="code" href="pray-frankenstein_8php.html#a8db1a2e2bee6226a8d70fc25ffa2f5eb">$prayfile</a>-&gt;AddBlock(<span class="keyword">new</span> <a class="code" href="classBinaryBlock.html">BinaryBlock</a>($type,$name,$content));
+<a name="l00012"></a>00012     <a class="code" href="pray-frankenstein_8php.html#a8db1a2e2bee6226a8d70fc25ffa2f5eb">$prayfile</a>-&gt;AddBlock(<span class="keyword">new</span> <a class="code" href="classBinaryBlock.html" title="A block to allow simple, non-parsed binary content. This class is essentially un-necessary...">BinaryBlock</a>($type,$name,$content));
 <a name="l00013"></a>00013 }
 <a name="l00014"></a><a class="code" href="pray-frankenstein_8php.html#a1c5b4a2cf84c26c44e5ae60c87fc4175">00014</a> <a class="code" href="pray-frankenstein_8php.html#a1c5b4a2cf84c26c44e5ae60c87fc4175">$fh</a> = fopen(<span class="stringliteral">&#39;output.pray&#39;</span>,<span class="charliteral">&#39;w&#39;</span>);
 <a name="l00015"></a>00015 fwrite(<a class="code" href="pray-frankenstein_8php.html#a1c5b4a2cf84c26c44e5ae60c87fc4175">$fh</a>,<a class="code" href="pray-frankenstein_8php.html#a8db1a2e2bee6226a8d70fc25ffa2f5eb">$prayfile</a>-&gt;Compile());
@@ -114,7 +114,7 @@ window.onload = initDynSections;
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Sat Jun 12 23:32:45 2010 for c2ephp by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jun 21 22:07:25 2010 for c2ephp by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

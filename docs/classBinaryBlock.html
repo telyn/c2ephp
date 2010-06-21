@@ -85,7 +85,10 @@ window.onload = initDynSections;
   </div>
 </div>
 <div class="contents">
-<h1>BinaryBlock Class Reference</h1><!-- doxytag: class="BinaryBlock" --><!-- doxytag: inherits="PrayBlock" --><div class="dynheader">
+<h1>BinaryBlock Class Reference</h1><!-- doxytag: class="BinaryBlock" --><!-- doxytag: inherits="PrayBlock" -->
+<p>A block to allow simple, non-parsed binary content. This class is essentially un-necessary, but it's good for debugging as you can use it to test PRAY compilation without needing to test individual block types' compilation. Additionally, it allows us to create blocks for types we don't know of yet.  
+<a href="#_details">More...</a></p>
+<div class="dynheader">
 Inheritance diagram for BinaryBlock:</div>
 <div class="dynsection">
 <div class="center"><img src="classBinaryBlock__inherit__graph.png" border="0" usemap="#BinaryBlock_inherit__map" alt="Inheritance graph"/></div>
@@ -132,8 +135,9 @@ Collaboration diagram for BinaryBlock:</div>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBinaryBlock.html#a6a3eebb2328cb895a9ead559b37f6be0">$binarydata</a></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>A block to allow simple, non-parsed binary content. This class is essentially un-necessary, but it's good for debugging as you can use it to test PRAY compilation without needing to test individual block types' compilation. Additionally, it allows us to create blocks for types we don't know of yet. </p>
 
-<p>Definition at line <a class="el" href="BinaryBlock_8php_source.html#l00004">4</a> of file <a class="el" href="BinaryBlock_8php_source.html">BinaryBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="BinaryBlock_8php_source.html#l00010">10</a> of file <a class="el" href="BinaryBlock_8php_source.html">BinaryBlock.php</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a73f09ec07257749f851c5b3c5e940ed3"></a><!-- doxytag: member="BinaryBlock::BinaryBlock" ref="a73f09ec07257749f851c5b3c5e940ed3" args="($type, $name, $content)" -->
 <div class="memitem">
@@ -166,7 +170,7 @@ Collaboration diagram for BinaryBlock:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="BinaryBlock_8php_source.html#l00006">6</a> of file <a class="el" href="BinaryBlock_8php_source.html">BinaryBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="BinaryBlock_8php_source.html#l00013">13</a> of file <a class="el" href="BinaryBlock_8php_source.html">BinaryBlock.php</a>.</p>
 
 </div>
 </div>
@@ -188,7 +192,7 @@ Collaboration diagram for BinaryBlock:</div>
 
 <p>Reimplemented from <a class="el" href="classPrayBlock.html#ad536a26cf7dfa2cfdc833ddbd32f33a9">PrayBlock</a>.</p>
 
-<p>Definition at line <a class="el" href="BinaryBlock_8php_source.html#l00010">10</a> of file <a class="el" href="BinaryBlock_8php_source.html">BinaryBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="BinaryBlock_8php_source.html#l00017">17</a> of file <a class="el" href="BinaryBlock_8php_source.html">BinaryBlock.php</a>.</p>
 
 </div>
 </div>
@@ -268,7 +272,7 @@ Collaboration diagram for BinaryBlock:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00097">97</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00100">100</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -288,7 +292,7 @@ Collaboration diagram for BinaryBlock:</div>
 <div class="memdoc">
 <p>Makes sure that the <a class="el" href="classPrayBlock.html" title="Abstract class to represent PRAY blocks.">PrayBlock</a> is decompiled. Call this function at the beginning of every function that returns data in superclasses so that data decoding is automatic. </p>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00197">197</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00201">201</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -306,10 +310,10 @@ Collaboration diagram for BinaryBlock:</div>
       </table>
 </div>
 <div class="memdoc">
-<p>Gets the PRAY block's binary data if the PRAYBlock is decompiled. It will decompress automatically if necessary, then unset the compressed flag. </p>
+<p>Gets the PRAY block's binary data if the PRAYBlock is decompiled. It will decompress automatically if necessary, then unset the compressed flag. TODO: I'm not 100% sure I should keep this public... </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the PRAY block's binary data. </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00132">132</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00136">136</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -330,7 +334,7 @@ Collaboration diagram for BinaryBlock:</div>
 <p>Returns the flag bitfield used to determine flags. Prefer using IsFlagSet </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>an integer that will either be 0 or 1 with c2e-compatible PRAY blocks. </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00152">152</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00156">156</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -351,7 +355,7 @@ Collaboration diagram for BinaryBlock:</div>
 <p>Gets the length of this block's content. Only useful on blocks that came from a <a class="el" href="classPRAYFile.html">PRAYFile</a>. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>an integer corresponding to the length of this block's binary data. </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00165">165</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00169">169</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -372,7 +376,7 @@ Collaboration diagram for BinaryBlock:</div>
 <p>Gets the PRAY block's name </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the PRAY block's name </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00125">125</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00128">128</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -393,7 +397,7 @@ Collaboration diagram for BinaryBlock:</div>
 <p>Returns the <a class="el" href="classPRAYFile.html">PRAYFile</a> this block belongs to. Only applies to PrayBlocks created with a <a class="el" href="classPRAYFile.html">PRAYFile</a>. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>a <a class="el" href="classPRAYFile.html">PRAYFile</a> object. </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00178">178</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00182">182</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -414,7 +418,7 @@ Collaboration diagram for BinaryBlock:</div>
 <p>Gives the type as one of the PRAY_BLOCK_* constants </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>One of the PRAY_BLOCK_* constants </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00146">146</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00150">150</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -442,7 +446,7 @@ Collaboration diagram for BinaryBlock:</div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>true or false. </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00159">159</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00163">163</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -502,7 +506,7 @@ Collaboration diagram for BinaryBlock:</div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>An object that is an instance of a subclass of <a class="el" href="classPrayBlock.html" title="Abstract class to represent PRAY blocks.">PrayBlock</a>. </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00240">240</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00244">244</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -530,7 +534,7 @@ Collaboration diagram for BinaryBlock:</div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the data, having been transformed. </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00116">116</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00119">119</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -585,7 +589,7 @@ Collaboration diagram for BinaryBlock:</div>
     <tr><td valign="top"></td><td valign="top"><em>$name</em>&nbsp;</td><td>The name of the block. Must be unique within the <a class="el" href="classPRAYFile.html">PRAYFile</a>. This will be checked by the <a class="el" href="classPRAYFile.html">PRAYFile</a>. </td></tr>
     <tr><td valign="top"></td><td valign="top"><em>$content</em>&nbsp;</td><td>If constructing the <a class="el" href="classPrayBlock.html" title="Abstract class to represent PRAY blocks.">PrayBlock</a> by reading a PRAY file, must be a binary string. Otherwise, should be null (but doesn't have to be). </td></tr>
     <tr><td valign="top"></td><td valign="top"><em>$flags</em>&nbsp;</td><td>A 1-byte integer containing the flags this <a class="el" href="classPrayBlock.html" title="Abstract class to represent PRAY blocks.">PrayBlock</a> has set </td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>$type</em>&nbsp;</td><td>The type of the <a class="el" href="classPrayBlock.html" title="Abstract class to represent PRAY blocks.">PrayBlock</a> as a PRAY_BLOCK_* constant </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>$type</em>&nbsp;</td><td>The type of the <a class="el" href="classPrayBlock.html" title="Abstract class to represent PRAY blocks.">PrayBlock</a> as a PRAY_BLOCK_* constant. Must be a four-character string. </td></tr>
   </table>
   </dd>
 </dl>
@@ -611,7 +615,7 @@ Collaboration diagram for BinaryBlock:</div>
 <div class="memdoc">
 <p>Sets the data for this object Used only by the CreatureHistoryBlock class to archive/de-archive data. Should ONLY be used to transform data in a way not specified by flags just before decompiling proper. </p>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00172">172</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00176">176</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -638,7 +642,7 @@ Collaboration diagram for BinaryBlock:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00190">190</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00194">194</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -665,7 +669,7 @@ Collaboration diagram for BinaryBlock:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00184">184</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00188">188</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -681,7 +685,7 @@ Collaboration diagram for BinaryBlock:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="BinaryBlock_8php_source.html#l00005">5</a> of file <a class="el" href="BinaryBlock_8php_source.html">BinaryBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="BinaryBlock_8php_source.html#l00011">11</a> of file <a class="el" href="BinaryBlock_8php_source.html">BinaryBlock.php</a>.</p>
 
 </div>
 </div>
@@ -703,7 +707,7 @@ Collaboration diagram for BinaryBlock:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Sat Jun 12 23:32:45 2010 for c2ephp by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jun 21 22:07:26 2010 for c2ephp by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

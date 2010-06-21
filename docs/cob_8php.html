@@ -88,8 +88,8 @@ window.onload = initDynSections;
 <p><a href="cob_8php_source.html">Go to the source code of this file.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Variables</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="cob_8php.html#a6c55609bdbb9b811532e4e70f243c3bd">$cob</a> = new <a class="el" href="classC1COB.html">C1COB</a>(new <a class="el" href="classFileReader.html">FileReader</a>('carrotbeatle.cob'))</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="cob_8php.html#a6efc15b5a2314dd4b5aaa556a375c6d6">$data</a> = $cob-&gt;GetData()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="cob_8php.html#a6c55609bdbb9b811532e4e70f243c3bd">$cob</a> = new <a class="el" href="classCOB.html">COB</a>(new <a class="el" href="classFileReader.html">FileReader</a>($argv[1]))</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="cob_8php.html#af0139c246c3abc304a3d174f99d40e0e">$rcbname</a> = substr($argv[1],0,-3).'rcb'</td></tr>
 </table>
 <hr/><h2>Variable Documentation</h2>
 <a class="anchor" id="a6c55609bdbb9b811532e4e70f243c3bd"></a><!-- doxytag: member="cob.php::$cob" ref="a6c55609bdbb9b811532e4e70f243c3bd" args="" -->
@@ -97,7 +97,7 @@ window.onload = initDynSections;
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">$cob = new <a class="el" href="classC1COB.html">C1COB</a>(new <a class="el" href="classFileReader.html">FileReader</a>('carrotbeatle.cob'))</td>
+          <td class="memname">$cob = new <a class="el" href="classCOB.html">COB</a>(new <a class="el" href="classFileReader.html">FileReader</a>($argv[1]))</td>
         </tr>
       </table>
 </div>
@@ -107,12 +107,12 @@ window.onload = initDynSections;
 
 </div>
 </div>
-<a class="anchor" id="a6efc15b5a2314dd4b5aaa556a375c6d6"></a><!-- doxytag: member="cob.php::$data" ref="a6efc15b5a2314dd4b5aaa556a375c6d6" args="" -->
+<a class="anchor" id="af0139c246c3abc304a3d174f99d40e0e"></a><!-- doxytag: member="cob.php::$rcbname" ref="af0139c246c3abc304a3d174f99d40e0e" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">$data = $cob-&gt;GetData()</td>
+          <td class="memname">$rcbname = substr($argv[1],0,-3).'rcb'</td>
         </tr>
       </table>
 </div>
@@ -137,7 +137,7 @@ window.onload = initDynSections;
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Sat Jun 12 23:32:45 2010 for c2ephp by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jun 21 22:07:25 2010 for c2ephp by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

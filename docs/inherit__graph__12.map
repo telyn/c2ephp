@@ -1,3 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" href="$classC3CAOSOperators.html" title="C3CAOSOperators" alt="" coords="7,5,135,35"/>
+<area shape="rect" href="$classCOBBlock.html" title="The base COB block class." alt="" coords="5,85,88,115"/>
+<area shape="rect" href="$classCOBAgentBlock.html" title="COB Agent Block for C1 and C2 For Creatures 1, this block contains all the useful..." alt="" coords="147,5,261,35"/>
+<area shape="rect" href="$classCOBAuthorBlock.html" title="Defines Author information about the COB." alt="" coords="144,59,264,88"/>
+<area shape="rect" href="$classCOBFileBlock.html" title="Defines the bock to represent a file block in a COB file." alt="" coords="152,112,256,141"/>
+<area shape="rect" href="$classCOBUnknownBlock.html" title="Simple class to allow for extra block types." alt="" coords="137,165,271,195"/>
 </map>

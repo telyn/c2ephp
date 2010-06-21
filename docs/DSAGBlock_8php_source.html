@@ -83,14 +83,73 @@ window.onload = initDynSections;
     </ul>
   </div>
 <h1>agents/PRAY/DSAGBlock.php</h1><a href="DSAGBlock_8php.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
-<a name="l00002"></a>00002 
+<a name="l00002"></a>00002 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/AGNTBlock.php&#39;</span>);
 <a name="l00003"></a>00003 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/TagBlock.php&#39;</span>);
-<a name="l00004"></a><a class="code" href="classDSAGBlock.html">00004</a> <span class="keyword">class </span><a class="code" href="classDSAGBlock.html">DSAGBlock</a> <span class="keyword">extends</span> <a class="code" href="classTagBlock.html">TagBlock</a> {
-<a name="l00005"></a><a class="code" href="classDSAGBlock.html#ada08eeb3ebe3142a616e5983b08c3edf">00005</a>     <span class="keyword">public</span> function <a class="code" href="classDSAGBlock.html#ada08eeb3ebe3142a616e5983b08c3edf">DSAGBlock</a>(<a class="code" href="classPrayBlock.html#aa67793174a8b64ce865789a0499bac5a">$prayfile</a>,<a class="code" href="classPrayBlock.html#a43283d76c7ba18af534b94cda55f2d01">$name</a>,<a class="code" href="classPrayBlock.html#abfe3a7b476ead85436ddef683a2493f7">$content</a>,$flags) {
-<a name="l00006"></a>00006         <a class="code" href="classTagBlock.html#add9077f01b82885b90caebc3e85ca0dd">parent::TagBlock</a>(<a class="code" href="classPrayBlock.html#aa67793174a8b64ce865789a0499bac5a">$prayfile</a>,<a class="code" href="classPrayBlock.html#a43283d76c7ba18af534b94cda55f2d01">$name</a>,<a class="code" href="classPrayBlock.html#abfe3a7b476ead85436ddef683a2493f7">$content</a>,$flags,<a class="code" href="PrayBlock_8php.html#afab8ed9219c129d726b110a1016534e0" title="Value: &amp;#39;DSAG&amp;#39;.">PRAY_BLOCK_DSAG</a>);
-<a name="l00007"></a>00007     }
-<a name="l00008"></a>00008 }
-<a name="l00009"></a>00009 ?&gt;
+<a name="l00004"></a>00004 
+<a name="l00008"></a><a class="code" href="classDSAGBlock.html">00008</a> <span class="keyword">class </span><a class="code" href="classDSAGBlock.html" title="Docking Station agent description block Defines everything about an agent for docking...">DSAGBlock</a> <span class="keyword">extends</span> <a class="code" href="classAGNTBlock.html">AGNTBlock</a> {
+<a name="l00015"></a><a class="code" href="classDSAGBlock.html#ada08eeb3ebe3142a616e5983b08c3edf">00015</a>     <span class="keyword">public</span> function <a class="code" href="classDSAGBlock.html#ada08eeb3ebe3142a616e5983b08c3edf" title="Instantiates a new DSAGBlock.">DSAGBlock</a>(<a class="code" href="classPrayBlock.html#aa67793174a8b64ce865789a0499bac5a">$prayfile</a>,<a class="code" href="classPrayBlock.html#a43283d76c7ba18af534b94cda55f2d01">$name</a>,<a class="code" href="classPrayBlock.html#abfe3a7b476ead85436ddef683a2493f7">$content</a>,$flags) {
+<a name="l00016"></a>00016         <a class="code" href="classTagBlock.html#add9077f01b82885b90caebc3e85ca0dd">parent::TagBlock</a>(<a class="code" href="classPrayBlock.html#aa67793174a8b64ce865789a0499bac5a">$prayfile</a>,<a class="code" href="classPrayBlock.html#a43283d76c7ba18af534b94cda55f2d01">$name</a>,<a class="code" href="classPrayBlock.html#abfe3a7b476ead85436ddef683a2493f7">$content</a>,$flags,<a class="code" href="PrayBlock_8php.html#afab8ed9219c129d726b110a1016534e0" title="Value: &amp;#39;DSAG&amp;#39;.">PRAY_BLOCK_DSAG</a>);
+<a name="l00017"></a>00017     }
+<a name="l00019"></a><a class="code" href="classDSAGBlock.html#a93f7e228f4a09af2f03d3d2eebfdcfa6">00019</a>     <span class="keyword">public</span> function <a class="code" href="classDSAGBlock.html#a93f7e228f4a09af2f03d3d2eebfdcfa6" title="Gets the label used on the web button.">GetWebLabel</a>() {
+<a name="l00020"></a>00020         <span class="keywordflow">return</span> $this-&gt;<a class="code" href="classTagBlock.html#a545c136659362f531ebf88aacb6fe2c5">GetTag</a>(<span class="stringliteral">&#39;Web Label&#39;</span>);
+<a name="l00021"></a>00021     }
+<a name="l00023"></a><a class="code" href="classDSAGBlock.html#a249993b9f97f2bcbf8bc369fff7b6ab8">00023</a>     <span class="keyword">public</span> function <a class="code" href="classDSAGBlock.html#a249993b9f97f2bcbf8bc369fff7b6ab8" title="Gets the URL of the web site.">GetWebURL</a>() {
+<a name="l00024"></a>00024         <span class="keywordflow">return</span> $this-&gt;<a class="code" href="classTagBlock.html#a545c136659362f531ebf88aacb6fe2c5">GetTag</a>(<span class="stringliteral">&#39;Web URL&#39;</span>);
+<a name="l00025"></a>00025     }
+<a name="l00026"></a>00026     <span class="comment">/*</span>
+<a name="l00027"></a>00027 <span class="comment">     * &quot;Web Icon&quot; &quot;&quot;  </span>
+<a name="l00028"></a>00028 <span class="comment">    &quot;Web Icon Base&quot; &quot;&quot; </span>
+<a name="l00029"></a>00029 <span class="comment">    &quot;Web Icon Animation String&quot; &quot;&quot;</span>
+<a name="l00030"></a>00030 <span class="comment">     */</span>
+<a name="l00032"></a><a class="code" href="classDSAGBlock.html#a113d59e2185762b328ca82ce5caa5162">00032</a>     <span class="keyword">public</span> function <a class="code" href="classDSAGBlock.html#a113d59e2185762b328ca82ce5caa5162" title="Gets the file used for the web button&amp;#39;s icon.">GetWebIcon</a>() {
+<a name="l00033"></a>00033         <span class="keywordflow">return</span> $this-&gt;<a class="code" href="classTagBlock.html#a545c136659362f531ebf88aacb6fe2c5">GetTag</a>(<span class="stringliteral">&#39;Web Icon&#39;</span>);
+<a name="l00034"></a>00034     }
+<a name="l00036"></a><a class="code" href="classDSAGBlock.html#aab8d8414a41252682a51880b710f44b1">00036</a>     <span class="keyword">public</span> function <a class="code" href="classDSAGBlock.html#aab8d8414a41252682a51880b710f44b1" title="Gets the number of the sprite to use as the base for the web icon.">GetWebIconBase</a>() {
+<a name="l00037"></a>00037         <span class="keywordflow">return</span> $this-&gt;<a class="code" href="classTagBlock.html#a545c136659362f531ebf88aacb6fe2c5">GetTag</a>(<span class="stringliteral">&#39;Web Icon Base&#39;</span>);
+<a name="l00038"></a>00038     }
+<a name="l00042"></a><a class="code" href="classDSAGBlock.html#abe59ee452a244cd9778680614cb5c119">00042</a>     <span class="keyword">public</span> function <a class="code" href="classDSAGBlock.html#abe59ee452a244cd9778680614cb5c119" title="Gets the animation string for the web icon. In theory, the web button would animate...">GetWebIconAnimationString</a>() {
+<a name="l00043"></a>00043         <span class="keywordflow">return</span> $this-&gt;<a class="code" href="classTagBlock.html#a545c136659362f531ebf88aacb6fe2c5">GetTag</a>(<span class="stringliteral">&#39;Web Icon Animation String&#39;</span>);
+<a name="l00044"></a>00044     }
+<a name="l00046"></a><a class="code" href="classDSAGBlock.html#a4eb558cb80c5707765af36bfc468866e">00046</a>     <span class="keyword">public</span> function <a class="code" href="classDSAGBlock.html#a4eb558cb80c5707765af36bfc468866e" title="Gets the web button image as an ISpriteFrame.">GetWebIconAsSpriteFrame</a>() {
+<a name="l00047"></a>00047         $webIcon = $this-&gt;<a class="code" href="classDSAGBlock.html#a113d59e2185762b328ca82ce5caa5162" title="Gets the file used for the web button&amp;#39;s icon.">GetWebIcon</a>();
+<a name="l00048"></a>00048         <span class="keywordflow">if</span>($webIcon == <span class="stringliteral">&#39;&#39;</span>) {
+<a name="l00049"></a>00049             <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;No web icon!&#39;</span>);
+<a name="l00050"></a>00050         }
+<a name="l00051"></a>00051         $webIconBase = $this-&gt;<a class="code" href="classDSAGBlock.html#aab8d8414a41252682a51880b710f44b1" title="Gets the number of the sprite to use as the base for the web icon.">GetWebIconBase</a>();
+<a name="l00052"></a>00052         $webIconAnimationString = $this-&gt;<a class="code" href="classDSAGBlock.html#abe59ee452a244cd9778680614cb5c119" title="Gets the animation string for the web icon. In theory, the web button would animate...">GetWebIconAnimationString</a>();
+<a name="l00053"></a>00053         <span class="keywordflow">if</span>($webIconBase == <span class="stringliteral">&#39;&#39;</span>) {
+<a name="l00054"></a>00054             $webIconBase = 0;
+<a name="l00055"></a>00055         }
+<a name="l00056"></a>00056         <span class="keywordflow">if</span>($webIconAnimationString == <span class="stringliteral">&#39;&#39;</span>) {
+<a name="l00057"></a>00057             $webIconAnimationString = 0;
+<a name="l00058"></a>00058         }
+<a name="l00059"></a>00059         <span class="keywordflow">if</span>(($position = strpos($webIconAnimationString,<span class="charliteral">&#39; &#39;</span>)) !== <span class="keyword">false</span>) {
+<a name="l00060"></a>00060             $webIconAnimationString = substr($webIconAnimationString,0,$position);
+<a name="l00061"></a>00061         }
+<a name="l00062"></a>00062         <a class="code" href="classPrayBlock.html#aa67793174a8b64ce865789a0499bac5a">$prayfile</a> = $this-&gt;<a class="code" href="classPrayBlock.html#a5c0a5d3651f658c5f62e2a0ff707636a">GetPrayFile</a>();
+<a name="l00063"></a>00063         <span class="keywordflow">if</span>(<a class="code" href="classPrayBlock.html#aa67793174a8b64ce865789a0499bac5a">$prayfile</a> == null) {
+<a name="l00064"></a>00064             <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;No PRAY file to get the icon from!&#39;</span>);
+<a name="l00065"></a>00065         }
+<a name="l00066"></a>00066         $iconBlock = <a class="code" href="classPrayBlock.html#aa67793174a8b64ce865789a0499bac5a">$prayfile</a>-&gt;GetBlockByName($webIcon);
+<a name="l00067"></a>00067         <span class="keywordflow">if</span>($iconBlock-&gt;GetType() != <span class="stringliteral">&#39;FILE&#39;</span>) {
+<a name="l00068"></a>00068             <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;The block with the web icon\&#39;s filename is not a file block!&#39;</span>);
+<a name="l00069"></a>00069         }
+<a name="l00070"></a>00070         <a class="code" href="classPrayBlock.html#a69d01031a6aacaccce42eeb73342a1c7">$type</a> = strtolower(substr($webIcon,-3));
+<a name="l00071"></a>00071         $icon = null;
+<a name="l00072"></a>00072         <span class="keywordflow">if</span>(<a class="code" href="classPrayBlock.html#a69d01031a6aacaccce42eeb73342a1c7">$type</a> == <span class="stringliteral">&#39;c16&#39;</span>) {
+<a name="l00073"></a>00073             $icon = <span class="keyword">new</span> <a class="code" href="classC16File.html">C16File</a>(<span class="keyword">new</span> <a class="code" href="classStringReader.html">StringReader</a>($iconBlock-&gt;GetData()));
+<a name="l00074"></a>00074         } <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<a class="code" href="classPrayBlock.html#a69d01031a6aacaccce42eeb73342a1c7">$type</a> == <span class="stringliteral">&#39;s16&#39;</span>) {
+<a name="l00075"></a>00075             $icon = <span class="keyword">new</span> <a class="code" href="classS16File.html">S16File</a>(<span class="keyword">new</span> <a class="code" href="classStringReader.html">StringReader</a>($iconBlock-&gt;GetData()));
+<a name="l00076"></a>00076         }
+<a name="l00077"></a>00077         <span class="keywordflow">if</span>($icon == null) {
+<a name="l00078"></a>00078             <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;For one reason or another, couldn\&#39;t make a sprite file for the web icon.&#39;</span>);
+<a name="l00079"></a>00079         }
+<a name="l00080"></a>00080         <span class="keywordflow">return</span> $icon-&gt;GetFrame($webIconBase+$webIconAnimationString);
+<a name="l00081"></a>00081         
+<a name="l00082"></a>00082     }
+<a name="l00083"></a>00083     
+<a name="l00084"></a>00084 }
+<a name="l00085"></a>00085 ?&gt;
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -106,7 +165,7 @@ window.onload = initDynSections;
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Sat Jun 12 23:32:45 2010 for c2ephp by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jun 21 22:07:24 2010 for c2ephp by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

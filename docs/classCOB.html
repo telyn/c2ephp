@@ -85,40 +85,93 @@ window.onload = initDynSections;
   </div>
 </div>
 <div class="contents">
-<h1>COB Class Reference</h1><!-- doxytag: class="COB" --><!-- doxytag: inherits="ICOB" --><div class="dynheader">
-Inheritance diagram for COB:</div>
-<div class="dynsection">
-<div class="center"><img src="classCOB__inherit__graph.png" border="0" usemap="#COB_inherit__map" alt="Inheritance graph"/></div>
-<map name="COB_inherit__map" id="COB_inherit__map">
-<area shape="rect" href="interfaceICOB.html" title="ICOB" alt="" coords="5,5,59,35"/></map>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
-<div class="dynheader">
-Collaboration diagram for COB:</div>
-<div class="dynsection">
-<div class="center"><img src="classCOB__coll__graph.png" border="0" usemap="#COB_coll__map" alt="Collaboration graph"/></div>
-<map name="COB_coll__map" id="COB_coll__map">
-<area shape="rect" href="interfaceICOB.html" title="ICOB" alt="" coords="5,5,59,35"/></map>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
-
+<h1>COB Class Reference</h1><!-- doxytag: class="COB" -->
 <p><a href="classCOB-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCOB.html#a7b47409f0d1961495a750d841bf7b568">COB</a> (<a class="el" href="interfaceIReader.html">IReader</a> $reader)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCOB.html#a973cc5764e796daa83fe6ff27f81fb42">COB</a> (<a class="el" href="interfaceIReader.html">IReader</a> $reader=null)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCOB.html#a8ae110c7b01c103dedf28398e2631559">LoadCOB</a> (<a class="el" href="interfaceIReader.html">IReader</a> $reader)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCOB.html#a45544686298a993878e3f4da05640e3e">GetData</a> ()</td></tr>
-<tr><td colspan="2"><h2>Public Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCOB.html#a852a531e9d2d0516ba7367d66aac661d">$cob</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCOB.html#a6e4f5d6fadcf60d21013806846412f70">LoadC2COB</a> (<a class="el" href="interfaceIReader.html">IReader</a> $reader)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCOB.html#aa524d975b4fbca6753033999973e4238">LoadC1COB</a> (<a class="el" href="interfaceIReader.html">IReader</a> $reader)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCOB.html#a5207fc38bf52390c4b36a52e03f5eefa">AddBlock</a> (<a class="el" href="classCOBBlock.html">COBBlock</a> $block)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCOB.html#aaa4ac21eacfe2f7b410e5cb481588aa3">GetBlocks</a> ($type=false)</td></tr>
+<tr><td colspan="2"><h2>Private Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCOB.html#a865dd7da5669ae500742bcfda3a5c74a">ReadBlock</a> ($reader)</td></tr>
+<tr><td colspan="2"><h2>Private Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCOB.html#ae3ecf9394037fbd1278e2010729b2541">$reader</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCOB.html#aa713a7606b5ca2fac454ec62bff6784e">$format</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCOB.html#a3c376687575b9ea1bb20887fc6108511">$blocks</a></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 
-<p>Definition at line <a class="el" href="COB_8php_source.html#l00010">10</a> of file <a class="el" href="COB_8php_source.html">COB.php</a>.</p>
+<p>Definition at line <a class="el" href="COB_8php_source.html#l00013">13</a> of file <a class="el" href="COB_8php_source.html">COB.php</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a7b47409f0d1961495a750d841bf7b568"></a><!-- doxytag: member="COB::COB" ref="a7b47409f0d1961495a750d841bf7b568" args="(IReader $reader)" -->
+<a class="anchor" id="a5207fc38bf52390c4b36a52e03f5eefa"></a><!-- doxytag: member="COB::AddBlock" ref="a5207fc38bf52390c4b36a52e03f5eefa" args="(COBBlock $block)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">COB::AddBlock </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCOBBlock.html">COBBlock</a> $&nbsp;</td>
+          <td class="paramname"> <em>block</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="COB_8php_source.html#l00059">59</a> of file <a class="el" href="COB_8php_source.html">COB.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a973cc5764e796daa83fe6ff27f81fb42"></a><!-- doxytag: member="COB::COB" ref="a973cc5764e796daa83fe6ff27f81fb42" args="(IReader $reader=null)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">COB::COB </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="interfaceIReader.html">IReader</a> $&nbsp;</td>
+          <td class="paramname"> <em>reader</em> = <code>null</code></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="COB_8php_source.html#l00018">18</a> of file <a class="el" href="COB_8php_source.html">COB.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aaa4ac21eacfe2f7b410e5cb481588aa3"></a><!-- doxytag: member="COB::GetBlocks" ref="aaa4ac21eacfe2f7b410e5cb481588aa3" args="($type=false)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">COB::GetBlocks </td>
+          <td>(</td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>type</em> = <code>false</code></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="COB_8php_source.html#l00086">86</a> of file <a class="el" href="COB_8php_source.html">COB.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa524d975b4fbca6753033999973e4238"></a><!-- doxytag: member="COB::LoadC1COB" ref="aa524d975b4fbca6753033999973e4238" args="(IReader $reader)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">COB::LoadC1COB </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="interfaceIReader.html">IReader</a> $&nbsp;</td>
           <td class="paramname"> <em>reader</em></td>
@@ -129,18 +182,19 @@ Collaboration diagram for COB:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="COB_8php_source.html#l00012">12</a> of file <a class="el" href="COB_8php_source.html">COB.php</a>.</p>
+<p>Definition at line <a class="el" href="COB_8php_source.html#l00049">49</a> of file <a class="el" href="COB_8php_source.html">COB.php</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a45544686298a993878e3f4da05640e3e"></a><!-- doxytag: member="COB::GetData" ref="a45544686298a993878e3f4da05640e3e" args="()" -->
+<a class="anchor" id="a6e4f5d6fadcf60d21013806846412f70"></a><!-- doxytag: member="COB::LoadC2COB" ref="a6e4f5d6fadcf60d21013806846412f70" args="(IReader $reader)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">COB::GetData </td>
+          <td class="memname">COB::LoadC2COB </td>
           <td>(</td>
-          <td class="paramname"></td>
+          <td class="paramtype"><a class="el" href="interfaceIReader.html">IReader</a> $&nbsp;</td>
+          <td class="paramname"> <em>reader</em></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
@@ -148,9 +202,7 @@ Collaboration diagram for COB:</div>
 </div>
 <div class="memdoc">
 
-<p>Implements <a class="el" href="interfaceICOB.html#a900c082b030dd3baf98da58084acbe03">ICOB</a>.</p>
-
-<p>Definition at line <a class="el" href="COB_8php_source.html#l00029">29</a> of file <a class="el" href="COB_8php_source.html">COB.php</a>.</p>
+<p>Definition at line <a class="el" href="COB_8php_source.html#l00038">38</a> of file <a class="el" href="COB_8php_source.html">COB.php</a>.</p>
 
 </div>
 </div>
@@ -170,25 +222,73 @@ Collaboration diagram for COB:</div>
 </div>
 <div class="memdoc">
 
-<p>Implements <a class="el" href="interfaceICOB.html#a4a360ffb4f6d5db26c12793208612d27">ICOB</a>.</p>
-
-<p>Definition at line <a class="el" href="COB_8php_source.html#l00015">15</a> of file <a class="el" href="COB_8php_source.html">COB.php</a>.</p>
+<p>Definition at line <a class="el" href="COB_8php_source.html#l00023">23</a> of file <a class="el" href="COB_8php_source.html">COB.php</a>.</p>
 
 </div>
 </div>
-<hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="a852a531e9d2d0516ba7367d66aac661d"></a><!-- doxytag: member="COB::$cob" ref="a852a531e9d2d0516ba7367d66aac661d" args="" -->
+<a class="anchor" id="a865dd7da5669ae500742bcfda3a5c74a"></a><!-- doxytag: member="COB::ReadBlock" ref="a865dd7da5669ae500742bcfda3a5c74a" args="($reader)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">COB::$cob</td>
+          <td class="memname">COB::ReadBlock </td>
+          <td>(</td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>reader</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [private]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="COB_8php_source.html#l00011">11</a> of file <a class="el" href="COB_8php_source.html">COB.php</a>.</p>
+<p>Definition at line <a class="el" href="COB_8php_source.html#l00062">62</a> of file <a class="el" href="COB_8php_source.html">COB.php</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a3c376687575b9ea1bb20887fc6108511"></a><!-- doxytag: member="COB::$blocks" ref="a3c376687575b9ea1bb20887fc6108511" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">COB::$blocks<code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="COB_8php_source.html#l00016">16</a> of file <a class="el" href="COB_8php_source.html">COB.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa713a7606b5ca2fac454ec62bff6784e"></a><!-- doxytag: member="COB::$format" ref="aa713a7606b5ca2fac454ec62bff6784e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">COB::$format<code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="COB_8php_source.html#l00015">15</a> of file <a class="el" href="COB_8php_source.html">COB.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae3ecf9394037fbd1278e2010729b2541"></a><!-- doxytag: member="COB::$reader" ref="ae3ecf9394037fbd1278e2010729b2541" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">COB::$reader<code> [private]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="COB_8php_source.html#l00014">14</a> of file <a class="el" href="COB_8php_source.html">COB.php</a>.</p>
 
 </div>
 </div>
@@ -210,7 +310,7 @@ Collaboration diagram for COB:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Sat Jun 12 23:32:46 2010 for c2ephp by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jun 21 22:07:26 2010 for c2ephp by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

@@ -84,41 +84,46 @@ window.onload = initDynSections;
   </div>
 <h1>sprites/C16File.php</h1><a href="C16File_8php.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
 <a name="l00002"></a>00002 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/../support/IReader.php&#39;</span>);
-<a name="l00003"></a>00003 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/C16Frame.php&#39;</span>);
-<a name="l00004"></a><a class="code" href="classC16File.html">00004</a> <span class="keyword">class </span><a class="code" href="classC16File.html">C16File</a>
-<a name="l00005"></a>00005 {
-<a name="l00006"></a><a class="code" href="classC16File.html#a172b9139d84e3051f4055b034763f41c">00006</a>     <span class="keyword">private</span> <a class="code" href="classC16File.html#a172b9139d84e3051f4055b034763f41c">$encoding</a>;
-<a name="l00007"></a><a class="code" href="classC16File.html#a57a78a248cc12bedb48ffa4374863db1">00007</a>     <span class="keyword">private</span> <a class="code" href="classC16File.html#a57a78a248cc12bedb48ffa4374863db1">$frameCount</a>;
-<a name="l00008"></a><a class="code" href="classC16File.html#a7c3832bfe5c53f8bb546bd3fe13c2367">00008</a>     <span class="keyword">private</span> <a class="code" href="classC16File.html#a7c3832bfe5c53f8bb546bd3fe13c2367">$frames</a>;
-<a name="l00009"></a><a class="code" href="classC16File.html#aada9f63958088c6629ae6d05470d67ce">00009</a>     <span class="keyword">private</span> <a class="code" href="classC16File.html#aada9f63958088c6629ae6d05470d67ce">$reader</a>;
-<a name="l00010"></a><a class="code" href="classC16File.html#a3c7a2651fcabce76f8ffe3478509a6a1">00010</a>     <span class="keyword">public</span> function <a class="code" href="classC16File.html#a3c7a2651fcabce76f8ffe3478509a6a1">C16File</a>(<a class="code" href="interfaceIReader.html">IReader</a> <a class="code" href="classC16File.html#aada9f63958088c6629ae6d05470d67ce">$reader</a>)
-<a name="l00011"></a>00011     {
-<a name="l00012"></a>00012         $this-&gt;reader = $reader;
-<a name="l00013"></a>00013         $buffer = $this-&gt;reader-&gt;<a class="code" href="interfaceIReader.html#a61b184ffbf103eb8369e3e2f71d884ea">ReadInt</a>(4);
-<a name="l00014"></a>00014         <span class="keywordflow">if</span>($buffer == 3)
-<a name="l00015"></a>00015             $this-&gt;encoding = <span class="stringliteral">&#39;565&#39;</span>;
-<a name="l00016"></a>00016         <span class="keywordflow">else</span> <span class="keywordflow">if</span>($buffer == 2)
-<a name="l00017"></a>00017             $this-&gt;encoding = <span class="stringliteral">&#39;555&#39;</span>;
-<a name="l00018"></a>00018         <span class="keywordflow">else</span>
-<a name="l00019"></a>00019             <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;File encoding not recognised. (&#39;</span>.$buffer.<span class="charliteral">&#39;)&#39;</span>);
-<a name="l00020"></a>00020         $buffer = $this-&gt;reader-&gt;ReadInt(2);
-<a name="l00021"></a>00021         <span class="keywordflow">if</span>($buffer &lt; 1)
-<a name="l00022"></a>00022             <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Sprite file appears to contain less than 1 frame.&#39;</span>);
-<a name="l00023"></a>00023         $this-&gt;frameCount = $buffer;
-<a name="l00024"></a>00024         <span class="keywordflow">for</span>($x=0; $x &lt; $this-&gt;frameCount; $x++)
-<a name="l00025"></a>00025         {
-<a name="l00026"></a>00026             $this-&gt;frames[$x] = <span class="keyword">new</span> <a class="code" href="classC16Frame.html">C16Frame</a>($this-&gt;reader);
-<a name="l00027"></a>00027         } 
-<a name="l00028"></a>00028     }
-<a name="l00029"></a>00029     
-<a name="l00030"></a><a class="code" href="classC16File.html#a935db79ae137bda497d3296222c6169a">00030</a>     <span class="keyword">public</span> function <a class="code" href="classC16File.html#a935db79ae137bda497d3296222c6169a">OutputPNG</a>($frame)
-<a name="l00031"></a>00031     {
-<a name="l00032"></a>00032         <span class="keywordflow">if</span>($this-&gt;frameCount &lt; ($frame+1))
-<a name="l00033"></a>00033             <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;OutputPNG - Frame out of bounds - &#39;</span>.$frame);
-<a name="l00034"></a>00034         <span class="keywordflow">return</span> $this-&gt;frames[$frame]-&gt;OutputPNG($this-&gt;encoding);
-<a name="l00035"></a>00035     }
-<a name="l00036"></a>00036 }
-<a name="l00037"></a>00037 ?&gt;
+<a name="l00003"></a>00003 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/ISpriteFile.php&#39;</span>);
+<a name="l00004"></a>00004 require_once(dirname(__FILE__).<span class="stringliteral">&#39;/C16Frame.php&#39;</span>);
+<a name="l00005"></a><a class="code" href="classC16File.html">00005</a> <span class="keyword">class </span><a class="code" href="classC16File.html">C16File</a> <span class="keyword">implements</span> <a class="code" href="interfaceISpriteFile.html">ISpriteFile</a>
+<a name="l00006"></a>00006 {
+<a name="l00007"></a><a class="code" href="classC16File.html#a172b9139d84e3051f4055b034763f41c">00007</a>     <span class="keyword">private</span> <a class="code" href="classC16File.html#a172b9139d84e3051f4055b034763f41c">$encoding</a>;
+<a name="l00008"></a><a class="code" href="classC16File.html#a57a78a248cc12bedb48ffa4374863db1">00008</a>     <span class="keyword">private</span> <a class="code" href="classC16File.html#a57a78a248cc12bedb48ffa4374863db1">$frameCount</a>;
+<a name="l00009"></a><a class="code" href="classC16File.html#a7c3832bfe5c53f8bb546bd3fe13c2367">00009</a>     <span class="keyword">private</span> <a class="code" href="classC16File.html#a7c3832bfe5c53f8bb546bd3fe13c2367">$frames</a>;
+<a name="l00010"></a><a class="code" href="classC16File.html#aada9f63958088c6629ae6d05470d67ce">00010</a>     <span class="keyword">private</span> <a class="code" href="classC16File.html#aada9f63958088c6629ae6d05470d67ce">$reader</a>;
+<a name="l00011"></a><a class="code" href="classC16File.html#a3c7a2651fcabce76f8ffe3478509a6a1">00011</a>     <span class="keyword">public</span> function <a class="code" href="classC16File.html#a3c7a2651fcabce76f8ffe3478509a6a1">C16File</a>(<a class="code" href="interfaceIReader.html">IReader</a> <a class="code" href="classC16File.html#aada9f63958088c6629ae6d05470d67ce">$reader</a>)
+<a name="l00012"></a>00012     {
+<a name="l00013"></a>00013         $this-&gt;reader = $reader;
+<a name="l00014"></a>00014         $buffer = $this-&gt;reader-&gt;<a class="code" href="interfaceIReader.html#a61b184ffbf103eb8369e3e2f71d884ea">ReadInt</a>(4);
+<a name="l00015"></a>00015         <span class="keywordflow">if</span>($buffer == 3)
+<a name="l00016"></a>00016             $this-&gt;encoding = <span class="stringliteral">&#39;565&#39;</span>;
+<a name="l00017"></a>00017         <span class="keywordflow">else</span> <span class="keywordflow">if</span>($buffer == 2)
+<a name="l00018"></a>00018             $this-&gt;encoding = <span class="stringliteral">&#39;555&#39;</span>;
+<a name="l00019"></a>00019         <span class="keywordflow">else</span>
+<a name="l00020"></a>00020             <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;File encoding not recognised. (&#39;</span>.$buffer.<span class="charliteral">&#39;)&#39;</span>);
+<a name="l00021"></a>00021         $buffer = $this-&gt;reader-&gt;ReadInt(2);
+<a name="l00022"></a>00022         <span class="keywordflow">if</span>($buffer &lt; 1)
+<a name="l00023"></a>00023             <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;Sprite file appears to contain less than 1 frame.&#39;</span>);
+<a name="l00024"></a>00024         $this-&gt;frameCount = $buffer;
+<a name="l00025"></a>00025         <span class="keywordflow">for</span>($x=0; $x &lt; $this-&gt;frameCount; $x++)
+<a name="l00026"></a>00026         {
+<a name="l00027"></a>00027             $this-&gt;frames[$x] = <span class="keyword">new</span> <a class="code" href="classC16Frame.html">C16Frame</a>($this-&gt;reader,$this-&gt;encoding);
+<a name="l00028"></a>00028         } 
+<a name="l00029"></a>00029     }
+<a name="l00030"></a><a class="code" href="classC16File.html#adbe75b6ce7f6dacde14f88b1af139ff0">00030</a>     <span class="keyword">public</span> function <a class="code" href="classC16File.html#adbe75b6ce7f6dacde14f88b1af139ff0">GetFrame</a>($frame) {
+<a name="l00031"></a>00031         <span class="keywordflow">if</span>($this-&gt;frameCount &lt; ($frame+1))
+<a name="l00032"></a>00032             <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;OutputPNG - Frame out of bounds - &#39;</span>.$frame);
+<a name="l00033"></a>00033         <span class="keywordflow">return</span> $this-&gt;frames[$frame];
+<a name="l00034"></a>00034     }
+<a name="l00035"></a><a class="code" href="classC16File.html#a935db79ae137bda497d3296222c6169a">00035</a>     <span class="keyword">public</span> function <a class="code" href="classC16File.html#a935db79ae137bda497d3296222c6169a">OutputPNG</a>($frame)
+<a name="l00036"></a>00036     {
+<a name="l00037"></a>00037         <span class="keywordflow">if</span>($this-&gt;frameCount &lt; ($frame+1))
+<a name="l00038"></a>00038             <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&#39;OutputPNG - Frame out of bounds - &#39;</span>.$frame);
+<a name="l00039"></a>00039         <span class="keywordflow">return</span> $this-&gt;frames[$frame]-&gt;OutputPNG($this-&gt;encoding);
+<a name="l00040"></a>00040     }
+<a name="l00041"></a>00041 }
+<a name="l00042"></a>00042 ?&gt;
 </pre></div></div>
 <!--- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -134,7 +139,7 @@ window.onload = initDynSections;
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Sat Jun 12 23:32:45 2010 for c2ephp by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jun 21 22:07:25 2010 for c2ephp by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>

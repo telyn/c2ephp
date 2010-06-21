@@ -85,25 +85,70 @@ window.onload = initDynSections;
   </div>
 </div>
 <div class="contents">
-<h1>DSAGBlock Class Reference</h1><!-- doxytag: class="DSAGBlock" --><!-- doxytag: inherits="TagBlock" --><div class="dynheader">
+<h1>DSAGBlock Class Reference</h1><!-- doxytag: class="DSAGBlock" --><!-- doxytag: inherits="AGNTBlock" -->
+<p>Docking Station agent description block Defines everything about an agent for docking station.  
+<a href="#_details">More...</a></p>
+<div class="dynheader">
 Inheritance diagram for DSAGBlock:</div>
 <div class="dynsection">
 <div class="center"><img src="classDSAGBlock__inherit__graph.png" border="0" usemap="#DSAGBlock_inherit__map" alt="Inheritance graph"/></div>
 <map name="DSAGBlock_inherit__map" id="DSAGBlock_inherit__map">
-<area shape="rect" href="classTagBlock.html" title="TagBlock" alt="" coords="13,83,88,112"/><area shape="rect" href="classPrayBlock.html" title="Abstract class to represent PRAY blocks." alt="" coords="11,5,91,35"/></map>
+<area shape="rect" href="classAGNTBlock.html" title="AGNTBlock" alt="" coords="7,160,95,189"/><area shape="rect" href="classTagBlock.html" title="TagBlock" alt="" coords="13,83,88,112"/><area shape="rect" href="classPrayBlock.html" title="Abstract class to represent PRAY blocks." alt="" coords="11,5,91,35"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
 Collaboration diagram for DSAGBlock:</div>
 <div class="dynsection">
 <div class="center"><img src="classDSAGBlock__coll__graph.png" border="0" usemap="#DSAGBlock_coll__map" alt="Collaboration graph"/></div>
 <map name="DSAGBlock_coll__map" id="DSAGBlock_coll__map">
-<area shape="rect" href="classTagBlock.html" title="TagBlock" alt="" coords="13,83,88,112"/><area shape="rect" href="classPrayBlock.html" title="Abstract class to represent PRAY blocks." alt="" coords="11,5,91,35"/></map>
+<area shape="rect" href="classAGNTBlock.html" title="AGNTBlock" alt="" coords="7,160,95,189"/><area shape="rect" href="classTagBlock.html" title="TagBlock" alt="" coords="13,83,88,112"/><area shape="rect" href="classPrayBlock.html" title="Abstract class to represent PRAY blocks." alt="" coords="11,5,91,35"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classDSAGBlock-members.html">List of all members.</a></p>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDSAGBlock.html#ada08eeb3ebe3142a616e5983b08c3edf">DSAGBlock</a> ($prayfile, $name, $content, $flags)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Instantiates a new <a class="el" href="classDSAGBlock.html" title="Docking Station agent description block Defines everything about an agent for docking...">DSAGBlock</a>.  <a href="#ada08eeb3ebe3142a616e5983b08c3edf"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDSAGBlock.html#a93f7e228f4a09af2f03d3d2eebfdcfa6">GetWebLabel</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the label used on the web button.  <a href="#a93f7e228f4a09af2f03d3d2eebfdcfa6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDSAGBlock.html#a249993b9f97f2bcbf8bc369fff7b6ab8">GetWebURL</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the URL of the web site.  <a href="#a249993b9f97f2bcbf8bc369fff7b6ab8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDSAGBlock.html#a113d59e2185762b328ca82ce5caa5162">GetWebIcon</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the file used for the web button's icon.  <a href="#a113d59e2185762b328ca82ce5caa5162"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDSAGBlock.html#aab8d8414a41252682a51880b710f44b1">GetWebIconBase</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the number of the sprite to use as the base for the web icon.  <a href="#aab8d8414a41252682a51880b710f44b1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDSAGBlock.html#abe59ee452a244cd9778680614cb5c119">GetWebIconAnimationString</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the animation string for the web icon. In theory, the web button would animate. In reality, DS actually only uses the first image.  <a href="#abe59ee452a244cd9778680614cb5c119"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDSAGBlock.html#a4eb558cb80c5707765af36bfc468866e">GetWebIconAsSpriteFrame</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the web button image as an <a class="el" href="interfaceISpriteFrame.html">ISpriteFrame</a>.  <a href="#a4eb558cb80c5707765af36bfc468866e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGNTBlock.html#acee06bf09393456bdd4fc7d982bec274">AGNTBlock</a> ($prayfile, $name, $content, $flags)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGNTBlock.html#a8720772125ca2c8d25ce7c8bff50941b">GetAgentName</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the agent's name.  <a href="#a8720772125ca2c8d25ce7c8bff50941b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGNTBlock.html#a9c95007cd479e2571471555dbec89ce6">GetAgentDescription</a> ($localisation='')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the agent's description in the specified language If the description doesn't exist in that language, falls back on English.  <a href="#a9c95007cd479e2571471555dbec89ce6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGNTBlock.html#a21d55e722fc1025e3ad671d05f4a0c56">GetAgentType</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the agent's type I honestly have no idea what this is. For some reason always zero. O_o.  <a href="#a21d55e722fc1025e3ad671d05f4a0c56"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGNTBlock.html#ac9702baa18c161d9381e0843d8449bfd">GetScriptCount</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the number of scripts stored in this block.  <a href="#ac9702baa18c161d9381e0843d8449bfd"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGNTBlock.html#a05e28543e14644adbc643580800bfc67">GetScript</a> ($script=1)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the specified script Gets the first script, or if you specified which script, that one.  <a href="#a05e28543e14644adbc643580800bfc67"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGNTBlock.html#adfe8bc1dcd848aac76c66467b6021034">GetDependencyCount</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get the number of files this agent depends on.  <a href="#adfe8bc1dcd848aac76c66467b6021034"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGNTBlock.html#a5d89979cfa2e3910506aacdc55840e6b">GetDependency</a> ($dependency)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the dependency specified.  <a href="#a5d89979cfa2e3910506aacdc55840e6b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGNTBlock.html#a538795b097cb5b4f19124fde50ddaa87">GetDependencies</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets all the files this agent depends on.  <a href="#a538795b097cb5b4f19124fde50ddaa87"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGNTBlock.html#aef464bdeb6b1db7c0f8938317f79db41">GetRemoveScript</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the script used to remove this agent. If not specified, most likely a removal script is included in the agent's scripts, however, if this isn't specified the game won't know how to remove the agent.  <a href="#aef464bdeb6b1db7c0f8938317f79db41"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGNTBlock.html#a9c02d6881b7eaafed281535f8e657993">GetAgentAnimationFile</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the file used for the animation of the agent on the C3 Creator/DS injector.  <a href="#a9c02d6881b7eaafed281535f8e657993"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGNTBlock.html#abe12dc5b0e7fb3812d13406fb61d8082">GetAgentAnimationGallery</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the filename (excluding extension) used for the animation of the agent on the C3 Creator/DS injector For all agent files I've seen, it's functionally identical to substr(<a class="el" href="classAGNTBlock.html#a9c02d6881b7eaafed281535f8e657993" title="Gets the file used for the animation of the agent on the C3 Creator/DS injector.">AGNTBlock::GetAgentAnimationFile()</a>,0,-4) I have no idea why anyone would use this.  <a href="#abe12dc5b0e7fb3812d13406fb61d8082"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGNTBlock.html#ab8ee85b3bc08b92c7dbbf14dba21797a">GetAgentAnimationFirstImage</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the number of the first image of the animation displayed on the C3 Creator/DS injector This is used as the basis for the animation string. For example, an AGNT block with 'Animation Sprite First Image' = 4 and 'Agent Animation String' = 0 0 3 4 Would show the same image as one with 'Animation Sprite First Image' = 0 and 'Agent Animation String' = 4 4 7 8.  <a href="#ab8ee85b3bc08b92c7dbbf14dba21797a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGNTBlock.html#a64ce5fdebfdc341d7d3f10d24325e491">GetAgentAnimationString</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the animation displayed on the C3 creator/DS injector It's simply a space-delimited set of numbers.  <a href="#a64ce5fdebfdc341d7d3f10d24325e491"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAGNTBlock.html#a3a1d68436877f172fc5892bff2ea258d">GetAgentAnimationAsSpriteFrame</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Gets the image used on the creator Since I have no desire to bring GIF files back to the internet this function will ONLY support single-frame animations. If you really, REALLY, want to make a GIF, it's totally possible so do it yourself. You can use this function as a basis. After all, that's what FOSS software is for.  <a href="#a3a1d68436877f172fc5892bff2ea258d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTagBlock.html#add9077f01b82885b90caebc3e85ca0dd">TagBlock</a> ($prayfile, $name, $content, $flags, $type)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTagBlock.html#a545c136659362f531ebf88aacb6fe2c5">GetTag</a> ($key)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTagBlock.html#a4edee038174d9a92c37428276f86dc6c">GetTags</a> ()</td></tr>
@@ -133,9 +178,51 @@ Collaboration diagram for DSAGBlock:</div>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPrayBlock.html#a2bb58fe131b7102fcfb74002d24b3828">EnsureDecompiled</a> ()</td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
+<p>Docking Station agent description block Defines everything about an agent for docking station. </p>
 
-<p>Definition at line <a class="el" href="DSAGBlock_8php_source.html#l00004">4</a> of file <a class="el" href="DSAGBlock_8php_source.html">DSAGBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="DSAGBlock_8php_source.html#l00008">8</a> of file <a class="el" href="DSAGBlock_8php_source.html">DSAGBlock.php</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="acee06bf09393456bdd4fc7d982bec274"></a><!-- doxytag: member="DSAGBlock::AGNTBlock" ref="acee06bf09393456bdd4fc7d982bec274" args="($prayfile, $name, $content, $flags)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AGNTBlock::AGNTBlock </td>
+          <td>(</td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>prayfile</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>content</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>flags</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="AGNTBlock_8php_source.html#l00006">6</a> of file <a class="el" href="AGNTBlock_8php_source.html">AGNTBlock.php</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ad536a26cf7dfa2cfdc833ddbd32f33a9"></a><!-- doxytag: member="DSAGBlock::Compile" ref="ad536a26cf7dfa2cfdc833ddbd32f33a9" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -154,7 +241,7 @@ Collaboration diagram for DSAGBlock:</div>
 
 <p>Reimplemented in <a class="el" href="classBinaryBlock.html#a7d0bd7a82dd9ef2f71707844182813e9">BinaryBlock</a>.</p>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00208">208</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00212">212</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -242,7 +329,18 @@ Collaboration diagram for DSAGBlock:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="DSAGBlock_8php_source.html#l00005">5</a> of file <a class="el" href="DSAGBlock_8php_source.html">DSAGBlock.php</a>.</p>
+<p>Instantiates a new <a class="el" href="classDSAGBlock.html" title="Docking Station agent description block Defines everything about an agent for docking...">DSAGBlock</a>. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>$prayfile</em>&nbsp;</td><td>The <a class="el" href="classPRAYFile.html">PRAYFile</a> this <a class="el" href="classDSAGBlock.html" title="Docking Station agent description block Defines everything about an agent for docking...">DSAGBlock</a> is being read from. Can be null. </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>$name</em>&nbsp;</td><td>This block's name. </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>$content</em>&nbsp;</td><td>The binary contents of the block </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>$flags</em>&nbsp;</td><td>The flags this block </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="DSAGBlock_8php_source.html#l00015">15</a> of file <a class="el" href="DSAGBlock_8php_source.html">DSAGBlock.php</a>.</p>
 
 </div>
 </div>
@@ -279,7 +377,7 @@ Collaboration diagram for DSAGBlock:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00097">97</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00100">100</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -299,7 +397,183 @@ Collaboration diagram for DSAGBlock:</div>
 <div class="memdoc">
 <p>Makes sure that the <a class="el" href="classPrayBlock.html" title="Abstract class to represent PRAY blocks.">PrayBlock</a> is decompiled. Call this function at the beginning of every function that returns data in superclasses so that data decoding is automatic. </p>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00197">197</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00201">201</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3a1d68436877f172fc5892bff2ea258d"></a><!-- doxytag: member="DSAGBlock::GetAgentAnimationAsSpriteFrame" ref="a3a1d68436877f172fc5892bff2ea258d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AGNTBlock::GetAgentAnimationAsSpriteFrame </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the image used on the creator Since I have no desire to bring GIF files back to the internet this function will ONLY support single-frame animations. If you really, REALLY, want to make a GIF, it's totally possible so do it yourself. You can use this function as a basis. After all, that's what FOSS software is for. </p>
+<p>This function tries hard to get the animation file. TODO: Make it try really hard, and then really really hard. </p>
+
+<p>Definition at line <a class="el" href="AGNTBlock_8php_source.html#l00114">114</a> of file <a class="el" href="AGNTBlock_8php_source.html">AGNTBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9c02d6881b7eaafed281535f8e657993"></a><!-- doxytag: member="DSAGBlock::GetAgentAnimationFile" ref="a9c02d6881b7eaafed281535f8e657993" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AGNTBlock::GetAgentAnimationFile </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the file used for the animation of the agent on the C3 Creator/DS injector. </p>
+
+<p>Definition at line <a class="el" href="AGNTBlock_8php_source.html#l00082">82</a> of file <a class="el" href="AGNTBlock_8php_source.html">AGNTBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab8ee85b3bc08b92c7dbbf14dba21797a"></a><!-- doxytag: member="DSAGBlock::GetAgentAnimationFirstImage" ref="ab8ee85b3bc08b92c7dbbf14dba21797a" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AGNTBlock::GetAgentAnimationFirstImage </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the number of the first image of the animation displayed on the C3 Creator/DS injector This is used as the basis for the animation string. For example, an AGNT block with 'Animation Sprite First Image' = 4 and 'Agent Animation String' = 0 0 3 4 Would show the same image as one with 'Animation Sprite First Image' = 0 and 'Agent Animation String' = 4 4 7 8. </p>
+
+<p>Definition at line <a class="el" href="AGNTBlock_8php_source.html#l00097">97</a> of file <a class="el" href="AGNTBlock_8php_source.html">AGNTBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abe12dc5b0e7fb3812d13406fb61d8082"></a><!-- doxytag: member="DSAGBlock::GetAgentAnimationGallery" ref="abe12dc5b0e7fb3812d13406fb61d8082" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AGNTBlock::GetAgentAnimationGallery </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the filename (excluding extension) used for the animation of the agent on the C3 Creator/DS injector For all agent files I've seen, it's functionally identical to substr(<a class="el" href="classAGNTBlock.html#a9c02d6881b7eaafed281535f8e657993" title="Gets the file used for the animation of the agent on the C3 Creator/DS injector.">AGNTBlock::GetAgentAnimationFile()</a>,0,-4) I have no idea why anyone would use this. </p>
+
+<p>Definition at line <a class="el" href="AGNTBlock_8php_source.html#l00089">89</a> of file <a class="el" href="AGNTBlock_8php_source.html">AGNTBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a64ce5fdebfdc341d7d3f10d24325e491"></a><!-- doxytag: member="DSAGBlock::GetAgentAnimationString" ref="a64ce5fdebfdc341d7d3f10d24325e491" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AGNTBlock::GetAgentAnimationString </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the animation displayed on the C3 creator/DS injector It's simply a space-delimited set of numbers. </p>
+
+<p>Definition at line <a class="el" href="AGNTBlock_8php_source.html#l00103">103</a> of file <a class="el" href="AGNTBlock_8php_source.html">AGNTBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9c95007cd479e2571471555dbec89ce6"></a><!-- doxytag: member="DSAGBlock::GetAgentDescription" ref="a9c95007cd479e2571471555dbec89ce6" args="($localisation='')" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AGNTBlock::GetAgentDescription </td>
+          <td>(</td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>localisation</em> = <code>''</code></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the agent's description in the specified language If the description doesn't exist in that language, falls back on English. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>$localisation</em>&nbsp;</td><td>The two-letter language code (e.g. de, fr) to get. If not specified, english is used. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="AGNTBlock_8php_source.html#l00017">17</a> of file <a class="el" href="AGNTBlock_8php_source.html">AGNTBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8720772125ca2c8d25ce7c8bff50941b"></a><!-- doxytag: member="DSAGBlock::GetAgentName" ref="a8720772125ca2c8d25ce7c8bff50941b" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AGNTBlock::GetAgentName </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the agent's name. </p>
+
+<p>Definition at line <a class="el" href="AGNTBlock_8php_source.html#l00010">10</a> of file <a class="el" href="AGNTBlock_8php_source.html">AGNTBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a21d55e722fc1025e3ad671d05f4a0c56"></a><!-- doxytag: member="DSAGBlock::GetAgentType" ref="a21d55e722fc1025e3ad671d05f4a0c56" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AGNTBlock::GetAgentType </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the agent's type I honestly have no idea what this is. For some reason always zero. O_o. </p>
+
+<p>Definition at line <a class="el" href="AGNTBlock_8php_source.html#l00031">31</a> of file <a class="el" href="AGNTBlock_8php_source.html">AGNTBlock.php</a>.</p>
 
 </div>
 </div>
@@ -317,10 +591,82 @@ Collaboration diagram for DSAGBlock:</div>
       </table>
 </div>
 <div class="memdoc">
-<p>Gets the PRAY block's binary data if the PRAYBlock is decompiled. It will decompress automatically if necessary, then unset the compressed flag. </p>
+<p>Gets the PRAY block's binary data if the PRAYBlock is decompiled. It will decompress automatically if necessary, then unset the compressed flag. TODO: I'm not 100% sure I should keep this public... </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the PRAY block's binary data. </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00132">132</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00136">136</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a538795b097cb5b4f19124fde50ddaa87"></a><!-- doxytag: member="DSAGBlock::GetDependencies" ref="a538795b097cb5b4f19124fde50ddaa87" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AGNTBlock::GetDependencies </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets all the files this agent depends on. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>An array of <a class="el" href="classPrayDependency.html">PrayDependency</a> objects. </dd></dl>
+
+<p>Definition at line <a class="el" href="AGNTBlock_8php_source.html#l00066">66</a> of file <a class="el" href="AGNTBlock_8php_source.html">AGNTBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5d89979cfa2e3910506aacdc55840e6b"></a><!-- doxytag: member="DSAGBlock::GetDependency" ref="a5d89979cfa2e3910506aacdc55840e6b" args="($dependency)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AGNTBlock::GetDependency </td>
+          <td>(</td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>dependency</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the dependency specified. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>$dependency</em>&nbsp;</td><td>The number of the dependency to get. 1-based. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A <a class="el" href="classPrayDependency.html">PrayDependency</a> object describing the file the agent depends on </dd></dl>
+
+<p>Definition at line <a class="el" href="AGNTBlock_8php_source.html#l00058">58</a> of file <a class="el" href="AGNTBlock_8php_source.html">AGNTBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adfe8bc1dcd848aac76c66467b6021034"></a><!-- doxytag: member="DSAGBlock::GetDependencyCount" ref="adfe8bc1dcd848aac76c66467b6021034" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AGNTBlock::GetDependencyCount </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the number of files this agent depends on. </p>
+
+<p>Definition at line <a class="el" href="AGNTBlock_8php_source.html#l00050">50</a> of file <a class="el" href="AGNTBlock_8php_source.html">AGNTBlock.php</a>.</p>
 
 </div>
 </div>
@@ -341,7 +687,7 @@ Collaboration diagram for DSAGBlock:</div>
 <p>Returns the flag bitfield used to determine flags. Prefer using IsFlagSet </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>an integer that will either be 0 or 1 with c2e-compatible PRAY blocks. </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00152">152</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00156">156</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -362,7 +708,7 @@ Collaboration diagram for DSAGBlock:</div>
 <p>Gets the length of this block's content. Only useful on blocks that came from a <a class="el" href="classPRAYFile.html">PRAYFile</a>. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>an integer corresponding to the length of this block's binary data. </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00165">165</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00169">169</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -383,7 +729,7 @@ Collaboration diagram for DSAGBlock:</div>
 <p>Gets the PRAY block's name </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the PRAY block's name </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00125">125</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00128">128</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -404,7 +750,77 @@ Collaboration diagram for DSAGBlock:</div>
 <p>Returns the <a class="el" href="classPRAYFile.html">PRAYFile</a> this block belongs to. Only applies to PrayBlocks created with a <a class="el" href="classPRAYFile.html">PRAYFile</a>. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>a <a class="el" href="classPRAYFile.html">PRAYFile</a> object. </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00178">178</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00182">182</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aef464bdeb6b1db7c0f8938317f79db41"></a><!-- doxytag: member="DSAGBlock::GetRemoveScript" ref="aef464bdeb6b1db7c0f8938317f79db41" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AGNTBlock::GetRemoveScript </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the script used to remove this agent. If not specified, most likely a removal script is included in the agent's scripts, however, if this isn't specified the game won't know how to remove the agent. </p>
+
+<p>Definition at line <a class="el" href="AGNTBlock_8php_source.html#l00078">78</a> of file <a class="el" href="AGNTBlock_8php_source.html">AGNTBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a05e28543e14644adbc643580800bfc67"></a><!-- doxytag: member="DSAGBlock::GetScript" ref="a05e28543e14644adbc643580800bfc67" args="($script=1)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AGNTBlock::GetScript </td>
+          <td>(</td>
+          <td class="paramtype">$&nbsp;</td>
+          <td class="paramname"> <em>script</em> = <code>1</code></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the specified script Gets the first script, or if you specified which script, that one. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>$script</em>&nbsp;</td><td>Which script to get as an integer. The first script is script 1. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="AGNTBlock_8php_source.html#l00042">42</a> of file <a class="el" href="AGNTBlock_8php_source.html">AGNTBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac9702baa18c161d9381e0843d8449bfd"></a><!-- doxytag: member="DSAGBlock::GetScriptCount" ref="ac9702baa18c161d9381e0843d8449bfd" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AGNTBlock::GetScriptCount </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the number of scripts stored in this block. </p>
+
+<p>Definition at line <a class="el" href="AGNTBlock_8php_source.html#l00035">35</a> of file <a class="el" href="AGNTBlock_8php_source.html">AGNTBlock.php</a>.</p>
 
 </div>
 </div>
@@ -464,7 +880,133 @@ Collaboration diagram for DSAGBlock:</div>
 <p>Gives the type as one of the PRAY_BLOCK_* constants </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>One of the PRAY_BLOCK_* constants </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00146">146</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00150">150</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a113d59e2185762b328ca82ce5caa5162"></a><!-- doxytag: member="DSAGBlock::GetWebIcon" ref="a113d59e2185762b328ca82ce5caa5162" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DSAGBlock::GetWebIcon </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the file used for the web button's icon. </p>
+
+<p>Definition at line <a class="el" href="DSAGBlock_8php_source.html#l00032">32</a> of file <a class="el" href="DSAGBlock_8php_source.html">DSAGBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abe59ee452a244cd9778680614cb5c119"></a><!-- doxytag: member="DSAGBlock::GetWebIconAnimationString" ref="abe59ee452a244cd9778680614cb5c119" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DSAGBlock::GetWebIconAnimationString </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the animation string for the web icon. In theory, the web button would animate. In reality, DS actually only uses the first image. </p>
+
+<p>Definition at line <a class="el" href="DSAGBlock_8php_source.html#l00042">42</a> of file <a class="el" href="DSAGBlock_8php_source.html">DSAGBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4eb558cb80c5707765af36bfc468866e"></a><!-- doxytag: member="DSAGBlock::GetWebIconAsSpriteFrame" ref="a4eb558cb80c5707765af36bfc468866e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DSAGBlock::GetWebIconAsSpriteFrame </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the web button image as an <a class="el" href="interfaceISpriteFrame.html">ISpriteFrame</a>. </p>
+
+<p>Definition at line <a class="el" href="DSAGBlock_8php_source.html#l00046">46</a> of file <a class="el" href="DSAGBlock_8php_source.html">DSAGBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aab8d8414a41252682a51880b710f44b1"></a><!-- doxytag: member="DSAGBlock::GetWebIconBase" ref="aab8d8414a41252682a51880b710f44b1" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DSAGBlock::GetWebIconBase </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the number of the sprite to use as the base for the web icon. </p>
+
+<p>Definition at line <a class="el" href="DSAGBlock_8php_source.html#l00036">36</a> of file <a class="el" href="DSAGBlock_8php_source.html">DSAGBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a93f7e228f4a09af2f03d3d2eebfdcfa6"></a><!-- doxytag: member="DSAGBlock::GetWebLabel" ref="a93f7e228f4a09af2f03d3d2eebfdcfa6" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DSAGBlock::GetWebLabel </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the label used on the web button. </p>
+
+<p>Definition at line <a class="el" href="DSAGBlock_8php_source.html#l00019">19</a> of file <a class="el" href="DSAGBlock_8php_source.html">DSAGBlock.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a249993b9f97f2bcbf8bc369fff7b6ab8"></a><!-- doxytag: member="DSAGBlock::GetWebURL" ref="a249993b9f97f2bcbf8bc369fff7b6ab8" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DSAGBlock::GetWebURL </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Gets the URL of the web site. </p>
+
+<p>Definition at line <a class="el" href="DSAGBlock_8php_source.html#l00023">23</a> of file <a class="el" href="DSAGBlock_8php_source.html">DSAGBlock.php</a>.</p>
 
 </div>
 </div>
@@ -492,7 +1034,7 @@ Collaboration diagram for DSAGBlock:</div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>true or false. </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00159">159</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00163">163</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -552,7 +1094,7 @@ Collaboration diagram for DSAGBlock:</div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>An object that is an instance of a subclass of <a class="el" href="classPrayBlock.html" title="Abstract class to represent PRAY blocks.">PrayBlock</a>. </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00240">240</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00244">244</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -580,7 +1122,7 @@ Collaboration diagram for DSAGBlock:</div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>the data, having been transformed. </dd></dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00116">116</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00119">119</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -635,7 +1177,7 @@ Collaboration diagram for DSAGBlock:</div>
     <tr><td valign="top"></td><td valign="top"><em>$name</em>&nbsp;</td><td>The name of the block. Must be unique within the <a class="el" href="classPRAYFile.html">PRAYFile</a>. This will be checked by the <a class="el" href="classPRAYFile.html">PRAYFile</a>. </td></tr>
     <tr><td valign="top"></td><td valign="top"><em>$content</em>&nbsp;</td><td>If constructing the <a class="el" href="classPrayBlock.html" title="Abstract class to represent PRAY blocks.">PrayBlock</a> by reading a PRAY file, must be a binary string. Otherwise, should be null (but doesn't have to be). </td></tr>
     <tr><td valign="top"></td><td valign="top"><em>$flags</em>&nbsp;</td><td>A 1-byte integer containing the flags this <a class="el" href="classPrayBlock.html" title="Abstract class to represent PRAY blocks.">PrayBlock</a> has set </td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>$type</em>&nbsp;</td><td>The type of the <a class="el" href="classPrayBlock.html" title="Abstract class to represent PRAY blocks.">PrayBlock</a> as a PRAY_BLOCK_* constant </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>$type</em>&nbsp;</td><td>The type of the <a class="el" href="classPrayBlock.html" title="Abstract class to represent PRAY blocks.">PrayBlock</a> as a PRAY_BLOCK_* constant. Must be a four-character string. </td></tr>
   </table>
   </dd>
 </dl>
@@ -661,7 +1203,7 @@ Collaboration diagram for DSAGBlock:</div>
 <div class="memdoc">
 <p>Sets the data for this object Used only by the CreatureHistoryBlock class to archive/de-archive data. Should ONLY be used to transform data in a way not specified by flags just before decompiling proper. </p>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00172">172</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00176">176</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -688,7 +1230,7 @@ Collaboration diagram for DSAGBlock:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00190">190</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00194">194</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -715,7 +1257,7 @@ Collaboration diagram for DSAGBlock:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00184">184</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
+<p>Definition at line <a class="el" href="PrayBlock_8php_source.html#l00188">188</a> of file <a class="el" href="PrayBlock_8php_source.html">PrayBlock.php</a>.</p>
 
 </div>
 </div>
@@ -784,7 +1326,7 @@ Collaboration diagram for DSAGBlock:</div>
 </iframe>
 </div>
 
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Sat Jun 12 23:32:46 2010 for c2ephp by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Mon Jun 21 22:07:29 2010 for c2ephp by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
