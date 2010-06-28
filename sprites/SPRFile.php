@@ -8,6 +8,7 @@ class SPRFile implements ISpriteFile {
 	private $reader;
 	private $frameCount;
 	private $frames;
+	
 	public function SPRFile(IReader	$reader) {
 		$this->reader = $reader;
 		$this->frameCount = $this->reader->ReadInt(2);
@@ -23,14 +24,12 @@ class SPRFile implements ISpriteFile {
 	}
 	public function GetFrame($frame) {
 		if($this->frameCount < ($frame+1))
-			throw new Exception('OutputPNG - Frame out of bounds - '.$frame);
+			throw new Exception('GetFrame - Frame out of bounds - '.$frame);
 		return $this->frames[$frame];
 	}
-	public function OutputPNG($frame)
+	public function ToPNG($frame)
 	{
-		if($this->frameCount < ($frame+1))
-			throw new Exception('OutputPNG - Frame out of bounds - '.$frame);
-		return $this->frames[$frame]->OutputPNG($this->reader, $this->encoding);
+		return $this->GetFrame($frame)->OutputPNG($this->reader);
 	}
 }
 ?>

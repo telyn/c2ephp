@@ -11,31 +11,33 @@ require_once(dirname(__FILE__).'/C16Frame.php');
 class C16File implements ISpriteFile
 {
 	private $encoding;
-	private $frameCount;
-	private $frames;
-	private $reader;
+	private $frames = array();
 	/** \brief Creates a new C16File object.
 	  * If $reader is null, creates an empty C16File ready to add sprites to.
 	  * \param IReader $reader The reader to read the sprites from. Will be able to be null
 	  */
-	public function C16File(IReader $reader)
+	public function C16File(IReader $reader=null)
 	{
-		$this->reader = $reader;
-		$buffer = $this->reader->ReadInt(4);
-		if($buffer == 3)
-			$this->encoding = '565';
-		else if($buffer == 2)
-			$this->encoding = '555';
-		else
-			throw new Exception('File encoding not recognised. ('.$buffer.')');
-		$buffer = $this->reader->ReadInt(2);
-		if($buffer < 1)
-			throw new Exception('Sprite file appears to contain less than 1 frame.');
-		$this->frameCount = $buffer;
-		for($x=0; $x < $this->frameCount; $x++)
-		{
-			$this->frames[$x] = new C16Frame($this->reader,$this->encoding);
-		} 
+    if($reader != null) {
+  		$buffer = $reader->ReadInt(4);
+  		if($buffer == 3)
+  			$this->encoding = '565';
+  		else if($buffer == 2)
+  			$this->encoding = '555';
+  		else
+  			throw new Exception('File encoding not recognised. ('.$buffer.')');
+  		$buffer = $reader->ReadInt(2);
+  		if($buffer < 1)
+  			throw new Exception('Sprite file appears to contain less than 1 frame.');
+  		$frameCount = $buffer;
+  		for($x=0; $x < $frameCount; $x++)
+  		{
+  			$this->frames[$x] = new C16Frame($reader,$this->encoding);
+  		}
+  	}
+	}
+	public function Compile() {
+	
 	}
 	/** \brief Gets the specified C16Frame
 	  * \param $frame The index of the frame to get.
@@ -51,9 +53,9 @@ class C16File implements ISpriteFile
 	  * \param $frame The frame to output.
 	  * \return A PNG as a binary string.
 	  */
-	public function OutputPNG($frame)
+	public function ToPNG($frame)
 	{
-		$this->GetFrame($frame)->OutputPNG($this->encoding);
+		$this->GetFrame($frame)->OutputPNG();
 	}
 }
 ?>

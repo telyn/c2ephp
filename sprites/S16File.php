@@ -5,9 +5,10 @@ require_once(dirname(__FILE__)."/S16Frame.php");
 class S16File implements ISpriteFile
 {
 	private $encoding;
-	private $frame_count;
-	private $frame_header;
+	private $frameCount;
+	private $frames;
 	private $reader;
+	
 	public function S16File(IReader $reader)
 	{
 		$this->reader = $reader;
@@ -19,10 +20,10 @@ class S16File implements ISpriteFile
 		} else {
 			throw new Exception("File encoding not recognised. (".$buffer.'|'.$this->reader->GetPosition().')');
 		}
-		$this->frame_count = $this->reader->ReadInt(2);
-		for($i=0; $i < $this->frame_count; $i++)
+		$this->frameCount = $this->reader->ReadInt(2);
+		for($i=0; $i < $this->frameCount; $i++)
 		{
-			$this->frame_header[$i] = new S16Frame($this->reader,$this->encoding);
+			$this->frames[$i] = new S16Frame($this->reader,$this->encoding);
 		}
 	}
 	public function GetFrame($frame) {
@@ -30,11 +31,9 @@ class S16File implements ISpriteFile
 			throw new Exception('OutputPNG - Frame out of bounds - '.$frame);
 		return $this->frames[$frame];
 	}
-	public function OutputPNG($frame)
+	public function ToPNG($frame)
 	{
-		if($this->frame_count < ($frame+1))
-			throw new Exception("OutputPNG - Frame out of bounds - ".$frame);
-		return $this->frames[$frame]->OutputPNG($this->encoding);
+		return $this->GetFrame($frame)->ToPNG();
 	}
 }
 ?>

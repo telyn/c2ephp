@@ -119,6 +119,12 @@ class CreatureHistory {
 		}
 		return $matchingEvents;
 	}
+	/** \brief Gets all the events in this history
+	 * \return An array of CreatureHistoryEvents 
+	 */
+  public function GetEvents() {
+	  return $this->events;
+	} 
 	/// \brief Gets the moniker of the creature this history is attached to.
 	public function GetCreatureMoniker() {
 		return $this->moniker;
