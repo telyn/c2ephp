@@ -10,8 +10,8 @@ $agent = new PRAYFile(new FileReader($argv[1]));
 $blocks = $agent->GetBlocks(PRAY_BLOCK_GLST);
 $history = $blocks[0]->GetHistory();
 foreach($history->GetEvents() as $event) {
-	if($event->GetEventNumber() == 13) {
-		print $agent->GetBlockByName($event['photograph'].'.photo')->OutputPNG();
+	if($event->GetEventType() == 13) {
+		print $agent->GetBlockByName($blocks[0]->GetPHOTBlockName($event))->ToPNG();
 		break;
 	}
 }

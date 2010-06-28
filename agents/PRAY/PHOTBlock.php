@@ -31,8 +31,8 @@ class PHOTBlock extends PrayBlock {
 	/** Returns the photo data as a PNG.
 	* 	\return The photo data as a binary string containing PHP data.
 	*/
-	public function OutputPNG() {
-		return $this->GetS16File()->OutputPNG(0);
+	public function ToPNG() {
+		return $this->GetS16File()->ToPNG(0);
 	}
 }
 ?>

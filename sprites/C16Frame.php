@@ -4,32 +4,62 @@ require_once(dirname(__FILE__).'/../support/IReader.php');
 
 class C16Frame implements ISpriteFrame 
 {
-	 private $offset;
-	 private $width;
-	 private $height;
-	 private $reader;
 	 private $encoding;
-	 private $lineOffset;
 	 
-	 public function C16Frame(IReader &$reader,$encoding)
+	 private $lineOffset = array();
+	 
+	 private $reader;
+	 private $offset;
+   private $width;
+   private $height;
+   
+	 private $gdImage;
+	 private $decoded;
+	 
+	 public function C16Frame($reader,$encoding)
 	 {
- 	 	$this->reader = $reader;
- 	 	$this->encoding = $encoding;
-	 	$this->offset = $this->reader->ReadInt(4);
-	 	$buffer = $this->reader->ReadInt(2);
-	 	if($buffer < 1)
-	 		throw new Exception('Frame claims zero width.');
-	 	$this->width = $buffer;
-	 	$this->height = $this->reader->ReadInt(2);
-	 	for($x = 0; $x < ($this->height - 1); $x++)
-	 	{
-	 		$this->lineOffset[$x] = $this->reader->ReadInt(4);
-	 	}
+  	 if($reader instanceof IReader) {
+  	   $this->decoded = false;
+     	 $this->reader = $reader;
+     	 $this->encoding = $encoding;
+    	 $this->offset = $this->reader->ReadInt(4);
+    	 $buffer = $this->reader->ReadInt(2);
+    	 if($buffer < 1)
+    	   throw new Exception('Frame claims zero width.');
+    	 $this->width = $buffer;
+    	 $this->height = $this->reader->ReadInt(2);
+    	 for($x = 0; $x < ($this->height - 1); $x++)
+    	 {
+    	   $this->lineOffset[$x] = $this->reader->ReadInt(4);
+    	 }
+     } else if(is_resource($reader)) {
+        if(get_resource_type($reader) == 'gd') {
+          $this->decoded= true;
+          $this->encoding = '565';
+          $this->gdImage = $reader;
+          
+        }
+     }
 	 }
-	 
-	 public function OutputPNG()
+	 public function SetPixel($x,$y,$r,$g,$b) {
+	   $this->EnsureDecoded();
+	   imagesetpixel($this->gdImage, $x, $y, imagecolorallocate($this->gdImage, $r, $g, $b));
+	 }
+	 public function GetPixel($x,$y) {
+	   $this->EnsureDecoded();
+	   $color = imagecolorat($this->gdImage, $x, $y);
+	   return imagecolorsforindex($this->gdImage, $color);
+	 }
+	 private function EnsureDecoded() {
+	   if(!$this->decoded) {
+	     $this->gdImage = $this->ToGDImage();
+	     $this->decoded = true;
+	   }
+	 }
+	 public function ToGDImage()
 	 {
-	 	ob_start();
+	  if($this->decoded) { return $this->gdImage; }
+	  
 		$image = imagecreatetruecolor($this->width,
 									  $this->height);
 		$this->reader->Seek($this->offset);
@@ -77,10 +107,15 @@ class C16Frame implements ISpriteFrame
 				$this->reader->Skip(2);
 			}
 		}
-		imagepng($image);
-		$data = ob_get_contents();
-		ob_end_clean();
-		return $data;
+		return $image;
 	 }
+	 public function ToPNG() {
+	   $image = $this->ToGDImage();
+	   ob_start();
+	   imagepng($image);
+     $data = ob_get_contents();
+     ob_end_clean();
+     return $data;
+   }
 }
 ?>
