@@ -1,8 +1,8 @@
 <?php
 require_once(dirname(__FILE__)."/../support/FileReader.php");
-require_once(dirname(__FILE__).'/ISpriteFile.php');
+require_once(dirname(__FILE__).'/SpriteFile.php');
 require_once(dirname(__FILE__)."/S16Frame.php");
-class S16File implements ISpriteFile
+class S16File extends SpriteFile
 {
 	private $encoding;
 	private $frameCount;
@@ -11,6 +11,7 @@ class S16File implements ISpriteFile
 	
 	public function S16File(IReader $reader)
 	{
+	  parent::SpriteFile('S16');
 		$this->reader = $reader;
 		$buffer = $this->reader->ReadInt(4);
 		if($buffer == 1) {
@@ -23,17 +24,11 @@ class S16File implements ISpriteFile
 		$this->frameCount = $this->reader->ReadInt(2);
 		for($i=0; $i < $this->frameCount; $i++)
 		{
-			$this->frames[$i] = new S16Frame($this->reader,$this->encoding);
+			$this->AddFrame(new S16Frame($this->reader,$this->encoding));
 		}
 	}
-	public function GetFrame($frame) {
-		if($this->frameCount < ($frame+1))
-			throw new Exception('OutputPNG - Frame out of bounds - '.$frame);
-		return $this->frames[$frame];
-	}
-	public function ToPNG($frame)
-	{
-		return $this->GetFrame($frame)->ToPNG();
+	public function Compile() {
+	  throw new Exception('Not yet implemented..');
 	}
 }
 ?>

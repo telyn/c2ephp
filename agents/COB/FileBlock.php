@@ -31,7 +31,7 @@ class COBFileBlock extends COBBlock {
 		return $this->fileName;
 	}
 	/// \brief Get the file's type
-	public function GetType() {
+	public function GetFileType() {
 		return $this->fileType;
 	}
 	/// \brief Get the contents of the file.
