@@ -3,9 +3,10 @@ require_once(dirname(__FILE__).'/IReader.php');
 class FileReader implements IReader
 {
 	private $fp;
-    public function FileReader($file)
-    {
-    	if(!file_exists($file))
+	
+  public function FileReader($file)
+  {
+    if(!file_exists($file))
 			throw new Exception("File does not exist: ".$file);
 		if(!is_file($file))
 			throw new Exception("Target is not a file.");
@@ -13,14 +14,14 @@ class FileReader implements IReader
 			throw new Exception("File exists, but is not readable.");
 		
 		$this->fp = fopen($file, 'rb');
+  }
+
+  public function Read($count)
+  {
+	if($count > 0) {
+		return fread($this->fp, $count);
 	}
-	
-    public function Read($count)
-    {
-		if($count > 0) {
-			return fread($this->fp, $count);
-		}
-		return '';
+	return '';
 	}
 	
 	public function ReadInt($count)
@@ -46,7 +47,12 @@ class FileReader implements IReader
 		fseek($this->fp,$start);
 		if($length === false) {
 			$data = '';
-			while($data.=fread($this->fp,4096));
+			while($newdata = $this->Read(4096)) {
+			  if(strlen($newdata) == 0) {
+			    break;
+			  }
+			  $data .= $newdata;
+			}
 			return $data;
 		}
 		return fread($this->fp,$length);
@@ -72,3 +78,4 @@ class FileReader implements IReader
 	}
 }
 ?>
+
