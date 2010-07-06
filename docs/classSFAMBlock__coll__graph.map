@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" href="$classEXPCBlock.html" title="Defines the class for EXPC (Creatures 3 exported creatures)." alt="" coords="5,160,96,189"/>
-<area shape="rect" href="$classTagBlock.html" title="TagBlock" alt="" coords="13,83,88,112"/>
-<area shape="rect" href="$classPrayBlock.html" title="Abstract class to represent PRAY blocks." alt="" coords="11,5,91,35"/>
-</map>

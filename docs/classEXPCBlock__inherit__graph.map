@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" href="$classDSEXBlock.html" title="DSEXBlock" alt="" coords="5,237,96,267"/>
-<area shape="rect" href="$classSFAMBlock.html" title="Creatures 3 starter family description block The tags in a SFAM block are the same..." alt="" coords="120,237,211,267"/>
-<area shape="rect" href="$classTagBlock.html" title="TagBlock" alt="" coords="71,83,145,112"/>
-<area shape="rect" href="$classPrayBlock.html" title="Abstract class to represent PRAY blocks." alt="" coords="68,5,148,35"/>
-<area shape="rect" href="$classDFAMBlock.html" title="Docking Station starter family description block The fields in a DFAM block are identical..." alt="" coords="5,315,96,344"/>
-</map>

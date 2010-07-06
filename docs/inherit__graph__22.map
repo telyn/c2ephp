@@ -1,6 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" href="$interfaceISpriteFile.html" title="ISpriteFile" alt="" coords="5,59,85,88"/>
-<area shape="rect" href="$classC16File.html" title="C16File" alt="" coords="136,5,200,35"/>
-<area shape="rect" href="$classS16File.html" title="S16File" alt="" coords="136,59,200,88"/>
-<area shape="rect" href="$classSPRFile.html" title="SPRFile" alt="" coords="133,112,203,141"/>
-</map>
