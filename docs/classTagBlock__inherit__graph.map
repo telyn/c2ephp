@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" href="$classAGNTBlock.html" title="AGNTBlock" alt="" coords="60,160,148,189"/>
+<area shape="rect" href="$classEGGSBlock.html" title="EGGSBlock" alt="" coords="172,160,263,189"/>
+<area shape="rect" href="$classEXPCBlock.html" title="Defines the class for EXPC (Creatures 3 exported creatures)." alt="" coords="287,160,377,189"/>
+<area shape="rect" href="$classPrayBlock.html" title="Abstract class to represent PRAY blocks." alt="" coords="177,5,257,35"/>
+<area shape="rect" href="$classDSAGBlock.html" title="Docking Station agent description block Defines everything about an agent for docking..." alt="" coords="5,237,96,267"/>
+<area shape="rect" href="$classLIVEBlock.html" title="Block to enable some kind of compatibility with Amazing Virtual Sea Monkeys agents..." alt="" coords="120,237,203,267"/>
+<area shape="rect" href="$classDSEXBlock.html" title="DSEXBlock" alt="" coords="256,237,347,267"/>
+<area shape="rect" href="$classSFAMBlock.html" title="Creatures 3 starter family description block The tags in a SFAM block are the same..." alt="" coords="371,237,461,267"/>
+<area shape="rect" href="$classDFAMBlock.html" title="Docking Station starter family description block The fields in a DFAM block are identical..." alt="" coords="256,315,347,344"/>
+</map>
