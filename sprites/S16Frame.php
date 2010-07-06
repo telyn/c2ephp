@@ -1,43 +1,45 @@
 <?php
-require_once(dirname(__FILE__).'/ISpriteFrame.php');
+require_once(dirname(__FILE__).'/SpriteFrame.php');
 require_once(dirname(__FILE__).'/../support/IReader.php');
-class S16Frame implements ISpriteFrame
+class S16Frame extends SpriteFrame
 {
 	 private $offset;
-	 private $width;
 	 private $reader;
-	 private $height;
+	 private $decoded;
 	 private $encoding;
 	 
-	 public function S16Frame($reader,$encoding,$width=false,$height=false,$offset=false)
+	 public function S16Frame($reader,$encoding='565',$width=false,$height=false,$offset=false)
 	 {
 	   if($reader instanceof IReader) {
     	 	$this->reader = $reader;
     	 	$this->encoding = $encoding;
     	 	if($width === false || $height === false || $offset === false) {
     		 	$this->offset = $this->reader->ReadInt(4);
-    		 	$this->width = $this->reader->ReadInt(2);
-    	 		$this->height = $this->reader->ReadInt(2);
+    		 	parent::SpriteFrame($this->reader->ReadInt(2), $this->reader->ReadInt(2));
     	 	} else {
-    	 		$this->width = $width;
-    	 		$this->height = $width;
+    	 		parent::SpriteFrame($width,$height);
     	 		$this->offset = $offset;
     	 	}
-     }/* else if(get_resource_type($reader) == 'gd') {
+     } else if(get_resource_type($reader) == 'gd') {
         $this->gdImage = $reader;
         $this->decoded = true;
-        $this->width = imagesx($reader);
-        $this->height = imagesy($reader);
-        $this->encoding = '565';
-     }*/
+        $this->encoding = $encoding;
+        parent::SpriteFrame(imagesx($reader), imagesy($reader));
+        
+     }
 	 }
-	 public function ToGDImage() {
-	  $image = imagecreatetruecolor($this->width,
-                    $this->height);
+	 public function Encode() {
+	   throw new Exception('Not implemented yet');
+	 }
+	 protected function Decode() {
+	  if($this->decoded) { return $this->gdImage; }
+	  
+	  $image = imagecreatetruecolor($this->GetWidth(),
+                    $this->GetHeight());
     $this->reader->Seek($this->offset);
-    for($y = 0; $y < $this->height; $y++)
+    for($y = 0; $y < $this->GetHeight(); $y++)
     {
-      for($x = 0; $x < $this->width; $x++)
+      for($x = 0; $x < $this->GetWidth(); $x++)
       {
         $pixel = $this->reader->ReadInt(2);
         $red = 0; $green = 0; $blue = 0;
@@ -57,15 +59,8 @@ class S16Frame implements ISpriteFrame
         imagesetpixel($image, $x, $y, $colour);
       }
     }
+    $this->gdImage = $image;
     return $image;
-	 }
-	 public function ToPNG()
-	 {
-	 	ob_start();
-		imagepng($this->ToGDImage());
-		$contents = ob_get_contents();
-		ob_end_clean();
-		return $contents;
 	 }
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 require_once(dirname(__FILE__).'/COBBlock.php');
-require_once(dirname(__FILE__).'/../../sprites/ISpriteFrame.php');
+require_once(dirname(__FILE__).'/../../sprites/SpriteFrame.php');
 require_once(dirname(__FILE__).'/../../sprites/S16Frame.php');
 require_once(dirname(__FILE__).'/../../sprites/SPRFrame.php');
 
@@ -188,9 +188,9 @@ class COBAgentBlock extends COBBlock {
 		$this->reserved3 = $reserved3;
 	}
 	/** \brief Add the thumbnail to this agent.
-	 * \param ISpriteFrame $frame The thumbnail as an ISpriteFrame 
+	 * \param SpriteFrame $frame The thumbnail as a SpriteFrame 
 	 */
-	public function AddThumbnail(ISpriteFrame $frame) {
+	public function AddThumbnail(SpriteFrame $frame) {
 		if($this->thumbnail != null) {
 			throw new Exception('Thumbnail already added');
 		}
@@ -245,7 +245,6 @@ class COBAgentBlock extends COBBlock {
 			$name = $reader->ReadCString();
 			$dependencies[] = new COBDependency($type,$name);
 		}
-		print_r($dependencies);
 		$thumbWidth = $reader->ReadInt(2);
 		$thumbHeight = $reader->ReadInt(2);
 	
@@ -304,15 +303,20 @@ class COBAgentBlock extends COBBlock {
 		$pictureWidth = $reader->ReadInt(4);
 		$pictureHeight = $reader->ReadInt(4);
 		$unknown = $reader->ReadInt(2);
+		$sprframe = null;
+		if($pictureWidth > 0 || $pictureHeight > 0) {
+  		$sprframe = new SPRFrame($reader,$pictureWidth,$pictureHeight);
+      $sprframe->Flip(); 
+    }
 		
-		$sprframe = new SPRFrame($reader,$pictureWidth,$pictureHeight);
-		$sprframe->Flip();
 		$agentName = $reader->Read($reader->ReadInt(1));
 		
 		$agentBlock = new COBAgentBlock($agentName,'');
 		$agentBlock->AddQuantityAvailable($quantityAvailable);
 		$agentBlock->AddExpiryDate($expiryDate);
-		$agentBlock->AddThumbnail($sprframe);
+		if($sprframe != null) {
+		  $agentBlock->AddThumbnail($sprframe);
+		}
 		foreach($objectScripts as $objectScript) {
 			$agentBlock->AddEventScript($objectScript);
 		}

@@ -1,73 +1,90 @@
 <?php
-require_once(dirname(__FILE__).'/ISpriteFrame.php');
+require_once(dirname(__FILE__).'/SpriteFrame.php');
 require_once(dirname(__FILE__).'/../support/IReader.php');
 require_once(dirname(__FILE__).'/../support/FileReader.php');
 require_once(dirname(__FILE__).'/../support/StringReader.php');
 
 
-class SPRFrame implements ISpriteFrame {
-	private $width;
-	private $height;
+class SPRFrame extends SpriteFrame {
 	private $offset;
 	private $reader;
 	public static $sprToRGB;
 	
-	public function SPRFrame($reader,$width,$height) {
+	public function SPRFrame($reader,$width=0,$height=0,$offset=false) {
 	  if($reader instanceof IReader) {
   		$this->reader = $reader;
-  		$this->width = $width;
-  		$this->height = $height;
-  		$this->offset = $this->reader->GetPosition();
-  		
+  		parent::SpriteFrame($width,$height);
+  		if($offset !== false) {
+  		  $this->offset = $offset;
+  		} else {
+  		  $this->offset = $this->reader->GetPosition();
+  		}
+
   		//initialise palette if necessary.
-  		if(empty(SPRFrame::$sprToRGB)) {
+  		if(empty(self::$sprToRGB)) {
   			$paletteReader = new FileReader(dirname(__FILE__).'/palette.dta');
   			for($i = 0;$i<256;$i++) {
-  				SPRFrame::$sprToRGB[$i] = array('b'=>$paletteReader->ReadInt(1)*4,'g'=>$paletteReader->ReadInt(1)*4,'r'=>$paletteReader->ReadInt(1)*4);
+  				self::$sprToRGB[$i] = array('r'=>$paletteReader->ReadInt(1)*4,'g'=>$paletteReader->ReadInt(1)*4,'b'=>$paletteReader->ReadInt(1)*4);
   			}
   			unset($paletteReader);
   		}
+    } else if(get_resource_type($reader) == 'gd') {
+      parent::SpriteFrame(imagesx($reader),imagesy($reader),true);
+      $this->gdImage = $reader;
+    } else {
+      throw new Exception('$reader was not an IReader or a gd image.');
     }
 	}
 	//Sometimes you need to flip an image. trufax. Agent thumbnails I think.
 	public function Flip() {
-	  if($this->decoded) { throw new Exception('You\'re too late to flip the image, it\'s already been decoded!'); }
+	  if($this->HasBeenDecoded()) {
+	    throw new Exception('Too late!');
+	    return;
+	  }
 		$tempData = '';
-		for($i=$this->height-1;$i>-1;$i--) {
-			$tempData .= $reader->GetSubString($this->offset+$this->width*$i,$this->width);
+		for($i=($this->GetHeight()-1);$i>-1;$i--) {
+			$tempData .= $this->reader->GetSubString($this->offset+($this->GetWidth())*$i,($this->GetWidth()));
 		}
 		$this->reader = new StringReader($tempData);
 		$this->offset = 0;
 
 	}
-  public function ToGDImage() {
-    if($this->decoded) { return $this->gdImage; }
-	   
-    $image = imagecreatetruecolor($this->width, $this->height);
+  protected function Decode() {	   
+    $image = imagecreatetruecolor($this->GetWidth(), $this->GetHeight());
     $this->reader->Seek($this->offset);
-    $i=0;
-    for($y = 0; $y < $this->height; $y++)
+    for($y = 0; $y < $this->GetHeight(); $y++)
     {
-      for($x = 0; $x < $this->width; $x++)
+      for($x = 0; $x < $this->GetWidth(); $x++)
       {
-        $colour = $this->NextToRGB();
+        $colour = self::$sprToRGB[$this->reader->ReadInt(1)];
         imagesetpixel($image,$x,$y,imagecolorallocate($image,$colour['r'],$colour['g'],$colour['b']));
-        $i++;
       }
      }
-    return $image;
+    $this->gdImage = $image;
 	}
-	public function ToPNG() {
-		ob_start();
-		imagepng($this->ToGDImage());
-		$data = ob_get_contents();
-		ob_end_clean();
-		return $data;
+	public function Encode() {
+	  $data = '';
+	  for($y = 0; $y < $this->height; $y++ ) {
+  	  for($x = 0; $x < $this->width; $x++ ) {
+  	    $color = $this->GetPixel($x, $y);
+  	    $data .= pack('C',$this->RGBToSPR($color['r'], $color['g'], $color['b']));
+      }
+	  }
+	  return $data;
 	}
-	private function NextToRGB() {
-		$colour = $this->reader->ReadInt(1);
-		return self::$sprToRGB[$colour];
+	private function RGBToSPR($r,$g,$b) {
+	  $minDistance = ($r^2) + ($g^2) +  ($b^2);
+	  $minKey = 0;
+	  foreach(self::$SprToRGB as $key => $colour) {
+	     $distance = (($r-$colour['r'])^2)+  (($g-$colour['g'])^2)+  (($b-$colour['b'])^2);
+	     if($distance == 0) {
+	       return $key;
+	     } else if ($distance < $minDistance) {
+         $minKey = $key;
+         $minDistance = $distance;
+       }
+	  }
+	  return $key;
 	}
-	
 }
 ?>

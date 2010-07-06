@@ -1,5 +1,4 @@
 <?php
-
 require_once(dirname(__FILE__).'/../support/IReader.php');
 require_once(dirname(__FILE__).'/../support/StringReader.php');
 require_once(dirname(__FILE__).'/COB/AgentBlock.php');
