@@ -11,14 +11,24 @@ class SPRFile extends SpriteFile {
 		$frameCount = $reader->ReadInt(2);
 		
 		for($i=0;$i<$frameCount;$i++) {
-			$offset = $reader->ReadInt(4); // skipping offset since I'll read all of the images in one lump.
+			$offset = $reader->ReadInt(4);
 			$width = $reader->ReadInt(2);
 			$height = $reader->ReadInt(2);
 			$this->AddFrame(new SPRFrame($reader,$width,$height,$offset));
 		}
 	}
 	public function Compile() {
-	  throw new Exception('Not implemented yet');
+	  $data = pack('v',$this->GetFrameCount());
+	  $offset = 2+(8*$this->GetFrameCount());
+	  foreach($this->GetFrames() as $frame) {
+	    $data .= pack('V',$offset);
+	    $data .= pack('vv',$frame->GetWidth(),$frame->GetHeight());
+	    $offset += $frame->GetWidth()*$frame->GetHeight();
+	  }
+	  foreach($this->GetFrames() as $frame) {
+	    $data .= $frame->Encode();
+	  }
+	  return $data;
 	}
 }
 ?>

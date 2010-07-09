@@ -29,7 +29,25 @@ class S16Frame extends SpriteFrame
      }
 	 }
 	 public function Encode() {
-	   throw new Exception('Not implemented yet');
+	   $this->EnsureDecoded();
+	   $data = ''; 
+	   for($y = 0; $y < $this->GetHeight(); $y++) {
+	     for($x = 0; $x < $this->GetWidth(); $x++ ) {
+	     
+	       $pixel = $this->GetPixel($x,$y);
+	       if($pixel['red'] > 255 || $pixel['green'] > 255 || $pixel['blue'] > 255) {
+	         throw new Exception('Pixel colour out of range.');
+	       }
+	       $newpixel = 0;
+	       if($this->encoding == '555') {
+	           $newpixel = (($pixel['red'] << 7) & 0xF800) | (($pixel['green'] << 2) & 0x03E0) | (($pixel['blue'] >> 3) & 0x001F);
+	       } else {
+	           $newpixel = (($pixel['red'] << 8) & 0xF800) | (($pixel['green'] << 3) & 0x07E0) | (($pixel['blue'] >> 3) & 0x001F);
+	       }
+	       $data .= pack('v',$newpixel);
+	     }
+	   }
+	   return $data;
 	 }
 	 protected function Decode() {
 	  if($this->decoded) { return $this->gdImage; }
@@ -60,6 +78,7 @@ class S16Frame extends SpriteFrame
       }
     }
     $this->gdImage = $image;
+    $this->decoded = true;
     return $image;
 	 }
 }

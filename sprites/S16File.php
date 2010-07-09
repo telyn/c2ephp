@@ -27,8 +27,29 @@ class S16File extends SpriteFile
 			$this->AddFrame(new S16Frame($this->reader,$this->encoding));
 		}
 	}
+	public function SetEncoding($encoding) {
+	  $this->EnsureDecompiled();
+	  $this->encoding = $encoding;
+	}
 	public function Compile() {
-	  throw new Exception('Not yet implemented..');
+	  $data = ''; //S16 and C16 are actually the same format....C16 just has RLE. But they're different classes. not very DRY, I know.
+    $flags = 0; // 0b00 => 555 S16, 0b01 => 565 S16, 0b10 => 555 C16, 0b11 => 565 C16
+    if($this->encoding == '565') {
+      $flags = $flags | 1;
+    }
+    $data .= pack('V',$flags);
+    $data .= pack('v',$this->GetFrameCount());
+    $idata = '';
+    $offset = 6+(8*$this->GetFrameCount());
+    foreach($this->GetFrames() as $frame) {
+      $data .= pack('V',$offset);
+      $data .= pack('vv',$frame->GetWidth(),$frame->GetHeight());
+      
+      $framebin = $frame->Encode();
+      $offset += strlen($framebin); 
+      $idata .= $framebin;
+    }
+    return $data . $idata;
 	}
 }
 ?>
