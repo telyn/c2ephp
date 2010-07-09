@@ -59,24 +59,25 @@ class SPRFrame extends SpriteFrame {
         $colour = self::$sprToRGB[$this->reader->ReadInt(1)];
         imagesetpixel($image,$x,$y,imagecolorallocate($image,$colour['r'],$colour['g'],$colour['b']));
       }
-     }
+    }
     $this->gdImage = $image;
 	}
 	public function Encode() {
 	  $data = '';
-	  for($y = 0; $y < $this->height; $y++ ) {
-  	  for($x = 0; $x < $this->width; $x++ ) {
+	  for($y = 0; $y < $this->GetHeight(); $y++ ) {
+  	  for($x = 0; $x < $this->GetWidth(); $x++ ) {
   	    $color = $this->GetPixel($x, $y);
-  	    $data .= pack('C',$this->RGBToSPR($color['r'], $color['g'], $color['b']));
+  	    $data .= pack('C',$this->RGBToSPR($color['red'], $color['green'], $color['blue']));
       }
 	  }
 	  return $data;
 	}
 	private function RGBToSPR($r,$g,$b) {
-	  $minDistance = ($r^2) + ($g^2) +  ($b^2);
+	  //start out with the maximum distance.
+	  $minDistance = ($r^2) + ($g^2) + ($b^2);
 	  $minKey = 0;
-	  foreach(self::$SprToRGB as $key => $colour) {
-	     $distance = (($r-$colour['r'])^2)+  (($g-$colour['g'])^2)+  (($b-$colour['b'])^2);
+	  foreach(self::$sprToRGB as $key => $colour) {
+	     $distance = pow(($r-$colour['r']),2) +  pow(($g-$colour['g']),2) +  pow(($b-$colour['b']),2);
 	     if($distance == 0) {
 	       return $key;
 	     } else if ($distance < $minDistance) {

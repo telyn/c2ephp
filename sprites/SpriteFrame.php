@@ -32,8 +32,9 @@ abstract class SpriteFrame {
   }
   public function GetPixel($x,$y) {
     $this->EnsureDecoded();
-    $color = imagecolorat($this->gdImage, $x, $y);
-    return imagecolorsforindex($this->gdImage, $color);
+    $colori = imagecolorat($this->gdImage, $x, $y);
+    $color = imagecolorsforindex($this->gdImage, $colori);
+    return $color;
   }
   
   public function SetPixel($x,$y,$r,$g,$b) {
@@ -44,6 +45,8 @@ abstract class SpriteFrame {
   protected function EnsureDecoded() {
     if(!$this->decoded)
       $this->Decode();
+      
+    $this->decoded = true;
   }
   
 	protected abstract function Decode();

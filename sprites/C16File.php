@@ -37,7 +37,17 @@ class C16File extends SpriteFile
   	}
 	}
 	public function Compile() {
-	  throw new Exception('Not yet implemented');
+	  $data = ''; //S16 and C16 are actually the same format....C16 just has RLE
+	  $flags = 2; // 0b00 => 555 S16, 0b01 => 565 S16, 0b10 => 555 C16, 0b11 => 565 C16
+	  if($this->encoding == '565') {
+	    $flags = $flags | 1;
+	  }
+	  $data .= pack('V',$flags);
+	  $data .= pack('v',$this->GetFrameCount());
+	  foreach($this->GetFrames() as $frame) {
+	    $data .= $frame->Encode();
+	  }
+	  return $data;
 	}
 	
 }
