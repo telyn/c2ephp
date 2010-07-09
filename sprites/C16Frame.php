@@ -92,7 +92,86 @@ class C16Frame extends SpriteFrame
 		return $image;
 	 }
    public function Encode() {
-     throw new Exception('Not yet implemented');
+     $data = '';
+     $lineOffsets = array();
+     for($y = 0; $y < $this->GetHeight(); $y++) {
+       $wasblack = 0;
+       $runlength = 0;
+       if($y > 0) {
+         $lineOffsets[] = strlen($data);
+       }
+       $colourRunData = '';
+       for($x = 0; $x < $this->GetWidth(); $x++) {
+         
+         $pixel = $this->GetPixel($x,$y);
+         if($pixel['red'] > 255 || $pixel['green'] > 255 || $pixel['blue'] > 255) {
+           throw new Exception('Pixel colour out of range.');
+         }
+         $newpixel = 0;
+         if($this->encoding == '555') {
+             $newpixel = (($pixel['red'] << 7) & 0xF800) | (($pixel['green'] << 2) & 0x03E0) | (($pixel['blue'] >> 3) & 0x001F);
+         } else {
+             $newpixel = (($pixel['red'] << 8) & 0xF800) | (($pixel['green'] << 3) & 0x07E0) | (($pixel['blue'] >> 3) & 0x001F);
+         }
+         
+         
+         // if isblack !== wasblack
+         if(($newpixel == 0) !== $wasblack || $runlength > 32766) {
+           //end the run if this isn't the first run
+           if($wasblack !== 0) {
+           
+             //output data.
+             print "Ending run \n";
+             $run = $runlength << 1;
+             if($wasblack) {
+               $data .= pack('v',$run);
+                
+             } else {
+               $run = $run | 1;
+               $data .= pack('v',$run);
+               $data .= $colourRunData;
+               $colourRunData = '';
+             }
+           }
+           //start a new run
+           if($newpixel == 0) {
+             print "Starting new black run \n";
+             $wasblack = true;
+             $colourRunData = '';
+           } else {
+             print "Starting new colour run \n";
+             $wasblack = false;
+             $colourRunData = pack('v',$newpixel);
+           }
+           $runlength = 1;
+           
+         } else {
+           if(!$wasblack) {
+             $colourRunData .= pack('v',$newpixel);
+           }
+           $runlength++;
+         }
+         
+         if($x == ($this->GetWidth()-1)) {
+           //end run and output data.
+           $run = $runlength << 1;
+           if($wasblack) {
+             $data .= pack('v',$run);
+              
+           } else {
+             $run = $run | 1;
+             $data .= pack('v',$run);
+             $data .= $colourRunData;
+             $colourRunData = '';
+           }
+         }
+       }
+       //line terminating zero tag.
+       $data .= pack('xx');
+     }
+     //image terminating zero tag
+     $data .= pack('xx');
+     return array('lineoffsets' => $lineOffsets, 'data' => $data);
    }
 }
 ?>

@@ -20,12 +20,18 @@ class C16File extends SpriteFile
     if($reader != null) {
       parent::SpriteFile('C16');
   		$buffer = $reader->ReadInt(4);
-  		if($buffer == 3)
+  		if(($buffer & 1) == 1) {
   			$this->encoding = '565';
-  		else if($buffer == 2)
+  		} else {
   			$this->encoding = '555';
-  		else
-  			throw new Exception('File encoding not recognised. ('.$buffer.')');
+  	  }
+  			
+    	if(($buffer & 2) == 0) { //buffer & 2 == 2 => RLE. buffer & 2 == 0 => non-RLE (same as s16 but not supported here because it's complex dude.
+        throw new Exception('This file is probably a S16 masquerading as a C16!');
+    	} else if($buffer > 3) {
+    	  throw new Exception('File encoding not recognised. ('.$buffer.')');
+      }
+  			
   		$buffer = $reader->ReadInt(2);
   		if($buffer < 1)
   			throw new Exception('Sprite file appears to contain less than 1 frame.');
@@ -37,18 +43,33 @@ class C16File extends SpriteFile
   	}
 	}
 	public function Compile() {
-	  $data = ''; //S16 and C16 are actually the same format....C16 just has RLE
-	  $flags = 2; // 0b00 => 555 S16, 0b01 => 565 S16, 0b10 => 555 C16, 0b11 => 565 C16
-	  if($this->encoding == '565') {
-	    $flags = $flags | 1;
-	  }
-	  $data .= pack('V',$flags);
-	  $data .= pack('v',$this->GetFrameCount());
-	  foreach($this->GetFrames() as $frame) {
-	    $data .= $frame->Encode();
-	  }
-	  return $data;
-	}
+    $data = ''; 
+    $flags = 2; // 0b00 => 555 S16, 0b01 => 565 S16, 0b10 => 555 C16, 0b11 => 565 C16
+    if($this->encoding == '565') {
+      $flags = $flags | 1;
+    }
+    $data .= pack('V',$flags);
+    $data .= pack('v',$this->GetFrameCount());
+    $idata = '';
+    $offset = 6+(8*$this->GetFrameCount());
+    foreach($this->GetFrames() as $frame) {
+      $offset += ($frame->GetHeight()-1)*4;
+    }
+    
+    foreach($this->GetFrames() as $frame) {
+      $data .= pack('V',$offset);
+      $data .= pack('vv',$frame->GetWidth(),$frame->GetHeight());
+      
+      $framedata = $frame->Encode();
+      $framebin = $framedata['data'];
+      foreach($framedata['lineoffsets'] as $lineoffset) {
+        $data .= pack('V',$lineoffset+$offset);
+      }
+      $offset += strlen($framebin); 
+      $idata .= $framebin;
+    }
+    return $data . $idata;
+  }
 	
 }
 ?>
