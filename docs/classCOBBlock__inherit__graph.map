@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" href="$classCOBAgentBlock.html" title="COB Agent Block for C1 and C2 For Creatures 1, this block contains all the useful..." alt="" coords="5,83,120,112"/>
+<area shape="rect" href="$classCOBAuthorBlock.html" title="Defines Author information about the COB." alt="" coords="144,83,264,112"/>
+<area shape="rect" href="$classCOBFileBlock.html" title="Defines the bock to represent a file block in a COB file." alt="" coords="288,83,392,112"/>
+<area shape="rect" href="$classCOBUnknownBlock.html" title="Simple class to allow for extra block types." alt="" coords="416,83,549,112"/>
+</map>
