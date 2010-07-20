@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" href="$classCREABlock.html" title="Block for defining a Creature&#39;s current state. The binary format of this block..." alt="" coords="5,160,96,189"/>
-<area shape="rect" href="$classGLSTBlock.html" title="PRAY Block for Creature History Data. because of PHP being a single&#45;inheritance language..." alt="" coords="120,160,205,189"/>
-<area shape="rect" href="$classPrayBlock.html" title="Abstract class to represent PRAY blocks." alt="" coords="67,5,147,35"/>
-</map>
