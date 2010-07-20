@@ -5,6 +5,20 @@ define('FORMAT_C2','C2');
 define('FORMAT_C3','C3');
 define('FORMAT_DS','DS');
 
+
+/** \brief Class for highlighting CAOS 
+ * This is the class used for highlighting CAOS code.
+ * It outputs HTML code, using spans with classes.
+ * It current supports C2, C3 and DS CAOS.
+ * It automatically formats a script while preserving formatting in comments and strings.
+ * The reason it formats scripts is because scripts in COBs and agents tend to have little in the way of formatting,
+ * making them hard to read.
+ * It also provides rudimentary error detection which will display errors with strings, byte strings and invalid CAOS functions.
+ * It checks labels (used with SUBR and GSUB) for validity and existence 
+ * Usage:
+ * $highlighter = new CAOSHighlighter(FORMAT_C1);
+ * $highlighter->HighlightScript($caos_code);
+ * */
 class CAOSHighlighter {
 	private $caosCommands = array();
 	private $caosVariables = array();
@@ -21,6 +35,11 @@ class CAOSHighlighter {
 	private $currentLine;
 	private $currentIndent;
 	private $currentWord;
+  
+  /** \brief Instantiates a new CAOSHighlighter for the given CAOS format.
+   * This function also loads CAOS definitions from the subfolders of this folder. In this way it is extensible.
+   * \param $format The format of the CAOS you intend to highlight.
+   */
 
 	public function CAOSHighlighter($format) {
 		$this->scriptFormat = $format;
@@ -39,6 +58,10 @@ class CAOSHighlighter {
 		$this->caosFlowControls = call_user_func(array($format.'CAOSFlowControls','GetTokens'));
 	}
 	
+  /** \brief Highlights the given CAOS script.
+   * \param $script the CAOS script as a string.
+   * If you're taking CAOS from a COB file, please replace the commas with newlines.
+   */
 	public function HighlightScript($script) {
 		if(strpos($script,"\r") !== false) {
 			$script = str_replace("\r\n","\n",$script); //get rid of mac and windows newlines.
@@ -60,7 +83,12 @@ class CAOSHighlighter {
 		}
 		return implode($this->highlightedLines);
 	}
-	public function SmartRemoveMultipleSpaces($text) {
+  
+  /** \brief Removes multiple spaces
+   * This function removes all unnecessary spaces, while preserving those spaces
+   * that are within comments or strings.
+   */
+	private function SmartRemoveMultipleSpaces($text) {
 		$newString = array();
 		$inString = false;
 		$inComment = false;
@@ -81,6 +109,10 @@ class CAOSHighlighter {
 		}
 		return trim(implode('',$newString));
 	}
+  /* \brief Creates an array of subroutine names
+   * Collects all the tokens coming after SUBRs and places them in an array
+   * This allow GSUB to give errors when a SUBR hasn't been defined
+   */
 	private function ScanForSubroutines() {
 		//expects $scriptLines to be filled out
 		foreach($this->scriptLines as $line) {
@@ -90,6 +122,10 @@ class CAOSHighlighter {
 			}
 		}	
 	}
+  /** \brief The meat of the class - essentially a main loop.
+   * This function performs all the necessary wizardry to get the CAOS highlighted
+   * and contains a lot of strange logic.
+   */
 	private function HighlightNextLine() {
 		if(sizeof($this->scriptLines) <= $this->currentLine) {
 			return false;
@@ -306,6 +342,9 @@ class CAOSHighlighter {
 		return $highlightedLine;
 	}
 	
+  /** \brief Tries to find a match in the CAOS dictionaries for the token
+   * This is called by the main loop a few times to highlight CAOS commands
+   */
 	private function TryToHighlightToken($word) {
 		$lcword = strtolower($word);
 		$matches; //used for C2 anim command preg_match
@@ -340,7 +379,13 @@ class CAOSHighlighter {
 		}
 		return $word;
 	}
+	
+  
 	//These may well not apply to all versions of CAOS! I haven't thoroughly looked over the docs.
+	/** \brief Handles the indentation level of the current line
+   * This function unindents code to the correct level if the current line begins with the given word.
+   * \param $firstword The first word of the line
+   */
 	private function SetIndentForThisLine($firstword) {
 		switch($firstword) {
 			case 'scrp':
@@ -364,12 +409,15 @@ class CAOSHighlighter {
 			break;
 		}
 	}
+  
+  /** \brief Sets the indent for the next line
+   */
 	private function SetIndentForNextLine($firstword) {
 		switch($firstword) {
 			case 'scrp':
 			case 'rscr':
 			case 'iscr':
-				$this->currentIndent = 0;
+				$this->currentIndent = 0; //falls through
 			case 'doif':
 			case 'elif':
 			case 'else':
@@ -388,7 +436,8 @@ class CAOSHighlighter {
 				return "\n";
 		}
 	}
-	
+	/** \brief Writes tabs to indent the correct amount.
+   */
 	private function CreateIndentForThisLine($firstword) {
 		$indent = '';
 		if(in_array($firstword,array('scrp','rscr'))) {

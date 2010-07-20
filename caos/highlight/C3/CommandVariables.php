@@ -1,4 +1,5 @@
 <?php
+/** \brief C3 CAOS dictionary of tokens that can act like commands or variables */
 class C3CAOSCommandVariables {
 	public static function GetTokens() {
 		return array(

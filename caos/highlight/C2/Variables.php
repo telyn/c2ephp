@@ -1,4 +1,6 @@
 <?php
+/** \brief C2 CAOS built-in variables dictionary
+ * OBVx, OVxx and VAxx are handled by the CAOS highlighter internally */
 class C2CAOSVariables {
 	public static function GetTokens() {
 		return array

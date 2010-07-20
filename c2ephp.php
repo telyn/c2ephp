@@ -9,6 +9,9 @@ require_once(dirname(__FILE__).'/support/Archiver.php');
 require_once(dirname(__FILE__).'/agents/PRAYFile.php');
 require_once(dirname(__FILE__).'/agents/COB.php');
 
+//CAOS
+require_once(dirname(__FILE__).'/caos/highlight/CAOSHighlighter.php')
+
 //images
 require_once(dirname(__FILE__).'/sprites/C16File.php');
 require_once(dirname(__FILE__).'/sprites/S16File.php');

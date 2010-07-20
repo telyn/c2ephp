@@ -1,4 +1,6 @@
 <?php
+/** \brief DS CAOS built-in variables dictionary
+ * OVxx, VAxx and MVxx are handled by the CAOS highlighter internally */
 class DSCAOSVariables {
 	public static function GetTokens() {
 		return array(

@@ -1,4 +1,5 @@
 <?php
+/** \brief DS CAOS commands dictionary */
 class DSCAOSCommands {
 	public static function GetTokens() {
 		return array(

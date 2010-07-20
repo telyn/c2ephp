@@ -1,4 +1,5 @@
 <?php
+/** \brief C2 CAOS flow control (doif, else, loop, etc) dictionary */
 class C2CAOSFlowControls {
 	public static function GetTokens() {
 		return array

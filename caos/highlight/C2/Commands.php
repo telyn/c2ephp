@@ -1,4 +1,6 @@
 <?php
+
+/** \brief C2 CAOS commands dictionary */
 class C2CAOSCommands {
 	public static function GetTokens() {
 		return array
