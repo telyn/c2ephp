@@ -1,4 +1,5 @@
 <?php
+/** \brief DS CAOS dictionary of tokens that can act like commands or variables */
 class DSCAOSCommandVariables {
 	public static function GetTokens() {
 		return array(

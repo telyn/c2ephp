@@ -1,4 +1,5 @@
 <?php
+/** \brief C3 CAOS flow control (doif, else, loop, etc) dictionary */
 class C3CAOSFlowControls {
 	public static function GetTokens() {
 		return array
