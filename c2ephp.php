@@ -17,5 +17,4 @@ require_once(dirname(__FILE__).'/sprites/C16File.php');
 require_once(dirname(__FILE__).'/sprites/S16File.php');
 require_once(dirname(__FILE__).'/sprites/S16File.php');
 
-
 ?>
