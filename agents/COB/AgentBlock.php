@@ -100,21 +100,21 @@ class COBAgentBlock extends COBBlock {
 		}
 		return $dependenciesToReturn;
 	}
-	/** \Gets the value of reserved1
+	/** \brief Gets the value of reserved1
 	 * Reserved values weren't ever officially used by CL,
 	 * but someone might find them useful for something else.
 	 */
 	public function GetReserved1() {
 		return $this->reserved1;
 	}
-	/** \Gets the value of reserved2
+	/** \brief Gets the value of reserved2
 	 * Reserved values weren't ever officially used by CL,
 	 * but someone might find them useful for something else.
 	 */
 	public function GetReserved2() {
 		return $this->reserved2;
 	}
-	/** \Gets the value of reserved3
+	/** \brief Gets the value of reserved3
 	 * Reserved values weren't ever officially used by CL,
 	 * but someone might find them useful for something else.
 	 */
@@ -123,7 +123,7 @@ class COBAgentBlock extends COBBlock {
 	}
 	/** \brief Adds a dependency to this agent
 	 * 
-	 * \param COBDependency $dependency The dependency to add.
+	 * \param $dependency The COBDependency to add.
 	 */
 	public function AddDependency(COBDependency $dependency) {
 		if(!in_array($dependency->GetDependencyName(),$this->dependencies)) {
@@ -143,7 +143,7 @@ class COBAgentBlock extends COBBlock {
 		$this->removeScript = $removeScript;
 	}
 	/** \brief Adds an event script
-	 * \param $removeScript The text of the script to add
+	 * \param $eventScript The text of the script to add
 	 */
 	public function AddEventScript($eventScript) {
 		$this->eventScripts[] = $eventScript;
@@ -188,7 +188,7 @@ class COBAgentBlock extends COBBlock {
 		$this->reserved3 = $reserved3;
 	}
 	/** \brief Add the thumbnail to this agent.
-	 * \param SpriteFrame $frame The thumbnail as a SpriteFrame 
+	 * \param $frame The thumbnail as a SpriteFrame 
 	 */
 	public function AddThumbnail(SpriteFrame $frame) {
 		if($this->thumbnail != null) {

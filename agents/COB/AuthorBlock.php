@@ -59,7 +59,7 @@ class COBAuthorBlock extends COBBlock {
 		return $this->revision;
 	}
 	/** Creates the COBAuthorBlock from an IReader
-	 * \param IReader $reader The IReader, currently at the position of the author block  
+	 * \param $reader The IReader, currently at the position of the author block  
 	 */
 	public static function CreateFromReader(IReader $reader) {
 		$creationDay = $reader->ReadInt(1);

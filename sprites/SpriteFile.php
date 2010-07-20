@@ -13,6 +13,10 @@ abstract class SpriteFile {
 	public function GetFrames() {
 	  return $this->frames;
 	}
+  
+  /** \brief Compiles the file's data into a C16 binary string
+   * \return A binary string containing the C16File's data.
+   */
 	public abstract function Compile();
 	
 	public function AddFrame(SpriteFrame $frame, $position=false) {

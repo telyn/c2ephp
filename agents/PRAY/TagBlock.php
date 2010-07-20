@@ -9,13 +9,14 @@ require_once(dirname(__FILE__).'/../../support/StringReader.php');
   */
 abstract class TagBlock extends PrayBlock {
 	private $tags;
-	/** \brief Creates a new TagBlock
-	  * This should be called by all subclasses from their constructors.
-  	  * \param $prayfile The prayfile this block is contained in, or for TagBlocks being created from scratch, the initial tags array. Can be null.
-	  * \param $name The name of the block. Cannot be null.
-	  * \param $content The binary data this block contains. Can be null.
-	  * \param $flags The flags relating to this block. Should be zero or real flags.
-	  */
+	/* \brief Creates a new TagBlock
+	 * This should be called by all subclasses from their constructors.
+   * \param $prayfile The prayfile this block is contained in, or for TagBlocks being created from scratch, the initial tags array. Can be null.
+	 * \param $name The name of the block. Cannot be null.
+	 * \param $content The binary data this block contains. Can be null.
+	 * \param $flags The flags relating to this block. Should be zero or real flags.
+   * \param $type The block's 4-character type. Must be defined.
+	 */
 	public function TagBlock($prayfile,$name,$content,$flags,$type) {
 		parent::PrayBlock($prayfile,$name,$content,$flags,$type);
 		if($prayfile instanceof PRAYFile) {
