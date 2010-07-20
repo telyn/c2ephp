@@ -17,7 +17,7 @@ class GLSTBlock extends CreaturesArchiveBlock {
 	private $history;
 	private $format = GLST_FORMAT_UNKNOWN;
 	/** \brief Creates a new GLSTBlock
-    * \param $prayfile The PRAYFile this FILEBlock belongs to, or the CreatureHistory object to store. *CANNOT* be null.
+    * \param $object The PRAYFile this FILEBlock belongs to, or the CreatureHistory object to store. *CANNOT* be null.
     * \param $name The name of this file block (also the file's name)
     * \param $content The binary data of this file block.
     * \param $flags The block's flags. See PrayBlock.

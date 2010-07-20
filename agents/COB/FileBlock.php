@@ -43,7 +43,7 @@ class COBFileBlock extends COBBlock {
 		return $this->reserved;
 	}
 	/** Creates a new COBFileBlock from an IReader
-	 * \param IReader $reader The reader the data's coming from
+	 * \param $reader The reader the data's coming from
 	 */
 	public static function CreateFromReader(IReader $reader) {
 		$type = ($reader->ReadInt(2)==0)?'sprite':'sound';

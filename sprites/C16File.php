@@ -12,9 +12,9 @@ class C16File extends SpriteFile
 {
 	private $encoding;
 	/** \brief Creates a new C16File object.
-	  * If $reader is null, creates an empty C16File ready to add sprites to.
-	  * \param IReader $reader The reader to read the sprites from. Will be able to be null
-	  */
+	 * If $reader is null, creates an empty C16File ready to add sprites to.
+	 * \param $reader The reader to read the sprites from. Can be null.
+	 */
 	public function C16File(IReader $reader=null)
 	{
     if($reader != null) {
@@ -42,6 +42,16 @@ class C16File extends SpriteFile
   		}
   	}
 	}
+  /** \brief Sets the encoding for this file 
+   * \param $encoding '565' or '555', anything else will be treated as '555'
+   */
+  public function SetEncoding($encoding) {
+    $this->EnsureDecompiled();
+    $this->encoding = $encoding;
+  }
+  /** \brief Compiles the file's data into a C16 binary string
+   * \return A binary string containing the C16File's data.
+   */
 	public function Compile() {
     $data = ''; 
     $flags = 2; // 0b00 => 555 S16, 0b01 => 565 S16, 0b10 => 555 C16, 0b11 => 565 C16

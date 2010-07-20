@@ -51,7 +51,7 @@ class PRAYFile {
 		return $compiled;
 	}
 	/** \brief Adds a block to this PRAYFile.
-	  * \param PrayBlock $block The block to add
+	  * \param $block The PrayBlock to add
 	  */
 	public function AddBlock(PrayBlock $block) {
 		//TODO: Check block name is unique (in blocks of the same type).

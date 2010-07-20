@@ -8,11 +8,11 @@ require_once(dirname(__FILE__).'/COB/UnknownBlock.php');
 
 ///@{
 /** \brief C1 format cob
-  * \value C1
+  * C1
   */
 define('COB_FORMAT_C1','C1');
 /** \brief C2 format COB
-  * \value C2
+  * C2
   */
 define('COB_FORMAT_C2','C2');
 ///@}
@@ -23,17 +23,16 @@ class COB {
 	private $blocks;
 	
 	/** \brief Creates a new COB file
-	  * \param IReader $reader The reader which contains the cob to
-	  * read from. Can be null
-	  * If you want to create a COB file from scratch, simply don't
-	  * pass anything to the constructor.
-	  * Alternatively, if you know which kind of COB file you are
-	  * reading, or only want to deal with a specific kind of COB
-	  * file, you can call the LoadC1COB and LoadC2COB functions
-	  * after creating a blank cob file. E.g. ($reader is a IReader)
-	  * $cob = new COB;
-	  * $cob->LoadC1COB($reader);
-	  * This code will only parse C1 cobs.
+    * If you want to create a COB file from scratch, simply don't
+    * pass anything to the constructor.
+    * Alternatively, if you know which kind of COB file you are
+    * reading, or only want to deal with a specific kind of COB
+    * file, you can call the LoadC1COB and LoadC2COB functions
+    * after creating a blank cob file. E.g. ($reader is a IReader)
+    * $cob = new COB;
+    * $cob->LoadC1COB($reader);
+    * This code will only parse C1 cobs.
+	  * \param $reader The reader which contains the cob to read from. Can be null.
 	  */
 	public function COB(IReader $reader=null) {
 		if($reader != null) {
@@ -44,7 +43,7 @@ class COB {
 	  * Used internally, this function is not for the general public!
 	  * This function first identifies which type of COB is in the IReader
 	  * Then decompresses if necessary, then calls LoadC1COB or LoadC2COB.
-	  * \param IReader $reader The reader to read from
+	  * \param $reader The reader to read from
 	  */
 	private function LoadCOB(IReader $reader) {
 		if($reader->Read(4) == 'cob2') {
@@ -64,7 +63,7 @@ class COB {
 	/** \brief Loads a C2 COB from the IReader given
 	  * C2 COBs have multiple blocks, which are accessible via the
 	  * COB::GetBlocks function.
-	  * \param IReader $reader The IReader to load from
+	  * \param $reader The IReader to load from
 	  */
 	public function LoadC2COB(IReader $reader) {
 		$this->format = COB_FORMAT_C2;
@@ -79,7 +78,7 @@ class COB {
 	/** \brief Loads a C1 COB from the specified reader
 	  * C1 COBs have just one block, which is a COBAgentBlock.
 	  * This is accessible by calling COB::GetBlocks
-	  * \param IReader $reader the reader to load from
+	  * \param $reader the reader to load from
 	  */
 	public function LoadC1COB(IReader $reader) {
 		$this->format = COB_FORMAT_C1;
@@ -91,7 +90,7 @@ class COB {
 		}
 	}
 	/** \brief Adds a COBBlock to this COB
-	  * \param COBBlock $block the block to add.
+	  * \param $block the block to add.
 	  */
 	public function AddBlock(COBBlock $block) {
 		//TODO: Check that this block works for this COB type?
