@@ -10,7 +10,7 @@ require_once(dirname(__FILE__).'/agents/PRAYFile.php');
 require_once(dirname(__FILE__).'/agents/COB.php');
 
 //CAOS
-require_once(dirname(__FILE__).'/caos/highlight/CAOSHighlighter.php')
+require_once(dirname(__FILE__).'/caos/highlight/CAOSHighlighter.php');
 
 //images
 require_once(dirname(__FILE__).'/sprites/C16File.php');
