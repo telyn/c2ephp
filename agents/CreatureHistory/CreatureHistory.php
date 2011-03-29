@@ -6,10 +6,10 @@ require_once(dirname(__FILE__).'/../PRAY/GLSTBlock.php');
 * CreatureHistory-specific gender constants
 */
 //@{
-/**\brief Value: 2 */
+/**Value: 2 */
 //Girls first! Boys suck :)
 define('CREATUREHISTORY_GENDER_FEMALE',2);
-/**\brief Value: 1 */
+/**Value: 1 */
 define('CREATUREHISTORY_GENDER_MALE',1);
 //@}
 
@@ -77,7 +77,7 @@ class CreatureHistory {
 	}
 	/**
 	 * Try to work out which game this CreatureHistory is for (by working out whether any DS-specific variables are set)
-	 * \return GLST_FORMAT_DS or GLST_FORMAT_C3 as defined in GLSTBlock.php  
+	 * return GLST_FORMAT_DS or GLST_FORMAT_C3 as defined in GLSTBlock.php  
 	 */
 	public function GuessFormat() {
 		return (isset($this->unknown3))?GLST_FORMAT_DS:GLST_FORMAT_C3;
@@ -93,14 +93,14 @@ class CreatureHistory {
 	 * Gets an event from the history
 	 * Simply gets the nth event that happened in this history
 	 * \param $n the event number to get
-	 * \return the $nth event 
+	 * return the $nth event 
 	 */
 	public function GetEvent($n) {
 		return $this->events[$n];
 	}
 	/**
 	 * Counts the events in the history
-	 * \return How many events there currently are in this history
+	 * return How many events there currently are in this history
 	 */
 	public function CountEvents() {
 		return sizeof($this->events);
@@ -108,7 +108,7 @@ class CreatureHistory {
 	/**
 	 * Gets all events matching the given event type
 	 * \param $type one of the CREATUREHISTORY_EVENT_* constants, defined in CreatureHistoryEvent.php
-	 * \return an array of CreatureHistoryEvents
+	 * return an array of CreatureHistoryEvents
 	 */
 	public function GetEventsByType($type) {
 		$matchingEvents = array();
@@ -119,33 +119,33 @@ class CreatureHistory {
 		}
 		return $matchingEvents;
 	}
-	/** \brief Gets all the events in this history
-	 * \return An array of CreatureHistoryEvents 
+	/** Gets all the events in this history
+	 * return An array of CreatureHistoryEvents 
 	 */
   public function GetEvents() {
 	  return $this->events;
 	} 
-	/// \brief Gets the moniker of the creature this history is attached to.
+	/// Gets the moniker of the creature this history is attached to.
 	public function GetCreatureMoniker() {
 		return $this->moniker;
 	}
-	/// \brief Gets the name of the creature this history is attached to.
+	/// Gets the name of the creature this history is attached to.
 	public function GetCreatureName() {
 		return $this->name;
 	}
-	/// \brief Gets the gender of the creature this history is attached to.
+	/// Gets the gender of the creature this history is attached to.
 	public function GetCreatureGender() {
 		return $this->gender;
 	}
-	/// \brief Gets the genus of the creature this history is attached to.
+	/// Gets the genus of the creature this history is attached to.
 	public function GetCreatureGenus() {
 		return $this->genus;
 	}
-	/// \brief Gets the species of the creature this history is attached to.
+	/// Gets the species of the creature this history is attached to.
 	public function GetCreatureSpecies() {
 		return $this->species;
 	}
-	/// \brief Gets whether the creature this history is attached to has been through the warp.
+	/// Gets whether the creature this history is attached to has been through the warp.
 	public function GetCreatureIsWarpVeteran() {
 		return $this->warpveteran;
 	}

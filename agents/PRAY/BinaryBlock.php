@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__).'/PrayBlock.php');
 
-/** \brief A block to allow simple, non-parsed binary content.
+/** A block to allow simple, non-parsed binary content.
  * This class is essentially un-necessary, but it's good for debugging
  * as you can use it to test PRAY compilation without needing to test
  * individual block types' compilation.

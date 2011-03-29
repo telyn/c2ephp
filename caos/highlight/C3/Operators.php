@@ -1,5 +1,5 @@
 <?php
-/** \brief Valid C3 CAOS operators */
+/** Valid C3 CAOS operators */
 class C3CAOSOperators {
 	public static function GetTokens() {
 		return array(
@@ -18,5 +18,4 @@ class C3CAOSOperators {
 		);
 	}
 }
-
 ?>

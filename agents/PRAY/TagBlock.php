@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__).'/PrayBlock.php');
 require_once(dirname(__FILE__).'/../../support/StringReader.php');
-/** \brief Base block class for working with tag-type blocks
+/** Base block class for working with tag-type blocks
   * This includes (but may not be limited to agents (AGNTBlock/DSAGBlock),
   * creatures (EXPCBlock/DSEXBlock) and starter families (SFAMBlock,DFAMBlock)
   * This contains the majority of the meat of the tag block functions, including
@@ -9,7 +9,7 @@ require_once(dirname(__FILE__).'/../../support/StringReader.php');
   */
 abstract class TagBlock extends PrayBlock {
 	private $tags;
-	/* \brief Creates a new TagBlock
+	/* Creates a new TagBlock
 	 * This should be called by all subclasses from their constructors.
    * \param $prayfile The prayfile this block is contained in, or for TagBlocks being created from scratch, the initial tags array. Can be null.
 	 * \param $name The name of the block. Cannot be null.
@@ -24,7 +24,7 @@ abstract class TagBlock extends PrayBlock {
 			$this->tags = $prayfile;
 		}
     }
-    /** \brief Gets the tag with the given name
+    /** Gets the tag with the given name
 	  * Returns the tag's value as a string, or
 	  * nothing if the tag doesn't exist.
 	  */
@@ -36,12 +36,15 @@ abstract class TagBlock extends PrayBlock {
 			}
 		}
 	}
-	/** \brief Gets all the tags from this block */
+	/** Gets all the tags from this block as an array of tags.
+	  * This is mainly useful for people writing subclasses of TagBlock.
+	  * If you have to write code that uses GetTags in your application,
+	  * please file a bug report! */
 	public function GetTags() {
 		$this->EnsureDecompiled();
 		return $this->tags;
 	}
-	/** \brief Compiles the block. Called by PrayBlock. Not by you. Ever. */
+	/** Compiles the block. Called by PrayBlock. Not by you. Ever. */
 	protected function CompileBlockData() {
 		$compiled = '';
 		$ints = array();
@@ -68,7 +71,7 @@ abstract class TagBlock extends PrayBlock {
 		}
 		return $compiled;
 	}
-	/** \brief Compiles the block. Called by EnsureDecompiled. */
+	/** Compiles the block. Called by EnsureDecompiled. */
     protected function DecompileBlockData() {
     //use GetData because it decompresses if necessary.
         $blockReader = new StringReader($this->GetData());

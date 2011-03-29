@@ -8,7 +8,7 @@ require_once(dirname(__FILE__).'/../CreatureHistory/CreatureHistory.php');
 define('GLST_FORMAT_UNKNOWN',0);
 define('GLST_FORMAT_C3',1);
 define('GLST_FORMAT_DS',2);
-/** \brief PRAY Block for Creature History Data.
+/** PRAY Block for Creature History Data.
   * because of PHP being a single-inheritance language, we store the
   * history as a CreatureHistory variable rather than simply extending
   * CreatureHistory as well as CreaturesArchiveBlock.
@@ -16,7 +16,7 @@ define('GLST_FORMAT_DS',2);
 class GLSTBlock extends CreaturesArchiveBlock {
 	private $history;
 	private $format = GLST_FORMAT_UNKNOWN;
-	/** \brief Creates a new GLSTBlock
+	/** Creates a new GLSTBlock
     * \param $object The PRAYFile this FILEBlock belongs to, or the CreatureHistory object to store. *CANNOT* be null.
     * \param $name The name of this file block (also the file's name)
     * \param $content The binary data of this file block.
@@ -33,7 +33,7 @@ class GLSTBlock extends CreaturesArchiveBlock {
 		}
 	}
 
-	/** \brief Tries hard to work out which game this GLSTBlock is from. */
+	/** Tries hard to work out which game this GLSTBlock is from. */
 	private function GuessFormat() {
 		//if I don't know
 		if($this->format == GLST_FORMAT_UNKNOWN) {
@@ -54,7 +54,7 @@ class GLSTBlock extends CreaturesArchiveBlock {
 		}
 		return $format;
 	}
-	/** \brief Compiles the block into binary for PrayBlock */
+	/** Compiles the block into binary for PrayBlock */
 	protected function CompileBlockData($format=GLST_FORMAT_UNKNOWN) {
 		//if you don't know
 		if($format == GLST_FORMAT_UNKNOWN) {
@@ -63,12 +63,12 @@ class GLSTBlock extends CreaturesArchiveBlock {
 		$compiled = Archive($this->history->Compile($format));
 		return $compiled;
 	}
-	/** \brief Gets the CreatureHistory this block stores. */
+	/** Gets the CreatureHistory this block stores. */
 	public function GetHistory() {
 		$this->EnsureDecompiled();
 		return $this->history;
 	}
-	/** \brief Gets the PHOTBlock name corresponding to the event given.
+	/** Gets the PHOTBlock name corresponding to the event given.
 	  * Useful for getting a photo event's photo.
       * e.g. if $block is a GLSTBlock, $prayfile a PRAYFile, and $event
 	  * a CreatureHistoryEvent for an event with a photo,
@@ -88,7 +88,7 @@ class GLSTBlock extends CreaturesArchiveBlock {
 			return $photoname.'.photo';
 		}
 	}
-	/* \brief Decompiles the GLST format into a CreatureHistory object, then stores it */
+	/* Decompiles the GLST format into a CreatureHistory object, then stores it */
 	protected function DecompileBlockData() {	
 		$reader = new StringReader($this->GetData());
 		$firstchar = $reader->Read(1);
@@ -138,7 +138,7 @@ class GLSTBlock extends CreaturesArchiveBlock {
 			$this->history->SetC3Unknowns($unknown1,$unknown2);
 		}
 	}
-	/** \brief Decodes an event. Used by DecompileBlockData.
+	/** Decodes an event. Used by DecompileBlockData.
 	  * Not for public consumption. Move along, citizen.
 	*/
 	private function DecodeEvent($reader) {

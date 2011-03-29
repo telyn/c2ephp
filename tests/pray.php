@@ -7,7 +7,6 @@ if($argv[1] != "") {
     $file = 'rubber_ball.agents';
 }
 $agent = new PRAYFile(new FileReader($file));
-$block = $agent->GetBlocks('DSEX');
-print_r($block[0]->GetTags());
+print_r($agent->GetBlocks());
 
 ?>

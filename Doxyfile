@@ -143,7 +143,7 @@ JAVADOC_AUTOBRIEF      = NO
 # interpret the first line (until the first dot) of a Qt-style
 # comment as the brief description. If set to NO, the comments
 # will behave just like regular Qt-style comments (thus requiring
-# an explicit \brief command for a brief description.)
+# an explicit command for a brief description.)
 
 QT_AUTOBRIEF           = NO
 
@@ -976,7 +976,7 @@ ENUM_VALUES_PER_LINE   = 4
 # JavaScript, DHTML, CSS and frames is required (i.e. any modern browser).
 # Windows users are probably better off using the HTML help feature.
 
-GENERATE_TREEVIEW      = NO
+GENERATE_TREEVIEW      = YES
 
 # By enabling USE_INLINE_TREES, doxygen will generate the Groups, Directories,
 # and Class Hierarchy pages using a tree view instead of an ordered list.

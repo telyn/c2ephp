@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__).'/TagBlock.php');
 
-/** \brief Block to enable some kind of compatibility with Amazing Virtual Sea Monkeys agents
+/** Block to enable some kind of compatibility with Amazing Virtual Sea Monkeys agents
  * This class will probably remain forever untested and unused.
  */
 class LIVEBlock extends AGNTBlock {

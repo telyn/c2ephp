@@ -2,11 +2,11 @@
 require_once(dirname(__FILE__).'/AGNTBlock.php');
 require_once(dirname(__FILE__).'/TagBlock.php');
 
-/** \brief Docking Station agent description block
+/** Docking Station agent description block
  * Defines everything about an agent for docking station
  */
 class DSAGBlock extends AGNTBlock {
-	/** \brief Instantiates a new DSAGBlock
+	/** Instantiates a new DSAGBlock
 	 * \param $prayfile The PRAYFile this DSAGBlock is being read from. Can be null.
 	 * \param $name This block's name.
 	 * \param $content The binary contents of the block
@@ -15,11 +15,11 @@ class DSAGBlock extends AGNTBlock {
 	public function DSAGBlock($prayfile,$name,$content,$flags) {
 		parent::TagBlock($prayfile,$name,$content,$flags,PRAY_BLOCK_DSAG);
 	}
-	/// \brief Gets the label used on the web button.
+	/// Gets the label used on the web button.
 	public function GetWebLabel() {
 		return $this->GetTag('Web Label');
 	}
-	/// \brief Gets the URL of the web site
+	/// Gets the URL of the web site
 	public function GetWebURL() {
 		return $this->GetTag('Web URL');
 	}
@@ -28,21 +28,21 @@ class DSAGBlock extends AGNTBlock {
 	"Web Icon Base" "" 
 	"Web Icon Animation String" ""
 	 */
-	/// \brief Gets the file used for the web button's icon
+	/// Gets the file used for the web button's icon
 	public function GetWebIcon() {
 		return $this->GetTag('Web Icon');
 	}
-	/// \brief Gets the number of the sprite to use as the base for the web icon.
+	/// Gets the number of the sprite to use as the base for the web icon.
 	public function GetWebIconBase() {
 		return $this->GetTag('Web Icon Base');
 	}
-	/** \brief Gets the animation string for the web icon.
+	/** Gets the animation string for the web icon.
 	 * In theory, the web button would animate. In reality, DS actually only uses the first image.
 	 */
 	public function GetWebIconAnimationString() {
 		return $this->GetTag('Web Icon Animation String');
 	}
-	/// \brief Gets the web button image as an ISpriteFrame
+	/// Gets the web button image as an ISpriteFrame
 	public function GetWebIconAsSpriteFrame() {
 		$webIcon = $this->GetWebIcon();
 		if($webIcon == '') {

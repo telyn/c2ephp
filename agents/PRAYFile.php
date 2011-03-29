@@ -3,14 +3,14 @@
 require_once(dirname(__FILE__).'/../support/IReader.php');
 require_once(dirname(__FILE__).'/../support/StringReader.php');
 require_once(dirname(__FILE__).'/PRAY/PrayBlock.php');
-/** \brief Class representing a file that uses the PRAY format
+/** Class representing a file that uses the PRAY format
   * .creature, .family and .agents files all use this format.
   */
 class PRAYFile {
     private $reader;
     private $blocks=array();
     private $parsed = false;
-    /** \brief Creates a new PRAYFile
+    /** Creates a new PRAYFile
 	  * \param $reader The IReader to read from. If null, means this is a user-generated PRAYFile.
 	  */
     function PRAYFile($reader=null) {
@@ -23,7 +23,7 @@ class PRAYFile {
 		}
     }
     
-    /** \brief Reads the PRAYFile stored in the reader. Called automatically. */
+    /** Reads the PRAYFile stored in the reader. Called automatically. */
     private function Parse() {
 		if(!$this->parsed) {
 			if($this->ParseHeader()) {
@@ -40,8 +40,8 @@ class PRAYFile {
 		
 		return $this->blocks;
     }
-    /** \brief Compiles the PRAYFile.
-	  * \return A binary string containing the PRAYFile's contents.
+    /** Compiles the PRAYFile.
+	  * return A binary string containing the PRAYFile's contents.
 	  */
 	public function Compile() {
 		$compiled = 'PRAY';
@@ -50,14 +50,14 @@ class PRAYFile {
 		}
 		return $compiled;
 	}
-	/** \brief Adds a block to this PRAYFile.
+	/** Adds a block to this PRAYFile.
 	  * \param $block The PrayBlock to add
 	  */
 	public function AddBlock(PrayBlock $block) {
 		//TODO: Check block name is unique (in blocks of the same type).
 		$this->blocks[] = $block;
 	}
-	/** \brief Gets the blocks of the specified type(s)
+	/** Gets the blocks of the specified type(s)
 	  * If $type is a string, returns all blocks of that type.
 	  * If $type is an array, returns all blocks the types in the array.
 	  * \param $type The type(s) of blocks to return, as the PRAYBLOCK_TYPE_* constants.
@@ -78,7 +78,7 @@ class PRAYFile {
             return $retblocks;
         }
     }
-	/** \brief Gets a block with the specified name */
+	/** Gets a block with the specified name */
     public function GetBlockByName($name) {
 		foreach($this->blocks as $blockid => $block) {
 			
@@ -88,7 +88,7 @@ class PRAYFile {
 		}
 		return null;
 	}
-	/** \brief Checks that this PRAYFile begins with PRAY */
+	/** Checks that this PRAYFile begins with PRAY */
     private function ParseHeader() {
         if($this->reader->Read(4) == "PRAY") {
             return true;
@@ -96,7 +96,7 @@ class PRAYFile {
             return false;
         }
     }
-	/** \brief Reads a block from the reader
+	/** Reads a block from the reader
 	  * Reads a block, then creates it using the PrayBlock::MakePrayBlock method.
 	  * Returns true if the block was created successfully, false otherwise.
 	  */
