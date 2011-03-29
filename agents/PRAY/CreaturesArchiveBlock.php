@@ -6,7 +6,7 @@ require_once(dirname(__FILE__).'/PrayBlock.php');
  * Used by CREABlock and GLSTBlock
  */
 abstract class CreaturesArchiveBlock extends PrayBlock {
-	/** \brief Instantiates a new CreaturesArchiveBlock
+	/** Instantiates a new CreaturesArchiveBlock
 	 * \param $prayfile The PRAYFile this CreaturesArchive belongs to. May be null.
 	 * @param $name The name of this block
 	 * @param $content This block's binary data.
@@ -21,7 +21,7 @@ abstract class CreaturesArchiveBlock extends PrayBlock {
 			}
 		}
 	}
-	/// \brief DeArchives this block
+	/// DeArchives this block
 	private function DeArchive() {
 		$content = $this->GetData();
 		if($content{0} == 'C') {

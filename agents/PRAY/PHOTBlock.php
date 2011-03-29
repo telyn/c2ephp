@@ -23,13 +23,13 @@ class PHOTBlock extends PrayBlock {
 		throw new Exception('It\'s impossible to decompile a PHOT.');
 	}
 	/** Returns the photo data as an s16 file.
-	*	\return The photo data as an S16File object.
+	*	return The photo data as an S16File object.
 	*/
 	public function GetS16File() {
 		return new S16File(new StringReader($this->GetData()));
 	}
 	/** Returns the photo data as a PNG.
-	* 	\return The photo data as a binary string containing PHP data.
+	* 	return The photo data as a binary string containing PHP data.
 	*/
 	public function ToPNG() {
 		return $this->GetS16File()->ToPNG(0);

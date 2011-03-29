@@ -7,22 +7,22 @@ require_once(dirname(__FILE__).'/COB/AuthorBlock.php');
 require_once(dirname(__FILE__).'/COB/UnknownBlock.php');
 
 ///@{
-/** \brief C1 format cob
+/** C1 format cob
   * C1
   */
 define('COB_FORMAT_C1','C1');
-/** \brief C2 format COB
+/** C2 format COB
   * C2
   */
 define('COB_FORMAT_C2','C2');
 ///@}
 
-/** \brief Class that interacts with COB files (c1 and c2 formats) */
+/** Class that interacts with COB files (c1 and c2 formats) */
 class COB {
 	private $format;
 	private $blocks;
 	
-	/** \brief Creates a new COB file
+	/** Creates a new COB file
     * If you want to create a COB file from scratch, simply don't
     * pass anything to the constructor.
     * Alternatively, if you know which kind of COB file you are
@@ -39,7 +39,7 @@ class COB {
 			$this->LoadCOB($reader);
 		}
 	}
-	/** \brief Loads the COB from the IReader.
+	/** Loads the COB from the IReader.
 	  * Used internally, this function is not for the general public!
 	  * This function first identifies which type of COB is in the IReader
 	  * Then decompresses if necessary, then calls LoadC1COB or LoadC2COB.
@@ -60,7 +60,7 @@ class COB {
 			}
 		}
 	}
-	/** \brief Loads a C2 COB from the IReader given
+	/** Loads a C2 COB from the IReader given
 	  * C2 COBs have multiple blocks, which are accessible via the
 	  * COB::GetBlocks function.
 	  * \param $reader The IReader to load from
@@ -75,7 +75,7 @@ class COB {
 			throw new Exception('Not a valid C2 COB file!');
 		}
 	}
-	/** \brief Loads a C1 COB from the specified reader
+	/** Loads a C1 COB from the specified reader
 	  * C1 COBs have just one block, which is a COBAgentBlock.
 	  * This is accessible by calling COB::GetBlocks
 	  * \param $reader the reader to load from
@@ -89,14 +89,14 @@ class COB {
 			$this->blocks[] = COBAgentBlock::CreateFromReaderC1($reader);
 		}
 	}
-	/** \brief Adds a COBBlock to this COB
+	/** Adds a COBBlock to this COB
 	  * \param $block the block to add.
 	  */
 	public function AddBlock(COBBlock $block) {
 		//TODO: Check that this block works for this COB type?
 		$this->blocks[] = $block;
 	}
-	/** \brief Underlying block reader used by C2 COBs
+	/** Underlying block reader used by C2 COBs
 	  * Reads a block from the specified reader, then instanitates
 	  * a representative COBBlock, and returns it.
 	  */
@@ -124,12 +124,12 @@ class COB {
 				break;
 		}
 	}
-	/** \brief Accessor method to get blocks of the given type
+	/** Accessor method to get blocks of the given type
 	  * If $type is false, will return all blocks in this agent.
 	  * In a C1 COB, there is only one block and it is of the agnt
 	  * type.
 	  * \param $type The type of block to get (agnt, auth, file). False by default.
-	  * \return An array of COBBlocks.
+	  * return An array of COBBlocks.
 	  */
 	public function GetBlocks($type=false) {
 		$blocks = array();
@@ -140,5 +140,34 @@ class COB {
 		}
 		return $blocks;
 	}
+  
+  /** Compiles the COB in the given format
+   * \param $format The format of the COB. If null, assumed it's a creatures 2 COB
+   */
+  public function Compile($format = null) {
+    if($format == null) {
+      $format = $this->GetType();
+    }
+    if($format != FORMAT_C1) {
+      $format = FORMAT_C2
+    }
+    switch($format) {
+      case FORMAT_C1:
+        $this->CompileC1();
+      case FORMAT_C2:
+        $this->CompileC2();
+      default:
+        throw new Exception('Non-understood COB format - sorry!');
+    }
+  }
+  public function CompileC1() {
+   throw new Exception('C1 COB Compilation not yet ready.')
+  }
+  public function CompileC2() {
+    $data = ''; // DRUNK: IS THIS EVEN RIGHT 
+    foreach($this->blocks as $block) {
+      $data .= $block->Compile();
+    }    
+  }
 }
 ?>

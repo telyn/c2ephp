@@ -2,15 +2,24 @@
 require_once(dirname(__FILE__).'/../../sprites/C16File.php');
 require_once(dirname(__FILE__).'/../../sprites/S16File.php');
 require_once(dirname(__FILE__).'/TagBlock.php');
+
+/// Represents an AGNT block in a PRAY file, used for C3 Agent scripts and metadata.
 class AGNTBlock extends TagBlock {
+  
+  /** Instantiate a new AGNTBlock
+	 * \param $prayfile The PRAYFile associated with this AGNT block. It is allowed to be null.
+	 * \param $name The name of this block.
+	 * \param $content This block's content.
+	 * \param $flags Any flags this block may have
+  */
 	public function AGNTBlock($prayfile,$name,$content,$flags) {
 		parent::TagBlock($prayfile,$name,$content,$flags,PRAY_BLOCK_AGNT);
 	}
-	/// \brief Gets the agent's name.
+	/// Gets the agent's name.
 	public function GetAgentName() {
 		return $this->GetName();
 	}
-	/** \brief Gets the agent's description in the specified language
+	/** Gets the agent's description in the specified language
 	 * If the description doesn't exist in that language, falls back on English.
 	 * \param $localisation The two-letter language code (e.g. de, fr) to get. If not specified, english is used.
 	 */ 
@@ -25,17 +34,17 @@ class AGNTBlock extends TagBlock {
 			return $description;
 		}
 	}
-	/** \brief Gets the agent's type
+	/** Gets the agent's type
 	 * I honestly have no idea what this is. For some reason always zero. O_o
 	 */ 
 	public function GetAgentType() {
 		return $this->GetTag('Agent Type');
 	}
-	/// \brief Gets the number of scripts stored in this block
+	/// Gets the number of scripts stored in this block
 	public function GetScriptCount() {
 		return $this->GetTag('Script Count');
 	}
-	/** \brief Gets the specified script 
+	/** Gets the specified script 
 	 * Gets the first script, or if you specified which script, that one.
 	 * \param $script Which script to get as an integer. The first script is script 1.
 	 */
@@ -46,13 +55,13 @@ class AGNTBlock extends TagBlock {
 		throw new Exception('Script doesn\'t exist!');
 		
 	}
-	/// \brief Get the number of files this agent depends on.
+	/// Get the number of files this agent depends on.
 	public function GetDependencyCount() {
 		return $this->GetTag('Dependency Count');
 	}
-	/** \brief Gets the dependency specified
+	/** Gets the dependency specified
 	 * \param $dependency The number of the dependency to get. 1-based.
-	 * \return A PrayDependency object describing the file the agent depends on
+	 * return A PrayDependency object describing the file the agent depends on
 	 */
 	
 	public function GetDependency($dependency) {
@@ -60,8 +69,8 @@ class AGNTBlock extends TagBlock {
 		$category = $this->GetTag('Dependency Category '.$dependency);
 		return new PrayDependency($category,$file);
 	}
-	/** \brief Gets all the files this agent depends on.
-	 * \return An array of PrayDependency objects.
+	/** Gets all the files this agent depends on.
+	 * return An array of PrayDependency objects.
 	 */
 	public function GetDependencies() {
 		$dependencies = array();
@@ -70,7 +79,7 @@ class AGNTBlock extends TagBlock {
 		}
 		return $dependencies;
 	}
-	/** \brief Gets the script used to remove this agent.
+	/** Gets the script used to remove this agent.
 	 * If not specified, most likely a removal script is included in the agent's scripts, however,
 	 * if this isn't specified the game won't know how to remove the agent
 	 */
@@ -78,18 +87,18 @@ class AGNTBlock extends TagBlock {
 	public function GetRemoveScript() {
 		return $this->GetTag('Remove Script');
 	}
-	/// \brief Gets the file used for the animation of the agent on the C3 Creator/DS injector
+	/// Gets the file used for the animation of the agent on the C3 Creator/DS injector
 	public function GetAgentAnimationFile() {
 		return $this->GetTag('Agent Animation File');
 	}
-	/** \brief Gets the filename (excluding extension) used for the animation of the agent on the C3 Creator/DS injector
+	/** Gets the filename (excluding extension) used for the animation of the agent on the C3 Creator/DS injector
 	 * For all agent files I've seen, it's functionally identical to substr(AGNTBlock::GetAgentAnimationFile(),0,-4)
 	 * I have no idea why anyone would use this.
 	 */
 	public function GetAgentAnimationGallery() {
 		return $this->GetTag('Agent Animation Gallery');
 	}
-	/** \brief Gets the number of the first image of the animation displayed on the C3 Creator/DS injector
+	/** Gets the number of the first image of the animation displayed on the C3 Creator/DS injector
 	 * This is used as the basis for the animation string. For example, an AGNT block with 'Animation Sprite First Image' = 4
 	 * and 'Agent Animation String' = 0 0 3 4
 	 * Would show the same image as one with 'Animation Sprite First Image' = 0 and 'Agent Animation String' = 4 4 7 8
@@ -97,13 +106,13 @@ class AGNTBlock extends TagBlock {
 	public function GetAgentAnimationFirstImage() {
 		return $this->GetTag('Animation Sprite First Image');
 	}
-	/** \brief Gets the animation displayed on the C3 creator/DS injector
+	/** Gets the animation displayed on the C3 creator/DS injector
 	 * It's simply a space-delimited set of numbers. 
 	 */
 	public function GetAgentAnimationString() {
 		return $this->GetTag('Agent Animation String');
 	}
-	/** \brief Gets the image used on the creator
+	/** Gets the image used on the creator
 	 * Since I have no desire to bring GIF files back to the internet
 	 * this function will ONLY support single-frame animations.
 	 * If you really, REALLY, want to make a GIF, it's totally possible so do it yourself.

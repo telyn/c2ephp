@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__).'/../PRAY/GLSTBlock.php');
 
-/** \brief Creature event numbers
+/** Creature event numbers
  * all creatures are either CONCEIVED, SPLICED, ENGINEERED, or IAMCLONED
  * Then CONCEIVED creatures are MUMLAIDMYEGG
  * Then they are HATCHED except maybe ENGINEERED creatures.
@@ -9,63 +9,63 @@ require_once(dirname(__FILE__).'/../PRAY/GLSTBlock.php');
  * Then they make their own way through life.
  */
 //@{
-/*\brief I was conceived the ol' fashioned way (kisspopping)
+/*I was conceived the ol' fashioned way (kisspopping)
  * Value: 0*/
 define('CREATUREHISTORY_EVENT_CONCEIVED',0);
-/*\brief I was spliced from two other creatures
+/*I was spliced from two other creatures
  * Value: 1*/
 define('CREATUREHISTORY_EVENT_SPLICED',1);
-/*\brief I was conceived by some geek in their bedroom (genetics kit)
+/*I was conceived by some geek in their bedroom (genetics kit)
  * Value: 2*/
 define('CREATUREHISTORY_EVENT_ENGINEERED',2);
-/*\brief I hatched out of my egg and began my journey through life!
+/*I hatched out of my egg and began my journey through life!
  * Value: 3*/
 define('CREATUREHISTORY_EVENT_HATCHED',3);
-/*\brief I grew up a little! CreatureHistoryEvent::GetLifestage will tell you what lifestage I am now.
+/*I grew up a little! CreatureHistoryEvent::GetLifestage will tell you what lifestage I am now.
  * Value: 4*/
 define('CREATUREHISTORY_EVENT_AGED',4);
-/*\brief I left this world 
+/*I left this world 
  * Value: 5*/
 define('CREATUREHISTORY_EVENT_EXPORTED',5);
-/*\brief I joined this world
+/*I joined this world
  * Value: 6*/
 define('CREATUREHISTORY_EVENT_IMPORTED',6);
-/*\brief My journey through life ended. 
+/*My journey through life ended. 
  * Value: 7*/
 define('CREATUREHISTORY_EVENT_DIED',7);
-/*\brief I became pregnant! (We kisspopped)
+/*I became pregnant! (We kisspopped)
  * Value: 8*/
 define('CREATUREHISTORY_EVENT_BECAMEPREGNANT',8);
-/*\brief I made someone else pregnant! (We kisspopped) 
+/*I made someone else pregnant! (We kisspopped) 
  * Value: 9*/
 define('CREATUREHISTORY_EVENT_IMPREGNATED',9);
-/*\brief My child began its journey through life! 
+/*My child began its journey through life! 
  * Value: 10*/
 define('CREATUREHISTORY_EVENT_CHILDBORN',10);
-/*\brief My mum laid my egg. Thanks, mum :D 
+/*My mum laid my egg. Thanks, mum :D 
  * Value: 11*/
 define('CREATUREHISTORY_EVENT_MUMLAIDMYEGG',11);
-/*\brief I finally got that kid out of my stomach and onto the floor, where it belongs :P 
+/*I finally got that kid out of my stomach and onto the floor, where it belongs :P 
  * Value: 12*/
 define('CREATUREHISTORY_EVENT_LAIDEGG',12);
-/*\brief A photo was taken of me. 
+/*A photo was taken of me. 
  * Value: 13*/
 define('CREATUREHISTORY_EVENT_PHOTOTAKEN',13);
-/*\brief I was made by cloning another creature. This happens when you export a creature then import it multiple times. 
+/*I was made by cloning another creature. This happens when you export a creature then import it multiple times. 
  * Value: 14*/
 define('CREATUREHISTORY_EVENT_IAMCLONED',14); 
-/*\brief Another creature was made by cloning me. This happens when you export a creature then import it multiple times. 
+/*Another creature was made by cloning me. This happens when you export a creature then import it multiple times. 
  * Value: 15*/
 define('CREATUREHISTORY_EVENT_CLONEDME',15);
-/*\brief I left this world via the internet :D 
+/*I left this world via the internet :D 
  * Value: 16*/
 define('CREATUREHISTORY_EVENT_WARPEDOUT',16);
-/*\brief I entered this world via the internet! :D 
+/*I entered this world via the internet! :D 
  * Value: 17*/
 define('CREATUREHISTORY_EVENT_WARPEDIN',17);
 //@}
 
-/** \brief Class to represent events in a creature's life*/
+/** Class to represent events in a creature's life*/
 
 class CreatureHistoryEvent {
 	private $eventtype;
@@ -124,7 +124,7 @@ class CreatureHistoryEvent {
 	}
 	/** Compiles the data into the correct format for the game specified
 	 * \param $format Which game to compile it for (a GLST_FORMAT_* constant)
-	 * \return GLST data ready to be put into a GLST history.
+	 * return GLST data ready to be put into a GLST history.
 	 */
 	public function Compile($format) {
 		$data = pack('VVVVV',$this->eventtype,$this->worldtime,$this->creatureage,$this->timestamp,$this->lifestage);
@@ -140,31 +140,31 @@ class CreatureHistoryEvent {
 		}
 	}
 	/** Accessor method for event type
-	 * \return The event type as a CREATUREHISTORY_EVENT_* constant.
+	 * return The event type as a CREATUREHISTORY_EVENT_* constant.
 	 */
 	public function GetEventType() {
 		return $this->eventtype;
 	}
 	/** Accessor method for world time
-	 * \return The age of the world, in ticks, when this event occurred.
+	 * return The age of the world, in ticks, when this event occurred.
 	 */
 	public function GetWorldTime() {
 		return $this->worldtime;
 	}
 	/** Accessor method for creature age 
-	 * \return The age of the creature, in ticks, when this event happened
+	 * return The age of the creature, in ticks, when this event happened
 	 */
 	public function GetCreatureAge() {
 		return $this->creatureage;
 	}
 	/** Accessor method for timestamp 
-	 * \return The unix timestamp of the time at which this event occurred
+	 * return The unix timestamp of the time at which this event occurred
 	 */
 	public function GetTimestamp() {
 		return $this->timestamp;
 	}
 	/** Accessor method for life stage
-	 * \return The creature's life stage (an integer, 0-6 I think. TODO: I'll make it into a constant. 0xFFFFFFFF means unborn.)
+	 * return The creature's life stage (an integer, 0-6 I think. TODO: I'll make it into a constant. 0xFFFFFFFF means unborn.)
 	 */
 	public function GetLifeStage() {
 		return $this->lifestage;
@@ -176,7 +176,7 @@ class CreatureHistoryEvent {
 	 * In becoming pregnant, it's the creature that made this one pregnant
 	 * In making another pregnant, it's the pregnant creature.
 	 * In a child being born, it's the other parent of the child
-	 * \return The first moniker associated with this event 
+	 * return The first moniker associated with this event 
 	 */
 	public function GetMoniker1() {
 		return $this->moniker1;
@@ -186,7 +186,7 @@ class CreatureHistoryEvent {
 	 * In becoming pregnant, it's the child's moniker
 	 * In making another pregnant, it's the child's moniker
 	 * In a child being born, it's the child's moniker
-	 * \return The first moniker associated with this event 
+	 * return The first moniker associated with this event 
 	 */
 	public function GetMoniker2() {
 		return $this->moniker2;
@@ -195,7 +195,7 @@ class CreatureHistoryEvent {
 	 * In theory user text can be used on any event without messing it up (and it would be readable via CAOS)
 	 * In practice, this is only used by either the first event or the hatched event (I forget which)
 	 * and is used to mean the text that the user enters to describe this creature in the creature info dialog
-	 * \return The user text associated with this event.
+	 * return The user text associated with this event.
 	 */
 	public function GetUserText() {
 		return $this->usertext;
@@ -203,19 +203,19 @@ class CreatureHistoryEvent {
 	/** Accessor method for photograph
 	 * In theory this can be used on any event without messing anything up, and would be readable via CAOS.
 	 * In pratice this is only used on photo taken events.
-	 * \return The identifier of the photograph (in the format mymoniker-photonumber)
+	 * return The identifier of the photograph (in the format mymoniker-photonumber)
 	 */
 	public function GetPhotograph() {
 		return $this->photograph;
 	}
 	/** Accessor method for world name
-	 * \return The name of the world this creature was in during this event
+	 * return The name of the world this creature was in during this event
 	 */
 	public function GetWorldName() {
 		return $this->worldname;
 	}
 	/** Accessor method for world name
-	 * \return The name of the world this creature was in during this event
+	 * return The name of the world this creature was in during this event
 	 */
 	public function GetWorldUID() {
 		return $this->worldUID;

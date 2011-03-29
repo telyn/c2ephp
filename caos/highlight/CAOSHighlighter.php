@@ -6,7 +6,7 @@ define('FORMAT_C3','C3');
 define('FORMAT_DS','DS');
 
 
-/** \brief Class for highlighting CAOS 
+/** Class for highlighting CAOS 
  * This is the class used for highlighting CAOS code.
  * It outputs HTML code, using spans with classes.
  * It current supports C2, C3 and DS CAOS.
@@ -36,7 +36,7 @@ class CAOSHighlighter {
 	private $currentIndent;
 	private $currentWord;
   
-  /** \brief Instantiates a new CAOSHighlighter for the given CAOS format.
+  /** Instantiates a new CAOSHighlighter for the given CAOS format.
    * This function also loads CAOS definitions from the subfolders of this folder. In this way it is extensible.
    * \param $format The format of the CAOS you intend to highlight.
    */
@@ -58,7 +58,7 @@ class CAOSHighlighter {
 		$this->caosFlowControls = call_user_func(array($format.'CAOSFlowControls','GetTokens'));
 	}
 	
-  /** \brief Highlights the given CAOS script.
+  /** Highlights the given CAOS script.
    * \param $script the CAOS script as a string.
    * If you're taking CAOS from a COB file, please replace the commas with newlines.
    */
@@ -84,7 +84,7 @@ class CAOSHighlighter {
 		return implode($this->highlightedLines);
 	}
   
-  /** \brief Removes multiple spaces
+  /** Removes multiple spaces
    * This function removes all unnecessary spaces, while preserving those spaces
    * that are within comments or strings.
    */
@@ -109,7 +109,7 @@ class CAOSHighlighter {
 		}
 		return trim(implode('',$newString));
 	}
-  /* \brief Creates an array of subroutine names
+  /* Creates an array of subroutine names
    * Collects all the tokens coming after SUBRs and places them in an array
    * This allow GSUB to give errors when a SUBR hasn't been defined
    */
@@ -122,7 +122,7 @@ class CAOSHighlighter {
 			}
 		}	
 	}
-  /** \brief The meat of the class - essentially a main loop.
+  /** The meat of the class - essentially a main loop.
    * This function performs all the necessary wizardry to get the CAOS highlighted
    * and contains a lot of strange logic.
    */
@@ -342,7 +342,7 @@ class CAOSHighlighter {
 		return $highlightedLine;
 	}
 	
-  /** \brief Tries to find a match in the CAOS dictionaries for the token
+  /** Tries to find a match in the CAOS dictionaries for the token
    * This is called by the main loop a few times to highlight CAOS commands
    */
 	private function TryToHighlightToken($word) {
@@ -382,7 +382,7 @@ class CAOSHighlighter {
 	
   
 	//These may well not apply to all versions of CAOS! I haven't thoroughly looked over the docs.
-	/** \brief Handles the indentation level of the current line
+	/** Handles the indentation level of the current line
    * This function unindents code to the correct level if the current line begins with the given word.
    * \param $firstword The first word of the line
    */
@@ -410,7 +410,7 @@ class CAOSHighlighter {
 		}
 	}
   
-  /** \brief Sets the indent for the next line
+  /** Sets the indent for the next line
    */
 	private function SetIndentForNextLine($firstword) {
 		switch($firstword) {
@@ -436,7 +436,7 @@ class CAOSHighlighter {
 				return "\n";
 		}
 	}
-	/** \brief Writes tabs to indent the correct amount.
+	/** Writes tabs to indent the correct amount.
    */
 	private function CreateIndentForThisLine($firstword) {
 		$indent = '';

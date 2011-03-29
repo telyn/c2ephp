@@ -3,7 +3,6 @@ require_once(dirname(__FILE__).'/SPRFrame.php');
 require_once(dirname(__FILE__).'/SpriteFile.php');
 require_once(dirname(__FILE__).'/../support/IReader.php');
 
-//TODO: THIS CLASS WAS IMPLEMENTED REALLY POORLY :(
 class SPRFile extends SpriteFile {
 		
 	public function SPRFile(IReader	 $reader) {

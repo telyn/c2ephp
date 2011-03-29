@@ -1,5 +1,5 @@
 <?php
-/** \brief C3 CAOS commands dictionary */
+/** C3 CAOS commands dictionary */
 class C3CAOSCommands {
 	public static function GetTokens() {
 		return array

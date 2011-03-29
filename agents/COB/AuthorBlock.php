@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__).'/COBBlock.php');
 
-/// \brief Defines Author information about the COB
+/** Defines Author information about the COB */
 class COBAuthorBlock extends COBBlock {
 	private $creationTime;
 	private $version;
@@ -11,14 +11,14 @@ class COBAuthorBlock extends COBBlock {
 	private $authorURL;
 	private $authorComments;
 	
-	/** \brief Creates a new COBAuthorBlock
-	 * \param $authorName the name of the author of this COB
-	 * \param $authorEmail the author's email address
-	 * \param $authorURL The author's website address
-	 * \param $authorComments Any comments the author had about this COB
-	 * \param $creationTime the time this COB was compiled
-	 * \param $version The version number of this COB
-	 * \param $revision the COB's revision number
+	/** Creates a new COBAuthorBlock
+	 * @param string $authorName the name of the author of this COB
+	 * @param string $authorEmail the author's email address
+	 * @param string $authorURL The author's website address
+	 * @param string $authorComments Any comments the author had about this COB
+	 * @param int $creationTime the time this COB was compiled as a UNIX timestamp
+	 * @param int $version The version number of this COB
+	 * @param int $revision the COB's revision number
 	 */
 	public function COBAuthorBlock($authorName,$authorEmail,$authorURL,$authorComments,$creationTime,$version,$revision) {
 		parent::COBBlock(COB_BLOCK_AUTHOR);
@@ -30,36 +30,46 @@ class COBAuthorBlock extends COBBlock {
 		$this->version = $version;
 		$this->revision = $revision;
 	}
-	/// \brief Gets the name of the author
+	/** Gets the name of the author
+     * @return string */
 	public function GetAuthorName() {
 		return $this->authorName;
 	}
-	/// \brief Gets the author's email address
+	/** Gets the author's email address
+     * @return string */
 	public function GetAuthorEmail() {
 		return $this->authorEmail;
 	}
-	/// \brief Gets the author's web address
+	/** Gets the author's web address
+	 * @return string */
 	public function GetAuthorURL() {
 		return $this->authorURL;
 	}
-	/// \brief Gets comments from the author
+	/** Gets comments from the author
+	 * @return string */
 	public function GetAuthorComments() {
 		return $this->authorComments;
 	}
-	/// \brief Gets the time this COB was created
+	/* Gets the time this COB was created
+	 * @return int UNIX timestamp */
 	public function GetCreationTime() {
 		return $this->creationTime;
 	}
-	/// \brief Gets the COB's version number
+	/** Gets the COB's version number
+	 * @return int */
 	public function GetVersion() {
 		return $this->version;
 	}
-	/// \brief Gets the COB's revision
+	/** Gets the COB's revision number
+	 * @return int */
 	public function GetRevision() {
 		return $this->revision;
 	}
-	/** Creates the COBAuthorBlock from an IReader
-	 * \param $reader The IReader, currently at the position of the author block  
+	/** @ignore
+	 * Creates the COBAuthorBlock from an IReader.
+     * Ordinary programmers will not need to deal with this
+	 * @param $reader The IReader, currently at the position of the author block  
+	 * @return COBAuthorBlock
 	 */
 	public static function CreateFromReader(IReader $reader) {
 		$creationDay = $reader->ReadInt(1);

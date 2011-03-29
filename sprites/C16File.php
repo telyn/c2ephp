@@ -3,7 +3,7 @@ require_once(dirname(__FILE__).'/../support/IReader.php');
 require_once(dirname(__FILE__).'/SpriteFile.php');
 require_once(dirname(__FILE__).'/C16Frame.php');
 
-/** \brief Class representing a C16 sprite file. 
+/** Class representing a C16 sprite file. 
   * This documentation was written in the future, when the code had already been written
   * In other words, what is true according to what's in the docs is not what's actually true RIGHT NOW
   * I will remove this notice when I finish coding this class.
@@ -11,7 +11,7 @@ require_once(dirname(__FILE__).'/C16Frame.php');
 class C16File extends SpriteFile
 {
 	private $encoding;
-	/** \brief Creates a new C16File object.
+	/** Creates a new C16File object.
 	 * If $reader is null, creates an empty C16File ready to add sprites to.
 	 * \param $reader The reader to read the sprites from. Can be null.
 	 */
@@ -42,15 +42,15 @@ class C16File extends SpriteFile
   		}
   	}
 	}
-  /** \brief Sets the encoding for this file 
+  /** Sets the encoding for this file 
    * \param $encoding '565' or '555', anything else will be treated as '555'
    */
   public function SetEncoding($encoding) {
     $this->EnsureDecompiled();
     $this->encoding = $encoding;
   }
-  /** \brief Compiles the file's data into a C16 binary string
-   * \return A binary string containing the C16File's data.
+  /** Compiles the file's data into a C16 binary string
+   * return A binary string containing the C16File's data.
    */
 	public function Compile() {
     $data = ''; 

@@ -1,20 +1,16 @@
 <?php
+
 require_once(dirname(__FILE__).'/COBBlock.php');
 require_once(dirname(__FILE__).'/../../sprites/SpriteFrame.php');
 require_once(dirname(__FILE__).'/../../sprites/S16Frame.php');
 require_once(dirname(__FILE__).'/../../sprites/SPRFrame.php');
 
-/** \name Dependency Types
- * Types of dependencies that apply to COBs.
- * @{
- * \brief Sprite Dependency
-**/
+/** Sprite dependency */
 define('DEPENDENCY_SPRITE','sprite');
-/// \brief Sound Dependency
+/** Sound dependency */
 define('DEPENDENCY_SOUND','sound');
-///@}
 
-/** \brief COB Agent Block for C1 and C2
+/** COB Agent Block for C1 and C2
  * For Creatures 1, this block contains all the useful data in a typical COB and will be the only block.
  * For Creatures 2, this block contains the scripts and metadata about the actual object.
  */
@@ -24,7 +20,7 @@ class COBAgentBlock extends COBBlock {
 	private $agentDescription;
 	
 	private $lastUsageDate; //unix timestamp
-	private $reuseInterval; // seconds IIRC
+	private $reuseInterval; // seconds
 	private $quantityAvailable;
 	private $expiryDate; //unix timestamp
 	
@@ -34,62 +30,78 @@ class COBAgentBlock extends COBBlock {
 	private $reserved3;
 	
 	private $dependencies = array();
-	
-	private $thumbnail; //ISpriteFrame ready to OutputPNG
+	/** @var SpriteFrame */
+	private $thumbnail;
 	
 	private $installScript;
 	private $removeScript;
 	private $eventScripts;
 	
-	/** \brief initialise a new COBAgentBlock
+	/** initialise a new COBAgentBlock
 	 * Initialises a new COBAgentBlock with the given name and description. 
 	 * As defaults can be made for everything else these is the only non-optional parts of a COB file in my opinion.
 	 * Even then they could just be '' if you really felt like it. 
-	 * \param $agentName The name of the agent (as displayed in the C2 injector)
-	 * \param $agentDescription The description of the agent (as displayed in the C2 injector)
+	 * @param string $agentName The name of the agent (as displayed in the C2 injector)
+	 * @param string $agentDescription The description of the agent (as displayed in the C2 injector)
 	 */
 	public function COBAgentBlock($agentName,$agentDescription) {
 		parent::COBBlock(COB_BLOCK_AGENT);
 		$this->agentName = $agentName;
 		$this->agentDescription = $agentDescription;
 	}
-	/// \brief Gets the agent's name
+	/** Gets the agent's name 
+	 * @return string
+	 */
 	public function GetAgentName() {
 		return $this->agentName;
 	}
-	/// \brief Gets the agent's description
+	/** Gets the agent's description
+	 * @return string
+	 */
 	public function GetAgentDescription() {
 		return $this->agentDescription;
 	}
-	/// \brief Gets the agent's install script
+	/** Gets the agent's install script
+     * @return string
+	 */
 	public function GetInstallScript() {
 		return $this->installScript;
 	}
-	/// \brief Gets the agent's remove script
+	/** Gets the agent's remove script
+	 * @return string
+	 */
 	public function GetRemoveScript() {
 		return $this->removeScript;
 	}
-	/// \brief Gets the number of event scripts
+	/** Gets the number of event scripts
+	 * @return int
+	 */
 	public function GetEventScriptCount() {
 		return sizeof($this->eventScripts);
 	}
-	/// \brief Gets the agent's event scripts
+	/** Gets the agent's event scripts
+	 * @return array
+	 */
 	public function GetEventScripts() {
 		return $this->eventScripts;
 	}
-	/** \brief Gets an event script
+	/** Gets an event script
 	 * Event scripts are not necessarily in any order.
-	 * \param $whichScript Which script to get.
+	 * @param int $whichScript Which script to get.
+	 * @return string
 	 */
 	public function GetEventScript($whichScript) {
 		return $this->eventScripts[$whichScript];
 	}
-	/// \brief Gets the thumbnail of this agent as an ISpriteFrame
+	/** Gets the thumbnail of this agent as would be shown in the Injector
+	 * @return SpriteFrame
+     */
 	public function GetThumbnail() {
 		return $this->thumbnail;
 	}
-	/** \brief Gets dependencies of the given type
-	 * \param $type One of the DEPENDENCY_* constants.
+	/** Gets dependencies of the given type
+	 * @param int $type One of the DEPENDENCY_* constants.
+	 * @return COBDependency
 	 */
 	public function GetDependencies($type=null) {
 		$dependenciesToReturn = array();
@@ -100,102 +112,109 @@ class COBAgentBlock extends COBBlock {
 		}
 		return $dependenciesToReturn;
 	}
-	/** \brief Gets the value of reserved1
+	/** Gets the value of reserved1
 	 * Reserved values weren't ever officially used by CL,
 	 * but someone might find them useful for something else.
+	 * @return int
 	 */
 	public function GetReserved1() {
 		return $this->reserved1;
 	}
-	/** \brief Gets the value of reserved2
+	/** Gets the value of reserved2
 	 * Reserved values weren't ever officially used by CL,
 	 * but someone might find them useful for something else.
+	 * @return int
 	 */
 	public function GetReserved2() {
 		return $this->reserved2;
 	}
-	/** \brief Gets the value of reserved3
+	/** Gets the value of reserved3
 	 * Reserved values weren't ever officially used by CL,
 	 * but someone might find them useful for something else.
+	 * @return int
 	 */
 	public function GetReserved3() {
 		return $this->reserved3;
 	}
-	/** \brief Adds a dependency to this agent
+	/** Adds a dependency to this agent
 	 * 
-	 * \param $dependency The COBDependency to add.
+	 * @param COBDependency $dependency The COBDependency to add.
 	 */
-	public function AddDependency(COBDependency $dependency) {
+	public function SetDependency(COBDependency $dependency) {
 		if(!in_array($dependency->GetDependencyName(),$this->dependencies)) {
 			$this->dependencies[] = $dependency;
 		}
 	}
-	/** \brief Adds an install script
-	 * \param $installScript the text of the script to add
+	/** Adds an install script
+	 * @param string $installScript the text of the script to add
 	 */
-	public function AddInstallScript($installScript) {
+	public function SetInstallScript($installScript) {
 		$this->installScript = $installScript;
 	}
-	/** \brief Adds a remover script
-	 * \param $removeScript The text of the script to add
+	/** Sets the remover script
+	 * @param string $removeScript The text of the script to add
 	 */
-	public function AddRemoveScript($removeScript) {
+	public function SetRemoveScript($removeScript) {
 		$this->removeScript = $removeScript;
 	}
-	/** \brief Adds an event script
-	 * \param $eventScript The text of the script to add
+	/** Adds an event script
+	 * @param string $eventScript The text of the script to add
 	 */
 	public function AddEventScript($eventScript) {
 		$this->eventScripts[] = $eventScript;
 	}
-	/** \brief Adds the date this agent was last injected
-	 * \param $time The date this agent was last injected as a UNIX timestamp
+	/** Sets the date this agent was last injected
+	 * @param int $time The date this agent was last injected as a UNIX timestamp
 	 */
-	public function AddLastUsageDate($time) {
+	public function SetLastUsageDate($time) {
 		if($time > time()) {
 			return false;
 		} else {
 			$this->lastUsageDate = $time;
 		}
 	}
-	/** \brief Adds the date this agent will expire
-	 * \param $time The date this agent will expire as a UNIX timestamp
+	/** Sets the date this agent will expire
+	 * @param int $time The date this agent will expire as a UNIX timestamp
 	 */
-	public function AddExpiryDate($time) {
+	public function SetExpiryDate($time) {
 		$this->expiryDate = $time;
 	}
-	/** \brief Adds the quantity of the agent available
-	 * \param $quantity The quantity available
+	/** Sets the quantity of the agent available
+	 * @param int $quantity The quantity available
 	 */
-	public function AddQuantityAvailable($quantity) {
+	public function SetQuantityAvailable($quantity) {
 		$this->quantityAvailable = $quantity;
 	}
-	/** \brief Adds the interval required between re-use.
-	 * \param $interval The interval in seconds, between re-use of this agent.
+	/** Sets the interval required between re-use.
+	 * @param int $interval The interval in seconds, between re-use of this agent.
 	 */
-	public function AddReuseInterval($interval) {
+	public function SetReuseInterval($interval) {
 		$this->reuseInterval = $interval;
 	}
-	/** \brief Adds the reserved variables to this agent
+	/** Adds the reserved variables to this agent
 	 * These variables have no meaning to Creatures 2 and don't appear in Creatures 1.
-	 * \param $reserved1 The first reserved variable
-	 * \param $reserved2 The second reserved variable
-	 * \param $reserved3 The third reserved variable
+	 * @param int $reserved1 The first reserved variable
+	 * @param int $reserved2 The second reserved variable
+	 * @param int $reserved3 The third reserved variable
 	 */
-	public function AddReserved($reserved1,$reserved2,$reserved3) {
+	public function SetReserved($reserved1,$reserved2,$reserved3) {
 		$this->reserved1 = $reserved1;
 		$this->reserved2 = $reserved2;
 		$this->reserved3 = $reserved3;
 	}
-	/** \brief Add the thumbnail to this agent.
-	 * \param $frame The thumbnail as a SpriteFrame 
+	/** Add the thumbnail to this agent.
+	 * @param SpriteFrame $frame The thumbnail as a SpriteFrame 
 	 */
-	public function AddThumbnail(SpriteFrame $frame) {
+	public function SetThumbnail(SpriteFrame $frame) {
 		if($this->thumbnail != null) {
 			throw new Exception('Thumbnail already added');
 		}
 		$this->thumbnail = $frame;
 	}
+	/**
+	 * Adds a remover script by reading from an RCB file.
+	 * @param IReader $reader A StringReader or FileReader for the RCB
+	 */
 	public function AddC1RemoveScriptFromRCB(IReader $reader) {
 		if($this->removeScript != '') {
 			throw new Exception('Script already added!');
@@ -204,10 +223,12 @@ class COBAgentBlock extends COBBlock {
 		$ablocks = $rcb->GetBlocks(COB_BLOCK_AGENT);
 		$this->removeScript = $ablocks[0]->GetInstallScript();
 	}
-	/** \brief Creates a new COBAgentBlock from an IReader.
+	/** @ignore 
+     * Creates a new COBAgentBlock from an IReader.
 	 * Reads from the current position of the IReader to fill out the data required by
 	 * the COBAgentBlock, then creates one and adds all the fields to it.
-	 * \param $reader The IReader, seeked to the beginning of the contents of the agent block
+	 * @param IReader $reader The IReader, seeked to the beginning of the contents of the agent block
+	 * @return COBAgentBlock
 	 */
 	public static function CreateFromReaderC2(IReader $reader) {
 		$quantityAvailable = $reader->ReadInt(2);
@@ -250,6 +271,7 @@ class COBAgentBlock extends COBBlock {
 	
 		$thumbnail = new S16Frame($reader,'565',$thumbWidth,$thumbHeight,$reader->GetPosition());
 		$reader->Skip($thumbHeight*$thumbWidth*2);
+		
 		//parsing finished, onto making an AgentBlock.
 		$agentBlock = new COBAgentBlock($agentName,$agentDescription);
 		$agentBlock->AddQuantityAvailable($quantityAvailable);
@@ -269,10 +291,12 @@ class COBAgentBlock extends COBBlock {
 		return $agentBlock;
 		
 	}
-	/** \brief Creates a COBAgentBlock from an IReader
+	/** @ignore
+	 * Creates a COBAgentBlock from an IReader
 	 * Reads from the current position of the IReader to fill out the data required by
 	 * the COBAgentBlock, then creates one and adds all the fields to it.
-	 * \param $reader The IReader, seeked to the beginning of the contents of the agent block
+	 * @param $reader The IReader, seeked to the beginning of the contents of the agent block
+	 * 
 	 */
 	public static function CreateFromReaderC1(IReader $reader) {
 		$quantityAvailable	= $reader->ReadInt(2);
@@ -325,24 +349,28 @@ class COBAgentBlock extends COBBlock {
 	}
 }
 
-/// \brief defines a dependency as used in a COB file
+/** defines a dependency which is used in a COB file */
 class COBDependency {
 	private $type;
 	private $name;
 	
-	/** \brief Creates a new COBDependency
-	 * \param $type The type of dependency.
-	 * \param $name The name of the dependency.
+	/** Creates a new COBDependency
+	 * @param string $type The type of dependency ('sprite' or 'sound').
+	 * @param string $name The name of the dependency (four characters, no file extension)
 	 */
 	public function COBDependency($type,$name) {
 		$this->type = $type;
 		$this->name = $name;
 	}
-	/// \brief Gets the dependency type
+	/** Gets the dependency type
+     * @return string
+     */
 	public function GetDependencyType() {
 		return $this->type;
 	}
-	/// \brief Gets the name of the dependency
+	/** Gets the name of the dependency
+	 * @return string
+	 */
 	public function GetDependencyName() {
 		return $this->name;
 	}

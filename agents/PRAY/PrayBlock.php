@@ -20,43 +20,43 @@ require_once(dirname(__FILE__).'/SFAMBlock.php');
 	* Constants for the various PRAY block types
 	*/
 	//@{
-	/**\brief Value: 'AGNT' */
+	/**Value: 'AGNT' */
 	define('PRAY_BLOCK_AGNT','AGNT'); 
-	/**\brief Value: 'CREA' */
+	/**Value: 'CREA' */
 	define('PRAY_BLOCK_CREA','CREA');
-	/**\brief Value: 'DFAM' */
+	/**Value: 'DFAM' */
 	define('PRAY_BLOCK_DFAM','DFAM');
-	/**\brief Value: 'DSAG' */
+	/**Value: 'DSAG' */
 	define('PRAY_BLOCK_DSAG','DSAG');
-	/**\brief Value: 'DSEX' */
+	/**Value: 'DSEX' */
 	define('PRAY_BLOCK_DSEX','DSEX');
-	/**\brief Value: 'EGG' */
+	/**Value: 'EGG' */
 	define('PRAY_BLOCK_EGGS' ,'EGGS' );
-	/**\brief Value: 'EXPC' */
+	/**Value: 'EXPC' */
 	define('PRAY_BLOCK_EXPC','EXPC');
-	/**\brief Value: 'FILE' */
+	/**Value: 'FILE' */
 	define('PRAY_BLOCK_FILE','FILE');
-	/**\brief Value: 'GENE' */
+	/**Value: 'GENE' */
 	define('PRAY_BLOCK_GENE','GENE');
-	/**\brief Value: 'GLST' */
+	/**Value: 'GLST' */
 	define('PRAY_BLOCK_GLST','GLST');
-	/**\brief Value: 'LIVE' */
+	/**Value: 'LIVE' */
 	define('PRAY_BLOCK_LIVE','LIVE');
-	/**\brief Value: 'PHOT' */
+	/**Value: 'PHOT' */
 	define('PRAY_BLOCK_PHOT','PHOT');
-	/**\brief Value: 'SFAM' */
+	/**Value: 'SFAM' */
 	define('PRAY_BLOCK_SFAM','SFAM');
 	//@}
 	/** \name Flags
 	* Flags used to specify how the block's data is stored.
 	*/
 	//@{
-	/**\brief Value: 1*/
+	/**Value: 1*/
 	///Whether or not the block is zLib compressed.
 	define('PRAY_FLAG_ZLIB_COMPRESSED',1);
 	//@}
 
-/**\brief Abstract class to represent PRAY blocks*/
+/**Abstract class to represent PRAY blocks*/
 /**
 * This class represents a PRAY block
 */
@@ -67,7 +67,7 @@ abstract class PrayBlock {
 	private $type;
 	private $decompiled;
 
-/**\brief PrayBlock constructor*/
+/**PrayBlock constructor*/
 /**
 *	Constructs a new PrayBlock, setting the PrayBlock's name, content, flags, and type.
 *	\param $prayfile	If constructing by reading a PRAY file, is a PRAYFile object. Otherwise is allowed to be anything (it's assumed the subclasses take care of it)
@@ -114,7 +114,7 @@ abstract class PrayBlock {
 	/** Performs flag functions, e.g. compression, just before a compile is done.
 	 * Called automatically.
 	 * \param $data the data to perform the function on
-	 * \return the data, having been transformed.
+	 * return the data, having been transformed.
 	 */
 	protected function PerformFlagOperations($data) {
 		if($this->IsFlagSet(PRAY_FLAG_ZLIB_COMPRESSED)) {
@@ -123,7 +123,7 @@ abstract class PrayBlock {
 		return $data;
 	}
 	/** Gets the PRAY block's name
-	 * \return the PRAY block's name
+	 * return the PRAY block's name
 	 */
 	public function GetName() {
 		return $this->name;
@@ -131,7 +131,7 @@ abstract class PrayBlock {
 	/** Gets the PRAY block's binary data if the PRAYBlock is decompiled.
 	 * It will decompress automatically if necessary, then unset the compressed flag.
 	 * TODO: I'm not 100% sure I should keep this public...
-	 * \return the PRAY block's binary data.
+	 * return the PRAY block's binary data.
 	 */
 	public function GetData() {
 		if($this->decompiled) {
@@ -145,20 +145,20 @@ abstract class PrayBlock {
 		return $this->content;
 	}
 	/** Gives the type as one of the PRAY_BLOCK_* constants
-	 * \return One of the PRAY_BLOCK_* constants
+	 * return One of the PRAY_BLOCK_* constants
 	 */
 	public function GetType() {
 		return $this->type;
 	}
 	/** Returns the flag bitfield used to determine flags. Prefer using IsFlagSet
-	 * \return an integer that will either be 0 or 1 with c2e-compatible PRAY blocks.
+	 * return an integer that will either be 0 or 1 with c2e-compatible PRAY blocks.
 	 */
 	public function GetFlags() {
 		return $this->flags;
 	}
 	/** Tells you whether $flag is set on this PRAY block
 	 * \param $flag the bitfield to compare $flags to. As such can be multiple flags OR'd together.
-	 * \return true or false.
+	 * return true or false.
 	 */
 	public function IsFlagSet($flag) {
 		return (($this->flags & $flag) === $flag);
@@ -226,20 +226,20 @@ abstract class PrayBlock {
 			return $compiled;
 		}
 	}
-	/**\brief Compiles the block data
-	 * \return The compiled block data as a string.
+	/**Compiles the block data
+	 * return The compiled block data as a string.
 	 */
 	protected abstract function CompileBlockData();
-	/**\brief Decompiles the block data
+	/**Decompiles the block data
 	 */
 	protected abstract function DecompileBlockData();
-	/**\brief Creates PrayBlock objects of the correct type.
+	/**Creates PrayBlock objects of the correct type.
 	* 	\param $blocktype	The type of PRAYBlock, as one of the Block Types defines.
 	*	\param $prayfile	The PRAYFile object that the PRAYBlock is a child of. This is used to allow blocks to access to each other.
 	*	\param $name		The name of the PRAYBlock
 	*	\param $content		The binary content of the PRAYBlock, uncompressed if necessary.
 	*	\param $flags		The flags given to this PRAYBlock as an integer.
-	*	\return An object that is an instance of a subclass of PrayBlock.
+	*	return An object that is an instance of a subclass of PrayBlock.
 	*/
 	public static function MakePrayBlock($blocktype,PRAYFile $prayfile,$name,$content,$flags) {
 		switch($blocktype) {
