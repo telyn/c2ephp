@@ -1,6 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" href="$classDSAGBlock.html" title="Docking Station agent description block Defines everything about an agent for docking..." alt="" coords="5,237,96,267"/>
-<area shape="rect" href="$classLIVEBlock.html" title="Block to enable some kind of compatibility with Amazing Virtual Sea Monkeys agents..." alt="" coords="120,237,203,267"/>
-<area shape="rect" href="$classTagBlock.html" title="Base block class for working with tag&#45;type blocks This includes (but may not be limited..." alt="" coords="68,83,143,112"/>
-<area shape="rect" href="$classPrayBlock.html" title="Abstract class to represent PRAY blocks." alt="" coords="65,5,145,35"/>
-</map>

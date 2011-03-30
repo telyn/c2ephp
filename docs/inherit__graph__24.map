@@ -1,6 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" href="$classSpriteFile.html" title="SpriteFile" alt="" coords="7,59,81,88"/>
-<area shape="rect" href="$classC16File.html" title="Class representing a C16 sprite file. This documentation was written in the future..." alt="" coords="133,5,197,35"/>
-<area shape="rect" href="$classS16File.html" title="S16File" alt="" coords="133,59,197,88"/>
-<area shape="rect" href="$classSPRFile.html" title="SPRFile" alt="" coords="131,112,200,141"/>
-</map>
