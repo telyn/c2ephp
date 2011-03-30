@@ -107,7 +107,7 @@ class CreatureHistoryEvent {
     /**
      * @see agents/CreatureHistory/CreatureHistoryEvent.php Event
      * Types
-     * @see GetMoniker1() , GetMoniker2(), GetUserText,
+     * @see GetMoniker1(), GetMoniker2(), GetUserText,
      * GetPhotograph()
      * @param $eventtype The event number as defined by the
      * CREATUREHISTORY_EVENT_* constants.
@@ -156,7 +156,7 @@ class CreatureHistoryEvent {
     /// specified.
     /**
      * This is called automatically by CreatureHistory, most users
-     * should hav no need to use this function themselves.
+     * should have no need to use this function themselves.
      * @param $format Which game to compile it for (a GLST_FORMAT_* constant)
      * @return A binary string containing GLST data ready to be put into a GLST history.
      */
@@ -251,7 +251,9 @@ class CreatureHistoryEvent {
     /// @brief Accessor method for user text
     /**
      * In theory user text can be used on any event without messing
-     * it up (and it would be readable via CAOS) \n
+     * it up (and it would be readable via CAOS) See
+     * http://nornalbion.github.com/c2ephp/caos-guide.html#HIST%20FOTO
+     * for more on reading history with CAOS. \n
      * In practice, this is only used by either the first event or
      * the hatched event (I forget which) and is used to mean the
      * text that the user enters to describe this creature in the
@@ -264,9 +266,11 @@ class CreatureHistoryEvent {
 
     /// @brief Accessor method for photograph
     /**
-     * @see http://nornalbion.github.com/c2ephp/caos-guide.html#HIST%20FOTO
+     * @see 
      * In theory this can be used on any event without messing
-     * anything up, and would be readable via CAOS. \n
+     * anything up, and would be readable via CAOS. See
+     * http://nornalbion.github.com/c2ephp/caos-guide.html#HIST%20FOTO
+     * for more on reading history with CAOS. \n
      * In pratice (i.e. in all GLST blocks I've seen) this is only
      * used on photo-taken events. \n
      * @return The identifier of the photograph (in the format
