@@ -1,6 +1,10 @@
 <?php
-/** C3 CAOS flow control (doif, else, loop, etc) dictionary */
+
+/// @cond INTERNAL_DOCS
+
+/// @brief C3 CAOS flow control (doif, else, loop, etc) dictionary */
 class C3CAOSFlowControls {
+    /// @brief Returns an array of tokens.
 	public static function GetTokens() {
 		return array
 		(
@@ -35,4 +39,6 @@ class C3CAOSFlowControls {
 		);
 	}
 }
+
+/// @endcond
 ?>

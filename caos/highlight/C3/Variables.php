@@ -1,7 +1,13 @@
 <?php
-/** C3 CAOS built-in variables dictionary
- * OVxx, VAxx and MVxx are handled by the CAOS highlighter internally */
+
+/// @cond INTERNAL_DOCS
+
+/// @brief C3 CAOS built-in variables dictionary
+/**
+ *  OVxx, VAxx and MVxx are handled by the CAOS highlighter internally
+ */
 class C3CAOSVariables {
+    /// @brief Returns an array of tokens.
 	public static function GetTokens() {
 		return array
 		(
@@ -157,4 +163,6 @@ class C3CAOSVariables {
 		);
 	}
 }
+
+/// @endcond
 ?>

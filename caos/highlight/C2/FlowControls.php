@@ -1,6 +1,9 @@
 <?php
-/** C2 CAOS flow control (doif, else, loop, etc) dictionary */
+/// @cond INTERNAL_DOCS
+
+/// @brief C2 CAOS flow control (doif, else, loop, etc) dictionary
 class C2CAOSFlowControls {
+    /// @brief Returns an array of tokens.
 	public static function GetTokens() {
 		return array
 		(
@@ -31,5 +34,5 @@ class C2CAOSFlowControls {
 		);
 	}
 }
-
+/// @endcond
 ?>

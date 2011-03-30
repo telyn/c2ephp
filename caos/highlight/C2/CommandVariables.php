@@ -1,8 +1,9 @@
 <?php
-/** @ignore
- * C2 CAOS dictionary of tokens that can act like commands or variables 
- */
+/// @cond INTERNAL_DOCS
+
+/// @brief C2 CAOS dictionary of tokens that can act like commands or variables 
 class C2CAOSCommandVariables {
+    /// @brief Returns an array of tokens.
 	public static function GetTokens() {
 		return array(
 			'targ',
@@ -15,4 +16,5 @@ class C2CAOSCommandVariables {
 		);
 	}
 }
+/// @endcond
 ?>

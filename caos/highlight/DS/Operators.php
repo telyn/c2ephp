@@ -1,6 +1,9 @@
 <?php
-/** Valid operators for DS CAOS */
+/// @cond INTERNAL_DOCS
+
+/// @brief Valid operators for DS CAOS */
 class DSCAOSOperators {
+    /// @brief Returns an array of tokens.
 	public static function GetTokens() {
 		return array(
 			'=',
@@ -18,4 +21,6 @@ class DSCAOSOperators {
 		);
 	}
 }
+
+/// @endcond
 ?>

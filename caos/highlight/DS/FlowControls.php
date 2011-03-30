@@ -1,6 +1,10 @@
 <?php
-/** DS CAOS flow control (doif, else, loop, etc) dictionary */
+
+/// @cond INTERNAL_DOCS
+
+/// @brief DS CAOS flow control (doif, else, loop, etc) dictionary
 class DSCAOSFlowControls {
+    /// @brief Returns an array of tokens.
 	public static function GetTokens() {
 		return array(
 			'doif',
@@ -32,4 +36,5 @@ class DSCAOSFlowControls {
 		);
 	}
 }
+/// @endcond
 ?>
