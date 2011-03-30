@@ -9,18 +9,23 @@ class AGNTBlock extends TagBlock {
     /// @brief Instantiate a new AGNTBlock
     /**
      * Makes a new AGNTBlock. \n
-     * If $prayfile is not null, all the data about this AGNTBlock will be read from the PRAYFile.
-     * @param $prayfile The PRAYFile associated with this AGNT block. It is allowed to be null.
+     * If $prayfile is not null, all the data about this AGNTBlock
+     * will be read from the PRAYFile.
+     * @param $prayfile The PRAYFile associated with this AGNT block.
+     * It is allowed to be null.
      * @param $name The name of this block.
      * @param $content This block's content.
-     * @param $flags Any flags this block may have. I think this is a single byte. Check the PRAY article on the CWiki.
+     * @param $flags Any flags this block may have. I think this is a
+     * single byte. Check http://www.creatureswiki.net/wiki/PRAY
      */
     public function AGNTBlock($prayfile,$name,$content,$flags) {
         parent::TagBlock($prayfile,$name,$content,$flags,PRAY_BLOCK_AGNT);
     }
+
     /// @brief Gets the agent's name.
     /**
-     * Sometimes this ends in .agnt or .dsag, because some people don't do their PRAYING properly.
+     * Sometimes this ends in .agnt or .dsag, because some people
+     * don't do their PRAYING properly.
      * @return The agent name
      */
     public function GetAgentName() {
