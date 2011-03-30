@@ -2,22 +2,24 @@
 require_once(dirname(__FILE__).'/CreatureHistoryEvent.php');
 require_once(dirname(__FILE__).'/../PRAY/GLSTBlock.php');
 
-/** \name Gender
+/** @name Gender
 * CreatureHistory-specific gender constants
 */
-//@{
-/**Value: 2 */
-//Girls first! Boys suck :)
-define('CREATUREHISTORY_GENDER_FEMALE',2);
-/**Value: 1 */
+///@{
+/// @brief Value: 1 */
 define('CREATUREHISTORY_GENDER_MALE',1);
-//@}
+/// @brief Value: 2 */
+define('CREATUREHISTORY_GENDER_FEMALE',2);
+///@}
 
+/// @brief Class representing a creature's history.
 /**
- * Represents a creature's complete history, as used in the C3 crypt as well as the creature's in-game info.
+ * As used in the C3 crypt as well as the creature's in-game info.
  * At present, this class is capable of decoding only. It is automatically created by GLSTBlock during decoding.
  */
 class CreatureHistory {
+
+    /// @cond INTERNAL_DOCS
 
 	private $events;
 	private $moniker;
@@ -28,19 +30,20 @@ class CreatureHistory {
 	private $warpveteran;
 
 
-	//TODO: What I don't know...
-	private $unknown1;
+	//TODO: What you don't know sure can hurt you~~
+	private $unknown1; 
 	private $unknown2;
-	private $unknown3; ///DS only
-	private $unknown4; ///DS only
-	
-	/**
-	 * Construct a CreatureHistory object with the given non-optional information.
-	 * \param $moniker The moniker of the creature
-	 * \param $name The creature's name
-	 * \param $gender The creature's gender
-	 * \param $genus The creature's genus (Grendel, ettin, norn, geat)
-	 * \param $species The creature's species (unsure of purpose)  
+	private $unknown3; /// @brief DS only
+	private $unknown4; /// @brief DS only
+
+    /// @endcond
+
+    /// @brief Construct a CreatureHistory object.
+	/** @param $moniker The moniker of the creature
+	 * @param $name The creature's name
+	 * @param $gender The creature's gender
+	 * @param $genus The creature's genus (Grendel, ettin, norn, geat)
+	 * @param $species The creature's species (unsure of purpose)  
 	 */
 	public function CreatureHistory($moniker,$name,$gender,$genus,$species) {
 		$this->moniker = $moniker;
@@ -48,13 +51,19 @@ class CreatureHistory {
 		$this->gender = $gender;
 		$this->genus = $genus;
 		$this->species = $species;
-	}
-	/**
-	 * Compile the CreatureHistory to its CreaturesArchive representation, ready for archiving and putting in a GLST block. 
-	 * \param $format GLST_FORMAT_* constant used to state whether the history should be compiled for C3 or DS compatibility.
+    }
+    
+    /// @brief Compiles the CreatureHistory into CreaturesArchive data.
+    /**
+     * @see agents/PRAY/GLSTBlock.php History Formats
+	 * @param $format GLST_FORMAT_C3 or GLST_FORMAT_DS.
+     * @return A binary string ready for archiving and putting in a GLST block. 
 	 */
-	public function Compile($format) {
-		$data = '';
+	public function Compile($format=GLST_FORMAT_C3) {
+        $data = '';
+        if($format != GLST_FORMAT_C3 && $format != GLST_FORMAT_DS) {
+            $format = $this->GuessFormat();
+        }
 		if($format == GLST_FORMAT_DS) {
 			$data .= chr(0x27).pack('xxx');
 		} else {
@@ -75,16 +84,18 @@ class CreatureHistory {
 			$data .= pack('V',strlen($this->unknown4)).$this->unknown4;
 		}
 	}
-	/**
-	 * Try to work out which game this CreatureHistory is for (by working out whether any DS-specific variables are set)
-	 * return GLST_FORMAT_DS or GLST_FORMAT_C3 as defined in GLSTBlock.php  
+    /// Try to work out which game this CreatureHistory is for
+    /**
+     * This is done by working out whether any DS-specific variables
+     * are set.
+	 * @return GLST_FORMAT_DS or GLST_FORMAT_C3 as defined in GLSTBlock.php  
 	 */
 	public function GuessFormat() {
 		return (isset($this->unknown3))?GLST_FORMAT_DS:GLST_FORMAT_C3;
 	}
 	/**
 	 * Adds an event to the end of a history.
-	 * \param $event A CreatureHistoryEvent to add to this CreatureHistory object
+	 * @param $event A CreatureHistoryEvent to add to this CreatureHistory object
 	 */
 	public function AddEvent(CreatureHistoryEvent $event) {
 		$this->events[] = $event;
@@ -92,7 +103,7 @@ class CreatureHistory {
 	/**
 	 * Gets an event from the history
 	 * Simply gets the nth event that happened in this history
-	 * \param $n the event number to get
+	 * @param $n the event number to get
 	 * return the $nth event 
 	 */
 	public function GetEvent($n) {
@@ -107,7 +118,7 @@ class CreatureHistory {
 	}
 	/**
 	 * Gets all events matching the given event type
-	 * \param $type one of the CREATUREHISTORY_EVENT_* constants, defined in CreatureHistoryEvent.php
+	 * @param $type one of the CREATUREHISTORY_EVENT_* constants, defined in CreatureHistoryEvent.php
 	 * return an array of CreatureHistoryEvents
 	 */
 	public function GetEventsByType($type) {
@@ -154,8 +165,8 @@ class CreatureHistory {
 	 * Set variables that are currently unknown and used in C3 and DS.
 	 * These variables COULD be mutations and crossovers during conception, however in a creature that was not conceived, they appear to be strange.
 	 * Honestly, I don't know yet because I haven't looked into it.
-	 * \param $unknown1 First unknown variable
-	 * \param $unknown2 Second unknown variable
+	 * @param $unknown1 First unknown variable
+	 * @param $unknown2 Second unknown variable
 	 */
 	public function SetC3Unknowns($unknown1,$unknown2) {
 		$this->unknown1 = $unknown1;
@@ -163,10 +174,10 @@ class CreatureHistory {
 	}
 	/**
 	 * Set variables that are currently unknown, specific to DS
-	 * \param $unknown1 First unknown variable (shared with C3)
-	 * \param $unknown2 Second unknown variable (shared with C3)
-	 * \param $unknown3 Third unknown variable (DS only)
-	 * \param $unknown4 Forth unknown variable (DS only)
+	 * @param $unknown1 First unknown variable (shared with C3)
+	 * @param $unknown2 Second unknown variable (shared with C3)
+	 * @param $unknown3 Third unknown variable (DS only)
+	 * @param $unknown4 Forth unknown variable (DS only)
 	 */
 	public function SetDSUnknowns($unknown1,$unknown2,$unknown3,$unknown4) {
 		$this->SetC3Unknowns($unknown1,$unknown2);
@@ -175,7 +186,7 @@ class CreatureHistory {
 	}
 	/*
 	 * Sets whether or not the creature is a veteran of the warp (DS only)
-	 * \param $warpveteran 
+	 * @param $warpveteran 
 	 */
 	public function SetWarpVeteran($warpveteran) {
 		$this->warpveteran = $warpveteran;
