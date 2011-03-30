@@ -1,9 +1,10 @@
 <?php
 
-/** @internal
- * C2 CAOS commands dictionary
- */
+/// @cond INTERNAL_DOCS
+
+/// @brief C2 CAOS commands dictionary
 class C2CAOSCommands {
+    /// @brief Returns an array of tokens.
 	public static function GetTokens() {
 	    return array
 	    (
@@ -191,4 +192,6 @@ class C2CAOSCommands {
 		    );
     }
 }
+
+/// @endcond
 ?>

@@ -1,6 +1,10 @@
 <?php
-/** C3 CAOS commands dictionary */
+
+/// @cond INTERNAL_DOCS
+
+/// @brief C3 CAOS commands dictionary
 class C3CAOSCommands {
+    /// @brief Returns an array of tokens.
 	public static function GetTokens() {
 		return array
 		(
@@ -425,4 +429,5 @@ class C3CAOSCommands {
 		);
 	}
 }
+/// @endcond
 ?>

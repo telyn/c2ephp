@@ -1,7 +1,12 @@
 <?php
-/** DS CAOS built-in variables dictionary
- * OVxx, VAxx and MVxx are handled by the CAOS highlighter internally */
+/// @cond INTERNAL_DOCS
+
+/// @brief DS CAOS built-in variables dictionary
+/**
+ * OVxx, VAxx and MVxx are handled by the CAOS highlighter internally
+ */
 class DSCAOSVariables {
+    /// @brief Returns an array of tokens.
 	public static function GetTokens() {
 		return array(
 			//agents
@@ -162,4 +167,7 @@ class DSCAOSVariables {
 		);
 	}
 }
+
+/// @endcond
+
 ?>

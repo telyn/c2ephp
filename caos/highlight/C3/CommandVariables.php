@@ -1,6 +1,9 @@
 <?php
-/** C3 CAOS dictionary of tokens that can act like commands or variables */
+/// @cond INTERNAL_DOCS
+
+/// @brief C3 CAOS dictionary of tokens that can act like commands or variables
 class C3CAOSCommandVariables {
+    /// @brief Returns an array of tokens.
 	public static function GetTokens() {
 		return array(
 			'attr',
@@ -85,4 +88,6 @@ class C3CAOSCommandVariables {
 		);
 	}
 }
+
+/// @endcond
 ?>

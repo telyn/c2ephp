@@ -1,6 +1,10 @@
 <?php
-/** Valid C3 CAOS operators */
+
+/// @cond INTERNAL_DOCS
+
+/// @brief Valid C3 CAOS operators
 class C3CAOSOperators {
+    /// @brief Returns an array of tokens.
 	public static function GetTokens() {
 		return array(
 		'=',
@@ -18,4 +22,6 @@ class C3CAOSOperators {
 		);
 	}
 }
+
+/// @endcond
 ?>

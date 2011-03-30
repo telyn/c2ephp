@@ -1,6 +1,9 @@
 <?php
-/** DS CAOS commands dictionary */
+/// @cond INTERNAL_DOCS
+
+/// @brief DS CAOS commands dictionary
 class DSCAOSCommands {
+    /// @brief Returns an array of tokens.
 	public static function GetTokens() {
 		return array(
 			'alph',
@@ -440,4 +443,6 @@ class DSCAOSCommands {
 		);
 	}
 }
+
+/// @endcond
 ?>

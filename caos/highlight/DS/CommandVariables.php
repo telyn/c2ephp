@@ -1,6 +1,10 @@
 <?php
-/** DS CAOS dictionary of tokens that can act like commands or variables */
+
+/// @cond INTERNAL_DOCS
+
+/// @brief DS CAOS dictionary of tokens that can act like commands or variables
 class DSCAOSCommandVariables {
+    /// @brief Returns an array of tokens.
 	public static function GetTokens() {
 		return array(
 			'attr',
@@ -89,4 +93,7 @@ class DSCAOSCommandVariables {
 		);
 	}
 }
+
+/// @endcond
+
 ?>
