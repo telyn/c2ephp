@@ -5,19 +5,20 @@ require_once(dirname(__FILE__).'/../../sprites/SpriteFrame.php');
 require_once(dirname(__FILE__).'/../../sprites/S16Frame.php');
 require_once(dirname(__FILE__).'/../../sprites/SPRFrame.php');
 
-/** \name Dependency Types
+/** @name Dependency Types
  * The two types of dependency available to C1/C2 COBs
  */
 //@{
-/** Sprite dependency */
+/// @brief Sprite dependency - 'sprite'
 define('DEPENDENCY_SPRITE','sprite');
-/** Sound dependency */
+/// @brief Sound dependency - 'sound'
 define('DEPENDENCY_SOUND','sound');
 //@}
 
 
 /// @brief COB Agent Block for C1 and C2
-/** For Creatures 1, this block contains all the useful data in a typical COB and will be the only block.\n
+/**
+ * For Creatures 1, this block contains all the useful data in a typical COB and will be the only block.\n
  * For Creatures 2, this block contains the scripts and metadata about the actual object.
  */
 class COBAgentBlock extends COBBlock {
@@ -108,7 +109,7 @@ class COBAgentBlock extends COBBlock {
 	}
     /// @brief Gets dependencies of the given type
     /** If type is null, will get all dependencies.
-     * \see agents/COB/AgentBlock.php Dependency Types 
+     * @see agents/COB/AgentBlock.php Dependency Types 
 	 * @param $type One of the Dependency Types constants.
 	 * @return An array of COBDependency objects
 	 */
@@ -369,8 +370,12 @@ class COBAgentBlock extends COBBlock {
 
 /// @brief defines a dependency which is used in a COB file */
 class COBDependency {
+    /// @cond INTERNAL_DOCS
+    
 	private $type;
-	private $name;
+    private $name;
+
+    /// @endcond
 	
 	/// @brief Creates a new COBDependency
 	/** @param $type The type of dependency ('sprite' or 'sound').
