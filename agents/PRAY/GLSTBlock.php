@@ -5,9 +5,16 @@ require_once(dirname(__FILE__).'/../../support/Archiver.php');
 require_once(dirname(__FILE__).'/CreaturesArchiveBlock.php');
 require_once(dirname(__FILE__).'/../CreatureHistory/CreatureHistory.php');
 
+/// @name History Formats
+///@{
+/// @brief Value: 0
 define('GLST_FORMAT_UNKNOWN',0);
+/// @brief Value: 1
 define('GLST_FORMAT_C3',1);
+/// @brief Value: 2
 define('GLST_FORMAT_DS',2);
+//@}
+
 /** PRAY Block for Creature History Data.
   * because of PHP being a single-inheritance language, we store the
   * history as a CreatureHistory variable rather than simply extending
