@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classAGNTBlock.html" title="Represents an AGNT block in a PRAY file, used for C3 Agent scripts and metadata." alt="" coords="5,86,96,117"/>
+<area shape="rect" id="node4" href="$classTagBlock.html" title="Base block class for working with tag&#45;type blocks." alt="" coords="13,6,88,37"/>
+</map>
