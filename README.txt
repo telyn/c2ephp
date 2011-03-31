@@ -2,6 +2,8 @@ To use:
 checkout to a folder
 require_once c2ephp.php
 
+read the docs at http://nornalbion.github.com/c2ephp/
+
 The tests are command-line-only and expect to be run in the following manner:
 php <file> [arguments]
 
