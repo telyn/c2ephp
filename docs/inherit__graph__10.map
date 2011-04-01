@@ -1,5 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node1" href="$interfaceIReader.html" title="IReader" alt="" coords="5,31,72,62"/>
-<area shape="rect" id="node3" href="$classFileReader.html" title="FileReader" alt="" coords="128,5,211,35"/>
-<area shape="rect" id="node5" href="$classStringReader.html" title="StringReader" alt="" coords="121,58,217,89"/>
-</map>
