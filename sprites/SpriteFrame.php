@@ -1,5 +1,9 @@
 <?php
 /// @brief Class representing a single frame of a sprite.
+/**
+ * All SpriteFrame classes may also be used in the abscence of a 
+ * parent SpriteFile.
+ */
 abstract class SpriteFrame {
 
     /// @cond INTERNAL_DOCS
@@ -16,7 +20,7 @@ abstract class SpriteFrame {
     /// @brief Initialises a SpriteFrame
     /**
      * Width and height must both be non-zero.
-     * @see C16Frame::C16Frame
+     * @see C16Frame::C16Frame()
      */
     public function SpriteFrame($width,$height,$decoded=false) {
         if($width == 0) {
@@ -119,7 +123,7 @@ abstract class SpriteFrame {
      * This is called internally by SpriteFile, and is not really
      * for public use. A way of converting I'd approve of more is to
      * create a SpriteFile of the right type and then call AddFrame. 
-     * @see SpriteFile AddFrame. 
+     * @see SpriteFile::AddFrame()
      * @internal
      * If you create your own SpriteFrame and SpriteFile formats, and
      * they use names longer than 3 characters, you will need to 

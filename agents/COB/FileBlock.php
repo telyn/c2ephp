@@ -42,8 +42,8 @@ class COBFileBlock extends COBBlock {
 
     /// @brief Get the file's type
     /**
-     * @see agents/COB/AgentBlock.php Dependency Types
-     * @return 'sprite' or 'sound'
+     * @return 'sprite' or 'sound' - i.e. one of the
+     * COB_DEPENDENCY_* constants in COBAgentBlock
      */
 	public function GetFileType() {
 		return $this->fileType;

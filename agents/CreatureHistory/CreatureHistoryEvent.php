@@ -1,81 +1,81 @@
 <?php
 require_once(dirname(__FILE__).'/../PRAY/GLSTBlock.php');
 
-/// @name Event Numbers 
 /**
+ * @relates CreatureHistoryEvent
+ * @name Event Numbers 
  * All creatures are either CONCEIVED, SPLICED, ENGINEERED, or
  * IAMCLONED.\n
  * Then CONCEIVED creatures are MUMLAIDMYEGG. \n
  * Then they are HATCHED except maybe ENGINEERED creatures. \n
  * Then they have a PHOTOTAKEN. \n
- * Then they make their own way through life.
+ * Then there's not a specific order of events that always happen
+ * - they go on and live their own lives ;) 
  */
 //@{
-/// @brief Conceived the ol' fashioned way (kisspopping)
-/** Value: 0 */
+/** I was conceived by kisspopping or artificial insemination. \n
+ * Value: 0 */
 define('CREATUREHISTORY_EVENT_CONCEIVED',0);
-/// @brief I was spliced from two other creatures
-/** Value: 1 */
+/** I was spliced from two other creatures \n
+ * Value: 1 */
 define('CREATUREHISTORY_EVENT_SPLICED',1);
-/// @brief I was created by someone in their bedroom (genetics kit)
-/** Value: 2 */
+/** I was created by someone with a genetics kit \n
+ * Value: 2 */
 define('CREATUREHISTORY_EVENT_ENGINEERED',2);
-/// @brief I hatched out of my egg and began my journey through life!
-/** Value: 3 */
+/** I hatched out of my egg. \n
+ * Value: 3 */
 define('CREATUREHISTORY_EVENT_HATCHED',3);
-/// @brief I grew up a little!
 /**
  * CreatureHistoryEvent::GetLifestage will tell you what lifestage I
  * am now. \n\n
  * Value: 4
  */
 define('CREATUREHISTORY_EVENT_AGED',4);
-/// @brief I was exported from this world 
-/** Value: 5 */
+/** I was exported from this world \n
+ * Value: 5 */
 define('CREATUREHISTORY_EVENT_EXPORTED',5);
-/// @brief I joined this world
-/** Value: 6 */
+/** I joined this world \n
+ * Value: 6 */
 define('CREATUREHISTORY_EVENT_IMPORTED',6);
-/// @brief My journey through life ended. 
-/** Value: 7 */
+/** My journey through life ended. \n
+ * Value: 7 */
 define('CREATUREHISTORY_EVENT_DIED',7);
-/// @brief I became pregnant! (We kisspopped)
-/** Value: 8 */
+/** I became pregnant. \n
+ * Value: 8 */
 define('CREATUREHISTORY_EVENT_BECAMEPREGNANT',8);
-/// @brief I made someone else pregnant! (We kisspopped) 
-/** Value: 9 */
+/** I made someone else pregnant.  \n
+ * Value: 9 */
 define('CREATUREHISTORY_EVENT_IMPREGNATED',9);
-/// @brief My child hatched from its egg!
-/** Value: 10 */
+/** My child hatched from its egg! \n
+ * Value: 10 */
 define('CREATUREHISTORY_EVENT_CHILDBORN',10);
-/// @brief My mum laid my egg.
-/** Value: 11 */
+/** My mum laid my egg. \n
+ * Value: 11 */
 define('CREATUREHISTORY_EVENT_MUMLAIDMYEGG',11);
-/// @brief I laid an egg I was carrying.
-/** Value: 12 */
+/** I laid an egg I was carrying. \n
+ * Value: 12 */
 define('CREATUREHISTORY_EVENT_LAIDEGG',12);
-/// @brief A photo was taken of me. 
-/** Value: 13 */
+/** A photo was taken of me. \n
+ * Value: 13 */
 define('CREATUREHISTORY_EVENT_PHOTOTAKEN',13);
-/// @brief I was made by cloning another creature.
 /**
- * This happens when you export a creature then import it multiple
- * times. 
+ * I was made by cloning another creature \n
+ * This happens when you export a creature then import it more than
+ * once. \n
  * Value: 14
  */
 define('CREATUREHISTORY_EVENT_IAMCLONED',14); 
-/// @brief Another creature was made by cloning me.
-/**
- * This happens when you export a creature then import it multiple
- * times. 
+/** Another creature was made by cloning me. \n
+ * This happens when you export a creature then import it more than
+ * once. \n
  * Value: 15
  */
 define('CREATUREHISTORY_EVENT_CLONEDME',15);
-/// @brief I left this world through the warp 
-/** Value: 16 */
+/** I left this world through the warp \n
+ * Value: 16 */
 define('CREATUREHISTORY_EVENT_WARPEDOUT',16);
-/// @brief I entered this world through the warp
-/** Value: 17 */
+/** I entered this world through the warp \n
+ * Value: 17 */
 define('CREATUREHISTORY_EVENT_WARPEDIN',17);
 //@}
 
@@ -105,8 +105,8 @@ class CreatureHistoryEvent {
 
     /// @brief Instantiates a new CreatureHistoryEvent.
     /**
-     * @see agents/CreatureHistory/CreatureHistoryEvent.php Event
-     * Types
+     * 
+     *
      * @see GetMoniker1(), GetMoniker2(), GetUserText,
      * GetPhotograph()
      * @param $eventtype The event number as defined by the
@@ -176,7 +176,6 @@ class CreatureHistoryEvent {
 
     /// @brief Accessor method for event type
     /**
-     * @see agents/CreatureHistory/CreatureHistoryEvent.php Event Type
      * @return The event type as a CREATUREHISTORY_EVENT_* constant.
      */
     public function GetEventType() {
@@ -266,7 +265,8 @@ class CreatureHistoryEvent {
 
     /// @brief Accessor method for photograph
     /**
-     * @see 
+     * Gets the name of the PHOT block containing the S16File
+     * of the photograph for this event. \n
      * In theory this can be used on any event without messing
      * anything up, and would be readable via CAOS. See
      * http://nornalbion.github.com/c2ephp/caos-guide.html#HIST%20FOTO

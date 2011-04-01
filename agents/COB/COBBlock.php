@@ -1,5 +1,8 @@
 <?php
-/// @name Cob Block Types
+/**
+ * @relates COBBlock
+ * @name Cob Block Types
+ */
 ///@{
 /// @brief Agent Block - 'agnt'
 define('COB_BLOCK_AGENT','agnt');
@@ -28,7 +31,7 @@ abstract class COBBlock {
     /// @endcond
 
     /// @brief Gets the type of this COB block
-    /** @see agents/COB/COBBlock.php Cob Block Types
+    /** 
 	 * @return string One of the COB_BLOCK_* defines.
 	 */
 	public function GetType() {

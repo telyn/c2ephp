@@ -9,12 +9,12 @@ require_once(dirname(__FILE__).'/COB/UnknownBlock.php');
 ///@{
 /**
  * @name C1 format cob
- * @value C1
+ * Value: C1
  */
 define('COB_FORMAT_C1','C1');
 /**
  * @name C2 format COB
- * @value C2
+ * Value: C2
  */
 define('COB_FORMAT_C2','C2');
 ///@}
