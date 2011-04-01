@@ -16,7 +16,7 @@ class S16Frame extends SpriteFrame {
     /// @endcond
     
     /// @brief Instantiate an S16Frame
-
+    
     public function S16Frame($reader,$encoding='565',$width=false,$height=false,$offset=false)
     {
         if($reader instanceof IReader) {
@@ -66,6 +66,12 @@ class S16Frame extends SpriteFrame {
         return $data;
     }
 
+    /// @cond INTERNAL_DOCS
+    
+    // @brief Decodes the S16Frame and creates a gdimage.
+    /**
+     * TODO: Internal documentation S16Frame::Decode()
+     */
     protected function Decode() {
         if($this->decoded) { return $this->gdImage; }
 
@@ -98,5 +104,6 @@ class S16Frame extends SpriteFrame {
         $this->decoded = true;
         return $image;
     }
+    /// @endcond
 }
 ?>
