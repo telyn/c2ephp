@@ -59,18 +59,21 @@ class FileReader implements IReader {
 
     public function GetSubString($start,$length = FALSE)
     {
+        $oldpos = ftell($this->fp);
         fseek($this->fp,$start);
+        $data = '';
         if($length === false) {
-            $data = '';
             while($newdata = $this->Read(4096)) {
                 if(strlen($newdata) == 0) {
                     break;
                 }
                 $data .= $newdata;
             }
-            return $data;
+        } else {
+            $data = fread($this->fp,$length);
         }
-        return fread($this->fp,$length);
+        fseek($this->fp,$oldpos);
+        return $data;
     }
     public function ReadCString() {
         $string = '';
