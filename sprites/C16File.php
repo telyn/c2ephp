@@ -10,7 +10,7 @@ class C16File extends SpriteFile
     
     private $encoding;
     /// @endcond
-/
+
     /// @brief Creates a new C16File object.
     /**
      * If $reader is null, creates an empty C16File ready to add sprites to.
