@@ -2,13 +2,17 @@
 require_once(dirname(__FILE__).'/CreatureHistoryEvent.php');
 require_once(dirname(__FILE__).'/../PRAY/GLSTBlock.php');
 
-/** @name Gender
-* CreatureHistory-specific gender constants
-*/
+
+/**
+ * @relates CreatureHistory
+ * @name Gender
+ * CreatureHistory-specific gender constants
+ */
 ///@{
-/// @brief Value: 1 */
+/** Value: 1 */
 define('CREATUREHISTORY_GENDER_MALE',1);
-/// @brief Value: 2 */
+
+/** Value: 2 */
 define('CREATUREHISTORY_GENDER_FEMALE',2);
 ///@}
 
@@ -55,7 +59,6 @@ class CreatureHistory {
     
     /// @brief Compiles the CreatureHistory into CreaturesArchive data.
     /**
-     * @see agents/PRAY/GLSTBlock.php History Formats
      * @param $format GLST_FORMAT_C3 or GLST_FORMAT_DS.
      * @return A binary string ready for archiving and putting in a GLST block. 
      */
@@ -89,7 +92,6 @@ class CreatureHistory {
     /**
      * This is done by working out whether any DS-specific variables
      * are set.
-     * @see agents/PRAY/GLSTBlock.php History Formats
      * @return GLST_FORMAT_DS or GLST_FORMAT_C3.
      */
     public function GuessFormat() {

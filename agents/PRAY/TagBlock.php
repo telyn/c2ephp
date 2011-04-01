@@ -4,11 +4,11 @@ require_once(dirname(__FILE__).'/../../support/StringReader.php');
 /// @brief Base block class for working with tag-type blocks
 /**
  * This includes (but may not be limited to) agents
- * (AGNTBlock/DSAGBlock),creatures (EXPCBlock/DSEXBlock) and starter
+ * (AGNTBlock,DSAGBlock), creatures (EXPCBlock,DSEXBlock) and starter
  * families (SFAMBlock,DFAMBlock) \n
  * This contains the majority of the meat of the tag block functions,
  * including compilation and decompilation and maintaining a
- * name->value tag array.
+ * name->value tag array. \n
  * Subclasses of tag block are good for getting data in a more
  * programmer-friendly way and for accessing data in the PRAYFile
  * based on data within the TagBlock. For example, AGNTBlock can

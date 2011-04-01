@@ -3,11 +3,12 @@ require_once(dirname(__FILE__).'/SpriteFrame.php');
 require_once(dirname(__FILE__).'/../support/IReader.php');
 /// @brief Class for a single image in a C16File
 /**
- * Can also be used standalone
+ *
  */
 class C16Frame extends SpriteFrame
 {
-    /// @brief INTERNAL_DOCS
+    /// @cond INTERNAL_DOCS
+
     private $encoding;
 
     private $lineOffset = array();
@@ -20,6 +21,7 @@ class C16Frame extends SpriteFrame
 
     ///brief Initialise a C16Frame
     /**
+     * @see http://php.net/image
      * @param $reader An IReader or GD image resource.
      * @param $encoding The encoding of the C16 frame (555 or 565). Defaults to 565
      */
