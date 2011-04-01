@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$classSpriteFile.html" title="Superclass for all SpriteFile types." alt="" coords="5,58,83,89"/>
+<area shape="rect" id="node3" href="$classC16File.html" title="Class representing a C16 sprite file." alt="" coords="133,5,200,35"/>
+<area shape="rect" id="node5" href="$classS16File.html" title="Class for S16 sprite files." alt="" coords="133,58,200,89"/>
+<area shape="rect" id="node7" href="$classSPRFile.html" title="SPRFile" alt="" coords="132,111,201,142"/>
+</map>

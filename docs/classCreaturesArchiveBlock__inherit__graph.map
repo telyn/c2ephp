@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$classCREABlock.html" title="Block for defining a Creature&#39;s current state." alt="" coords="5,166,96,197"/>
+<area shape="rect" id="node7" href="$classGLSTBlock.html" title="PRAY Block for Creature History Data." alt="" coords="120,166,205,197"/>
+<area shape="rect" id="node2" href="$classPrayBlock.html" title="Abstract class to represent PRAY blocks." alt="" coords="65,6,148,37"/>
+</map>
