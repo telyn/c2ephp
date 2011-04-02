@@ -154,7 +154,6 @@ class C16Frame extends SpriteFrame
                     if($wasblack !== 0) {
 
                         //output data.
-                        print "Ending run \n";
                         $run = $runlength << 1;
                         if($wasblack) {
                             $data .= pack('v',$run);
@@ -168,11 +167,9 @@ class C16Frame extends SpriteFrame
                     }
                     //start a new run
                     if($newpixel == 0) {
-                        print "Starting new black run \n";
                         $wasblack = true;
                         $colourRunData = '';
                     } else {
-                        print "Starting new colour run \n";
                         $wasblack = false;
                         $colourRunData = pack('v',$newpixel);
                     }
