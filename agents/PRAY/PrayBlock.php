@@ -237,6 +237,7 @@ abstract class PrayBlock {
             return;
         } else {
             $this->DecompileBlockData();
+            $this->decompiled = true;
         }
     }
 
@@ -253,14 +254,14 @@ abstract class PrayBlock {
         if($this->decompiled) { 
             $data = $this->CompileBlockData();
             $uclength = strlen($data);
-            $data = $this->PerformFlagFunctions($data);
-            $compile = $this->EncodeBlockHeader(strlen($data),$uclength);
+            $data = $this->PerformFlagOperations($data);
+            $compiled = $this->EncodeBlockHeader(strlen($data),$uclength);
             $compiled .= $data;
             $this->content = $data;
             $this->decompiled = false;
             return $compiled; 
         } else {
-            $data = $this->PerformFlagFunctions($this->content);
+            $data = $this->PerformFlagOperations($this->content);
             $compiled  = $this->EncodeBlockHeader(strlen($this->content),strlen($data));
             $compiled .= $this->content;
             return $compiled;
