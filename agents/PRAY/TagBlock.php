@@ -58,6 +58,18 @@ abstract class TagBlock extends PrayBlock {
         $this->EnsureDecompiled();
         return $this->tags;
     }
+
+    /// @brief Sets a tag
+    /**
+     * Sets the tag with the given value, overwriting or creating the tag as needed.
+     * Generally setters ought to be used in subclasses of TagBlock.
+     * @param $tag Name of the tag to set
+     * @param $value The value to set the tag to
+     */
+    public function SetTag($tag,$value) {
+        $this->EnsureDecompiled();
+        $this->tags[$tag] = $value;
+    }
     /// @cond INTERNAL_DOCS
     
     /// @brief Compiles the block and returns a string/
