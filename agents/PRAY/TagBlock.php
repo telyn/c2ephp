@@ -72,7 +72,7 @@ abstract class TagBlock extends PrayBlock {
     }
     /// @cond INTERNAL_DOCS
     
-    /// @brief Compiles the block and returns a string/
+    /// @brief Compiles the block and returns a string
     /**
      * This is called by the Compile method in PrayBlock.
      * You shouldn't have cause to use it in any of your code,
