@@ -181,7 +181,6 @@ class AGNTBlock extends TagBlock {
         }
         $type = strtolower(substr($animationFile,-3));
         $icon = null;
-        print $type;
         if($type == 'c16') {
             $icon = new C16File(new StringReader($iconBlock->GetData()));
         } else if($type == 's16') {
