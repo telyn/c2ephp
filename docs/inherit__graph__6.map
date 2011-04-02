@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$interfaceIReader.html" title="Interface for reading data." alt="" coords="5,31,72,62"/>
+<area shape="rect" id="node3" href="$classFileReader.html" title="Wrapper class to make reading files easier." alt="" coords="128,5,211,35"/>
+<area shape="rect" id="node5" href="$classStringReader.html" title="Class to read from strings in the same way as files." alt="" coords="121,58,217,89"/>
+</map>
