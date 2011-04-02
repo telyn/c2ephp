@@ -109,7 +109,7 @@ abstract class PrayBlock {
         $compiled = $this->GetType();
         $compiled .= substr($this->GetName(),0,128);
         $len = 128 - strlen($this->GetName());
-        fwrite(STDERR, $len);
+        
         for($i=0;$i<$len;$i++) {
             $compiled .= pack('x');
         }
