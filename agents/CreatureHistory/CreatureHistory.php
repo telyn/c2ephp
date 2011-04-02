@@ -56,7 +56,7 @@ class CreatureHistory {
         $this->genus = $genus;
         $this->species = $species;
     }
-    
+
     /// @brief Compiles the CreatureHistory into CreaturesArchive data.
     /**
      * @param $format GLST_FORMAT_C3 or GLST_FORMAT_DS.
@@ -68,26 +68,27 @@ class CreatureHistory {
             $format = $this->GuessFormat();
         }
         if($format == GLST_FORMAT_DS) {
-            $data .= chr(0x27).pack('xxx');
+            $data = pack('V',0x27);
         } else {
-            $data .= chr(0x0C).pack('xxx');
+            $data = pack('V',0x0C);
         }
         $data .= pack('V',1);
         $data .= pack('V',32).$this->moniker;
         $data .= pack('V',32).$this->moniker; //yeah, twice. Dunno why, CL are bonkers.
         $data .= pack('V',strlen($this->name)).$this->name;
-        $data .= pack('VVVV',$this-gender,$this->genus,$this->species,count($this->events));
+        $data .= pack('VVVV',$this->gender,$this->genus,$this->species,count($this->events));
         foreach($this->events as $event) {
-                $data .= $event->Compile();
+            $data .= $event->Compile($format);
         }
-        $data .= $this->unknown1;
-        $data .= $this->unknown2;
+        $data .= pack('V',$this->unknown1);
+        $data .= pack('V',$this->unknown2);
         if($format == GLST_FORMAT_DS) {
             $data .= pack('V',$this->unknown3);
             $data .= pack('V',strlen($this->unknown4)).$this->unknown4;
         }
+        return $data;
     }
-    
+
     /// @brief Try to work out which game this CreatureHistory is for
     /**
      * This is done by working out whether any DS-specific variables
@@ -116,6 +117,16 @@ class CreatureHistory {
     public function GetEvent($n) {
         return $this->events[$n];
     }
+
+    /// @brief Removes an event from history
+    /**
+     * Removes the nth event from this history
+     * @param $n the event number to remove
+     */
+    public function RemoveEvent($n) {
+       unset($this->events[$n]); 
+    }
+
     /// @brief Counts the events in the history
     /**
      * @return How many events there currently are in this history
@@ -123,6 +134,7 @@ class CreatureHistory {
     public function CountEvents() {
         return sizeof($this->events);
     }
+
     /// @brief Gets all events matching the given event type
     /**
      * @see agents/CreatureHistory/CreatureHistoryEvent.php Event Types
@@ -143,9 +155,9 @@ class CreatureHistory {
     /**
      * @return An array of CreatureHistoryEvents 
      */
-  public function GetEvents() {
-      return $this->events;
-  } 
+    public function GetEvents() {
+        return $this->events;
+    } 
 
     /// @brief Gets the moniker of the creature this history is attached to.
     public function GetCreatureMoniker() {
@@ -171,7 +183,7 @@ class CreatureHistory {
     public function GetCreatureIsWarpVeteran() {
         return $this->warpveteran;
     }
-    
+
     /// @brief Set unknown variables.
     /**
      * Set variables that are currently unknown and used in C3 and DS

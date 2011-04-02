@@ -68,7 +68,7 @@ class GLSTBlock extends CreaturesArchiveBlock {
             //cache so I don't need to ask again :)
             $this->format = $format;
         }
-        return $format;
+        return $this->format;
     }
 
 
@@ -130,14 +130,14 @@ class GLSTBlock extends CreaturesArchiveBlock {
             //c3
             $this->format = GLST_FORMAT_C3;
         } else {
-            print 'Unknown format!';
-            return false;
+            print var_dump(ord($firstchar));
+            throw new Exception("Couldn't guess the format.");
         }
         //the first four bytes including $firstchar are probably one integer used to identify the game used.
         //We read the first one above and now we're skipping the next three.
         $reader->Skip(3); // 3 nulls.
         if($reader->ReadInt(4)!=1) { //Always 1, don't know why.
-            throw new Exception('I guess I was wrong about it always being 1.');
+            throw new Exception('Either the GLST Block is corrupt or I don\'t understand what the 2nd set of 4 bytes mean.');
             return false;
         }
         $moniker        = $reader->Read($reader->ReadInt(4));
@@ -203,11 +203,12 @@ class GLSTBlock extends CreaturesArchiveBlock {
     }
 
     /// @brief Compiles the block into binary for PrayBlock
+    // TODO: make me work ;-; 
     protected function CompileBlockData($format=GLST_FORMAT_UNKNOWN) {
         //if you don't know
         if($format == GLST_FORMAT_UNKNOWN) {
             $format = $this->GuessFormat();
-        }           
+        }   
         $compiled = Archive($this->history->Compile($format));
         return $compiled;
     }
