@@ -172,6 +172,7 @@ class CreatureHistoryEvent {
             $data .= pack('V',strlen($this->dockingstationuser)).$this->dockingstationuser;
             $data .= pack('VV',$this->unknown1,$this->unknown2);
         }
+        return $data;
     }
 
     /// @brief Accessor method for event type
