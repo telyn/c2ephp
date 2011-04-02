@@ -130,7 +130,6 @@ class GLSTBlock extends CreaturesArchiveBlock {
             //c3
             $this->format = GLST_FORMAT_C3;
         } else {
-            print var_dump(ord($firstchar));
             throw new Exception("Couldn't guess the format.");
         }
         //the first four bytes including $firstchar are probably one integer used to identify the game used.
