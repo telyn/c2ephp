@@ -201,8 +201,12 @@ class GLSTBlock extends CreaturesArchiveBlock {
         return false;       
     }
 
+
     /// @brief Compiles the block into binary for PrayBlock
-    // TODO: make me work ;-; 
+    /**
+     * @param $format One of the GLST_FORMAT_* constants
+     * @return The compiled block data for Compile()
+     */
     protected function CompileBlockData($format=GLST_FORMAT_UNKNOWN) {
         //if you don't know
         if($format == GLST_FORMAT_UNKNOWN) {
