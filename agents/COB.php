@@ -125,7 +125,6 @@ class COB {
      */
     private function ReadBlock(IReader $reader) {
         if(!($type = $reader->Read(4))) {
-            print($type);
             return false;
         }
         $size = $reader->ReadInt(4);
