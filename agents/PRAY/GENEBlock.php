@@ -15,7 +15,7 @@ class GENEBlock extends PrayBlock {
      * If $prayfile is not null, all the data for this block
      * will be read from the PRAYFile.
      * @param $prayfile The PRAYFile object this block belongs to. Can be null.
-     * @param $name The block's name. This is a moniker, possibly ending in .gen. TODO: Does it end in gen?
+     * @param $name The block's name. This is a creature's moniker with .genetics appended.
      * @param $content The block's binary data. Used when constructing from a PrayFile
      * @param $flags The block's flags, which apply to the binary data as-is.
      */
