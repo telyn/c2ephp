@@ -33,7 +33,7 @@ class CreatureHistory {
     private $warpveteran;
 
 
-    //TODO: What you don't know sure can hurt you~~
+    //TODO: find out what unknowns are` 
     private $unknown1; 
     private $unknown2;
     private $unknown3; /// @brief DS only
