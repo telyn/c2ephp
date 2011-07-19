@@ -72,7 +72,11 @@ class PRAYFile {
      * @param $block The PrayBlock to add.
      */
     public function AddBlock(PrayBlock $block) {
-        //TODO: Check block name is unique (in blocks of the same type).
+        foreach($this->blocks as $checkBlock) {
+            if($checkBlock->GetName() == $block->GetName()) {
+                throw new Exception("PRAY Files cannot contain multiple blocks with the same name");
+            }
+        }
         $this->blocks[] = $block;
     }
 
