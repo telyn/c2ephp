@@ -163,22 +163,27 @@ class CreatureHistory {
     public function GetCreatureMoniker() {
         return $this->moniker;
     }
+
     /// @brief Gets the name of the creature this history is attached to.
     public function GetCreatureName() {
         return $this->name;
     }
+
     /// @brief Gets the gender of the creature this history is attached to.
     public function GetCreatureGender() {
         return $this->gender;
     }
+
     /// @brief Gets the genus of the creature this history is attached to.
     public function GetCreatureGenus() {
         return $this->genus;
     }
+
     /// @brief Gets the species of the creature this history is attached to.
     public function GetCreatureSpecies() {
         return $this->species;
     }
+
     /// @brief Gets whether the creature this history is attached to has been through the warp.
     public function GetCreatureIsWarpVeteran() {
         return $this->warpveteran;
@@ -199,6 +204,7 @@ class CreatureHistory {
         $this->unknown1 = $unknown1;
         $this->unknown2 = $unknown2;
     }
+
     /// @brief Set variables that are currently unknown, specific to
     /// DS
     /**
