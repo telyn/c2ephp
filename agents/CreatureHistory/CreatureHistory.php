@@ -164,6 +164,25 @@ class CreatureHistory {
         return $this->moniker;
     }
 
+    /// @brief Gets the generation of the creature
+    /**
+     * I cannot guarantee that this function works. However, it does use the
+     * same method as the Creatures 3 in-game creature information viewer,
+     * so it should work on all creatures made in-game.
+     * @return 0 for failure, the generation of the creature otherwise.
+     */
+    public function GetCreatureGenerationNumber() {
+        if($pos = strpos('_',$this->moniker) == -1) {
+            return 0;
+        } else {
+            $firstbit = substr($this->moniker,0,$pos);
+            if(is_numeric($firstbit)) {
+                return $firstbit+0;
+            }
+            return 0;
+        }
+    }
+
     /// @brief Gets the name of the creature this history is attached to.
     public function GetCreatureName() {
         return $this->name;
