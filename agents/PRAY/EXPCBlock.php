@@ -26,6 +26,7 @@ require_once(dirname(__FILE__).'/TagBlock.php');
  */
 
 class EXPCBlock extends TagBlock {
+
     /// @brief Creates a new EXPCBlock
     /**
      * If $prayfile is not null, all the data for this block
@@ -46,6 +47,7 @@ class EXPCBlock extends TagBlock {
     public function GetAgeInTicks() {
         return $this->GetTag('Creature Age In Ticks');
     }
+
     /// @brief Gets the life stage of the creature
     /**
      * @return The life stage of the creature.
@@ -53,6 +55,7 @@ class EXPCBlock extends TagBlock {
     public function GetLifeStage() {
         return $this->GetTag('Creature Life Stage');
     }
+
     /// @brief Gets the time the creature was exported
     /**
      * @return The time the creature was exported as a UNIX timestamp. (Seconds since 00:00 1st Jan 1970)
@@ -84,6 +87,7 @@ class EXPCBlock extends TagBlock {
     public function GetGenus() {
         return $this->GetTag('Genus');
     }
+
     /// @brief Gets whether the creature is pregnant
     /**
      * 0 = not pregnant, 1 = pregnant.
@@ -91,6 +95,7 @@ class EXPCBlock extends TagBlock {
     public function GetPregnancyStatus() {
         return $this->GetTag('Pregnancy Status');
     }
+
     /// @brief Gets the variant (breed) of the creature
     /**
      * @return A single alphabetical character.
@@ -99,18 +104,22 @@ class EXPCBlock extends TagBlock {
     public function GetVariant() {
         return $this->GetTag('Variant');
     }
+
     /// @brief Gets the creature's name
     public function GetCreatureName() {
         return $this->GetTag('Creature Name');
     }
+
     /// @brief Gets the name of the world the creature was exported from.
     public function GetWorldName() {
         return $this->GetTag('Exported From World Name');
     }
+
     /// @brief Gets the UID of the world the creature was exported from.
     public function GetWorldUID() {
         return $this->GetTag('Exported From World UID');
     }
+
     /// @brief Gets the gallery for the creature's head sprites.
     /**
      * This does not include the file extension.
