@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$classSpriteFrame.html" title="Class representing a single frame of a sprite." alt="" coords="7,58,97,89"/>
+<area shape="rect" id="node3" href="$classC16Frame.html" title="Class for a single image in a C16File." alt="" coords="149,5,229,35"/>
+<area shape="rect" id="node5" href="$classS16Frame.html" title="Class for frames of S16 files." alt="" coords="149,58,229,89"/>
+<area shape="rect" id="node7" href="$classSPRFrame.html" title="Class for a single frame stored in SPR format." alt="" coords="147,111,232,142"/>
+</map>
