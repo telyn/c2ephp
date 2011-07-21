@@ -146,8 +146,8 @@ class GLSTBlock extends CreaturesArchiveBlock {
         $genus          = $reader->ReadInt(4); //0 for norn, 1 for grendel, 2 for ettin
         $species        = $reader->ReadInt(4);
         $eventslength   = $reader->ReadInt(4);
-        $this->history = new CreatureHistory($moniker,$name,$gender,$genus,$species);
 
+        $this->history = new CreatureHistory($moniker,$name,$gender,$genus,$species);
         if(!isset($eventslength)) {
             return false;
         }
@@ -156,16 +156,17 @@ class GLSTBlock extends CreaturesArchiveBlock {
         }
 
         //reading the footer
-        $unknown1 = $reader->ReadInt(4);
-        $unknown2 = $reader->ReadInt(4);
+        $mutations = $reader->ReadInt(4);
+        $crossovers = $reader->ReadInt(4);
+
+        $this->history->SetMutationsAndCrossovers($mutations,$crossovers);
+
         if($this->format == GLST_FORMAT_DS) {
-            $unknown3 = $reader->ReadInt(4);
+            $unknown1 = $reader->ReadInt(4);
             $warpveteran = (($reader->ReadInt(4)==1)?1:0);
-            $unknown4 = $reader->Read($reader->ReadInt(4));
-            $this->history->SetDSUnknowns($unknown1,$unknown2,$unknown3,$unknown4);
+            $unknown2 = $reader->Read($reader->ReadInt(4));
+            $this->history->SetDSUnknowns($unknown1,$unknown2);
             $this->history->SetWarpVeteran($warpveteran);
-        } else {
-            $this->history->SetC3Unknowns($unknown1,$unknown2);
         }
     }
 
