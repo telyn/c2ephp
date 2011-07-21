@@ -34,10 +34,10 @@ class CreatureHistory {
 
 
     //TODO: find out what unknowns are` 
-    private $unknown1; 
-    private $unknown2;
-    private $unknown3; /// @brief DS only
-    private $unknown4; /// @brief DS only
+    private $mutations; 
+    private $crossoverpoints;
+    private $unknown1; /// @brief DS only
+    private $unknown2; /// @brief DS only
 
     /// @endcond
 
@@ -80,11 +80,11 @@ class CreatureHistory {
         foreach($this->events as $event) {
             $data .= $event->Compile($format);
         }
-        $data .= pack('V',$this->unknown1);
-        $data .= pack('V',$this->unknown2);
+        $data .= pack('V',$this->mutations);
+        $data .= pack('V',$this->crossoverpoints);
         if($format == GLST_FORMAT_DS) {
-            $data .= pack('V',$this->unknown3);
-            $data .= pack('V',strlen($this->unknown4)).$this->unknown4;
+            $data .= pack('V',$this->unknown1);
+            $data .= pack('V',strlen($this->unknown2)).$this->unknown2;
         }
         return $data;
     }
@@ -96,7 +96,7 @@ class CreatureHistory {
      * @return GLST_FORMAT_DS or GLST_FORMAT_C3.
      */
     public function GuessFormat() {
-        return (isset($this->unknown3))?GLST_FORMAT_DS:GLST_FORMAT_C3;
+        return (isset($this->unknown1))?GLST_FORMAT_DS:GLST_FORMAT_C3;
     }
 
     /// @brief Adds an event to the end of a history.
@@ -208,35 +208,32 @@ class CreatureHistory {
         return $this->warpveteran;
     }
 
-    /// @brief Set unknown variables.
-    /**
-     * Set variables that are currently unknown and used in C3 and DS
-     * These variables COULD be mutations and crossovers during
-     * conception, however in a creature that was not conceived, they
-     * appear to be strange. \n
-     * Honestly, I don't know yet because I haven't managed to work
-     * it out.
-     * @param $unknown1 First unknown variable
-     * @param $unknown2 Second unknown variable
-     */
-    public function SetC3Unknowns($unknown1,$unknown2) {
-        $this->unknown1 = $unknown1;
-        $this->unknown2 = $unknown2;
+    /// @brief Gets the number of mutation points during conception
+    public function GetCreatureMutations() {
+        return $this->mutations;
     }
+
+    /// @brief Gets the number of crossover points during conception
+    public function GetCreatureCrossoverPoints() {
+        return $this->crossoverpoints;
+    }
+
+    public function SetMutationsAndCrossovers($mutations,$crossovers) {
+        $this->mutations = $mutations;
+        $this->crossoverpoints = $crossovers;
+    }
+
 
     /// @brief Set variables that are currently unknown, specific to
     /// DS
     /**
      * This calls SetC3Unknown
-     * @param $unknown1 First unknown variable (shared with C3)
-     * @param $unknown2 Second unknown variable (shared with C3)
-     * @param $unknown3 Third unknown variable (DS only)
-     * @param $unknown4 Forth unknown variable (DS only)
+     * @param $unknown1 First unknown variable
+     * @param $unknown2 Second unknown variable
      */
-    public function SetDSUnknowns($unknown1,$unknown2,$unknown3,$unknown4) {
-        $this->SetC3Unknowns($unknown1,$unknown2);
-        $this->unknown3 = $unknown3;
-        $this->unknown4 = $unknown4;
+    public function SetDSUnknowns($unknown1,$unknown2) {
+        $this->unknown1 = $unknown1;
+        $this->unknown2 = $unknown2;
     }
 
     /// @brief Sets whether or not the creature is a veteran of the warp (DS only)
