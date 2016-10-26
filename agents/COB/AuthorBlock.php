@@ -27,7 +27,7 @@ class COBAuthorBlock extends COBBlock {
      * @param $version The version number of this COB (integer)
      * @param $revision the COB's revision number (integer)
      */
-    public function COBAuthorBlock($authorName,$authorEmail,$authorURL,$authorComments,$creationTime,$version,$revision) {
+    public function COBAuthorBlock($authorName, $authorEmail, $authorURL, $authorComments, $creationTime, $version, $revision) {
         parent::COBBlock(COB_BLOCK_AUTHOR);
         $this->authorName = $authorName;
         $this->authorEmail = $authorEmail;
@@ -108,7 +108,7 @@ class COBAuthorBlock extends COBBlock {
         $creationDay = $reader->ReadInt(1);
         $creationMonth = $reader->ReadInt(1);
         $creationYear = $reader->ReadInt(2);
-        $timestamp = mktime(0,0,0,$creationMonth,$creationDay,$creationYear);
+        $timestamp = mktime(0, 0, 0, $creationMonth, $creationDay, $creationYear);
         $version = $reader->ReadInt(1);
         $revision = $reader->ReadInt(1);
         $authorName = $reader->ReadCString();

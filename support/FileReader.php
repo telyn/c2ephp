@@ -21,12 +21,15 @@ class FileReader implements IReader {
      */
     public function FileReader($filename)
     {
-        if (!file_exists($filename))
-            throw new Exception("File does not exist: ".$filename);
-        if (!is_file($filename))
-            throw new Exception("Target is not a file.");
-        if (!is_readable($filename))
-            throw new Exception("File exists, but is not readable.");
+        if (!file_exists($filename)) {
+                    throw new Exception("File does not exist: ".$filename);
+        }
+        if (!is_file($filename)) {
+                    throw new Exception("Target is not a file.");
+        }
+        if (!is_readable($filename)) {
+                    throw new Exception("File exists, but is not readable.");
+        }
 
         $this->fp = fopen($filename, 'rb');
     }
@@ -51,8 +54,9 @@ class FileReader implements IReader {
         for ($x = 0; $x < $count; $x++)
         {
             $buffer = (ord(fgetc($this->fp)) << ($x*8));
-            if ($buffer === false)
-                throw new Exception("Read failure");
+            if ($buffer === false) {
+                            throw new Exception("Read failure");
+            }
             $int += $buffer;
         }
         return $int;

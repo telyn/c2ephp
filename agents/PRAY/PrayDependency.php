@@ -54,7 +54,7 @@ class PrayDependency {
      * @param $category One of the PRAY_DEPENDENCY_* constants
      * @param $filename The name of the file this dependency relates to.
      */
-    public function PrayDependency($category,$filename) {
+    public function PrayDependency($category, $filename) {
         $this->category = $category;
         $this->filename = $filename;
     }

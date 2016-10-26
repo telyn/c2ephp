@@ -20,8 +20,8 @@ class LIVEBlock extends AGNTBlock {
      * @param $flags The block's flags. See PrayBlock.
      */
 
-    public function LIVEBlock($prayfile,$name,$content,$flags) {
-        parent::TagBlock($prayfile,$name,$content,$flags,PRAY_BLOCK_LIVE);
+    public function LIVEBlock($prayfile, $name, $content, $flags) {
+        parent::TagBlock($prayfile, $name, $content, $flags, PRAY_BLOCK_LIVE);
 
     }
 }

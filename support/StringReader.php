@@ -64,11 +64,11 @@ class StringReader implements IReader {
     /**
      * @param integer $start
      */
-    public function GetSubString($start,$length = FALSE) {
-        if($length == FALSE) {
+    public function GetSubString($start, $length = FALSE) {
+        if ($length == FALSE) {
             $length = strlen($this->string)-$start;
         }
-        $str = substr($this->string,$start,$length);         
+        $str = substr($this->string, $start, $length);         
         return $str;
     }
 }
@@ -77,13 +77,13 @@ class StringReader implements IReader {
  * @param false|string $string
  */
 function BytesToIntLilEnd($string) { //little endian
-    if($string == "") {
+    if ($string == "") {
         return false;
     }
     $length = strlen($string);
     $int = 0;
-    for($i=0;$i<$length;$i++) {
-        $int += ord($string{$i})<<($i*8);
+    for ($i = 0; $i < $length; $i++) {
+        $int += ord($string{$i}) << ($i*8);
     }
     return $int;
 }

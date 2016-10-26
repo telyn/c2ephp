@@ -5,8 +5,7 @@
 class C2CAOSFlowControls {
     /// @brief Returns an array of tokens.
     public static function GetTokens() {
-        return array
-        (
+        return array(
             'enum',
             'esee',
             'etch',

@@ -22,17 +22,17 @@ class BinaryBlock extends PrayBlock {
      * @param $name The block's name.
      * @param $content The content of the block as a binary string.
      */
-	public function BinaryBlock($type, $name, $content) {
-		parent::PrayBlock(null, $name, '', 0, $type);
-		$this->binarydata = $content;
+    public function BinaryBlock($type, $name, $content) {
+        parent::PrayBlock(null, $name, '', 0, $type);
+        $this->binarydata = $content;
     }
     /// @brief Compile the BinaryBlock
     /**
      * @return string compiled BinaryBlock as a binary string.
      */
-	public function Compile() {
-		return $this->EncodeBlockHeader(strlen($this->binarydata)).$this->binarydata;
-	}
+    public function Compile() {
+        return $this->EncodeBlockHeader(strlen($this->binarydata)).$this->binarydata;
+    }
 }
 
 ?>

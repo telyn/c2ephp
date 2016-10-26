@@ -89,8 +89,7 @@ class S16Frame extends SpriteFrame {
                     $red   = ($pixel & 0xF800) >> 8;
                     $green = ($pixel & 0x07E0) >> 3;
                     $blue  = ($pixel & 0x001F) << 3;
-                }
-                else if ($this->encoding == "555")
+                } else if ($this->encoding == "555")
                 {
                     $red   = ($pixel & 0x7C00) >> 7;
                     $green = ($pixel & 0x03E0) >> 2;
