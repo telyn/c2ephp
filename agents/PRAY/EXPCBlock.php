@@ -31,13 +31,13 @@ class EXPCBlock extends TagBlock {
     /**
      * If $prayfile is not null, all the data for this block
      * will be read from the PRAYFile.
-     * @param $prayfile The PRAYFile that this DFAM block belongs to.
+     * @param PRAYFile $prayfile The PRAYFile that this DFAM block belongs to.
      * @param $name The block's name.
      * @param $content The binary data of this block. May be null.
      * @param $flags The block's flags
      */
-    public function EXPCBlock($prayfile,$name,$content,$flags) {
-        parent::TagBlock($prayfile,$name,$content,$flags,PRAY_BLOCK_EXPC);
+    public function EXPCBlock($prayfile, $name, $content, $flags) {
+        parent::TagBlock($prayfile, $name, $content, $flags, PRAY_BLOCK_EXPC);
     }
 
     /// @brief Gets the age of the creature

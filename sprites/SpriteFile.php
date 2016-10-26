@@ -11,6 +11,9 @@ abstract class SpriteFile {
 
   /// @cond INTERNAL_DOCS
   
+  /**
+   * @param string $filetype
+   */
   public function SpriteFile($filetype) {
     $this->spritefiletype = $filetype;
   }
@@ -54,7 +57,7 @@ abstract class SpriteFile {
    * @param $frame A SpriteFrame
    * @param $position Where to put the frame. Currently un-used.
    */
-  public function AddFrame(SpriteFrame $frame, $position=false) {
+  public function AddFrame(SpriteFrame $frame, $position = false) {
       /*
       if($position === false) {
           $position = sizeof($this->frames);
@@ -62,7 +65,7 @@ abstract class SpriteFile {
           $position = sizeof($this->frames) - $position;
       }
       */
-      if($this->spritefiletype == substr(get_class($frame),0,3)) {
+      if ($this->spritefiletype == substr(get_class($frame), 0, 3)) {
           //$this->frames[$position] = $frame;
           $this->frames[] = $frame;
       } else {
@@ -79,8 +82,8 @@ abstract class SpriteFile {
    * backwards from the end of the frames array.
    */
   public function ReplaceFrame(SpriteFrame $frame, $position) {
-      if($position < 0) {
-          $position = sizeof($this->frames) - $position;
+      if ($position < 0) {
+          $position = sizeof($this->frames)-$position;
       }
       $this->frames[$position] = $frame->ToSpriteFrame($this->spritefiletype);
   }
@@ -102,7 +105,7 @@ abstract class SpriteFile {
   /**
    * May be removed in a future release.
    * Use GetFrame($frame)->ToPNG() instead.
-   * @param $frame The 0-based index of the frame to delete.
+   * @param integer $frame The 0-based index of the frame to delete.
    * @return A binary string containing a PNG.
    */
   public function ToPNG($frame) {

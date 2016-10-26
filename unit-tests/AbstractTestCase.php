@@ -1,6 +1,6 @@
 <?php
-require_once(dirname(__FILE__) . '/../agents/PRAYFile.php');
-require_once(dirname(__FILE__) . '/../support/FileReader.php');
+require_once(dirname(__FILE__).'/../agents/PRAYFile.php');
+require_once(dirname(__FILE__).'/../support/FileReader.php');
 
 abstract class c2ephpAbstractTestCase extends PHPUnit_Framework_TestCase {
     /// @brief Agent Files fixture
@@ -27,7 +27,7 @@ abstract class c2ephpAbstractTestCase extends PHPUnit_Framework_TestCase {
         );
 
         $prayfiles = array();
-        foreach($files as $info) {
+        foreach ($files as $info) {
 
             $prayfiles[] = array(new PRAYFile(new FileReader($info['path'])), $info);
         }
@@ -44,7 +44,7 @@ abstract class c2ephpAbstractTestCase extends PHPUnit_Framework_TestCase {
 
 
         $prayfiles = array();
-        foreach($files as $info) {
+        foreach ($files as $info) {
 
             $prayfiles[] = array(new PRAYFile(new FileReader($info['path'])), $info);
         }

@@ -12,13 +12,14 @@
 interface IReader {
     /// @brief Reads an integer
     /**
-     * @param $length Length of the integer in bytes.
+     * @param integer $length Length of the integer in bytes.
      */
     public function ReadInt($length);
 
     /// @brief Reads a string
     /**
      * @param $length Length of the string to read in bytes
+     * @return string|false
      */
     public function Read($length);
 
@@ -30,24 +31,32 @@ interface IReader {
      * memory-wise, but it simplifies the code and c2e files don't
      * tend to get big enough to make this inefficiency a concern on
      * any reasonably modern hardware.
+     * @return string
      */
-    public function GetSubString($start,$length=FALSE);
+    public function GetSubString($start, $length = FALSE);
     /// @brief Gets the position of the cursor
     /**
      * This is analagous to ftell in C or PHP.
+     * @return integer
      */
     public function GetPosition();
     /// @brief Changes the current position in the reader's stream
     /**
      * This is analagous to fseek in C or PHP.
+     * @return void
      */
     public function Seek($position); 
     /// @brief Advances the position of the reader by $count.
+
+    /**
+     * @return void
+     */
     public function Skip($count);
     /// @brief Reads a c-style string at the current position.
     /**
      * C-style means that the string is terminated by a NUL (0) 
      * character.
+     * @return string
      */
     public function ReadCString(); //read a string of unknown length until the first NUL
 }

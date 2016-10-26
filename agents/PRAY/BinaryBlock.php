@@ -13,7 +13,7 @@ require_once(dirname(__FILE__).'/PrayBlock.php');
 class BinaryBlock extends PrayBlock {
     /// @cond INTERNAL_DOCS
     
-	private $binarydata;
+    private $binarydata;
     /// @endcond
 
     /// @brief Instantiate a BinaryBlock
@@ -22,13 +22,13 @@ class BinaryBlock extends PrayBlock {
      * @param $name The block's name.
      * @param $content The content of the block as a binary string.
      */
-	public function BinaryBlock($type,$name,$content) {
-		parent::PrayBlock(null,$name,'',0,$type);
+	public function BinaryBlock($type, $name, $content) {
+		parent::PrayBlock(null, $name, '', 0, $type);
 		$this->binarydata = $content;
     }
     /// @brief Compile the BinaryBlock
     /**
-     * @return The compiled BinaryBlock as a binary string.
+     * @return string compiled BinaryBlock as a binary string.
      */
 	public function Compile() {
 		return $this->EncodeBlockHeader(strlen($this->binarydata)).$this->binarydata;
