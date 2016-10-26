@@ -22,10 +22,10 @@ abstract class SpriteFrame {
      * Width and height must both be non-zero.
      * @see C16Frame::C16Frame()
      */
-    public function SpriteFrame($width,$height,$decoded=false) {
-        if($width == 0) {
+    public function SpriteFrame($width, $height, $decoded = false) {
+        if ($width == 0) {
             throw new Exception('Zero width');
-        } else if($height == 0) {
+        } else if ($height == 0) {
             throw new Exception('Zero height');
         }
         $this->width = $width;
@@ -42,7 +42,7 @@ abstract class SpriteFrame {
     /// @brief Gets the GD Image resource for this sprite frame.
     /// <strong> Deprecated</strong>
     /**
-     *  @return a GD image resource. See http://php.net/image 
+     *  @return resource GD image resource. See http://php.net/image 
      */
     public function GetGDImage() {
         $this->EnsureDecoded();
@@ -54,6 +54,10 @@ abstract class SpriteFrame {
         return $this->width;
     }
     /// @brief Gets the height of the frame in pixels
+
+    /**
+     * @return integer
+     */
     public function GetHeight() {
         return $this->height;
     }
@@ -69,11 +73,11 @@ abstract class SpriteFrame {
      *    [alpha] => 0 
      * )</pre>
      * @see http://php.net/imagecolorsforindex
-     * @param $x The x-coordinate of the pixel to get.
-     * @param $y The y-coordinate of the pixel to get.
+     * @param integer $x The x-coordinate of the pixel to get.
+     * @param integer $y The y-coordinate of the pixel to get.
      * @return An associative array containing the keys 'red','green','blue','alpha'.
      */
-    public function GetPixel($x,$y) {
+    public function GetPixel($x, $y) {
         $this->EnsureDecoded();
         $colori = imagecolorat($this->gdImage, $x, $y);
         $color = imagecolorsforindex($this->gdImage, $colori);
@@ -88,7 +92,7 @@ abstract class SpriteFrame {
      * @param $g The green component of the pixel. 0-255.
      * @param $b The blue component of the pixel. 0-255.
      */
-    public function SetPixel($x,$y,$r,$g,$b) {
+    public function SetPixel($x, $y, $r, $g, $b) {
         $this->EnsureDecoded();
         imagesetpixel($this->gdImage, $x, $y, imagecolorallocate($this->gdImage, $r, $g, $b));
     }
@@ -101,7 +105,7 @@ abstract class SpriteFrame {
      * if it does't already.
      */
     protected function EnsureDecoded() {
-        if(!$this->decoded)
+        if (!$this->decoded)
             $this->Decode();
 
         $this->decoded = true;
@@ -133,10 +137,10 @@ abstract class SpriteFrame {
      */
     public function ToSpriteFrame($type) {
         $this->EnsureDecoded();
-        if(substr(get_class($this),0,3) == $type && substr(get_class($this),3) == 'Frame') {
+        if (substr(get_class($this), 0, 3) == $type && substr(get_class($this), 3) == 'Frame') {
             return $this;
         }
-        switch($type) {
+        switch ($type) {
         case 'C16':
             return new C16Frame($this->GetGDImage());
         case 'S16':
@@ -150,7 +154,7 @@ abstract class SpriteFrame {
 
     /// @brief Converts this SpriteFrame into a PNG.
     /**
-     * @return A binary string in PNG format, ready for output! :)
+     * @return string binary string in PNG format, ready for output! :)
      */
     public function ToPNG() {
         $this->EnsureDecoded();

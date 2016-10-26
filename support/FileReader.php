@@ -17,35 +17,41 @@ class FileReader implements IReader {
     /// @brief Instantiates a filereader for the given file, ready
     /// for reading.
     /**
-     * @param $filename A full path to the file you want to open.
+     * @param string $filename A full path to the file you want to open.
      */
     public function FileReader($filename)
     {
-        if(!file_exists($filename))
+        if (!file_exists($filename))
             throw new Exception("File does not exist: ".$filename);
-        if(!is_file($filename))
+        if (!is_file($filename))
             throw new Exception("Target is not a file.");
-        if(!is_readable($filename))
+        if (!is_readable($filename))
             throw new Exception("File exists, but is not readable.");
 
         $this->fp = fopen($filename, 'rb');
     }
 
+    /**
+     * @param integer $count
+     */
     public function Read($count)
     {
-        if($count > 0) {
+        if ($count > 0) {
             return fread($this->fp, $count);
         }
         return '';
     }
 
+    /**
+     * @param integer $count
+     */
     public function ReadInt($count)
     {
         $int = 0;
-        for($x = 0; $x < $count; $x++)
+        for ($x = 0; $x < $count; $x++)
         {
-            $buffer = (ord(fgetc($this->fp)) << ($x * 8));
-            if($buffer === false)
+            $buffer = (ord(fgetc($this->fp)) << ($x*8));
+            if ($buffer === false)
                 throw new Exception("Read failure");
             $int += $buffer;
         }
@@ -57,31 +63,31 @@ class FileReader implements IReader {
         return ftell($this->fp);
     }
 
-    public function GetSubString($start,$length = FALSE)
+    public function GetSubString($start, $length = FALSE)
     {
         $oldpos = ftell($this->fp);
-        fseek($this->fp,$start);
+        fseek($this->fp, $start);
         $data = '';
-        if($length === false) {
-            while($newdata = $this->Read(4096)) {
-                if(strlen($newdata) == 0) {
+        if ($length === false) {
+            while ($newdata = $this->Read(4096)) {
+                if (strlen($newdata) == 0) {
                     break;
                 }
                 $data .= $newdata;
             }
         } else {
-            $data = fread($this->fp,$length);
+            $data = fread($this->fp, $length);
         }
-        fseek($this->fp,$oldpos);
+        fseek($this->fp, $oldpos);
         return $data;
     }
     public function ReadCString() {
         $string = '';
-        while(($char = $this->Read(1)) !== false) {
-            if(ord($char) == 0) {
+        while (($char = $this->Read(1)) !== false) {
+            if (ord($char) == 0) {
                 break;
             }
-            $string.=$char;
+            $string .= $char;
         }
         return $string;
     }

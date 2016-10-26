@@ -11,15 +11,15 @@ class AGNTBlock extends TagBlock {
      * Makes a new AGNTBlock. \n
      * If $prayfile is not null, all the data about this AGNTBlock
      * will be read from the PRAYFile.
-     * @param $prayfile The PRAYFile associated with this AGNT block.
+     * @param PRAYFile $prayfile The PRAYFile associated with this AGNT block.
      * It is allowed to be null.
      * @param $name The name of this block.
      * @param $content This block's content.
      * @param $flags Any flags this block may have. I think this is a
      * single byte. Check http://www.creatureswiki.net/wiki/PRAY
      */
-    public function AGNTBlock($prayfile,$name,$content,$flags) {
-        parent::TagBlock($prayfile,$name,$content,$flags,PRAY_BLOCK_AGNT);
+    public function AGNTBlock($prayfile, $name, $content, $flags) {
+        parent::TagBlock($prayfile, $name, $content, $flags, PRAY_BLOCK_AGNT);
     }
 
     /// @brief Gets the agent's name.
@@ -36,12 +36,12 @@ class AGNTBlock extends TagBlock {
      * If the description doesn't exist in the language specified, falls back on English rather than returning nothing.
      * @param $localisation The two-letter language code (e.g. de, fr) to get. If not specified, english is used.
      */ 
-    public function GetAgentDescription($localisation='') {
-        if($localisation == '') {
+    public function GetAgentDescription($localisation = '') {
+        if ($localisation == '') {
             return $this->GetTag('Agent Description');
         } else {
             $description = $this->GetTag('Agent Description-'.$localisation);
-            if($description == '') {
+            if ($description == '') {
                 $description = $this->GetTag('Agent Description'); 
             }
             return $description;
@@ -63,8 +63,8 @@ class AGNTBlock extends TagBlock {
      * Gets the first script, or if you specified which script, that one.
      * @param $script Which script to get as an integer. The first script is script 1.
      */
-    public function GetScript($script=1) {
-        if($script > 0 && $script <= $this->GetScriptCount()) {
+    public function GetScript($script = 1) {
+        if ($script > 0 && $script <= $this->GetScriptCount()) {
             return $this->GetTag('Script '.$script);            
         }
         throw new Exception('Script doesn\'t exist!');
@@ -75,21 +75,21 @@ class AGNTBlock extends TagBlock {
         return $this->GetTag('Dependency Count');
     }
     /// @brief Gets the dependency specified
-    /** @param $dependency The number of the dependency to get. 1-based.
+    /** @param integer $dependency The number of the dependency to get. 1-based.
      * return A PrayDependency object describing the file the agent depends on
      */
     
     public function GetDependency($dependency) {
         $file = $this->GetTag('Dependency '.$dependency);
         $category = $this->GetTag('Dependency Category '.$dependency);
-        return new PrayDependency($category,$file);
+        return new PrayDependency($category, $file);
     }
     /// @brief Gets all the files this agent depends on.
     /** return An array of PrayDependency objects.
      */
     public function GetDependencies() {
         $dependencies = array();
-        for($i = 1; $i <= $this->GetDependencyCount(); $i++) {
+        for ($i = 1; $i <= $this->GetDependencyCount(); $i++) {
             $dependencies[] = $this->GetDependency($i);
         }
         return $dependencies;
@@ -153,40 +153,40 @@ class AGNTBlock extends TagBlock {
      */
     public function GetAgentAnimationAsSpriteFrame() {
         $animationFile = $this->GetAgentAnimationFile();
-        if($animationFile == '') {
+        if ($animationFile == '') {
             $animationFile = $this->GetAgentAnimationGallery();
-            if($animationFile == '') {
+            if ($animationFile == '') {
                 throw new Exception('No animation file!');
             }
             $animationFile .= '.c16';
         }
         $animationFirstImage = $this->GetAgentAnimationFirstImage();
         $animationString = $this->GetAgentAnimationString();
-        if($animationFirstImage == '') {
+        if ($animationFirstImage == '') {
             $animationFirstImage = 0;
         }
-        if($animationString == '') {
+        if ($animationString == '') {
             $animationString = 0;
         }
-        if(($position = strpos($animationString,' ')) !== false) {
-            $animationString = substr($animationString,0,$position);
+        if (($position = strpos($animationString, ' ')) !== false) {
+            $animationString = substr($animationString, 0, $position);
         }
         $prayfile = $this->GetPrayFile();
-        if($prayfile == null) {
+        if ($prayfile == null) {
             throw new Exception('No PRAY file to get the icon from!');
         }
         $iconBlock = $prayfile->GetBlockByName($animationFile);
-        if($iconBlock->GetType() != 'FILE') {
+        if ($iconBlock->GetType() != 'FILE') {
             throw new Exception('The block with the animation\'s filename is not a file block!');
         }
-        $type = strtolower(substr($animationFile,-3));
+        $type = strtolower(substr($animationFile, -3));
         $icon = null;
-        if($type == 'c16') {
+        if ($type == 'c16') {
             $icon = new C16File(new StringReader($iconBlock->GetData()));
-        } else if($type == 's16') {
+        } else if ($type == 's16') {
             $icon = new S16File(new StringReader($iconBlock->GetData()));
         }
-        if($icon == null) {
+        if ($icon == null) {
             throw new Exception('For one reason or another, couldn\'t make a sprite file for the agent.');
         }
         return $icon->GetFrame($animationFirstImage+$animationString);

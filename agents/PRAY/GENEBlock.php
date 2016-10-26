@@ -4,9 +4,9 @@ require_once(dirname(__FILE__).'/PrayBlock.php');
 
 /// @brief The class for a GENE block 
 /**
-  * The contents are identical to that of a .gen file\n
-  * This class doesn't have any useful functions yet - I don't
-  * actually know how to decode genetics at the moment.
+ * The contents are identical to that of a .gen file\n
+ * This class doesn't have any useful functions yet - I don't
+ * actually know how to decode genetics at the moment.
  */
 class GENEBlock extends PrayBlock {
 
@@ -14,13 +14,13 @@ class GENEBlock extends PrayBlock {
     /**
      * If $prayfile is not null, all the data for this block
      * will be read from the PRAYFile.
-     * @param $prayfile The PRAYFile object this block belongs to. Can be null.
+     * @param PRAYFile $prayfile The PRAYFile object this block belongs to. Can be null.
      * @param $name The block's name. This is a creature's moniker with .genetics appended.
      * @param $content The block's binary data. Used when constructing from a PrayFile
      * @param $flags The block's flags, which apply to the binary data as-is.
      */
-    public function GENEBlock($prayfile,$name,$content,$flags) {
-        parent::PrayBlock($prayfile,$name,$content,$flags,PRAY_BLOCK_GENE);
+    public function GENEBlock($prayfile, $name, $content, $flags) {
+        parent::PrayBlock($prayfile, $name, $content, $flags, PRAY_BLOCK_GENE);
 
     }
 

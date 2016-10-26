@@ -12,23 +12,23 @@ class EGGSBlock extends TagBlock {
      * Makes a new EGGSBlock. \n
      * If $prayfile is not null, all the data about this AGNTBlock
      * will be read from the PRAYFile.
-     * @param $prayfile The PRAYFile associated with this AGNT block.
+     * @param PRAYFile $prayfile The PRAYFile associated with this AGNT block.
      * It is allowed to be null.
      * @param $name The name of this block.
      * @param $content This block's content.
      * @param $flags Any flags this block may have. I think this is a
      * single byte. Check http://www.creatureswiki.net/wiki/PRAY
      */
-     public function EGGSBlock($prayfile,$name,$content,$flags) {
+        public function EGGSBlock($prayfile,$name,$content,$flags) {
         parent::TagBlock($prayfile,$name,$content,$flags,PRAY_BLOCK_EGGS);
 
     }
 
-     /// @brief Gets the agent's type.
-     /**
-      * This method is identical to that in EXPCBlock.
-      * The type seems to always be 0 for EGGSBlocks.
-      */
+        /// @brief Gets the agent's type.
+        /**
+         * This method is identical to that in EXPCBlock.
+         * The type seems to always be 0 for EGGSBlocks.
+         */
     public function GetAgentType() {
         return $this->GetTag('Agent Type');
     }

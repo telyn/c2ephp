@@ -12,9 +12,9 @@ require_once(dirname(__FILE__).'/../../sprites/SPRFrame.php');
  */
 //@{
 /** Sprite dependency - 'sprite' */
-define('DEPENDENCY_SPRITE','sprite');
+define('DEPENDENCY_SPRITE', 'sprite');
 /** Sound dependency - 'sound' */
-define('DEPENDENCY_SOUND','sound');
+define('DEPENDENCY_SOUND', 'sound');
 //@}
 
 
@@ -54,7 +54,7 @@ class COBAgentBlock extends COBBlock {
      * @param $agentName The name of the agent (as displayed in the C2 injector)
      * @param $agentDescription The description of the agent (as displayed in the C2 injector)
      */
-    public function COBAgentBlock($agentName,$agentDescription) {
+    public function COBAgentBlock($agentName, $agentDescription) {
         parent::COBBlock(COB_BLOCK_AGENT);
         $this->agentName = $agentName;
         $this->agentDescription = $agentDescription;
@@ -104,7 +104,7 @@ class COBAgentBlock extends COBBlock {
         return $this->eventScripts[$whichScript];
     }
     /// @brief Gets the thumbnail of this agent as would be shown in the Injector
-    /** @return A SpriteFrame of the thumbnail
+    /** @return SpriteFrame SpriteFrame of the thumbnail
      */
     public function GetThumbnail() {
         return $this->thumbnail;
@@ -115,10 +115,10 @@ class COBAgentBlock extends COBBlock {
      * above.
      * @return An array of COBDependency objects
      */
-    public function GetDependencies($type=null) {
+    public function GetDependencies($type = null) {
         $dependenciesToReturn = array();
-        foreach($this->dependencies as $dependency) {
-            if($type == null || $type == $dependency->GetType()) {
+        foreach ($this->dependencies as $dependency) {
+            if ($type == null || $type == $dependency->GetType()) {
                 $dependenciesToReturn[] = $dependency;
             }
         }
@@ -153,7 +153,7 @@ class COBAgentBlock extends COBBlock {
      * @param $dependency The COBDependency to add.
      */
     public function AddDependency(COBDependency $dependency) { 
-        if(!in_array($dependency->GetDependencyName(),$this->dependencies)) {
+        if (!in_array($dependency->GetDependencyName(), $this->dependencies)) {
             $this->dependencies[] = $dependency;
         }
     }
@@ -183,7 +183,7 @@ class COBAgentBlock extends COBBlock {
      * @param $time The date this agent was last injected as a UNIX timestamp
      */
     public function SetLastUsageDate($time) {
-        if($time > time()) {
+        if ($time > time()) {
             return false;
         } else {
             $this->lastUsageDate = $time;
@@ -217,7 +217,7 @@ class COBAgentBlock extends COBBlock {
      * @param $reserved2 The second reserved variable
      * @param $reserved3 The third reserved variable
      */
-    public function SetReserved($reserved1,$reserved2,$reserved3) {
+    public function SetReserved($reserved1, $reserved2, $reserved3) {
         $this->reserved1 = $reserved1;
         $this->reserved2 = $reserved2;
         $this->reserved3 = $reserved3;
@@ -226,7 +226,7 @@ class COBAgentBlock extends COBBlock {
     /** @param $frame The thumbnail as a SpriteFrame 
      */
     public function SetThumbnail(SpriteFrame $frame) {
-        if($this->thumbnail != null) {
+        if ($this->thumbnail != null) {
             throw new Exception('Thumbnail already added');
         }
         $this->thumbnail = $frame;
@@ -237,7 +237,7 @@ class COBAgentBlock extends COBBlock {
      * @param IReader $reader A StringReader or FileReader for the RCB
      */
     public function AddC1RemoveScriptFromRCB(IReader $reader) {
-        if($this->removeScript != '') {
+        if ($this->removeScript != '') {
             throw new Exception('Script already added!');
         }
         $rcb = new COB($reader);
@@ -253,7 +253,7 @@ class COBAgentBlock extends COBBlock {
      */
     public static function CreateFromReaderC2(IReader $reader) {
         $quantityAvailable = $reader->ReadInt(2);
-        if($quantityAvailable == 0xffff) {
+        if ($quantityAvailable == 0xffff) {
             $quantityAvailable = -1;
         }       
         $lastUsageDate = $reader->ReadInt(4);
@@ -262,50 +262,50 @@ class COBAgentBlock extends COBBlock {
         $expiryDay = $reader->ReadInt(1);
         $expiryMonth = $reader->ReadInt(1);
         $expiryYear = $reader->ReadInt(2);
-        $expiryDate = mktime(0,0,0,$expiryMonth,$expiryDay,$expiryYear);
+        $expiryDate = mktime(0, 0, 0, $expiryMonth, $expiryDay, $expiryYear);
 
-        $reserved = array($reader->ReadInt(4),$reader->ReadInt(4),$reader->ReadInt(4));
+        $reserved = array($reader->ReadInt(4), $reader->ReadInt(4), $reader->ReadInt(4));
 
         $agentName = $reader->ReadCString();
         $agentDescription = $reader->ReadCString();
 
-        $installScript = str_replace(',',"\n",$reader->ReadCString());
-        $removeScript = str_replace(',',"\n",$reader->ReadCString());
+        $installScript = str_replace(',', "\n", $reader->ReadCString());
+        $removeScript = str_replace(',', "\n", $reader->ReadCString());
 
         $numEventScripts = $reader->ReadInt(2);
 
         $eventScripts = array();
 
-        for($i=0;$i<$numEventScripts;$i++) {
-            $eventScripts[] = str_replace(',',"\n",$reader->ReadCString());
+        for ($i = 0; $i < $numEventScripts; $i++) {
+            $eventScripts[] = str_replace(',', "\n", $reader->ReadCString());
         }
         $numDependencies = $reader->ReadInt(2);
         $dependencies = array();
 
-        for($i=0;$i<$numDependencies;$i++) {
-            $type = ($reader->ReadInt(2) == 0)?DEPENDENCY_SPRITE:DEPENDENCY_SOUND;
+        for ($i = 0; $i < $numDependencies; $i++) {
+            $type = ($reader->ReadInt(2) == 0) ? DEPENDENCY_SPRITE : DEPENDENCY_SOUND;
             $name = $reader->ReadCString();
-            $dependencies[] = new COBDependency($type,$name);
+            $dependencies[] = new COBDependency($type, $name);
         }
         $thumbWidth = $reader->ReadInt(2);
         $thumbHeight = $reader->ReadInt(2);
 
-        $thumbnail = new S16Frame($reader,'565',$thumbWidth,$thumbHeight,$reader->GetPosition());
+        $thumbnail = new S16Frame($reader, '565', $thumbWidth, $thumbHeight, $reader->GetPosition());
         $reader->Skip($thumbHeight*$thumbWidth*2);
 
         //parsing finished, onto making an AgentBlock.
-        $agentBlock = new COBAgentBlock($agentName,$agentDescription);
+        $agentBlock = new COBAgentBlock($agentName, $agentDescription);
         $agentBlock->AddQuantityAvailable($quantityAvailable);
         $agentBlock->AddReuseInterval($reuseInterval);
         $agentBlock->AddExpiryDate($expiryDate);
         $agentBlock->AddLastUsageDate($lastUsageDate);
-        $agentBlock->AddReserved($reserved[0],$reserved[1],$reserved[2]);
+        $agentBlock->AddReserved($reserved[0], $reserved[1], $reserved[2]);
         $agentBlock->AddInstallScript($installScript);
         $agentBlock->AddRemoveScript($removeScript);
-        foreach($eventScripts as $eventScript) {
+        foreach ($eventScripts as $eventScript) {
             $agentBlock->AddEventScript($eventScript);
         }
-        foreach($dependencies as $dependency) {
+        foreach ($dependencies as $dependency) {
             $agentBlock->AddDependency($dependency);
         }
         $agentBlock->AddThumbnail($thumbnail);
@@ -319,27 +319,27 @@ class COBAgentBlock extends COBBlock {
      * 
      */
     public static function CreateFromReaderC1(IReader $reader) {
-        $quantityAvailable  = $reader->ReadInt(2);
+        $quantityAvailable = $reader->ReadInt(2);
         $expires_month = $reader->ReadInt(4);
         $expires_day = $reader->ReadInt(4);
         $expires_year = $reader->ReadInt(4);
-        $expiryDate = mktime(0,0,0,$expires_month,$expires_day,$expires_year);
+        $expiryDate = mktime(0, 0, 0, $expires_month, $expires_day, $expires_year);
 
         $numObjectScripts = $reader->ReadInt(2);
         $numInstallScripts = $reader->ReadInt(2);
         $quantityUsed = $reader->ReadInt(4);
         $objectScripts = array();
-        for($i=0;$i<$numObjectScripts;$i++) {
+        for ($i = 0; $i < $numObjectScripts; $i++) {
             $scriptsize = $reader->ReadInt(1);
-            if($scriptsize == 255) {
+            if ($scriptsize == 255) {
                 $scriptsize = $reader->ReadInt(2);
             }
             $objectScripts[$i] = $reader->Read($scriptsize);
         }
         $installScripts = array();
-        for($i=0;$i<$numInstallScripts;$i++) {
+        for ($i = 0; $i < $numInstallScripts; $i++) {
             $scriptsize = $reader->ReadInt(1);
-            if($scriptsize == 255) {
+            if ($scriptsize == 255) {
                 $scriptsize = $reader->ReadInt(2);
             }
             $installScripts[$i] = $reader->Read($scriptsize);
@@ -348,23 +348,23 @@ class COBAgentBlock extends COBBlock {
         $pictureHeight = $reader->ReadInt(4);
         $unknown = $reader->ReadInt(2);
         $sprframe = null;
-        if($pictureWidth > 0 || $pictureHeight > 0) {
-            $sprframe = new SPRFrame($reader,$pictureWidth,$pictureHeight);
+        if ($pictureWidth > 0 || $pictureHeight > 0) {
+            $sprframe = new SPRFrame($reader, $pictureWidth, $pictureHeight);
             $sprframe->Flip(); 
         }
 
         $agentName = $reader->Read($reader->ReadInt(1));
 
-        $agentBlock = new COBAgentBlock($agentName,'');
+        $agentBlock = new COBAgentBlock($agentName, '');
         $agentBlock->AddQuantityAvailable($quantityAvailable);
         $agentBlock->AddExpiryDate($expiryDate);
-        if($sprframe != null) {
+        if ($sprframe != null) {
             $agentBlock->AddThumbnail($sprframe);
         }
-        foreach($objectScripts as $objectScript) {
+        foreach ($objectScripts as $objectScript) {
             $agentBlock->AddEventScript($objectScript);
         }
-        $agentBlock->AddInstallScript(implode("\n*c2ephp Install script seperator\n",$installScripts));
+        $agentBlock->AddInstallScript(implode("\n*c2ephp Install script seperator\n", $installScripts));
         return $agentBlock;
     }
     /// @endcond
@@ -380,10 +380,10 @@ class COBDependency {
     /// @endcond
 
     /// @brief Creates a new COBDependency
-    /** @param $type The type of dependency ('sprite' or 'sound').
+    /** @param string $type The type of dependency ('sprite' or 'sound').
      * @param $name The name of the dependency (four characters, no file extension)
      */
-    public function COBDependency($type,$name) {
+    public function COBDependency($type, $name) {
         $this->type = $type;
         $this->name = $name;
     }

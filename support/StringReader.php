@@ -23,11 +23,11 @@ class StringReader implements IReader {
         $this->position = 0;
     }
     public function Read($characters) {
-        if($characters > 0) {
-            if($this->position+$characters > strlen($this->string)) {
+        if ($characters > 0) {
+            if ($this->position+$characters > strlen($this->string)) {
                 return false;
             }
-            $str = substr($this->string,$this->position,$characters);
+            $str = substr($this->string, $this->position, $characters);
 
             $this->position += $characters;
             return $str;
@@ -36,13 +36,13 @@ class StringReader implements IReader {
     }
     public function ReadCString() {
         $string = '';
-        while(($char = $this->Read(1)) !== false) {
-            $string.=$char;
-            if($char == "\0") {
+        while (($char = $this->Read(1)) !== false) {
+            $string .= $char;
+            if ($char == "\0") {
                 break;
             }           
         }
-        return substr($string,0,-1);
+        return substr($string, 0, -1);
     }
     public function Seek($position) {
         $this->position = $position;
@@ -50,12 +50,20 @@ class StringReader implements IReader {
     public function Skip($count) {
         $this->position += $count;
     }
+
+    /**
+     * @param integer $characters
+     */
     public function ReadInt($characters) {
         return BytesToIntLilEnd($this->Read($characters));
     }
     public function GetPosition() {
         return $this->position;
     }
+
+    /**
+     * @param integer $start
+     */
     public function GetSubString($start,$length = FALSE) {
         if($length == FALSE) {
             $length = strlen($this->string)-$start;
@@ -65,6 +73,9 @@ class StringReader implements IReader {
     }
 }
 
+/**
+ * @param false|string $string
+ */
 function BytesToIntLilEnd($string) { //little endian
     if($string == "") {
         return false;

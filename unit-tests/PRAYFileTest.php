@@ -1,19 +1,19 @@
 <?php
-require_once(dirname(__FILE__) . '/AbstractTestCase.php');
+require_once(dirname(__FILE__).'/AbstractTestCase.php');
 
 class PRAYFileTest extends c2ephpAbstractTestCase {
     
     /**
-      * @dataProvider createAgentFiles
-      */
+     * @dataProvider createAgentFiles
+     */
     public function testCreatePRAYFile(PRAYFile $prayfile) {
         $this->assertInstanceOf('PRAYFile',$prayfile);
         $this->assertNotNull($prayfile);
     }
     
     /**
-      * @dataProvider createAgentFiles
-      */
+     * @dataProvider createAgentFiles
+     */
     public function testNumberOfBlocks(PRAYFile $prayfile,$fixtureInfo) {
         $this->assertNotNull($prayfile);
         $this->assertEquals($fixtureInfo['block count'],sizeof($prayfile->GetBlocks()));

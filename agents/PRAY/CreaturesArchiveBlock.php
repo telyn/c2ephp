@@ -15,12 +15,12 @@ abstract class CreaturesArchiveBlock extends PrayBlock {
      * @param $name The name of this block
      * @param $content This block's binary data.
      * @param $flags the flags of this block
-     * @param $type This block's type as one of the PRAY_BLOCK_* constants
+     * @param string $type This block's type as one of the PRAY_BLOCK_* constants
      */
-    public function CreaturesArchiveBlock(&$prayfile,$name,$content,$flags,$type) {
-        parent::PrayBlock($prayfile,$name,$content,$flags,$type);
-        if($prayfile instanceof PRAYFile) {
-            if(!$this->DeArchive()) {
+    public function CreaturesArchiveBlock(&$prayfile, $name, $content, $flags, $type) {
+        parent::PrayBlock($prayfile, $name, $content, $flags, $type);
+        if ($prayfile instanceof PRAYFile) {
+            if (!$this->DeArchive()) {
                 throw new Exception('De-Archiving failed, block probably wasn\'t a CreaturesArchive type');
             }
         }
@@ -30,9 +30,9 @@ abstract class CreaturesArchiveBlock extends PrayBlock {
     /// DeArchives this block
     private function DeArchive() {
         $content = $this->GetData();
-        if($content{0} == 'C') {
+        if ($content{0} == 'C') {
             $content = DeArchive($content);
-            if($content !== false) {
+            if ($content !== false) {
                 $this->SetData($content);
                 return true;
             }
