@@ -25,9 +25,9 @@ class C16Frame extends SpriteFrame
      * @param $reader An IReader or GD image resource.
      * @param $encoding The encoding of the C16 frame (555 or 565). Defaults to 565
      */
-    public function C16Frame($reader,$encoding='565')
+    public function C16Frame($reader, $encoding = '565')
     {
-        if($reader instanceof IReader) {
+        if ($reader instanceof IReader) {
             $this->reader = $reader;
             $this->encoding = $encoding;
             $this->offset = $this->reader->ReadInt(4);
@@ -35,17 +35,17 @@ class C16Frame extends SpriteFrame
             $width = $this->reader->ReadInt(2);
             $height = $this->reader->ReadInt(2);
 
-            parent::SpriteFrame($width,$height);
+            parent::SpriteFrame($width, $height);
 
-            for($x = 0; $x < ($height - 1); $x++)
+            for ($x = 0; $x < ($height-1); $x++)
             {
                 $this->lineOffset[$x] = $this->reader->ReadInt(4);
             }
-        } else if(is_resource($reader)) {
-            if(get_resource_type($reader) == 'gd') {
+        } else if (is_resource($reader)) {
+            if (get_resource_type($reader) == 'gd') {
 
-                $this->encoding = ($encoding=='555')?'555':'565';
-                parent::SpriteFrame(imagesx($reader),imagesy($reader),true);
+                $this->encoding = ($encoding == '555') ? '555' : '565';
+                parent::SpriteFrame(imagesx($reader), imagesy($reader), true);
                 $this->gdImage = $reader;
             }
         } else {
@@ -70,37 +70,36 @@ class C16Frame extends SpriteFrame
         $image = imagecreatetruecolor($this->GetWidth(),
             $this->GetHeight());
         $this->reader->Seek($this->offset);
-        for($y = 0; $y < $this->GetHeight(); $y++)
+        for ($y = 0; $y < $this->GetHeight(); $y++)
         {
-            for($x = 0; $x < $this->GetWidth();)
+            for ($x = 0; $x < $this->GetWidth();)
             {
                 $run = $this->reader->ReadInt(2);
-                if(($run & 0x0001) > 0)
+                if (($run & 0x0001) > 0)
                     $run_type = "colour";
                 else
                     $run_type = "black";
                 $run_length = ($run & 0x7FFF) >> 1;
-                if($run_type == "black")
+                if ($run_type == "black")
                 {
-                    $z = $x + $run_length;
-                    for(;$x < $z; $x++)
+                    $z = $x+$run_length;
+                    for (;$x < $z; $x++)
                     {
                         imagesetpixel($image, $x, $y, imagecolorallocate($image, 0, 0, 0));
                     }
-                }
-                else //colour run
+                } else //colour run
                 {
-                    $z = $x + $run_length;
-                    for(;$x < $z; $x++)
+                    $z = $x+$run_length;
+                    for (;$x < $z; $x++)
                     {
                         $pixel = $this->reader->ReadInt(2);
-                        if($this->encoding == "565")
+                        if ($this->encoding == "565")
                         {
                             $red   = ($pixel & 0xF800) >> 8;
                             $green = ($pixel & 0x07E0) >> 3;
                             $blue  = ($pixel & 0x001F) << 3;
                         }
-                        else if($this->encoding == "555")
+                        else if ($this->encoding == "555")
                         {
                             $red   = ($pixel & 0x7C00) >> 7;
                             $green = ($pixel & 0x03E0) >> 2;
@@ -110,7 +109,7 @@ class C16Frame extends SpriteFrame
                         imagesetpixel($image, $x, $y, $colour);
                     }
                 }
-                if($x == $this->GetWidth())
+                if ($x == $this->GetWidth())
                     $this->reader->Skip(2);
             }
         }
@@ -127,21 +126,21 @@ class C16Frame extends SpriteFrame
     public function Encode() {
         $data = '';
         $lineOffsets = array();
-        for($y = 0; $y < $this->GetHeight(); $y++) {
+        for ($y = 0; $y < $this->GetHeight(); $y++) {
             $wasblack = 0;
             $runlength = 0;
-            if($y > 0) {
+            if ($y > 0) {
                 $lineOffsets[] = strlen($data);
             }
             $colourRunData = '';
-            for($x = 0; $x < $this->GetWidth(); $x++) {
+            for ($x = 0; $x < $this->GetWidth(); $x++) {
 
-                $pixel = $this->GetPixel($x,$y);
-                if($pixel['red'] > 255 || $pixel['green'] > 255 || $pixel['blue'] > 255) {
+                $pixel = $this->GetPixel($x, $y);
+                if ($pixel['red'] > 255 || $pixel['green'] > 255 || $pixel['blue'] > 255) {
                     throw new Exception('Pixel colour out of range.');
                 }
                 $newpixel = 0;
-                if($this->encoding == '555') {
+                if ($this->encoding == '555') {
                     $newpixel = (($pixel['red'] << 7) & 0xF800) | (($pixel['green'] << 2) & 0x03E0) | (($pixel['blue'] >> 3) & 0x001F);
                 } else {
                     $newpixel = (($pixel['red'] << 8) & 0xF800) | (($pixel['green'] << 3) & 0x07E0) | (($pixel['blue'] >> 3) & 0x001F);
@@ -149,48 +148,48 @@ class C16Frame extends SpriteFrame
 
 
                 // if isblack !== wasblack
-                if(($newpixel == 0) !== $wasblack || $runlength > 32766) {
+                if (($newpixel == 0) !== $wasblack || $runlength > 32766) {
                     //end the run if this isn't the first run
-                    if($wasblack !== 0) {
+                    if ($wasblack !== 0) {
 
                         //output data.
                         $run = $runlength << 1;
-                        if($wasblack) {
-                            $data .= pack('v',$run);
+                        if ($wasblack) {
+                            $data .= pack('v', $run);
 
                         } else {
                             $run = $run | 1;
-                            $data .= pack('v',$run);
+                            $data .= pack('v', $run);
                             $data .= $colourRunData;
                             $colourRunData = '';
                         }
                     }
                     //start a new run
-                    if($newpixel == 0) {
+                    if ($newpixel == 0) {
                         $wasblack = true;
                         $colourRunData = '';
                     } else {
                         $wasblack = false;
-                        $colourRunData = pack('v',$newpixel);
+                        $colourRunData = pack('v', $newpixel);
                     }
                     $runlength = 1;
 
                 } else {
-                    if(!$wasblack) {
-                        $colourRunData .= pack('v',$newpixel);
+                    if (!$wasblack) {
+                        $colourRunData .= pack('v', $newpixel);
                     }
                     $runlength++;
                 }
 
-                if($x == ($this->GetWidth()-1)) {
+                if ($x == ($this->GetWidth()-1)) {
                     //end run and output data.
                     $run = $runlength << 1;
-                    if($wasblack) {
-                        $data .= pack('v',$run);
+                    if ($wasblack) {
+                        $data .= pack('v', $run);
 
                     } else {
                         $run = $run | 1;
-                        $data .= pack('v',$run);
+                        $data .= pack('v', $run);
                         $data .= $colourRunData;
                         $colourRunData = '';
                     }

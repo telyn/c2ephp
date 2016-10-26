@@ -10,10 +10,10 @@ require_once(dirname(__FILE__).'/../PRAY/GLSTBlock.php');
  */
 ///@{
 /** Value: 1 */
-define('CREATUREHISTORY_GENDER_MALE',1);
+define('CREATUREHISTORY_GENDER_MALE', 1);
 
 /** Value: 2 */
-define('CREATUREHISTORY_GENDER_FEMALE',2);
+define('CREATUREHISTORY_GENDER_FEMALE', 2);
 ///@}
 
 /// @brief Class representing a creature's history.
@@ -43,13 +43,13 @@ class CreatureHistory {
 
     /// @brief Construct a CreatureHistory object.
     /**
-     * @param $moniker The moniker of the creature
-     * @param $name The creature's name
+     * @param false|string $moniker The moniker of the creature
+     * @param false|string $name The creature's name
      * @param $gender The creature's gender
      * @param $genus The creature's genus (Grendel, ettin, norn, geat)
      * @param $species The creature's species (unsure of purpose)  
      */
-    public function CreatureHistory($moniker,$name,$gender,$genus,$species) {
+    public function CreatureHistory($moniker, $name, $gender, $genus, $species) {
         $this->moniker = $moniker;
         $this->name = $name;
         $this->gender = $gender;
@@ -60,31 +60,31 @@ class CreatureHistory {
     /// @brief Compiles the CreatureHistory into CreaturesArchive data.
     /**
      * @param $format GLST_FORMAT_C3 or GLST_FORMAT_DS.
-     * @return A binary string ready for archiving and putting in a GLST block. 
+     * @return string binary string ready for archiving and putting in a GLST block. 
      */
-    public function Compile($format=GLST_FORMAT_C3) {
+    public function Compile($format = GLST_FORMAT_C3) {
         $data = '';
-        if($format != GLST_FORMAT_C3 && $format != GLST_FORMAT_DS) {
+        if ($format != GLST_FORMAT_C3 && $format != GLST_FORMAT_DS) {
             $format = $this->GuessFormat();
         }
-        if($format == GLST_FORMAT_DS) {
-            $data = pack('V',0x27);
+        if ($format == GLST_FORMAT_DS) {
+            $data = pack('V', 0x27);
         } else {
-            $data = pack('V',0x0C);
+            $data = pack('V', 0x0C);
         }
-        $data .= pack('V',1);
-        $data .= pack('V',32).$this->moniker;
-        $data .= pack('V',32).$this->moniker; //yeah, twice. Dunno why, CL are bonkers.
-        $data .= pack('V',strlen($this->name)).$this->name;
-        $data .= pack('VVVV',$this->gender,$this->genus,$this->species,count($this->events));
-        foreach($this->events as $event) {
+        $data .= pack('V', 1);
+        $data .= pack('V', 32).$this->moniker;
+        $data .= pack('V', 32).$this->moniker; //yeah, twice. Dunno why, CL are bonkers.
+        $data .= pack('V', strlen($this->name)).$this->name;
+        $data .= pack('VVVV', $this->gender, $this->genus, $this->species, count($this->events));
+        foreach ($this->events as $event) {
             $data .= $event->Compile($format);
         }
-        $data .= pack('V',$this->mutations);
-        $data .= pack('V',$this->crossoverpoints);
-        if($format == GLST_FORMAT_DS) {
-            $data .= pack('V',$this->unknown1);
-            $data .= pack('V',strlen($this->unknown2)).$this->unknown2;
+        $data .= pack('V', $this->mutations);
+        $data .= pack('V', $this->crossoverpoints);
+        if ($format == GLST_FORMAT_DS) {
+            $data .= pack('V', $this->unknown1);
+            $data .= pack('V', strlen($this->unknown2)).$this->unknown2;
         }
         return $data;
     }
@@ -93,10 +93,10 @@ class CreatureHistory {
     /**
      * This is done by working out whether any DS-specific variables
      * are set.
-     * @return GLST_FORMAT_DS or GLST_FORMAT_C3.
+     * @return integer or GLST_FORMAT_C3.
      */
     public function GuessFormat() {
-        return (isset($this->unknown1))?GLST_FORMAT_DS:GLST_FORMAT_C3;
+        return (isset($this->unknown1)) ? GLST_FORMAT_DS : GLST_FORMAT_C3;
     }
 
     /// @brief Adds an event to the end of a history.
@@ -112,7 +112,7 @@ class CreatureHistory {
     /**
      * Simply gets the nth event that happened in this history
      * @param $n the event number to get
-     * @return the $nth CreatureHistoryEvent 
+     * @return CreatureHistoryEvent $nth CreatureHistoryEvent 
      */
     public function GetEvent($n) {
         return $this->events[$n];
@@ -124,7 +124,7 @@ class CreatureHistory {
      * @param $n the event number to remove
      */
     public function RemoveEvent($n) {
-       unset($this->events[$n]); 
+        unset($this->events[$n]); 
     }
 
     /// @brief Counts the events in the history
@@ -143,8 +143,8 @@ class CreatureHistory {
      */
     public function GetEventsByType($type) {
         $matchingEvents = array();
-        foreach($this->events as $event) {
-            if($event->GetEventType() == $type) {
+        foreach ($this->events as $event) {
+            if ($event->GetEventType() == $type) {
                 $matchingEvents[] = $event;
             }
         }
@@ -153,7 +153,7 @@ class CreatureHistory {
 
     /// Gets all the events in this history
     /**
-     * @return An array of CreatureHistoryEvents 
+     * @return CreatureHistoryEvent[] array of CreatureHistoryEvents 
      */
     public function GetEvents() {
         return $this->events;
@@ -172,11 +172,11 @@ class CreatureHistory {
      * @return 0 for failure, the generation of the creature otherwise.
      */
     public function GetCreatureGenerationNumber() {
-        if($pos = strpos('_',$this->moniker) == -1) {
+        if ($pos = strpos('_', $this->moniker) == -1) {
             return 0;
         } else {
-            $firstbit = substr($this->moniker,0,$pos);
-            if(is_numeric($firstbit)) {
+            $firstbit = substr($this->moniker, 0, $pos);
+            if (is_numeric($firstbit)) {
                 return $firstbit+0;
             }
             return 0;
@@ -218,7 +218,7 @@ class CreatureHistory {
         return $this->crossoverpoints;
     }
 
-    public function SetMutationsAndCrossovers($mutations,$crossovers) {
+    public function SetMutationsAndCrossovers($mutations, $crossovers) {
         $this->mutations = $mutations;
         $this->crossoverpoints = $crossovers;
     }
@@ -229,16 +229,16 @@ class CreatureHistory {
     /**
      * This calls SetC3Unknown
      * @param $unknown1 First unknown variable
-     * @param $unknown2 Second unknown variable
+     * @param false|string $unknown2 Second unknown variable
      */
-    public function SetDSUnknowns($unknown1,$unknown2) {
+    public function SetDSUnknowns($unknown1, $unknown2) {
         $this->unknown1 = $unknown1;
         $this->unknown2 = $unknown2;
     }
 
     /// @brief Sets whether or not the creature is a veteran of the warp (DS only)
     /**
-     * @param $warpveteran A boolean (I think!)
+     * @param integer $warpveteran A boolean (I think!)
      */
     public function SetWarpVeteran($warpveteran) {
         $this->warpveteran = $warpveteran;

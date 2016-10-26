@@ -5,93 +5,93 @@
 /// @brief DS CAOS dictionary of tokens that can act like commands or variables
 class DSCAOSCommandVariables {
     /// @brief Returns an array of tokens.
-	public static function GetTokens() {
-		return array(
-			'attr',
-			'base',
-			'bhvr',
-			'clik', //I have no experience using this, but I think this is right.
-			'gall',
-			'hand',
-			'mira',
-			'paus',
-			'plne',
-			'pose',
-			'rnge',
-			'targ',
-			'tick',
+    public static function GetTokens() {
+        return array(
+            'attr',
+            'base',
+            'bhvr',
+            'clik', //I have no experience using this, but I think this is right.
+            'gall',
+            'hand',
+            'mira',
+            'paus',
+            'plne',
+            'pose',
+            'rnge',
+            'targ',
+            'tick',
 		
-			//camera
-			'meta',
-			'trck',
-			'wdow',
+            //camera
+            'meta',
+            'trck',
+            'wdow',
 		
-			//compound
-			'page',
-			'ptxt',
+            //compound
+            'page',
+            'ptxt',
 		
-			//creatures
-			'aslp',
-			'dead',
-			'dirn',
-			'drea',
-			'face',
-			'ins#',
-			'mind',
-			'motr',
-			'norn',
-			'uncs',
-			'zomb',
+            //creatures
+            'aslp',
+            'dead',
+            'dirn',
+            'drea',
+            'face',
+            'ins#',
+            'mind',
+            'motr',
+            'norn',
+            'uncs',
+            'zomb',
 		
-			//files
+            //files
 			
-			//input
-			'pure',
+            //input
+            'pure',
 		
-			//map
-			'perm',
+            //map
+            'perm',
 			
-			//motion
-			'accg',
-			'admp',
-			'aero',
-			'avel',
-			'elas',
-			'fdmp',
-			'fric',
-			'fvel',
-			'sdmp',
-			'spin',
-			'svel',
-			'varc',
+            //motion
+            'accg',
+            'admp',
+            'aero',
+            'avel',
+            'elas',
+            'fdmp',
+            'fric',
+            'fvel',
+            'sdmp',
+            'spin',
+            'svel',
+            'varc',
 			
-			//ports
+            //ports
 			
-			//resources
+            //resources
 			
-			//caos
+            //caos
 			
-			//sounds
-			'vois',
+            //sounds
+            'vois',
 			
-			//time
-			'buzz',
-			'wpau',
-			'targ',
+            //time
+            'buzz',
+            'wpau',
+            'targ',
 			
-			//vehicles
-			'cabp',
-			'cabv',
+            //vehicles
+            'cabp',
+            'cabv',
 			
-			//world
-			'delw',
-			'load',
+            //world
+            'delw',
+            'load',
 		
-			//net
-			'net: line',
-			'net: pass'
-		);
-	}
+            //net
+            'net: line',
+            'net: pass'
+        );
+    }
 }
 
 /// @endcond

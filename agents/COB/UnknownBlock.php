@@ -12,16 +12,16 @@ class COBUnknownBlock extends COBBlock {
 
     /// @brief Creates a new COBUnknown block with the given type and contents
     /**
-	 * @param $type The four-character type of the block
-	 * @param $contents The contents of the block
-	 */
-	public function COBUnknownBlock($type,$contents) {
-		parent::COBBlock($type);
+     * @param $type The four-character type of the block
+     * @param $contents The contents of the block
+     */
+    public function COBUnknownBlock($type,$contents) {
+        parent::COBBlock($type);
     }
 
-	/// @brief Gets the block's contents
-	public function GetContents() {
-		return $this->contents;
-	}
+    /// @brief Gets the block's contents
+    public function GetContents() {
+        return $this->contents;
+    }
 }
 ?>

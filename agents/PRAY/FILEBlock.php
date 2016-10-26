@@ -17,15 +17,15 @@ class FILEBlock extends PrayBlock {
      * FILEBlocks are currently read-only. \n
      * If $prayfile is not null, all the data about this block
      * will be read from the PRAYFile.
-     * @param $prayfile The PRAYFile this FILEBlock belongs to. Can
+     * @param PRAYFile $prayfile The PRAYFile this FILEBlock belongs to. Can
      * be null.
      * @param $name The name of this file block (also the file's
      * name)
      * @param $content The binary data of this file block.
      * @param $flags The block's flags. See PrayBlock.
      */
-    public function FILEBlock($prayfile,$name,$content,$flags) {
-        parent::PrayBlock($prayfile,$name,$content,$flags,PRAY_BLOCK_FILE);
+    public function FILEBlock($prayfile, $name, $content, $flags) {
+        parent::PrayBlock($prayfile, $name, $content, $flags, PRAY_BLOCK_FILE);
     }
 
     /// @cond INTERNAL_DOCS

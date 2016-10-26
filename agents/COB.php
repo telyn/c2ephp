@@ -11,12 +11,12 @@ require_once(dirname(__FILE__).'/COB/UnknownBlock.php');
  * @name C1 format cob
  * Value: C1
  */
-define('COB_FORMAT_C1','C1');
+define('COB_FORMAT_C1', 'C1');
 /**
  * @name C2 format COB
  * Value: C2
  */
-define('COB_FORMAT_C2','C2');
+define('COB_FORMAT_C2', 'C2');
 ///@}
 
 /// @brief Class that interacts with COB files (c1 and c2 formats)
@@ -42,8 +42,8 @@ class COB {
      * This code will only parse C1 cobs.
      * @param $reader The reader which contains the cob to read from. Can be null.
      */
-    public function COB(IReader $reader=null) {
-        if($reader != null) {
+    public function COB(IReader $reader = null) {
+        if ($reader != null) {
             $this->LoadCOB($reader);
         }
     }
@@ -58,13 +58,13 @@ class COB {
      * @param $reader The reader to read from
      */
     private function LoadCOB(IReader $reader) {
-        if($reader->Read(4) == 'cob2') {
+        if ($reader->Read(4) == 'cob2') {
             $reader->Seek(0);
             $this->LoadC2COB($reader);
         } else {
             $string = $reader->GetSubString(0);
             $data = @gzuncompress($string);
-            if($data===false) {
+            if ($data === false) {
                 $reader->Seek(0);
                 $this->LoadC1COB($reader);
             } else {
@@ -83,8 +83,8 @@ class COB {
      */
     public function LoadC2COB(IReader $reader) {
         $this->format = COB_FORMAT_C2;
-        if($reader->Read(4) == 'cob2') {
-            while($block = $this->ReadBlock($reader)) {
+        if ($reader->Read(4) == 'cob2') {
+            while ($block = $this->ReadBlock($reader)) {
                 $this->blocks[] = $block;
             }
         } else {
@@ -101,7 +101,7 @@ class COB {
     public function LoadC1COB(IReader $reader) {
         $this->format = COB_FORMAT_C1;
         $version = $reader->ReadInt(2);
-        if($version > 4) {
+        if ($version > 4) {
             throw new Exception('Invalid cob file.');
         } else {
             $this->blocks[] = COBAgentBlock::CreateFromReaderC1($reader);
@@ -124,11 +124,11 @@ class COB {
      * a representative COBBlock, and returns it.
      */
     private function ReadBlock(IReader $reader) {
-        if(!($type = $reader->Read(4))) {
+        if (!($type = $reader->Read(4))) {
             return false;
         }
         $size = $reader->ReadInt(4);
-        switch($type) {
+        switch ($type) {
         case 'agnt':
             //we read the entire thing so that if there are errors we can still go on with the other blocks.
             return COBAgentBlock::CreateFromReaderC2($reader);
@@ -142,7 +142,7 @@ class COB {
         default:
             //throw new Exception('Invalid block type: Probably a bug or an invalid COB file: '.$type);
             //simply ignore unknown block types, in case people add their own
-            return new COBUnknownBlock($type,$reader->Read($size));
+            return new COBUnknownBlock($type, $reader->Read($size));
             break;
         }
     }
@@ -157,10 +157,10 @@ class COB {
      * @param $type The type of block to get (agnt, auth, file). False by default.
      * @return An array of COBBlocks.
      */
-    public function GetBlocks($type=false) {
+    public function GetBlocks($type = false) {
         $blocks = array();
-        foreach($this->blocks as $block) {
-            if($type === false || $type == $block->GetType()) {
+        foreach ($this->blocks as $block) {
+            if ($type === false || $type == $block->GetType()) {
                 $blocks[] = $block;
             }
         }
@@ -173,13 +173,13 @@ class COB {
      *  @return A binary string containing the COB.
      */
     public function Compile($format = null) {
-        if($format == null) {
+        if ($format == null) {
             $format = $this->GetType();
         }
-        if($format != FORMAT_C1) {
+        if ($format != FORMAT_C1) {
             $format = FORMAT_C2
         }
-        switch($format) {
+        switch ($format) {
         case FORMAT_C1:
             $this->CompileC1();
         case FORMAT_C2:
@@ -198,7 +198,7 @@ class COB {
     // TODO: Check accuracy
     public function CompileC2() {
         $data = 'cob2'; 
-        foreach($this->blocks as $block) {
+        foreach ($this->blocks as $block) {
             $data .= $block->Compile();
         }    
     }

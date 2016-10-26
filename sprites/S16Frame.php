@@ -17,19 +17,19 @@ class S16Frame extends SpriteFrame {
     
     /// @brief Instantiate an S16Frame
     
-    public function S16Frame($reader,$encoding='565',$width=false,$height=false,$offset=false)
+    public function S16Frame($reader, $encoding = '565', $width = false, $height = false, $offset = false)
     {
-        if($reader instanceof IReader) {
+        if ($reader instanceof IReader) {
             $this->reader = $reader;
             $this->encoding = $encoding;
-            if($width === false || $height === false || $offset === false) {
+            if ($width === false || $height === false || $offset === false) {
                 $this->offset = $this->reader->ReadInt(4);
                 parent::SpriteFrame($this->reader->ReadInt(2), $this->reader->ReadInt(2));
             } else {
-                parent::SpriteFrame($width,$height);
+                parent::SpriteFrame($width, $height);
                 $this->offset = $offset;
             }
-        } else if(get_resource_type($reader) == 'gd') {
+        } else if (get_resource_type($reader) == 'gd') {
             $this->gdImage = $reader;
             $this->decoded = true;
             $this->encoding = $encoding;
@@ -41,26 +41,26 @@ class S16Frame extends SpriteFrame {
     /// @brief Encodes the image into s16 frame data.
     /**
      * @param $format 555 or 565.
-     * @return s16 image data in the format specified
+     * @return string image data in the format specified
      */
 
-    public function Encode($format='565') {
+    public function Encode($format = '565') {
         $this->EnsureDecoded();
         $data = ''; 
-        for($y = 0; $y < $this->GetHeight(); $y++) {
-            for($x = 0; $x < $this->GetWidth(); $x++ ) {
+        for ($y = 0; $y < $this->GetHeight(); $y++) {
+            for ($x = 0; $x < $this->GetWidth(); $x++) {
 
-                $pixel = $this->GetPixel($x,$y);
-                if($pixel['red'] > 255 || $pixel['green'] > 255 || $pixel['blue'] > 255) {
+                $pixel = $this->GetPixel($x, $y);
+                if ($pixel['red'] > 255 || $pixel['green'] > 255 || $pixel['blue'] > 255) {
                     throw new Exception('Pixel colour out of range.');
                 }
                 $newpixel = 0;
-                if($this->encoding == '555') {
+                if ($this->encoding == '555') {
                     $newpixel = (($pixel['red'] << 7) & 0xF800) | (($pixel['green'] << 2) & 0x03E0) | (($pixel['blue'] >> 3) & 0x001F);
                 } else {
                     $newpixel = (($pixel['red'] << 8) & 0xF800) | (($pixel['green'] << 3) & 0x07E0) | (($pixel['blue'] >> 3) & 0x001F);
                 }
-                $data .= pack('v',$newpixel);
+                $data .= pack('v', $newpixel);
             }
         }
         return $data;
@@ -73,24 +73,24 @@ class S16Frame extends SpriteFrame {
      * TODO: Internal documentation S16Frame::Decode()
      */
     protected function Decode() {
-        if($this->decoded) { return $this->gdImage; }
+        if ($this->decoded) { return $this->gdImage; }
 
             $image = imagecreatetruecolor($this->GetWidth(),
                 $this->GetHeight());
         $this->reader->Seek($this->offset);
-        for($y = 0; $y < $this->GetHeight(); $y++)
+        for ($y = 0; $y < $this->GetHeight(); $y++)
         {
-            for($x = 0; $x < $this->GetWidth(); $x++)
+            for ($x = 0; $x < $this->GetWidth(); $x++)
             {
                 $pixel = $this->reader->ReadInt(2);
                 $red = 0; $green = 0; $blue = 0;
-                if($this->encoding == "565")
+                if ($this->encoding == "565")
                 {
                     $red   = ($pixel & 0xF800) >> 8;
                     $green = ($pixel & 0x07E0) >> 3;
                     $blue  = ($pixel & 0x001F) << 3;
                 }
-                else if($this->encoding == "555")
+                else if ($this->encoding == "555")
                 {
                     $red   = ($pixel & 0x7C00) >> 7;
                     $green = ($pixel & 0x03E0) >> 2;
