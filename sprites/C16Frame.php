@@ -75,10 +75,11 @@ class C16Frame extends SpriteFrame
             for ($x = 0; $x < $this->GetWidth();)
             {
                 $run = $this->reader->ReadInt(2);
-                if (($run & 0x0001) > 0)
-                    $run_type = "colour";
-                else
-                    $run_type = "black";
+                if (($run & 0x0001) > 0) {
+                                    $run_type = "colour";
+                } else {
+                                    $run_type = "black";
+                }
                 $run_length = ($run & 0x7FFF) >> 1;
                 if ($run_type == "black")
                 {
@@ -98,8 +99,7 @@ class C16Frame extends SpriteFrame
                             $red   = ($pixel & 0xF800) >> 8;
                             $green = ($pixel & 0x07E0) >> 3;
                             $blue  = ($pixel & 0x001F) << 3;
-                        }
-                        else if ($this->encoding == "555")
+                        } else if ($this->encoding == "555")
                         {
                             $red   = ($pixel & 0x7C00) >> 7;
                             $green = ($pixel & 0x03E0) >> 2;
@@ -109,8 +109,9 @@ class C16Frame extends SpriteFrame
                         imagesetpixel($image, $x, $y, $colour);
                     }
                 }
-                if ($x == $this->GetWidth())
-                    $this->reader->Skip(2);
+                if ($x == $this->GetWidth()) {
+                                    $this->reader->Skip(2);
+                }
             }
         }
         $this->gdImage = $image;

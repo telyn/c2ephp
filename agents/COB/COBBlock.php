@@ -23,7 +23,7 @@ abstract class COBBlock {
      * @param $type What type of COBBlock it is. Must be a 4-character string.
      */
     public function COBBlock($type) {
-        if(strlen($type) != 4) {
+        if (strlen($type) != 4) {
             throw new Exception('Invalid COB block type: '.$type);
         }
         $this->type = $type;

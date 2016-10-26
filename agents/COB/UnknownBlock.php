@@ -15,7 +15,7 @@ class COBUnknownBlock extends COBBlock {
      * @param $type The four-character type of the block
      * @param $contents The contents of the block
      */
-    public function COBUnknownBlock($type,$contents) {
+    public function COBUnknownBlock($type, $contents) {
         parent::COBBlock($type);
     }
 

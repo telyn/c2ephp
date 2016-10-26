@@ -6,8 +6,7 @@
 class C3CAOSFlowControls {
     /// @brief Returns an array of tokens.
     public static function GetTokens() {
-        return array
-        (
+        return array(
 		
             'doif',
             'econ',

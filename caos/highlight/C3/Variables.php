@@ -9,8 +9,7 @@
 class C3CAOSVariables {
     /// @brief Returns an array of tokens.
     public static function GetTokens() {
-        return array
-        (
+        return array(
             //agents
             'abba',
             'carr',
