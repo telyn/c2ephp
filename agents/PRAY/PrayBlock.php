@@ -24,31 +24,31 @@ require_once(dirname(__FILE__).'/SFAMBlock.php');
  */
 //@{
 /** Value: 'AGNT' */
-define('PRAY_BLOCK_AGNT','AGNT'); 
+define('PRAY_BLOCK_AGNT', 'AGNT'); 
 /** Value: 'CREA' */
-define('PRAY_BLOCK_CREA','CREA');
+define('PRAY_BLOCK_CREA', 'CREA');
 /** Value: 'DFAM' */
-define('PRAY_BLOCK_DFAM','DFAM');
+define('PRAY_BLOCK_DFAM', 'DFAM');
 /** Value: 'DSAG' */
-define('PRAY_BLOCK_DSAG','DSAG');
+define('PRAY_BLOCK_DSAG', 'DSAG');
 /** Value: 'DSEX' */
-define('PRAY_BLOCK_DSEX','DSEX');
+define('PRAY_BLOCK_DSEX', 'DSEX');
 /** Value: 'EGG' */
-define('PRAY_BLOCK_EGGS' ,'EGGS' );
+define('PRAY_BLOCK_EGGS', 'EGGS');
 /** Value: 'EXPC' */
-define('PRAY_BLOCK_EXPC','EXPC');
+define('PRAY_BLOCK_EXPC', 'EXPC');
 /** Value: 'FILE' */
-define('PRAY_BLOCK_FILE','FILE');
+define('PRAY_BLOCK_FILE', 'FILE');
 /** Value: 'GENE' */
-define('PRAY_BLOCK_GENE','GENE');
+define('PRAY_BLOCK_GENE', 'GENE');
 /** Value: 'GLST' */
-define('PRAY_BLOCK_GLST','GLST');
+define('PRAY_BLOCK_GLST', 'GLST');
 /** Value: 'LIVE' */
-define('PRAY_BLOCK_LIVE','LIVE');
+define('PRAY_BLOCK_LIVE', 'LIVE');
 /** Value: 'PHOT' */
-define('PRAY_BLOCK_PHOT','PHOT');
+define('PRAY_BLOCK_PHOT', 'PHOT');
 /** Value: 'SFAM' */
-define('PRAY_BLOCK_SFAM','SFAM');
+define('PRAY_BLOCK_SFAM', 'SFAM');
 //@}
 
 /** @name Flags
@@ -57,7 +57,7 @@ define('PRAY_BLOCK_SFAM','SFAM');
 ///@{
 /** Value: 1*/
 ///Whether or not the block is zLib compressed.
-define('PRAY_FLAG_ZLIB_COMPRESSED',1);
+define('PRAY_FLAG_ZLIB_COMPRESSED', 1);
 ///@}
 
 /// @brief Abstract class to represent PRAY blocks
@@ -83,11 +83,11 @@ abstract class PrayBlock {
      *    @param $flags     A 1-byte integer containing the flags this PrayBlock has set
      *    @param $type     The type of the PrayBlock as a PRAY_BLOCK_* constant. Must be a four-character string.  
      */
-    public function PrayBlock($prayfile,$name,$content,$flags,$type) {
-        if(strlen($type) != 4) {
+    public function PrayBlock($prayfile, $name, $content, $flags, $type) {
+        if (strlen($type) != 4) {
             throw new Exception('Invalid PRAY block type: '.$type);
         }
-        if($prayfile instanceof PRAYFile) {
+        if ($prayfile instanceof PRAYFile) {
             $this->prayfile = $prayfile;
             $this->decompiled = false;
         } else {
@@ -102,21 +102,21 @@ abstract class PrayBlock {
 
     /// @brief Encodes the block header for attaching to the front of the block binary data.
     /** 
-     * @param $length length of the data that will be written to the block
+     * @param integer $length length of the data that will be written to the block
      * @param $uncompressedlength length of the data when uncompressed, etc.
      */
-    protected function EncodeBlockHeader($length,$uncompressedlength=false) {
+    protected function EncodeBlockHeader($length, $uncompressedlength = false) {
         $compiled = $this->GetType();
-        $compiled .= substr($this->GetName(),0,128);
-        $len = 128 - strlen($this->GetName());
+        $compiled .= substr($this->GetName(), 0, 128);
+        $len = 128-strlen($this->GetName());
         
-        for($i=0;$i<$len;$i++) {
+        for ($i = 0; $i < $len; $i++) {
             $compiled .= pack('x');
         }
-        if($uncompressedlength === false) {
+        if ($uncompressedlength === false) {
             $uncompressedlength = $length;
         }
-        $compiled .= pack('VVV',$length,$uncompressedlength,$this->flags);
+        $compiled .= pack('VVV', $length, $uncompressedlength, $this->flags);
         return $compiled;
     }
     /// @endcond
@@ -127,10 +127,10 @@ abstract class PrayBlock {
     /** 
      * Called automatically during Compile
      * @param $data the data to perform the function on
-     * @return the data, having been transformed.
+     * @return boolean|string data, having been transformed.
      */
     protected function PerformFlagOperations($data) {
-        if($this->IsFlagSet(PRAY_FLAG_ZLIB_COMPRESSED)) {
+        if ($this->IsFlagSet(PRAY_FLAG_ZLIB_COMPRESSED)) {
             $data = gzcompress($data);
         }
         return $data;
@@ -140,6 +140,7 @@ abstract class PrayBlock {
 
     /// @brief Gets the PRAY block's name
     /** return the PRAY block's name
+     * @return string
      */
     public function GetName() {
         return $this->name;
@@ -151,11 +152,11 @@ abstract class PrayBlock {
      * return the PRAY block's binary data.
      */
     public function GetData() {
-        if($this->decompiled) {
+        if ($this->decompiled) {
             throw new Exception('Can\'t get data on a decompiled PRAYBlock. It must be compiled first');
             return;
         }
-        if($this->IsFlagSet(PRAY_FLAG_ZLIB_COMPRESSED)) {
+        if ($this->IsFlagSet(PRAY_FLAG_ZLIB_COMPRESSED)) {
             $this->content = gzuncompress($this->content);
             $this->SetFlagsOff(PRAY_FLAG_ZLIB_COMPRESSED);
         }
@@ -181,8 +182,8 @@ abstract class PrayBlock {
     }
     /// @brief Tells you whether $flag is set on this PRAY block
     /**
-     * @param $flag the bitfield to compare $flags to. As such can be multiple flags OR'd together.
-     * @return true or false.
+     * @param integer $flag the bitfield to compare $flags to. As such can be multiple flags OR'd together.
+     * @return boolean or false.
      */
     public function IsFlagSet($flag) {
         return (($this->flags & $flag) === $flag);
@@ -222,7 +223,7 @@ abstract class PrayBlock {
     }
     /// @brief Unsets flags
     /**
-     * @param $flags a bitfield representing the flags to set off.
+     * @param integer $flags a bitfield representing the flags to set off.
      */
     protected function SetFlagsOff($flags) {
         $this->flags = $this->flags & ~$flags;
@@ -233,7 +234,7 @@ abstract class PrayBlock {
      * Call this function at the beginning of every function that returns data in superclasses so that data decoding is automatic.
      */
     protected function EnsureDecompiled() {
-        if($this->decompiled) {
+        if ($this->decompiled) {
             return;
         } else {
             $this->DecompileBlockData();
@@ -251,18 +252,18 @@ abstract class PrayBlock {
      * This function is mainly intended for use by PRAYFiles. 
      */
     public function Compile() {
-        if($this->decompiled) { 
+        if ($this->decompiled) { 
             $data = $this->CompileBlockData();
             $uclength = strlen($data);
             $data = $this->PerformFlagOperations($data);
-            $compiled = $this->EncodeBlockHeader(strlen($data),$uclength);
+            $compiled = $this->EncodeBlockHeader(strlen($data), $uclength);
             $compiled .= $data;
             $this->content = $data;
             $this->decompiled = false;
             return $compiled; 
         } else {
             $data = $this->PerformFlagOperations($this->content);
-            $compiled  = $this->EncodeBlockHeader(strlen($this->content),strlen($data));
+            $compiled  = $this->EncodeBlockHeader(strlen($this->content), strlen($data));
             $compiled .= $this->content;
             return $compiled;
         }
@@ -288,55 +289,55 @@ abstract class PrayBlock {
     /** For developer use. Called by 
      *   @param $blocktype   The type of PRAYBlock, as one of the Block Types defines.
      *   @param $prayfile    The PRAYFile object that the PRAYBlock is a child of. This is used to allow blocks to access to each other.
-     *   @param $name        The name of the PRAYBlock
+     *   @param string $name        The name of the PRAYBlock
      *   @param $content     The binary content of the PRAYBlock, uncompressed if necessary.
      *   @param $flags       The flags given to this PRAYBlock as an integer.
      *   return An object that is an instance of a subclass of PrayBlock.
      */
-    public static function MakePrayBlock($blocktype,PRAYFile $prayfile,$name,$content,$flags) {
-        switch($blocktype) {
+    public static function MakePrayBlock($blocktype, PRAYFile $prayfile, $name, $content, $flags) {
+        switch ($blocktype) {
             //agents
         case PRAY_BLOCK_AGNT:
-            return new AGNTBlock($prayfile,$name,$content,$flags);
+            return new AGNTBlock($prayfile, $name, $content, $flags);
         case PRAY_BLOCK_DSAG:
-            return new DSAGBlock($prayfile,$name,$content,$flags);
+            return new DSAGBlock($prayfile, $name, $content, $flags);
         case PRAY_BLOCK_LIVE:
-            return new LIVEBlock($prayfile,$name,$content,$flags); //sea monkeys agent files.
+            return new LIVEBlock($prayfile, $name, $content, $flags); //sea monkeys agent files.
 
             //egg
         case PRAY_BLOCK_EGGS:
-            return new EGGSBlock($prayfile,$name,$content,$flags);
+            return new EGGSBlock($prayfile, $name, $content, $flags);
 
             //starter families
         case PRAY_BLOCK_DFAM:
-            return new DFAMBlock($prayfile,$name,$content,$flags);
+            return new DFAMBlock($prayfile, $name, $content, $flags);
         case PRAY_BLOCK_SFAM:
-            return new SFAMBlock($prayfile,$name,$content,$flags);
+            return new SFAMBlock($prayfile, $name, $content, $flags);
 
             //exported creatures
         case PRAY_BLOCK_EXPC:
-            return new EXPCBlock($prayfile,$name,$content,$flags);
+            return new EXPCBlock($prayfile, $name, $content, $flags);
         case PRAY_BLOCK_DSEX:
-            return new DSEXBlock($prayfile,$name,$content,$flags);
+            return new DSEXBlock($prayfile, $name, $content, $flags);
 
         case PRAY_BLOCK_CREA:
-            return new CREABlock($prayfile,$name,$content,$flags);
+            return new CREABlock($prayfile, $name, $content, $flags);
 
             //creature photos
         case PRAY_BLOCK_PHOT:
-            return new PHOTBlock($prayfile,$name,$content,$flags);
+            return new PHOTBlock($prayfile, $name, $content, $flags);
 
             //creature history
         case PRAY_BLOCK_GLST:
-            return new GLSTBlock($prayfile,$name,$content,$flags);
+            return new GLSTBlock($prayfile, $name, $content, $flags);
 
             //creature genetics
         case PRAY_BLOCK_GENE:
-            return new GENEBlock($prayfile,$name,$content,$flags);
+            return new GENEBlock($prayfile, $name, $content, $flags);
 
             //files
         case PRAY_BLOCK_FILE:
-            return new FILEBlock($prayfile,$name,$content,$flags);
+            return new FILEBlock($prayfile, $name, $content, $flags);
 
         default:
             return null;

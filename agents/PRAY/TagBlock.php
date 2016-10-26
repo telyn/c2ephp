@@ -25,12 +25,12 @@ abstract class TagBlock extends PrayBlock {
      * @param $name The name of the block. Cannot be null.
      * @param $content The binary data this block contains. Can be null.
      * @param $flags The flags relating to this block. Should be zero or real flags.
-     * @param $type The block's 4-character type. Must be defined.
+     * @param string $type The block's 4-character type. Must be defined.
      */
-    public function TagBlock($prayfile,$name,$content,$flags,$type) {
-        parent::PrayBlock($prayfile,$name,$content,$flags,$type);
-        if($prayfile instanceof PRAYFile) {
-        } else if(is_array($prayfile)) {
+    public function TagBlock($prayfile, $name, $content, $flags, $type) {
+        parent::PrayBlock($prayfile, $name, $content, $flags, $type);
+        if ($prayfile instanceof PRAYFile) {
+        } else if (is_array($prayfile)) {
             $this->tags = $prayfile;
         }
     }
@@ -40,11 +40,12 @@ abstract class TagBlock extends PrayBlock {
     /**
      * Returns the tag's value as a string, or
      * nothing if the tag doesn't exist.
+     * @param string $key
      */
     public function GetTag($key) {
         $this->EnsureDecompiled();
-        foreach($this->tags as $tk => $tv) {
-            if($key == $tk) {
+        foreach ($this->tags as $tk => $tv) {
+            if ($key == $tk) {
                 return $tv;
             }
         }
@@ -66,7 +67,7 @@ abstract class TagBlock extends PrayBlock {
      * @param $tag Name of the tag to set
      * @param $value The value to set the tag to
      */
-    public function SetTag($tag,$value) {
+    public function SetTag($tag, $value) {
         $this->EnsureDecompiled();
         $this->tags[$tag] = $value;
     }
@@ -82,24 +83,24 @@ abstract class TagBlock extends PrayBlock {
         $compiled = '';
         $ints = array();
         $strings = array();
-        foreach($this->tags as $key=>$value) {
-            if(is_int($value)) {
+        foreach ($this->tags as $key=>$value) {
+            if (is_int($value)) {
                 $ints[$key] = $value;
             } else {
                 $strings[$key] = $value;
             }
         }
-        $compiled .= pack('V',sizeof($ints));
-        foreach($ints as $key=>$value) {
-            $compiled .= pack('V',strlen($key));
+        $compiled .= pack('V', sizeof($ints));
+        foreach ($ints as $key=>$value) {
+            $compiled .= pack('V', strlen($key));
             $compiled .= $key;
-            $compiled .= pack('V',$value);
+            $compiled .= pack('V', $value);
         }
-        $compiled .= pack('V',sizeof($strings));
-        foreach($strings as $key=>$value) {
-            $compiled .= pack('V',strlen($key));
+        $compiled .= pack('V', sizeof($strings));
+        foreach ($strings as $key=>$value) {
+            $compiled .= pack('V', strlen($key));
             $compiled .= $key;
-            $compiled .= pack('V',strlen($value));
+            $compiled .= pack('V', strlen($value));
             $compiled .= $value;
         }
         return $compiled;
@@ -114,7 +115,7 @@ abstract class TagBlock extends PrayBlock {
         $blockReader = new StringReader($this->GetData());
         
         $numInts = $blockReader->ReadInt(4);
-        for($i=0;$i<$numInts;$i++) {
+        for ($i = 0; $i < $numInts; $i++) {
             $nameLength = $blockReader->ReadInt(4);
             $name = $blockReader->Read($nameLength);
             $int = $blockReader->ReadInt(4);
@@ -123,7 +124,7 @@ abstract class TagBlock extends PrayBlock {
         
         
         $numStrings = $blockReader->ReadInt(4);
-        for($i=0;$i<$numStrings;$i++) {
+        for ($i = 0; $i < $numStrings; $i++) {
             $nameLength = $blockReader->ReadInt(4);
             $name = $blockReader->Read($nameLength);
             $stringLength = $blockReader->ReadInt(4);

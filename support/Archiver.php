@@ -12,6 +12,9 @@ function DeArchive($data) {
 		return false; //coming soon
 	}	
 }
+/**
+ * @param string $data
+ */
 function Archive($data,$filehandle=null) {
 	if(is_resource($filehandle)) {
 		return false;

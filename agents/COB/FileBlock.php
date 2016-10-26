@@ -16,11 +16,11 @@ class COBFileBlock extends COBBlock {
 
 	/// @brief Constructs a new COBFileBlock
     /**
-     * @param $type The file type
+     * @param string $type The file type
 	 * @param $name The file name (including extension)
 	 * @param $contents The contents of the file
 	 */
-	public function COBFileBlock($type,$name,$contents) {
+	public function COBFileBlock($type, $name, $contents) {
 		parent::COBBlock(COB_BLOCK_FILE);
 		$this->fileType = $type;
 		$this->fileName = $name;
@@ -45,13 +45,13 @@ class COBFileBlock extends COBBlock {
      * @return 'sprite' or 'sound' - i.e. one of the
      * COB_DEPENDENCY_* constants in COBAgentBlock
      */
-	public function GetFileType() {
-		return $this->fileType;
+    public function GetFileType() {
+        return $this->fileType;
     }
 
     /// @brief Get the contents of the file.
-	public function GetContents() {
-		return $this->contents;
+    public function GetContents() {
+        return $this->contents;
     }
 
     /// @brief Get the reserved data
@@ -59,8 +59,8 @@ class COBFileBlock extends COBBlock {
      * Reserved data was never officially used.
      * @return A 4-byte integer.
      */
-	public function GetReserved() {
-		return $this->reserved;
+    public function GetReserved() {
+        return $this->reserved;
     }
 
     /// @cond INTERNAL_DOCS
@@ -68,16 +68,16 @@ class COBFileBlock extends COBBlock {
     /// @brief Creates a new COBFileBlock from an IReader
     /**
      * @param $reader The reader the data's coming from
-	 */
-	public static function CreateFromReader(IReader $reader) {
-		$type = ($reader->ReadInt(2)==0)?'sprite':'sound';
-		$reserved = $reader->ReadInt(4);
-		$size = $reader->ReadInt(4);
-		$fileName = $reader->ReadCString();
-		$contents = $reader->Read($size);
-		$block = new COBFileBlock($type,$fileName,$contents);
-		$block->AddReserved($reserved);
-		return $block;
+     */
+    public static function CreateFromReader(IReader $reader) {
+        $type = ($reader->ReadInt(2)==0)?'sprite':'sound';
+        $reserved = $reader->ReadInt(4);
+        $size = $reader->ReadInt(4);
+        $fileName = $reader->ReadCString();
+        $contents = $reader->Read($size);
+        $block = new COBFileBlock($type,$fileName,$contents);
+        $block->AddReserved($reserved);
+        return $block;
     }
     /// @endcond
 }

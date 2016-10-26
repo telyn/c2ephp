@@ -11,13 +11,13 @@ class DSAGBlock extends AGNTBlock {
     /**
      * If $prayfile is not null, all the data for this block
      * will be read from the PRAYFile.
-     * @param $prayfile The PRAYFile that this DSAG block belongs to.
+     * @param PRAYFile $prayfile The PRAYFile that this DSAG block belongs to.
      * @param $name The block's name.
      * @param $content The binary data of this block. May be null.
      * @param $flags The block's flags
      */
-    public function DSAGBlock($prayfile,$name,$content,$flags) {
-        parent::TagBlock($prayfile,$name,$content,$flags,PRAY_BLOCK_DSAG);
+    public function DSAGBlock($prayfile, $name, $content, $flags) {
+        parent::TagBlock($prayfile, $name, $content, $flags, PRAY_BLOCK_DSAG);
     }
     /// @brief Gets the label used on the web button.
     public function GetWebLabel() {
@@ -55,36 +55,36 @@ class DSAGBlock extends AGNTBlock {
      */
     public function GetWebIconAsSpriteFrame() {
         $webIcon = $this->GetWebIcon();
-        if($webIcon == '') {
+        if ($webIcon == '') {
             throw new Exception('No web icon!');
         }
         $webIconBase = $this->GetWebIconBase();
         $webIconAnimationString = $this->GetWebIconAnimationString();
-        if($webIconBase == '') {
+        if ($webIconBase == '') {
             $webIconBase = 0;
         }
-        if($webIconAnimationString == '') {
+        if ($webIconAnimationString == '') {
             $webIconAnimationString = 0;
         }
-        if(($position = strpos($webIconAnimationString,' ')) !== false) {
-            $webIconAnimationString = substr($webIconAnimationString,0,$position);
+        if (($position = strpos($webIconAnimationString, ' ')) !== false) {
+            $webIconAnimationString = substr($webIconAnimationString, 0, $position);
         }
         $prayfile = $this->GetPrayFile();
-        if($prayfile == null) {
+        if ($prayfile == null) {
             throw new Exception('No PRAY file to get the icon from!');
         }
         $iconBlock = $prayfile->GetBlockByName($webIcon);
-        if($iconBlock->GetType() != 'FILE') {
+        if ($iconBlock->GetType() != 'FILE') {
             throw new Exception('The block with the web icon\'s filename is not a file block!');
         }
-        $type = strtolower(substr($webIcon,-3));
+        $type = strtolower(substr($webIcon, -3));
         $icon = null;
-        if($type == 'c16') {
+        if ($type == 'c16') {
             $icon = new C16File(new StringReader($iconBlock->GetData()));
-        } else if($type == 's16') {
+        } else if ($type == 's16') {
             $icon = new S16File(new StringReader($iconBlock->GetData()));
         }
-        if($icon == null) {
+        if ($icon == null) {
             throw new Exception('For one reason or another, couldn\'t make a sprite file for the web icon.');
         }
         return $icon->GetFrame($webIconBase+$webIconAnimationString);
