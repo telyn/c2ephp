@@ -9,8 +9,7 @@
 class C2CAOSVariables {
     /// @brief Returns an array of tokens.
     public static function GetTokens() {
-        return array
-        (
+        return array(
             'ownr',
             'from',
             'pntr',

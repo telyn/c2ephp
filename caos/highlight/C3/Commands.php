@@ -6,8 +6,7 @@
 class C3CAOSCommands {
     /// @brief Returns an array of tokens.
     public static function GetTokens() {
-        return array
-        (
+        return array(
             'alph',
             'anim',
             'amms',

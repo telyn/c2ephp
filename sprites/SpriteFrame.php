@@ -105,8 +105,9 @@ abstract class SpriteFrame {
      * if it does't already.
      */
     protected function EnsureDecoded() {
-        if (!$this->decoded)
-            $this->Decode();
+        if (!$this->decoded) {
+                    $this->Decode();
+        }
 
         $this->decoded = true;
     }

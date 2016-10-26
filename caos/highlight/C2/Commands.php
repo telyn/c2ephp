@@ -6,8 +6,7 @@
 class C2CAOSCommands {
     /// @brief Returns an array of tokens.
     public static function GetTokens() {
-        return array
-        (
+        return array(
             //creation
             'new: scen',
             'new: simp',

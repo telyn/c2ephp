@@ -19,8 +19,8 @@ class EGGSBlock extends TagBlock {
      * @param $flags Any flags this block may have. I think this is a
      * single byte. Check http://www.creatureswiki.net/wiki/PRAY
      */
-        public function EGGSBlock($prayfile,$name,$content,$flags) {
-        parent::TagBlock($prayfile,$name,$content,$flags,PRAY_BLOCK_EGGS);
+        public function EGGSBlock($prayfile, $name, $content, $flags) {
+        parent::TagBlock($prayfile, $name, $content, $flags, PRAY_BLOCK_EGGS);
 
     }
 

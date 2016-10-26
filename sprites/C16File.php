@@ -34,8 +34,9 @@ class C16File extends SpriteFile
             }
 
             $buffer = $reader->ReadInt(2);
-            if ($buffer < 1)
-                throw new Exception('Sprite file appears to contain less than 1 frame.');
+            if ($buffer < 1) {
+                            throw new Exception('Sprite file appears to contain less than 1 frame.');
+            }
             $frameCount = $buffer;
             for ($x = 0; $x < $frameCount; $x++)
             {
