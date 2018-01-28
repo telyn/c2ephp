@@ -304,20 +304,20 @@ class COBAgentBlock extends COBBlock {
 
         //parsing finished, onto making an AgentBlock.
         $agentBlock = new COBAgentBlock($agentName, $agentDescription);
-        $agentBlock->AddQuantityAvailable($quantityAvailable);
-        $agentBlock->AddReuseInterval($reuseInterval);
-        $agentBlock->AddExpiryDate($expiryDate);
-        $agentBlock->AddLastUsageDate($lastUsageDate);
-        $agentBlock->AddReserved($reserved[0], $reserved[1], $reserved[2]);
-        $agentBlock->AddInstallScript($installScript);
-        $agentBlock->AddRemoveScript($removeScript);
+        $agentBlock->SetQuantityAvailable($quantityAvailable);
+        $agentBlock->SetReuseInterval($reuseInterval);
+        $agentBlock->SetExpiryDate($expiryDate);
+        $agentBlock->SetLastUsageDate($lastUsageDate);
+        $agentBlock->SetReserved($reserved[0], $reserved[1], $reserved[2]);
+        $agentBlock->SetInstallScript($installScript);
+        $agentBlock->SetRemoveScript($removeScript);
         foreach ($eventScripts as $eventScript) {
             $agentBlock->AddEventScript($eventScript);
         }
         foreach ($dependencies as $dependency) {
             $agentBlock->AddDependency($dependency);
         }
-        $agentBlock->AddThumbnail($thumbnail);
+        $agentBlock->SetThumbnail($thumbnail);
         return $agentBlock;
 
     }
@@ -365,15 +365,15 @@ class COBAgentBlock extends COBBlock {
         $agentName = $reader->Read($reader->ReadInt(1));
 
         $agentBlock = new COBAgentBlock($agentName, '');
-        $agentBlock->AddQuantityAvailable($quantityAvailable);
-        $agentBlock->AddExpiryDate($expiryDate);
+        $agentBlock->SetQuantityAvailable($quantityAvailable);
+        $agentBlock->SetExpiryDate($expiryDate);
         if ($sprframe != null) {
-            $agentBlock->AddThumbnail($sprframe);
+            $agentBlock->SetThumbnail($sprframe);
         }
         foreach ($objectScripts as $objectScript) {
             $agentBlock->AddEventScript($objectScript);
         }
-        $agentBlock->AddInstallScript(implode("\n*c2ephp Install script seperator\n", $installScripts));
+        $agentBlock->SetInstallScript(implode("\n*c2ephp Install script seperator\n", $installScripts));
         return $agentBlock;
     }
     /// @endcond

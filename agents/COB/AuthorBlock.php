@@ -38,6 +38,14 @@ class COBAuthorBlock extends COBBlock {
         $this->revision = $revision;
     }
 
+    /// @brief Supposedly compiles the block into binary. Throws an error to say it's not implemented.
+    /** @return string
+     */
+    public function Compile() {
+        // TODO: implement
+        throw new Exception("COBAgentBlock::Compile not implemented");
+    }
+
     /// @brief Gets the name of the author
     /**
      *  @return Author's name

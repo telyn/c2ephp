@@ -19,6 +19,13 @@ class COBUnknownBlock extends COBBlock {
         parent::COBBlock($type);
     }
 
+    /// @brief Returns the raw data back again
+    /** @return string
+     */
+    public function Compile() {
+        return $this->GetType() . $this->contents;
+    }
+
     /// @brief Gets the block's contents
     public function GetContents() {
         return $this->contents;

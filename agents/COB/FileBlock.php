@@ -34,6 +34,14 @@ class COBFileBlock extends COBBlock {
     public function AddReserved($reserved) {
         $this->reserved = $reserved;
     }
+    
+    /// @brief Supposedly compiles the block into binary. Throws an error to say it's not implemented.
+    /** @return string
+     */
+    public function Compile() {
+        // TODO: implement
+        throw new Exception("COBAgentBlock::Compile not implemented");
+    }
 
     /// @brief Get the name of the file
     public function GetName() {
