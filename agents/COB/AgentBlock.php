@@ -59,6 +59,15 @@ class COBAgentBlock extends COBBlock {
         $this->agentName = $agentName;
         $this->agentDescription = $agentDescription;
     }
+
+    /// @brief Supposedly compiles the block into binary. Throws an error to say it's not implemented.
+    /** @return string
+     */
+    public function Compile() {
+        // TODO: implement
+        throw new Exception("COBAgentBlock::Compile not implemented");
+    }
+
     /// @brief Gets the agent's name 
     /** @return string
      */
@@ -400,12 +409,5 @@ class COBDependency {
         return $this->name;
     }
 
-    /// @brief Supposedly compiles the block into binary. Throws an error to say it's not implemented.
-    /** @return string
-     */
-    public function Compile() {
-        // TODO: implement
-        throw new Exception("COBAgentBlock::Compile not implemented");
-    }
 }
 ?>
