@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/telyn/c2ephp.svg?branch=master)](https://travis-ci.org/telyn/c2ephp)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/telyn/c2ephp/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/telyn/c2ephp/?branch=master)
+
 To use:
 checkout to a folder
 require_once c2ephp.php
