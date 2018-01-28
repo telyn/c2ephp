@@ -177,7 +177,7 @@ class COB {
             $format = $this->GetType();
         }
         if ($format != FORMAT_C1) {
-            $format = FORMAT_C2
+            $format = FORMAT_C2;
         }
         switch ($format) {
         case FORMAT_C1:
@@ -192,7 +192,7 @@ class COB {
     /// @brief Compiles to a C1 COB. <b>Unimplemented</b>
     // TODO: implement this.
     public function CompileC1() {
-        throw new Exception('C1 COB Compilation not yet ready.')
+        throw new Exception('C1 COB Compilation not yet ready.');
     }
     /// @brief Compiles a C2 COB. <b>May not actually work.</b>
     // TODO: Check accuracy

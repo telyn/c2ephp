@@ -399,5 +399,13 @@ class COBDependency {
     public function GetDependencyName() {
         return $this->name;
     }
+
+    /// @brief Supposedly compiles the block into binary. Throws an error to say it's not implemented.
+    /** @return string
+     */
+    public function Compile() {
+        // TODO: implement
+        throw new Exception("COBAgentBlock::Compile not implemented");
+    }
 }
 ?>
