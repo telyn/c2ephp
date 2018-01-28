@@ -5,7 +5,6 @@ matrix:
       dist: precise
     - php: '5.4'
     - php: '5.5'
-    - php: '5.7'
 
 before_script:
   - curl -sSfL -o phpunit https://phar.phpunit.de/phpunit-4.8.phar
