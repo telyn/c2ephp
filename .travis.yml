@@ -4,7 +4,9 @@ matrix:
     - php: 5.3
       dist: precise
     - php: '5.4'
+      dist: trusty
     - php: '5.5'
+      dist: trusty
 
 before_script:
   - curl -sSfL -o phpunit https://phar.phpunit.de/phpunit-4.8.phar
